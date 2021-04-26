@@ -1,9 +1,9 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import './footer.css';
+import './styles.scss';
 
-function footer(props) {
+function Footer(props) {
     return (
         <div className="footer-container">
             <div className="footer-top">
@@ -67,4 +67,4 @@ function footer(props) {
     );
 }
 
-export default footer;
+export default Footer;

@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+li {
+    font-weight: 500;
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+}
+a {
+    font-weight: 500;
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+}
+button {
+    font-weight: 500;
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    padding: 9px 25px;
+    background-color: rgba(0, 136, 169, 1);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3 ease 0s;
+    margin-right: 50px;
+    &:hover {
+        background-color: rgba(0, 136, 169, 0.8);
+    }
+}
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+.top-navigation {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    background-color: #000;
+    ul {
+        background-color: #000;
+        color: #fff;
+    }
+    li {
+        background-color: #000;
+        color: #fff;
+    }
+    a {
+        background-color: #000;
+        color: #fff;
+    }
+    nav {
+        background-color: #000;
+        color: #fff;
+    }
+    .nav-top-link {
+        .nav-link {
+            li {
+                display: inline-block;
+                padding: 0px 20px;
+            }
+        }
+    }
+    .nav-link {
+        li {
+            a {
+                transition: all 0.3 ease 0s;
+                color: #fff;
+            }
+        }
+    }
+}
+.nav-top-link {
+    display: flex;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    .nav-link {
+        margin: 0;
+    }
+}
+span {
+    background-color: #000;
+    color: #fff;
+}
+.nav {
+    display: flex;
+    align-items: center;
+}
+.nav-logo {
+    cursor: pointer;
+}
+.nav_link {
+    list-style: none;
+}
+.nav-link {
+    li {
+        display: inline-block;
+        padding: 0px 20px;
+        a {
+            transition: all 0.3 ease 0s;
+            color: #000;
+            &:hover {
+                color: #0088a9;
+            }
+        }
+    }
+}
+.btn-smList {
+    color: #fff;
+}

@@ -1,11 +1,12 @@
-import Header from './components/common/header';
-import Footer from './components/common/footer';
-
+import Footer from "./components/Footer/footer";
+import Header from "./components/Header/header";
 
 function App() {
-  return (
-    <div className="app">
-    </div>
-  );
+    return (
+        <div className="app">
+            <Header />
+            <Footer />
+        </div>
+    );
 }
 export default App;
