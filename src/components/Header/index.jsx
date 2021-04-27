@@ -7,8 +7,8 @@ function Header(props) {
     return (
         //navigation
         <div className={`nav-wrapper ${animation}`}
-            onMouseEnter={() => setAnimation('animation-header')}
-            onMouseLeave={() => setAnimation('')}
+            onMouseEnter={() => setAnimation('animation-header-appear')}
+            onMouseLeave={() => setAnimation('animation-header-disappear')}
         >
             <div className="top-navigation">
                 <div className="nav-icon">
