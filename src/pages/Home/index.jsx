@@ -3,6 +3,7 @@ import Banner from './Banner';
 import Category from './Category';
 import Testimonials from './Testimonials';
 import NeedMore from './NeedMore';
+import Blog from './Blog';
 
 function Home(props) {
     return (
@@ -10,7 +11,8 @@ function Home(props) {
             {/* <Banner /> */}
             {/* <Category /> */}
             {/* <Testimonials /> */}
-            <NeedMore />
+            {/* <NeedMore /> */}
+            <Blog />
         </div>
     );
 }
