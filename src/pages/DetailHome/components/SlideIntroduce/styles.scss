@@ -1,0 +1,17 @@
+.slide-introduce {
+    background-color: transparent;
+    margin-right: 25px;
+    margin-bottom: 50px;
+    .ant-image-img,
+    .ant-image-mask {
+        border-radius: 10px;
+    }
+    & > .ant-image {
+        width: 100%;
+    }
+    .slider {
+        button::before {
+            color: #1d2228;
+        }
+    }
+}
