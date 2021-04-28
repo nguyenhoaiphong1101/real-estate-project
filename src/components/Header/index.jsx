@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '../Button';
 import './styles.scss';
 
 function Header(props) {
@@ -27,15 +28,31 @@ function Header(props) {
                 <nav className="nav">
                     <img className="nav-logo" src="https://achaumedia.vn/wp-content/uploads/2020/03/Free_Vector_Logo_for_Real_Estate-300x138.jpg" alt="logo" />
                     <ul className="nav-link">
-                        <li><a href="#">Home Pages</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li>
+                            <a href="#">Home Pages</a>
+                            <ul className="dropdown">
+                                <li><a href="./room-details.html">Page 1</a></li>
+                                <li><a href="./blog-details.html">Page 2</a></li>
+                                <li><a href="#">Page 3</a></li>
+                                <li><a href="#">Page 4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Blog</a>
+                            <ul className="dropdown">
+                                <li><a href="./room-details.html">Page 1</a></li>
+                                <li><a href="./blog-details.html">Page 2</a></li>
+                                <li><a href="#">Page 3</a></li>
+                            </ul>
+                        </li>
                         <li><a href="#">Pages</a></li>
                         <li><a href="#">Listings</a></li>
                         <li><a href="#">Agents</a></li>
                         <li><a href="#">Agency</a></li>
                     </ul>
                 </nav>
-                <a className="btn-smList" href="#"><button>Submit Listing</button></a>
+                <div className="button-wrap">
+                    <Button className="btn" value="Submit Listing" icon="fas fa-plus" />
+                </div>
             </div>
         </div>
     );

@@ -88,7 +88,7 @@ function Banner() {
                     </div>
                 );
             })}
-        </Carousel >
+        </Carousel>
     );
 }
 
