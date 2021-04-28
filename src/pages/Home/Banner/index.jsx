@@ -21,7 +21,7 @@ const items = [
     },
     {
         key: 2,
-        NAME: 'Iris Waston, Frederick Nebraska 20620',
+        NAME: 'Theodore Lowe, Azusa New York 39531',
         FORSALE: '$1,200,000',
         MORTGAGE: '$20,000/mo',
         BEDS: '4',
@@ -37,7 +37,7 @@ const items = [
 
 
 
-function index() {
+function Banner() {
 
     return (
         <Carousel>
@@ -48,35 +48,39 @@ function index() {
 
                         </div>
                         <div className="slide-info">
-                            <div className="silde-info-left">
+                            <div className="slide-info-left">
                                 <span>FOR SALE</span>
                                 <h3>{item.FORSALE}</h3>
                                 <span>EST.MORTAGE</span>
                                 <p>{item.MORTGAGE}</p>
                             </div>
-                            <div className="silde-info-mid">
+                            <div className="slide-info-mid">
                                 <h4><a href="#">{item.NAME}</a></h4>
-                                <p>BEDS {item.BEDS}    BATHS {item.BATHS}    SQFT {item.SQFT} </p>
+                                <div className="slide-info-mid-properties">
+                                    <p>BEDS<span>{item.BEDS}</span></p>
+                                    <p>BATHS<span>{item.BATHS}</span></p>
+                                    <p>SQFT<span>{item.SQFT}</span></p>
+                                </div>
                                 <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore magnam praesentium, numquam nihil non quibusdam, temporibus dolor voluptates porro mollitia nobis saepe cum laborum odit consectetur repudiandae iusto assumenda quidem?</span>
                             </div>
-                            <div className="silde-info-right">
+                            <div className="slide-info-right">
                                 <Row gutter={[16, 16]}>
                                     <Col span={12}>
                                         <span>TYPE</span>
-                                        {item.TYPE}
+                                        <p>{item.TYPE}</p>
                                     </Col>
                                     <Col span={12}>
                                         <span>VIEW</span>
-                                        {item.VIEW}
+                                        <p>{item.VIEW}</p>
                                     </Col>
 
                                     <Col span={12}>
                                         <span>LOT SIZE</span>
-                                        {item.LOTSIZE}
+                                        <p>{item.LOTSIZE}</p>
                                     </Col>
                                     <Col span={12}>
                                         <span>CONDITION</span>
-                                        {item.CONDITION}
+                                        <p>{item.CONDITION}</p>
                                     </Col>
                                 </Row>
                             </div>
@@ -88,4 +92,4 @@ function index() {
     );
 }
 
-export default index;
+export default Banner;
