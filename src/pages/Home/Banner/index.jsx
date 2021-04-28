@@ -84,7 +84,7 @@ function index() {
                     </div>
                 );
             })}
-        </Carousel >
+        </Carousel>
     );
 }
 

@@ -1,9 +1,10 @@
 .nav-wrapper {
-    position: -webkit-sticky;
-    position: sticky;
+    position: fixed;
     top: 25px;
+    left: 5%;
     z-index: 9999;
-    margin: 0 30px;
+    margin: 0 auto;
+    width: 90%;
     background-color: transparent;
     .top-navigation {
         border-top-left-radius: 10px;
@@ -73,20 +74,99 @@
                 background-color: transparent;
                 font-size: 14px;
                 margin-top: 15px;
+                display: inline-block;
+                & > li {
+                    padding: 20px 0;
+                    margin: 0 16px;
+                }
                 li {
+                    position: relative;
                     display: inline-block;
-                    padding: 0 16px;
                     background-color: transparent;
+                    &:hover {
+                        > a {
+                            &:after {
+                                opacity: 1;
+                            }
+                        }
+                        .dropdown {
+                            top: 87px;
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
                     a {
                         color: #1d2228;
                         font-weight: 700;
                         font-size: 16px;
-                        &:hover {
-                            color: #0088a9;
-                            cursor: pointer;
+                        position: relative;
+                        &:after {
+                            position: absolute;
+                            left: 0;
+                            top: 32px;
+                            width: 100%;
+                            height: 3px;
+                            background: #0088a9;
+                            content: "";
+                            opacity: 0;
+                            -webkit-transition: all 0.3s;
+                            -o-transition: all 0.3s;
+                            transition: all 0.3s;
+                        }
+                    }
+                    .dropdown {
+                        position: absolute;
+                        left: -10px;
+                        top: 85px;
+                        width: 260px;
+                        background: #ffffff;
+                        z-index: 9;
+                        opacity: 0;
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        visibility: hidden;
+                        -webkit-transition: all 0.3s;
+                        -o-transition: all 0.3s;
+                        transition: all 0.3s;
+                        -webkit-box-shadow: 0px 9px 15px rgba(25, 25, 26, 0.05);
+                        box-shadow: 0px 9px 15px rgba(25, 25, 26, 0.05);
+                        li {
+                            list-style: none;
+                            display: block;
+                            a {
+                                font-size: 16px;
+                                color: #19191a;
+                                display: block;
+                                text-align: left;
+                                padding: 12px 20px;
+                                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                                -webkit-transition: all 0.3s;
+                                -o-transition: all 0.3s;
+                                transition: all 0.3s;
+                                &:hover {
+                                    color: #0088a9;
+                                }
+                                &:after {
+                                    display: none;
+                                }
+                            }
                         }
                     }
                 }
+                li.active {
+                    a {
+                        &:after {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+        .button-wrap {
+            margin-right: 30px;
+            .btn {
+                font-size: 18px;
+                background-color: #0088a9;
             }
         }
     }
