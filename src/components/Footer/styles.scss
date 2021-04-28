@@ -2,59 +2,67 @@
     max-width: 1170px;
     margin: auto;
 }
-.col-1 {
-    padding-right: 200px;
-}
-ul {
-    list-style: none;
-}
-.footer-col {
-    h2 {
-        font-size: 18px;
-        color: black;
-        text-transform: capitalize;
-        margin-bottom: 15px;
-        font-weight: 500;
-        position: relative;
-        &::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            height: 2px;
-            background-color: #e91e63;
-            box-sizing: border-box;
-            width: 50px;
-        }
+.footer-top {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    .col-1 {
+        padding-right: 200px;
     }
     ul {
-        li {
-            &:not(:last-child) {
-                margin-bottom: 10px;
+        list-style: none;
+    }
+    .col-2 {
+        margin-top: 20px;
+    }
+    .footer-col {
+        h2 {
+            font-size: 18px;
+            color: black;
+            text-transform: capitalize;
+            margin-bottom: 30px;
+            font-weight: 700;
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -5px;
+                height: 2px;
+                background-color: #0088a9;
+                box-sizing: border-box;
+                width: 50px;
             }
-            a {
-                font-size: 14px;
-                text-transform: capitalize;
-                color: rgba(0, 0, 0, 0.5);
-                text-decoration: none;
-                display: block;
-                transition: all 0.3 ease 0s;
-                font-weight: 500;
-                &:hover {
-                    color: #e91e63;
+        }
+        ul {
+            li {
+                &:not(:last-child) {
+                    margin-bottom: 10px;
+                }
+                a {
+                    font-size: 14px;
+                    text-transform: capitalize;
+                    color: rgba(0, 0, 0, 0.5);
+                    text-decoration: none;
+                    display: block;
+                    transition: all 0.3 ease 0s;
+                    font-weight: 600;
+                    &:hover {
+                        color: #0088a9;
+                    }
                 }
             }
         }
     }
 }
-.footer-top {
-    padding-top: 60px;
-}
+
 .footer-bottom {
     ul {
+        list-style: none;
         display: flex;
         justify-content: flex-end;
+        margin-right: 32px;
         li {
+            margin: 0 12px;
             a {
                 font-size: 14px;
                 text-transform: capitalize;
@@ -64,7 +72,7 @@ ul {
                 transition: all 0.3 ease 0s;
                 font-weight: 500;
                 &:hover {
-                    color: #e91e63;
+                    color: #0088a9;
                 }
             }
         }

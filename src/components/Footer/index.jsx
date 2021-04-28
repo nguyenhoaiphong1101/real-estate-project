@@ -9,8 +9,10 @@ function Footer(props) {
             <div className="footer-top">
                 <Row>
                     <Col span={12} className="footer-col col-1">
-                        <h2>LOGO</h2>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio ullam consequuntur tempora excepturi earum molestiae! Officia iste deleniti minima. Omnis vel minima cum alias est nostrum inventore at, eligendi nam?
+                        <img className="nav-logo" src="https://achaumedia.vn/wp-content/uploads/2020/03/Free_Vector_Logo_for_Real_Estate-300x138.jpg" alt="logo" />
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Odio ullam consequuntur tempora excepturi earum molestiae!
+                        </p>
                     </Col>
                     <Col span={12} className="footer-col col-2">
                         <Row>
@@ -49,7 +51,7 @@ function Footer(props) {
                 <Row>
                     <Col span={12}>
                         <p>
-                            © Copyright 2020 - AndroThemes All Rights Reserved
+                            © Copyright 2021 - KTPM 2018
                         </p>
                     </Col>
                     <Col span={12}>
