@@ -1,0 +1,71 @@
+.container {
+    max-width: 1140px;
+    margin: auto;
+    margin-top: 85px;
+    padding-bottom: 85px;
+}
+.needmore {
+    position: relative;
+    overflow: hidden;
+    background-color: #01bbbc;
+    border-radius: 8px;
+    padding: 40px;
+
+    .needmore-content {
+        align-items: center i !important;
+
+        h3 {
+            color: #fff;
+            margin-bottom: 0;
+            font-size: 32px;
+            line-height: 40px;
+            font-weight: bold;
+            padding-right: 80px;
+        }
+
+        p {
+            color: #fff;
+            font-size: 16px;
+            margin: 0 0 20px;
+            line-height: 28px;
+            padding-left: 80px;
+        }
+
+        .needmore-content-btn {
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            position: relative;
+            color: #fff;
+            line-height: 24px;
+            background-color: transparent;
+            border: 2px solid #fff;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 12px 20px;
+            transition: 0.3s;
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 1;
+            margin-left: 80px;
+        }
+        .needmore-content-btn:hover {
+            background-color: #fff;
+            color: black;
+        }
+    }
+}
+
+.needmore::before {
+    content: "";
+    width: 600px;
+    height: 500px;
+    position: absolute;
+    left: 40%;
+    top: -70px;
+    transform: rotate(-50deg);
+    background-color: hsla(0, 0%, 100%, 0.2);
+    border-radius: 25px;
+}
