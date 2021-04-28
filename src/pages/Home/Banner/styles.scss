@@ -1,0 +1,21 @@
+.slide-img {
+    width: 100%;
+    min-height: 600px;
+    background-position: 50%;
+    background-size: cover;
+    position: relative;
+}
+
+.slide-info {
+    display: flex;
+    padding: 0 50px;
+    justify-content: space-between;
+    .slide-info-mid {
+        padding: 0 350px;
+    }
+}
+.slide-info-left {
+}
+
+.slide-info-right {
+}

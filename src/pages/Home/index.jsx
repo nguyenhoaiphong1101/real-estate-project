@@ -1,9 +1,11 @@
 import React from 'react';
+import Banner from './Banner/index';
 
 function Home(props) {
     return (
-        <div style={{ height: 1000, backgroundColor: 'pink' }}>
-            123
+        <div>
+            {/* <Banner /> */}
+            <Banner />
         </div>
     );
 }

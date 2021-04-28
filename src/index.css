@@ -19,3 +19,7 @@ code {
   padding: 0;
   background-color: #fff;
 }
+.ant-carousel .slick-dots-bottom {
+  background: rgb(54, 77, 121, 0.1);
+  margin-bottom: 80px;
+}
