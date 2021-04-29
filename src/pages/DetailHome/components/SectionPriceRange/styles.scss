@@ -1,0 +1,74 @@
+.section-price-wrapper {
+    padding: 16px 0px;
+    .section-price {
+        background-color: #f7f9fc;
+        position: relative;
+        border-radius: 8px;
+        padding: 70px 20px 40px 20px;
+        .current-price {
+            position: absolute;
+            top: 18px;
+            display: inline-block;
+            background-color: #01bbbc;
+            padding: 7px 20px;
+            border-radius: 25px;
+            color: #fff;
+            left: 20%;
+            &:before {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                height: 0;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-top: 5px solid #01bbbc;
+            }
+        }
+        .progress {
+            position: relative;
+            height: 10px;
+            font-size: 0.75rem;
+            background-color: #e9ecef;
+            border-radius: 0.25rem;
+            .progress-bar {
+                background-color: #01bbbc;
+                height: 100%;
+                width: 50%;
+                border-radius: 0.25rem;
+            }
+        }
+        .area-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 20px;
+            .price-min {
+                text-align: left;
+            }
+            .price-max {
+                text-align: right;
+            }
+            .price-min,
+            .price-max {
+                h5 {
+                    font-weight: 800;
+                    font-size: 20px;
+                    color: #101737;
+                }
+                span {
+                    text-transform: uppercase;
+                    color: #848486;
+                    font-weight: 700;
+                    font-size: 13px;
+                }
+            }
+            h5 {
+                font-weight: 800;
+                font-size: 20px;
+                color: #101737;
+            }
+        }
+    }
+}

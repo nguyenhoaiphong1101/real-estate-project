@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function SlideIntroduce() {
+function SectionSlideIntroduce() {
     const [slider, setSlider] = useState()
     var settings = {
         dots: false,
@@ -47,4 +47,4 @@ function SlideIntroduce() {
     );
 }
 
-export default SlideIntroduce;
+export default SectionSlideIntroduce;

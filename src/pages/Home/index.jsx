@@ -8,10 +8,10 @@ import Blog from './Blog';
 function Home(props) {
     return (
         <div>
-            {/* <Banner /> */}
-            {/* <Category /> */}
-            {/* <Testimonials /> */}
-            {/* <NeedMore /> */}
+            <Banner />
+            <Category />
+            <Testimonials />
+            <NeedMore />
             <Blog />
         </div>
     );
