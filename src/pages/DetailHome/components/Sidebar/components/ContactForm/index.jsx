@@ -1,13 +1,16 @@
 import { Form, Input, Popover } from 'antd';
 import React from 'react';
-import ButtonSubmit from '../../../../components/Button';
+import ButtonSubmit from '../../../../../../components/Button';
 import './styles.scss';
 
 function ContactForm() {
     const content = (
-        <div>
-            <p>Content</p>
-            <p>Content</p>
+        <div className="popup-content-wrapper">
+            <ul className="popup-content">
+                <li><i class="fas fa-phone"></i>Call Agent</li>
+                <li><i class="fas fa-th-list"></i>Send Message</li>
+                <li><i class="fas fa-star"></i>Book Tour</li>
+            </ul>
         </div>
     );
     return (
@@ -23,7 +26,7 @@ function ContactForm() {
                     </h6>
                     <span>Company Agent</span>
                 </div>
-                <Popover className="popup" content={content} title="Title" trigger="click">
+                <Popover className="popup" content={content} trigger="click">
                     <i className="fas fa-ellipsis-v">
                     </i>
                 </Popover>

@@ -1,0 +1,77 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?f18420f7fa6405bde072123a7e12b833") format("truetype"),
+url("./flaticon.woff?f18420f7fa6405bde072123a7e12b833") format("woff"),
+url("./flaticon.woff2?f18420f7fa6405bde072123a7e12b833") format("woff2"),
+url("./flaticon.eot?f18420f7fa6405bde072123a7e12b833#iefix") format("embedded-opentype"),
+url("./flaticon.svg?f18420f7fa6405bde072123a7e12b833#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "paint": "\f101",
+    "bone": "\f102",
+    "chair": "\f103",
+    "fan": "\f104",
+    "key": "\f105",
+    "garage": "\f106",
+    "history": "\f107",
+    "bathtub": "\f108",
+    "pillow": "\f109",
+    "mail": "\f10a",
+    "ruler": "\f10b",
+    "new": "\f10c",
+    "view": "\f10d",
+);
+
+.flaticon-paint:before {
+    content: map-get($flaticon-map, "paint");
+}
+.flaticon-bone:before {
+    content: map-get($flaticon-map, "bone");
+}
+.flaticon-chair:before {
+    content: map-get($flaticon-map, "chair");
+}
+.flaticon-fan:before {
+    content: map-get($flaticon-map, "fan");
+}
+.flaticon-key:before {
+    content: map-get($flaticon-map, "key");
+}
+.flaticon-garage:before {
+    content: map-get($flaticon-map, "garage");
+}
+.flaticon-history:before {
+    content: map-get($flaticon-map, "history");
+}
+.flaticon-bathtub:before {
+    content: map-get($flaticon-map, "bathtub");
+}
+.flaticon-pillow:before {
+    content: map-get($flaticon-map, "pillow");
+}
+.flaticon-mail:before {
+    content: map-get($flaticon-map, "mail");
+}
+.flaticon-ruler:before {
+    content: map-get($flaticon-map, "ruler");
+}
+.flaticon-new:before {
+    content: map-get($flaticon-map, "new");
+}
+.flaticon-view:before {
+    content: map-get($flaticon-map, "view");
+}

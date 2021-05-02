@@ -1,0 +1,22 @@
+.feature {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    i {
+        font-size: 36px;
+        color: #01bbbc;
+        width: 50px;
+    }
+    h6 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+    }
+    .feature-label {
+        width: 160px;
+    }
+    .feature-value {
+        font-weight: 400;
+        font-size: 16px;
+    }
+}

@@ -1,12 +1,13 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import ContactForm from './components/ContactForm';
+import RecentList from './components/RecentList';
 import './styles.scss';
-import ContactForm from '../ContactForm';
 
 function SideBar() {
     return (
         <div className="sidebar">
             <ContactForm />
+            <RecentList />
         </div>
     );
 }

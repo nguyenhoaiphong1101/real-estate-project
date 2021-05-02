@@ -3,6 +3,8 @@ import { Row, Col } from 'antd';
 import './styles.scss';
 import SectionSlideIntroduce from '../SectionSlideIntroduce';
 import SectionPriceRange from '../SectionPriceRange';
+import SectionFeatures from '../SectionFeatures';
+import SectionSimilarListing from '../SectionSimilarListing';
 
 function Content() {
     return (
@@ -25,6 +27,8 @@ function Content() {
                   </p>
             </div>
             <SectionPriceRange />
+            <SectionFeatures />
+            <SectionSimilarListing />
         </div>
     );
 }
