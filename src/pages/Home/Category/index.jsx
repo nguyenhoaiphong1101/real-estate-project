@@ -45,27 +45,29 @@ const items = [
 
 function Category(props) {
     return (
-        <div className="container">
-            <div className="title-category">
-                <h5>Categories</h5>
-                <h2>Browse By Category</h2>
-            </div>
-            <Row gutter={[16, 16]}>
-                {items.map(item => {
-                    return (
-                        <Col span={8} className="category">
-                            <div className="category-item">
-                                <a href=""><img src={item.url} alt="#" /></a>
-                                <div className="category-item-body">
-                                    <h5><a>{item.name}</a></h5>
-                                    <span>{item.totalListing}</span>
+        <div className="category-section">
+            <div className="container">
+                <div className="title-category">
+                    <h5>Categories</h5>
+                    <h2>Browse By Category</h2>
+                </div>
+                <Row gutter={[16, 16]}>
+                    {items.map(item => {
+                        return (
+                            <Col span={8} className="category">
+                                <div className="category-item">
+                                    <a href=""><img src={item.url} alt="#" /></a>
+                                    <div className="category-item-body">
+                                        <h5><a>{item.name}</a></h5>
+                                        <span>{item.totalListing}</span>
+                                    </div>
                                 </div>
-                            </div>
 
-                        </Col>
-                    );
-                })}
-            </Row>
+                            </Col>
+                        );
+                    })}
+                </Row>
+            </div>
         </div>
     );
 }
