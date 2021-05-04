@@ -6,7 +6,7 @@ import './styles.scss'
 
 function NeedMore(props) {
     return (
-        <div className="container">
+        <div className="section-needmore">
             <div className="needmore">
                 <Row className="needmore-content">
                     <Col span={8}>

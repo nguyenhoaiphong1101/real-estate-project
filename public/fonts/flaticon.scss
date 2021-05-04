@@ -2,11 +2,11 @@ $flaticon-font: "flaticon";
 
 @font-face {
     font-family: $flaticon-font;
-    src: url("./flaticon.ttf?f18420f7fa6405bde072123a7e12b833") format("truetype"),
-url("./flaticon.woff?f18420f7fa6405bde072123a7e12b833") format("woff"),
-url("./flaticon.woff2?f18420f7fa6405bde072123a7e12b833") format("woff2"),
-url("./flaticon.eot?f18420f7fa6405bde072123a7e12b833#iefix") format("embedded-opentype"),
-url("./flaticon.svg?f18420f7fa6405bde072123a7e12b833#flaticon") format("svg");
+    src: url("./flaticon.ttf?606f5aa64d2810b71124b892b283d97e") format("truetype"),
+url("./flaticon.woff?606f5aa64d2810b71124b892b283d97e") format("woff"),
+url("./flaticon.woff2?606f5aa64d2810b71124b892b283d97e") format("woff2"),
+url("./flaticon.eot?606f5aa64d2810b71124b892b283d97e#iefix") format("embedded-opentype"),
+url("./flaticon.svg?606f5aa64d2810b71124b892b283d97e#flaticon") format("svg");
 }
 
 i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
@@ -34,6 +34,8 @@ $flaticon-map: (
     "ruler": "\f10b",
     "new": "\f10c",
     "view": "\f10d",
+    "sales-agent": "\f10e",
+    "sold": "\f10f",
 );
 
 .flaticon-paint:before {
@@ -74,4 +76,10 @@ $flaticon-map: (
 }
 .flaticon-view:before {
     content: map-get($flaticon-map, "view");
+}
+.flaticon-sales-agent:before {
+    content: map-get($flaticon-map, "sales-agent");
+}
+.flaticon-sold:before {
+    content: map-get($flaticon-map, "sold");
 }

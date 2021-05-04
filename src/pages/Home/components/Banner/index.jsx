@@ -1,9 +1,8 @@
+import { Col, Row } from 'antd';
 import React, { useState } from 'react';
-import { Carousel, Select } from 'antd';
+import Button from '../../../../components/Button';
+import SelectCustom from '../../../../components/Select/index';
 import './styles.scss';
-import { Row, Col } from 'antd';
-import Button from '../../../components/Button';
-import SelectCustom from '../../../components/Select/index';
 
 
 const location = [
@@ -237,7 +236,7 @@ function Banner() {
                                         </div>
                                     </Col>
                                 </Row>
-                                <div className={`advanced-search d-block ${active ? 'active' : ''}`}>
+                                <div className={`advanced-search d-block ${active == true ? 'active' : ''}`}>
                                     <Row >
                                         <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
@@ -262,7 +261,7 @@ function Banner() {
                                     </Row>
                                 </div>
                             </form>
-                            <div className={`advanced-search-trigger semi-circle ${active ? 'active' : ''}`} onClick={handleToggle}>
+                            <div className={`advanced-search-trigger semi-circle ${active == true ? '' : 'active'}`} onClick={handleToggle}>
                                 <i className="fas fa-chevron-down">
                                 </i>
                             </div>
