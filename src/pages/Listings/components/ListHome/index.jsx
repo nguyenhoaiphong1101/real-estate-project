@@ -1,0 +1,38 @@
+import React from 'react';
+import { List } from 'antd';
+import ThumbnailExtra from '../../../../components/Thumbnail/ThumbnailExtra'
+
+
+const listData = [];
+
+for (let i = 0; i < 23; i++) {
+    listData.push({
+        title: `${i}`,
+    });
+}
+
+function ListHome(props) {
+    return (
+        <List
+            itemLayout="vertical"
+            size="large"
+            pagination={{
+                onChange: page => {
+                    console.log(page);
+                },
+                pageSize: 4,
+            }}
+            dataSource={listData}
+            renderItem={item => (
+                <List.Item
+                    key={item.title}
+                >
+                    <ThumbnailExtra />
+                </List.Item>
+            )}
+        >
+        </List>
+    );
+}
+
+export default ListHome;
