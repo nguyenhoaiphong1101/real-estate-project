@@ -1,12 +1,25 @@
 .nav-wrapper {
     position: fixed;
-    top: 25px;
-    left: 5%;
-    z-index: 9999;
-    margin: 0 auto;
-    width: 90%;
-    background-color: white;
-    border-radius: 10px;
+    &__top{
+        top: 25px;
+        left: 5%;
+        z-index: 9999;
+        margin: 0 auto;
+        width: 90%;
+        background-color: white;
+        border-radius: 10px;
+    }
+    &__scroll{
+        top: 0px;
+        z-index: 9999;
+        margin: 0 auto;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 2px 9px 0px rgba(34, 12, 43, .1);
+        .top-navigation{
+            display: none!important;
+        }
+    }
     .top-navigation {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -22,7 +35,7 @@
                 background-color: transparent;
                 color: white;
                 padding: 5px 13px;
-                font-size: 15px;
+                font-size: 14px;
                 &:hover {
                     color: #0088a9;
                     cursor: pointer;
@@ -32,10 +45,10 @@
         .nav-link {
             position: absolute;
             right: 40px;
-            top: 12px;
+            top: 16px;
             background-color: transparent;
             color: white;
-            font-size: 14px;
+            font-size: 12px;
             li {
                 display: inline-block;
                 padding: 0 12px;
@@ -68,16 +81,17 @@
             display: flex;
             align-items: center;
             .nav-logo {
-                width: 150px;
-                height: 100px;
+                width: 130px;
+                height: 80px;
             }
             .nav-link {
                 background-color: transparent;
                 font-size: 14px;
-                margin-top: 15px;
+                // margin-top: 15px;
+                margin: 0;
                 display: inline-block;
                 & > li {
-                    padding: 20px 0;
+                    padding: 15px 0;
                     margin: 0 16px;
                 }
                 li {
@@ -99,7 +113,7 @@
                     a {
                         color: #1d2228;
                         font-weight: 700;
-                        font-size: 16px;
+                        font-size: 14px;
                         position: relative;
                         &:after {
                             position: absolute;
@@ -164,10 +178,12 @@
             }
         }
         .button-wrap {
-            margin-right: 30px;
+            margin-right: 45px;
             .btn {
-                font-size: 18px;
+                font-size: 13px;
                 background-color: #0088a9;
+                padding: 14px 16px;
+                margin: 0;
             }
         }
     }

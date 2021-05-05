@@ -2,21 +2,39 @@ import React, { useState } from 'react';
 import Button from '../Button';
 import './styles.scss';
 
+import useDocumentScroll from './../../hooks/useDocumentScroll'
+
 function Header(props) {
+
+    const [shouldScrollHeader, setShouldScrollHeader] = useState(false);
+    const [scroll, setScroll] = useState(0);
+
+    const MINIMUM_SCROLL = 10;
+    const TIMEOUT_DELAY = 0;
+
+    useDocumentScroll(callbackData => {
+        const { previousScrollTop, currentScrollTop } = callbackData;
+        if (currentScrollTop > MINIMUM_SCROLL) {
+            setShouldScrollHeader(true)
+        } else {
+            setShouldScrollHeader(false)
+        }
+    });
+
+    const topStyle = shouldScrollHeader ? 'nav-wrapper__scroll' : 'nav-wrapper__top';
 
     const [animation, setAnimation] = useState('')
     return (
-        //navigation
-        <div className={`nav-wrapper ${animation}`}
+        <div className={`nav-wrapper ${shouldScrollHeader ? '' : `${animation}`}  ${topStyle}`}
             onMouseEnter={() => setAnimation('animation-header-appear')}
             onMouseLeave={() => setAnimation('animation-header-disappear')}
         >
             <div className="top-navigation">
                 <div className="nav-icon">
-                    <i class="fab fa-facebook-f"></i>
-                    <i class="fab fa-pinterest-p"></i>
-                    <i class="fab fa-linkedin-in"></i>
-                    <i class="fab fa-twitter"></i>
+                    <i className="fab fa-facebook-f"></i>
+                    <i className="fab fa-pinterest-p"></i>
+                    <i className="fab fa-linkedin-in"></i>
+                    <i className="fab fa-twitter"></i>
                 </div>
                 <ul className="nav-link">
                     <li><a href="#">Login</a></li>
