@@ -1,16 +1,21 @@
+import React, { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import DetailHome from "./pages/DetailHome";
-import Home from "./pages/Home";
 import Listings from "./pages/Listings";
 
+
 function App() {
+    const [content, setContent] = useState();
+
     return (
-        <div className="app">
-            <Header />
-            <Listings />
-            <Footer />
-        </div>
+        <BrowserRouter>
+            <div className="app">
+                <Header setContent={setContent} />
+                {content}
+                <Footer />
+            </div>
+        </BrowserRouter>
     );
 }
 export default App;

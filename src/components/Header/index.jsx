@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../Button';
+import { Link } from 'react-router-dom';
 import './styles.scss';
 
 import useDocumentScroll from './../../hooks/useDocumentScroll'
+import ROUTES, { RenderRoutes } from '../../router/routerConfig';
 
 function Header(props) {
+    const [path, setPath] = useState('');
+    useEffect(() => {
+        props.setContent(() => <RenderRoutes setPath={setPath} routes={ROUTES} />);
+    }, [])
 
     const [shouldScrollHeader, setShouldScrollHeader] = useState(false);
     const [scroll, setScroll] = useState(0);
@@ -45,7 +51,7 @@ function Header(props) {
             <div className="main-header">
                 <nav className="nav">
                     <img className="nav-logo" src="https://achaumedia.vn/wp-content/uploads/2020/03/Free_Vector_Logo_for_Real_Estate-300x138.jpg" alt="logo" />
-                    <ul className="nav-link">
+                    {/* <ul className="nav-link">
                         <li>
                             <a href="#">Home Pages</a>
                             <ul className="dropdown">
@@ -66,7 +72,8 @@ function Header(props) {
                         <li><a href="#">Listings</a></li>
                         <li><a href="#">Agents</a></li>
                         <li><a href="#">Agency</a></li>
-                    </ul>
+                    </ul> */}
+                    {displayRouteMenu(ROUTES, path)}
                 </nav>
                 <div className="button-wrap">
                     <Button className="btn" value="Submit Listing" icon="fas fa-plus" />
@@ -77,3 +84,41 @@ function Header(props) {
 }
 
 export default Header;
+
+/**
+ * Render a nested hierarchy of route configs with unknown depth/breadth
+ */
+function displayRouteMenu(routes, path) {
+
+    /**
+     * Render a single route as a list item link to the config's pathname
+     */
+    function singleRoute(route) {
+        var active = route.path === path ? 'active' : '';
+        return (
+            <li key={route.key} className={active}>
+                <Link to={route.path} > {route.display} </Link>
+            </li>
+        );
+    }
+
+    // loop through the array of routes and generate an unordered list
+    return (
+        <ul className="nav-link">
+            {routes.map(route => {
+                // if this route has sub-routes, then show the ROOT as a list item and recursively render a nested list of route links
+                if (route.routes) {
+                    return (
+                        <React.Fragment key={route.key}>
+                            {singleRoute(route)}
+                            {displayRouteMenu(route.routes)}
+                        </React.Fragment>
+                    );
+                }
+
+                // no nested routes, so just render a single route
+                return singleRoute(route);
+            })}
+        </ul>
+    );
+}
