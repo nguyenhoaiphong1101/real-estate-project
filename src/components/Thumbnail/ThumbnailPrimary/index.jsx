@@ -41,10 +41,14 @@ function ThumbnailPrimary() {
                     </h6>
                         <span>March 3, 2020</span>
                     </div>
-                    <Popover className="popup" content={content} trigger="click">
-                        <i className="fas fa-ellipsis-v">
-                        </i>
-                    </Popover>
+                    <div className="icon-wrapper">
+                        <Popover className="popup" content={content} trigger="click">
+                            <div className="icon">
+                                <i className="fas fa-ellipsis-v">
+                                </i>
+                            </div>
+                        </Popover>
+                    </div>
                 </div>
                 <h5 class="listing-title">
                     <a title="Iris Watson, Frederick Nebraska 20620">

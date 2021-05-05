@@ -9,8 +9,10 @@
     align-items: flex-start;
     .listing__thumbnail {
         position: relative;
+        width: 300px;
+        margin-right: 20px;
+        margin-bottom: 0;
         border-radius: 8px;
-        margin-bottom: 20px;
         overflow: hidden;
         img {
             border-radius: 8px;
@@ -96,17 +98,27 @@
                     color: #848486;
                 }
             }
-            .popup {
-                cursor: pointer;
+            .icon-wrapper {
+                .icon{
+                    cursor: pointer;
                 flex-grow: 1;
                 background-color: white;
-                padding: 8px 0px 8px 12px;
+                width: 25px;
+                height: 30px;
                 border-radius: 5px;
                 color: #848486;
                 transition: 0.3s;
+                position: relative;
                 border: 1px solid rgba(0, 0, 0, 0.1);
-                &:hover {
-                    background-color: #f5f5f5 !important;
+                    i{
+                        position: absolute;
+                        top: 25%;
+                        left: 50%;
+                        transform: translate(-50%);
+                    }
+                    &:hover {
+                        background-color: #f5f5f5 !important;
+                    }
                 }
             }
         }

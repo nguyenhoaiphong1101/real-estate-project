@@ -17,7 +17,7 @@ function ThumbnailExtra() {
         <div className="listing-extra">
             <div className="listing__thumbnail">
                 <a>
-                    <img src="http://androthemes.com/themes/react/acres/assets/img/listings/1.jpg" alt="listing" />
+                    <img src="http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg" alt="listing" />
                 </a>
                 <div class="listing-badges">
                     <span class="listing-badge sale">
@@ -36,15 +36,17 @@ function ThumbnailExtra() {
                         <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
                     </a>
                     <div className="media-body">
-                        <h6>
-                            Freddy Burben
-                    </h6>
+                        <h6>Freddy Burben</h6>
                         <span>March 3, 2020</span>
                     </div>
-                    <Popover className="popup" content={content} trigger="click">
-                        <i className="fas fa-ellipsis-v">
-                        </i>
-                    </Popover>
+                    <div className="icon-wrapper">
+                        <Popover className="popup" content={content} trigger="click">
+                            <div className="icon">
+                                <i className="fas fa-ellipsis-v">
+                                </i>
+                            </div>
+                        </Popover>
+                    </div>
                 </div>
                 <h5 class="listing-title">
                     <a title="Iris Watson, Frederick Nebraska 20620">

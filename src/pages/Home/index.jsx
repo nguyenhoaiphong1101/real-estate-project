@@ -1,10 +1,9 @@
 import React from 'react';
 import Banner from './components/Banner';
 import Category from './components/Category';
-import Testimonials from './components/Testimonials';
 import NeedMore from './components/NeedMore';
-import Blog from './components/Blog';
 import SectionFunction from './components/SectionFunction';
+import SectionRecentList from './components/SectionRecentList';
 import SectionTopList from './components/SectionTopList';
 
 function Home(props) {
@@ -14,8 +13,8 @@ function Home(props) {
             <Category />
             <SectionFunction />
             <NeedMore />
+            <SectionRecentList />
             <SectionTopList />
-            <Blog />
         </div>
     );
 }
