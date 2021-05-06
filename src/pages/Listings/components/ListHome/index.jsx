@@ -1,5 +1,6 @@
 import React from 'react';
 import { List } from 'antd';
+import "./styles.scss";
 import ThumbnailExtra from '../../../../components/Thumbnail/ThumbnailExtra'
 
 

@@ -12,7 +12,7 @@ const ROUTES = [
     {
         path: "/danh-sach",
         key: "LISTING",
-        display: "Listings",
+        display: "Danh Sách",
         component: Listings
     },
     {
@@ -20,18 +20,6 @@ const ROUTES = [
         key: "DETAIL",
         display: "Chi Tiết",
         component: DetailHome
-    },
-    {
-        path: "/dang-nhap",
-        key: "LOGIN",
-        display: "Đăng nhập",
-        component: Login
-    },
-    {
-        path: "/dang-ky",
-        key: "SIGNUP",
-        display: "Đăng ký",
-        component: Signup
     },
 
 ];
@@ -70,3 +58,6 @@ export function RenderRoutes({ routes, setPath }) {
         </Switch>
     );
 }
+
+
+
