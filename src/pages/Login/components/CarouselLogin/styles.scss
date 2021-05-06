@@ -1,0 +1,38 @@
+.carousellogin {
+    position: relative;
+    margin: auto;
+    height: 960px;
+    background-size: cover;
+    z-index: 1;
+    .acr-auth-quote {
+        position: absolute;
+        bottom: 60px;
+        left: 0;
+        height: auto;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 40px;
+    }
+}
+.carousel {
+    .slick-dots li button:before {
+        display: none;
+    }
+}
+
+.ant-carousel .slick-dots-bottom {
+    background: transparent;
+}
+.im1 {
+    background-image: url("http://androthemes.com/themes/react/acres/assets/img/coming-soon/1.jpg");
+    width: 100%;
+}
+.im2 {
+    background-image: url("http://androthemes.com/themes/react/acres/assets/img/coming-soon/2.jpg");
+    width: 100%;
+}
+.im3 {
+    background-image: url("http://androthemes.com/themes/react/acres/assets/img/coming-soon/3.jpg");
+    width: 100%;
+}

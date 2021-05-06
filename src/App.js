@@ -3,6 +3,8 @@ import { BrowserRouter } from 'react-router-dom';
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Listings from "./pages/Listings";
+import Login from "./pages/Login"
+import Signup from "./pages/Signup"
 
 
 function App() {
@@ -11,9 +13,10 @@ function App() {
     return (
         <BrowserRouter>
             <div className="app">
-                <Header setContent={setContent} />
+                {/* <Header setContent={setContent} />
                 {content}
-                <Footer />
+                <Footer /> */}
+                <Signup />
             </div>
         </BrowserRouter>
     );
