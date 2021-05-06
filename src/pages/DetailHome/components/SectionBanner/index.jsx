@@ -7,7 +7,7 @@ function SectionBanner() {
             <div className="detail-section-banner">
                 <div className="container">
                     <div className="sub-header">
-                        <span className="listing-badge">For Rent</span>
+                        <span className="listing-badge">Cho thuê</span>
                         <h1 className="title">Iris Watson, Frederick Nebraska 20620</h1>
                         <span className="address">
                             <i class="fas fa-map-marker-alt"></i>

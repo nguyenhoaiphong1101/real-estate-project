@@ -5,7 +5,7 @@ function RecentList() {
 
     return (
         <div className="recent-listing">
-            <h4 className="title">Recent Listings</h4>
+            <h4 className="title">Danh sách gần đây</h4>
             <div className="container-fluid wrapper">
                 <RecentItem />
                 <RecentItem />

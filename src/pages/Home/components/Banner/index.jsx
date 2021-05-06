@@ -217,22 +217,22 @@ function Banner() {
                                 <Row>
                                     <Col span={6} className="item-form">
                                         <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Location" value={location} />
+                                            <SelectCustom title="Vị trí" value={location} />
                                         </div>
                                     </Col>
                                     <Col span={6} className="item-form">
                                         <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Status" value={status} />
+                                            <SelectCustom title="Trạng thái" value={status} />
                                         </div>
                                     </Col>
                                     <Col span={8} className="item-form">
                                         <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Price Range" value={price} />
+                                            <SelectCustom title="Giá tiền" value={price} />
                                         </div>
                                     </Col>
                                     <Col className="submit-btn" span={4}>
                                         <div className="form-group">
-                                            <Button className="btn-custom" value="Search listings" />
+                                            <Button className="btn-custom" value="Tìm kiếm nhà" />
                                         </div>
                                     </Col>
                                 </Row>
@@ -240,22 +240,22 @@ function Banner() {
                                     <Row >
                                         <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Beds" value={beds} />
+                                                <SelectCustom title="Số phòng ngủ" value={beds} />
                                             </div>
                                         </Col>
                                         <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Bathrooms" value={bathrooms} />
+                                                <SelectCustom title="Số phòng tắm" value={bathrooms} />
                                             </div>
                                         </Col>
                                         <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Type" value={types} />
+                                                <SelectCustom title="Loại Nhà" value={types} />
                                             </div>
                                         </Col>
                                         <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Diameter" value={diameters} />
+                                                <SelectCustom title="Phạm vi" value={diameters} />
                                             </div>
                                         </Col>
                                     </Row>

@@ -171,27 +171,27 @@ const types = [
 function FilterListings(props) {
     return (
         <div className="filter-listings">
-            <h5>Filter Listings</h5>
+            <h5>Lọc theo danh sách</h5>
             <form className="filter-listings-form">
                 <div className="form-group acr-custom-select">
-                    <SelectCustom title="Location" value={location} />
+                    <SelectCustom title="Vị trí" value={location} />
                 </div>
                 <div className="form-group acr-custom-select">
-                    <SelectCustom title="Status" value={status} />
+                    <SelectCustom title="Trạng thái" value={status} />
                 </div>
                 <div className="form-group acr-custom-select">
-                    <SelectCustom title="Price Range" value={price} />
+                    <SelectCustom title="Giá tiền" value={price} />
                 </div>
                 <div className="form-group acr-custom-select">
-                    <SelectCustom title="Beds" value={beds} />
+                    <SelectCustom title="Số phòng ngủ" value={beds} />
                 </div>
                 <div className="form-group acr-custom-select">
-                    <SelectCustom title="Bathrooms" value={bathrooms} />
+                    <SelectCustom title="Số phòng tắm" value={bathrooms} />
                 </div>
                 <div className="form-group acr-custom-select">
-                    <SelectCustom title="Type" value={types} />
+                    <SelectCustom title="Loại nhà" value={types} />
                 </div>
-                <ButtonSubmit value="Apply filters" className="submit" />
+                <ButtonSubmit value="Áp dụng" className="submit" />
             </form>
         </div>
     );

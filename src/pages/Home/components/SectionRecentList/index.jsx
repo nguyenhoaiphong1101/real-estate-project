@@ -9,8 +9,8 @@ function SectionRecentList() {
         <div className="section-recent-list">
             <div className="container">
                 <div className="title-wrapper">
-                    <h5 class="sub-title">Find Your Home</h5>
-                    <h2 class="title">Recent Listings</h2>
+                    <h5 class="sub-title">Tìm nhà của bạn</h5>
+                    <h2 class="title">Danh sách gần nhất</h2>
                 </div>
                 <Row>
                     <Col span={16} className="col-left">

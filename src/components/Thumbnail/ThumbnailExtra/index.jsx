@@ -7,9 +7,9 @@ function ThumbnailExtra() {
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
-                <li><i class="fas fa-phone"></i>Call Agent</li>
-                <li><i class="fas fa-th-list"></i>Send Message</li>
-                <li><i class="fas fa-star"></i>Book Tour</li>
+                <li><i class="fas fa-phone"></i>Gọi chúng tôi</li>
+                <li><i class="fas fa-th-list"></i>Nhắn tin</li>
+                <li><i class="fas fa-star"></i>Đặt lịch</li>
             </ul>
         </div>
     );
@@ -21,7 +21,7 @@ function ThumbnailExtra() {
                 </a>
                 <div class="listing-badges">
                     <span class="listing-badge sale">
-                        On Sale
+                        Giảm giá
                     </span>
                 </div>
                 <div class="listing-controls">
@@ -36,8 +36,8 @@ function ThumbnailExtra() {
                         <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
                     </a>
                     <div className="media-body">
-                        <h6>Freddy Burben</h6>
-                        <span>March 3, 2020</span>
+                        <h6>Vũ Khánh</h6>
+                        <span>3 Tháng 3, 2020</span>
                     </div>
                     <div className="icon-wrapper">
                         <Popover className="popup" content={content} trigger="click">
@@ -70,7 +70,7 @@ function ThumbnailExtra() {
                     </div>
                 </div>
                 <div class="listing-gallery-wrapper">
-                    <Button value="View Details" className="view-detail"></Button>
+                    <Button value="Xem chi tiết" className="view-detail"></Button>
                 </div>
             </div>
         </div>

@@ -12,12 +12,12 @@ function SectionPriceRange() {
                 <div className="area-price">
                     <div className="price-min">
                         <h5>562,000$</h5>
-                        <span>Lowest</span>
+                        <span>Thấp nhất</span>
                     </div>
-                    <h5>Price range in the area</h5>
+                    <h5>Khoảng giá trong khu vực</h5>
                     <div className="price-max">
                         <h5>1,280,000$</h5>
-                        <span>Highest</span>
+                        <span>Cao nhất</span>
                     </div>
                 </div>
             </div>

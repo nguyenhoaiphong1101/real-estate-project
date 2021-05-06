@@ -15,7 +15,7 @@ function ContactForm() {
     );
     return (
         <div className="contact-form-wrapper">
-            <h5>Meet The Agent</h5>
+            <h5>Gặp gỡ đại lý</h5>
             <div className="media">
                 <a>
                     <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
@@ -33,16 +33,16 @@ function ContactForm() {
             </div>
             <Form className="form">
                 <Form.Item name="email" >
-                    <Input placeholder="Email Address" />
+                    <Input placeholder="Địa chỉ Email" />
                 </Form.Item>
                 <Form.Item name="phone" >
-                    <Input placeholder="Phone Number" />
+                    <Input placeholder="Số điện thoại" />
                 </Form.Item>
                 <Form.Item name="message" >
-                    <Input placeholder="Enter Your Messages" />
+                    <Input placeholder="Tin nhắn..." />
                 </Form.Item>
                 <Form.Item >
-                    <ButtonSubmit value="Send Message" className="submit" />
+                    <ButtonSubmit value="Gửi tin nhắn" className="submit" />
                 </Form.Item>
             </Form>
 

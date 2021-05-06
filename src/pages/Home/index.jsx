@@ -5,6 +5,7 @@ import NeedMore from './components/NeedMore';
 import SectionFunction from './components/SectionFunction';
 import SectionRecentList from './components/SectionRecentList';
 import SectionTopList from './components/SectionTopList';
+import Testimonials from './components/Testimonials';
 
 function Home(props) {
     return (
@@ -15,6 +16,7 @@ function Home(props) {
             <NeedMore />
             <SectionRecentList />
             <SectionTopList />
+            <Testimonials />
         </div>
     );
 }

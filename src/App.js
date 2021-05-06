@@ -13,10 +13,9 @@ function App() {
     return (
         <BrowserRouter>
             <div className="app">
-                {/* <Header setContent={setContent} />
+                <Header setContent={setContent} />
                 {content}
-                <Footer /> */}
-                <Signup />
+                <Footer />
             </div>
         </BrowserRouter>
     );

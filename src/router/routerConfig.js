@@ -3,6 +3,8 @@ import { Route, Switch } from "react-router";
 import Home from "../pages/Home";
 import Listings from "../pages/Listings";
 import DetailHome from "../pages/DetailHome";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
 
 
 const ROUTES = [
@@ -18,6 +20,18 @@ const ROUTES = [
         key: "DETAIL",
         display: "Chi Tiết",
         component: DetailHome
+    },
+    {
+        path: "/dang-nhap",
+        key: "LOGIN",
+        display: "Đăng nhập",
+        component: Login
+    },
+    {
+        path: "/dang-ky",
+        key: "SIGNUP",
+        display: "Đăng ký",
+        component: Signup
     },
 
 ];

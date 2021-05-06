@@ -43,9 +43,9 @@ function Header(props) {
                     <i className="fab fa-twitter"></i>
                 </div>
                 <ul className="nav-link">
-                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Đăng nhập</a></li>
                     <span>or</span>
-                    <li><a href="#">Signup</a></li>
+                    <li><a href="#">Đăng ký</a></li>
                 </ul>
             </div>
             <div className="main-header">
@@ -76,7 +76,7 @@ function Header(props) {
                     {displayRouteMenu(ROUTES, path)}
                 </nav>
                 <div className="button-wrap">
-                    <Button className="btn" value="Submit Listing" icon="fas fa-plus" />
+                    <Button className="btn" value="Gửi danh sách" icon="fas fa-plus" />
                 </div>
             </div>
         </div>

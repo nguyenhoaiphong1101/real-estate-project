@@ -7,38 +7,38 @@ const items = [
     {
         key: 1,
         url: 'http://androthemes.com/themes/react/acres/assets/img/categories/1.jpg',
-        name: 'Commercial',
-        totalListing: '90 Listings'
+        name: 'Thương mại',
+        totalListing: '90 danh sách'
     },
     {
         key: 2,
         url: 'http://androthemes.com/themes/react/acres/assets/img/categories/2.jpg',
-        name: 'Residential',
-        totalListing: '433 Listings'
+        name: 'Khu dân cư',
+        totalListing: '433 danh sách'
     },
     {
         key: 3,
         url: 'http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg',
-        name: 'Villas',
-        totalListing: '221 Listings'
+        name: 'Biệt thự',
+        totalListing: '221 danh sách'
     },
     {
         key: 4,
         url: 'http://androthemes.com/themes/react/acres/assets/img/categories/4.jpg',
-        name: 'Apartments',
-        totalListing: '185 Listings'
+        name: 'Căn hộ',
+        totalListing: '185 danh sách'
     },
     {
         key: 5,
         url: 'http://androthemes.com/themes/react/acres/assets/img/categories/5.jpg',
-        name: 'Beach House',
-        totalListing: '230 Listings'
+        name: 'Nhà gần biển',
+        totalListing: '230 danh sách'
     },
     {
         key: 6,
         url: 'http://androthemes.com/themes/react/acres/assets/img/categories/6.jpg',
-        name: 'Duplex',
-        totalListing: '365 Listings'
+        name: 'Nhà lầu',
+        totalListing: '365 danh sách'
     },
 ]
 
@@ -48,8 +48,8 @@ function Category(props) {
         <div className="category-section">
             <div className="container">
                 <div className="title-category">
-                    <h5>Categories</h5>
-                    <h2>Browse By Category</h2>
+                    <h5>Thể loại</h5>
+                    <h2>Tìm kiếm theo thể loại</h2>
                 </div>
                 <Row gutter={[16, 16]}>
                     {items.map(item => {

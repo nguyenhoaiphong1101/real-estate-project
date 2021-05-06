@@ -31,9 +31,9 @@ function ItemSlider() {
                                 </a>
                                 <div className="media-body">
                                     <h6>
-                                        Freddy Burben
+                                        Vũ Khánh
                     </h6>
-                                    <span>March 3, 2020</span>
+                                    <span>3 Tháng 3, 2020</span>
                                 </div>
                                 <div className="icon-wrapper">
                                     <Popover className="popup" content={content} trigger="click">
@@ -61,7 +61,7 @@ function ItemSlider() {
                                 </div>
                             </div>
                             <div class="listing-gallery-wrapper">
-                                <Button value="View Details" className="view-detail"></Button>
+                                <Button value="Xem chi tiết" className="view-detail"></Button>
                             </div>
                         </div>
                     </div>

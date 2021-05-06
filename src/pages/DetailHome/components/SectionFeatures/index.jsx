@@ -6,44 +6,44 @@ function SectionFeatures() {
     const [arr1, setArr1] = useState([
         {
             icon: "flaticon-paint",
-            label: "Propery Type",
-            value: "House"
+            label: "Loại",
+            value: "Nhà"
         },
         {
             icon: "flaticon-bone",
-            label: "Pet Friendly",
-            value: "Yes"
+            label: "Vật nuôi",
+            value: "Có"
         },
         {
             icon: "flaticon-chair",
-            label: "Furnished",
-            value: "Yes"
+            label: "Nội thất",
+            value: "Có"
         },
         {
             icon: "flaticon-fan",
-            label: "Cooling",
-            value: "Yes"
+            label: "Làm mát",
+            value: "Có"
         },
     ]);
     const [arr2, setArr2] = useState([
         {
             icon: "flaticon-bathtub",
-            label: "Bathrooms",
+            label: "Phòng ngủ",
             value: "3"
         },
         {
             icon: "flaticon-pillow",
-            label: "Bed Rooms",
+            label: "Phòng tắm",
             value: "4"
         },
         {
             icon: "flaticon-mail",
-            label: "Mail box",
-            value: "Yes"
+            label: "Hộp thư",
+            value: "Có"
         },
         {
             icon: "flaticon-ruler",
-            label: "Property Size",
+            label: "Kích thước",
             value: "3,000 Sqft"
         },
     ]);
@@ -52,27 +52,27 @@ function SectionFeatures() {
         e.preventDefault();
         setArr1([...arr1, {
             icon: "flaticon-key",
-            label: "Property ID",
+            label: "ID",
             value: "BPFXQEI"
         },
         {
             icon: "flaticon-garage",
-            label: "Parking",
-            value: "Yes"
+            label: "Đậu xe",
+            value: "Có"
         },
         {
             icon: "flaticon-history",
-            label: "Year Built",
+            label: "Năm xây dựng",
             value: "1979"
         },])
         setArr2([...arr2, {
             icon: "flaticon-new",
-            label: "Condition",
-            value: "New"
+            label: "Tình trạng",
+            value: "Mới"
         },
         {
             icon: "flaticon-ruler",
-            label: "Lot Size",
+            label: "Kích thước lô",
             value: "89 Acres"
         },
         {
@@ -85,7 +85,7 @@ function SectionFeatures() {
 
     return (
         <div className="section-feature">
-            <h4 className="title">Features</h4>
+            <h4 className="title">Đặc điểm</h4>
             <div className="container-fluid wrapper">
                 <div className="list-feature">
                     <Row>

@@ -6,7 +6,7 @@ function SectionSimilarListing() {
 
     return (
         <div className="section-similar-listing">
-            <h4 className="title">Similar Listing</h4>
+            <h4 className="title">Danh sách tương tự</h4>
             <div className="container-fluid wrapper">
                 <div className="list-feature">
                     <Row>

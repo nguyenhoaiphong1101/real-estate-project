@@ -17,30 +17,30 @@ function Footer(props) {
                     <Col span={12} className="footer-col col-2">
                         <Row>
                             <Col span={8}>
-                                <h2>Menu</h2>
+                                <h2>Danh mục</h2>
                                 <ul>
-                                    <li><a href="#">Find Home</a></li>
-                                    <li><a href="#">Add Listing</a></li>
-                                    <li><a href="#">Listing</a></li>
+                                    <li><a href="#">Tìm kiếm</a></li>
+                                    <li><a href="#">Thêm danh sách</a></li>
+                                    <li><a href="#">Danh sách</a></li>
                                     <li><a href="#">Blog</a></li>
                                 </ul>
                             </Col>
                             <Col span={8}>
-                                <h2>Infomation</h2>
+                                <h2>Thông tin</h2>
                                 <ul>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Contact Us</a></li>
-                                    <li><a href="#">Services</a></li>
+                                    <li><a href="#">Về chúng tôi</a></li>
+                                    <li><a href="#">Liên hệ chúng tôi</a></li>
+                                    <li><a href="#">Dịch vụ</a></li>
                                     <li><a href="#">FAQ</a></li>
                                 </ul>
                             </Col>
                             <Col span={8}>
-                                <h2>Legal</h2>
+                                <h2>Pháp lý</h2>
                                 <ul>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Refund Policy</a></li>
-                                    <li><a href="#">Cookie Policy</a></li>
-                                    <li><a href="#">Legal Terms</a></li>
+                                    <li><a href="#">Chính sách bảo mật</a></li>
+                                    <li><a href="#">Chính sách hoàn trả</a></li>
+                                    <li><a href="#">Chính sách Cookie</a></li>
+                                    <li><a href="#">Điều khoản pháp lý</a></li>
                                 </ul>
                             </Col>
                         </Row>
@@ -56,9 +56,9 @@ function Footer(props) {
                     </Col>
                     <Col span={12}>
                         <ul className="nav-link">
-                            <li><a href="">Find a Home</a></li>
-                            <li><a href="">Add Listing</a></li>
-                            <li><a href="">View Agencies</a></li>
+                            <li><a href="">Tìm nhà</a></li>
+                            <li><a href="">Thêm danh sách</a></li>
+                            <li><a href="">Xem đại lý</a></li>
                         </ul>
                     </Col>
                 </Row>
