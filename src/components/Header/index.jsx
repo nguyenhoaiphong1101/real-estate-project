@@ -9,16 +9,20 @@ import ROUTESMENU from '../../router/menuConfig';
 
 function Header(props) {
     const [path, setPath] = useState('');
+    // const [topStyle, setTopStyle] = useState('');
     useEffect(() => {
         props.setContent(() => <RenderRoutes setPath={setPath} routes={[...ROUTES, ...ROUTESMENU]} />);
-    }, [])
+        if (path === '/dang-ky' || path === '/dang-nhap') {
+            props.setEnableFooter(false);
+        } else {
+            props.setEnableFooter(true);
+        }
+    }, [path])
 
     const [shouldScrollHeader, setShouldScrollHeader] = useState(false);
-    const [scroll, setScroll] = useState(0);
+    const [shouldLogin, setShouldLogin] = useState('');
 
     const MINIMUM_SCROLL = 10;
-    const TIMEOUT_DELAY = 0;
-
     useDocumentScroll(callbackData => {
         const { previousScrollTop, currentScrollTop } = callbackData;
         if (currentScrollTop > MINIMUM_SCROLL) {
@@ -27,17 +31,48 @@ function Header(props) {
             setShouldScrollHeader(false)
         }
     });
-    useEffect(() => {
-        if (path === '/dang-ky' || path === '/dang-nhap') {
-            setShouldScrollHeader(true)
-        }
-    })
 
     const topStyle = shouldScrollHeader ? 'nav-wrapper__scroll' : 'nav-wrapper__top';
 
+    useEffect(() => {
+        if (path === '/dang-ky' || path === '/dang-nhap') {
+            setShouldLogin('nav-wrapper__full-top')
+        } else {
+            setShouldLogin('')
+        }
+    }, [path])
     const [animation, setAnimation] = useState('')
+    // const [path, setPath] = useState('');
+    // useEffect(() => {
+    //     props.setContent(() => <RenderRoutes setPath={setPath} routes={[...ROUTES, ...ROUTESMENU]} />);
+    // }, [])
+
+    // const [shouldScrollHeader, setShouldScrollHeader] = useState(false);
+    // const [scroll, setScroll] = useState(0);
+
+    // const MINIMUM_SCROLL = 10;
+    // const TIMEOUT_DELAY = 0;
+
+    // useDocumentScroll(callbackData => {
+    //     const { previousScrollTop, currentScrollTop } = callbackData;
+    //     if (currentScrollTop > MINIMUM_SCROLL) {
+    //         setShouldScrollHeader(true)
+    //     } else {
+    //         setShouldScrollHeader(false)
+    //     }
+    // });
+    // useEffect(() => {
+    //     if (path === '/dang-ky' || path === '/dang-nhap') {
+    //         setShouldScrollHeader(true)
+    //     }
+    // })
+
+    // const topStyle = shouldScrollHeader ? 'nav-wrapper__scroll' : 'nav-wrapper__top';
+
+    // const [animation, setAnimation] = useState('')
     return (
-        <div className={`nav-wrapper ${shouldScrollHeader ? '' : `${animation}`}  ${topStyle}`}
+        <div className={`nav-wrapper ${shouldLogin !== '' ? shouldLogin : shouldScrollHeader ? `${topStyle}` : `${animation} ${topStyle}`}  ${topStyle}`}
+            //<div className={`nav-wrapper ${shouldScrollHeader ? '' : `${animation}`}  ${topStyle}`}
             onMouseEnter={() => setAnimation('animation-header-appear')}
             onMouseLeave={() => setAnimation('animation-header-disappear')}
         >

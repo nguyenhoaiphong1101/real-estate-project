@@ -9,13 +9,15 @@ import Signup from "./pages/Signup"
 
 function App() {
     const [content, setContent] = useState();
+    const [enableFooter, setEnableFooter] = useState(true);
 
     return (
         <BrowserRouter>
             <div className="app">
-                <Header setContent={setContent} />
+                <Header setContent={setContent} setEnableFooter={setEnableFooter} />
                 {content}
-                <Footer />
+                {enableFooter ? <Footer /> : ''}
+
             </div>
         </BrowserRouter>
     );

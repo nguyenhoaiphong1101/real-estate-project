@@ -1,6 +1,6 @@
 .nav-wrapper {
     position: fixed;
-    &__top{
+    &__top {
         top: 25px;
         left: 5%;
         z-index: 9999;
@@ -9,15 +9,28 @@
         background-color: white;
         border-radius: 10px;
     }
-    &__scroll{
+    &__scroll {
         top: 0px;
         z-index: 9999;
         margin: 0 auto;
         width: 100%;
         background-color: white;
-        box-shadow: 0 2px 9px 0px rgba(34, 12, 43, .1);
-        .top-navigation{
-            display: none!important;
+        box-shadow: 0 2px 9px 0px rgba(34, 12, 43, 0.1);
+        .top-navigation {
+            display: none !important;
+        }
+    }
+    &__full-top {
+        position: unset;
+        top: 0px;
+        z-index: 9999;
+        margin: 0 auto;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 2px 9px 0px rgba(34, 12, 43, 0.1);
+        .top-navigation {
+            border-top-left-radius: 0 !important;
+            border-top-right-radius: 0 !important;
         }
     }
     .top-navigation {
