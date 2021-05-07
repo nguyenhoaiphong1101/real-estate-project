@@ -1,10 +1,12 @@
+import { Col, Row, Tabs } from "antd";
 import React from 'react';
+import FilterListings from "./components/FilterListings";
+import GridHome from './components/GridHome';
+import ListHome from "./components/ListHome";
+import MortgageCalculator from "./components/MortgageCalculator";
+import RecentListings from './components/RecentListings';
 import "./styles.scss";
-import { Col, Row } from "antd";
-import FilterListings from "./components/FilterListings"
-import ListHome from "./components/ListHome"
-import MortgageCalculator from "./components/MortgageCalculator"
-import RecentList from '../DetailHome/components/Sidebar/components/RecentList'
+const { TabPane } = Tabs;
 
 
 
@@ -30,18 +32,34 @@ function Listings(props) {
                     </div>
                 </div>
             </div>
-            <div className="container">
-                <Row>
-                    <Col span={9} className="sidebar-left">
-                        <FilterListings />
-                        <RecentList />
-                        <MortgageCalculator />
-                    </Col>
-                    <Col span={15} className="sidebar-right">
-                        <ListHome />
-                    </Col>
-                </Row>
+            <div className="content">
+                <div className="container">
+                    <Row>
+                        <Col span={9} className="sidebar-left">
+                            <FilterListings />
+                            <RecentListings />
+                            <MortgageCalculator />
+                        </Col>
+                        <Col span={15} className="sidebar-right">
+                            <div className="tab-wrapper">
+                                <Tabs className="tab-custom" defaultActiveKey="1" tabPosition="top">
+                                    <TabPane className="tab-item" tab={
+                                        <i className="fas fa-th-list"></i>
+                                    } key="1">
+                                        <ListHome />
+                                    </TabPane>
+                                    <TabPane tab={
+                                        <i class="fas fa-th-large"></i>
+                                    } key="2">
+                                        <GridHome />
+                                    </TabPane>
+                                </Tabs>
+                            </div>
 
+                        </Col>
+                    </Row>
+
+                </div>
             </div>
         </div>
     );

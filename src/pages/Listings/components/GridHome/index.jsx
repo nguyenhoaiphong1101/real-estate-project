@@ -1,7 +1,7 @@
 import React from 'react';
 import { List } from 'antd';
 import "./styles.scss";
-import ThumbnailExtra from '../../../../components/Thumbnail/ThumbnailExtra'
+import ThumbnailPrimary from '../../../../components/Thumbnail/ThumbnailPrimary'
 
 
 const listData = [];
@@ -12,11 +12,10 @@ for (let i = 0; i < 23; i++) {
     });
 }
 
-function ListHome(props) {
+function GridHome(props) {
     return (
-        <List className="list-home"
-            itemLayout="vertical"
-            size="large"
+        <List className="grid-home"
+            grid={{ gutter: 16, column: 2 }}
             pagination={{
                 onChange: page => {
                     console.log(page);
@@ -28,7 +27,7 @@ function ListHome(props) {
                 <List.Item className="item"
                     key={item.title}
                 >
-                    <ThumbnailExtra />
+                    <ThumbnailPrimary />
                 </List.Item>
             )}
         >
@@ -36,4 +35,4 @@ function ListHome(props) {
     );
 }
 
-export default ListHome;
+export default GridHome;

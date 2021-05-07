@@ -1,5 +1,5 @@
 .section-top-list {
-    margin-top: 20px;
+    margin-top: 85px;
     .title-wrapper {
         .sub-title {
             color: #519fff;
@@ -12,9 +12,9 @@
             font-weight: bold;
         }
     }
-    .slider{
-    position: relative;
-        .arrows{
+    .slider {
+        position: relative;
+        .arrows {
             position: absolute;
             bottom: 40px;
             right: 40px;
@@ -37,33 +37,32 @@
                 -webkit-box-pack: center;
                 -ms-flex-pack: center;
                 justify-content: center;
-                -webkit-transition: .3s;
-                -o-transition: .3s;
-                transition: .3s;
+                -webkit-transition: 0.3s;
+                -o-transition: 0.3s;
+                transition: 0.3s;
                 z-index: 100;
                 overflow: hidden;
-                &:hover{
-                    &::after{
+                &:hover {
+                    &::after {
                         transform: scale(1);
                     }
                 }
                 &::after {
-                    content: '';
+                    content: "";
                     position: absolute;
                     top: 0;
                     left: 0;
                     width: 100%;
                     height: 100%;
-                    -webkit-transition: .3s;
-                    -o-transition: .3s;
-                    transition: .3s;
+                    -webkit-transition: 0.3s;
+                    -o-transition: 0.3s;
+                    transition: 0.3s;
                     background-color: #519fff;
                     z-index: -1;
                     border-radius: 8px;
                     -webkit-transform: scale(0);
                     -ms-transform: scale(0);
                     transform: scale(0);
-                    
                 }
             }
         }
