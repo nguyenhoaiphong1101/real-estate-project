@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Listings from "../pages/Listings";
 import DetailHome from "../pages/DetailHome";
 import NotFound from "../pages/NotFound";
+import Profile from "../pages/Profile";
 
 
 
@@ -21,6 +22,13 @@ const ROUTES = [
         display: "Chi Tiết",
         component: DetailHome
     },
+    {
+        path: "/trang-ca-nhan",
+        key: "PROFILE",
+        display: "Trang Cá Nhân",
+        component: Profile
+    },
+
 
 ];
 

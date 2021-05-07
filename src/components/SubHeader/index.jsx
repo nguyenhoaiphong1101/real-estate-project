@@ -3,9 +3,9 @@ import "./styles.scss"
 
 
 
-function index(props) {
+function SubHeader(props) {
     return (
-        <div className="sub-header">
+        <div className="sub-header-banner">
             <div className="container">
                 <div className="subheader-inner">
                     <h1 className="title">{props.title}</h1>
@@ -27,4 +27,4 @@ function index(props) {
     );
 }
 
-export default index;
+export default SubHeader;
