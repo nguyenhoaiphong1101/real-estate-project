@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Listings from "./pages/Listings";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import NotFound from "./pages/NotFound";
+import SubmitList from "./pages/SubmitList";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
                 {/* <Header setContent={setContent} setEnableFooter={setEnableFooter} />
                 {content}
                 {enableFooter ? <Footer /> : ''} */}
-                <NotFound />
+                <SubmitList />
             </div>
         </BrowserRouter>
     );

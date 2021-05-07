@@ -1,0 +1,128 @@
+.gallery {
+    .form-group {
+        margin-bottom: 1rem;
+
+        .acr-form-notice {
+            display: block;
+            font-size: 13px;
+            line-height: 20px;
+            margin-top: 5px;
+            color: #848486;
+        }
+        .dropzone {
+            border: 1px dashed rgba(0, 0, 0, 0.1);
+            min-height: 150px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 0;
+            display: block;
+            text-align: center;
+
+            input {
+                overflow: visible;
+                margin: 0;
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit;
+            }
+
+            .dz-message {
+                text-align: center;
+                margin: 2em 0;
+            }
+
+            i {
+                font-size: 28px;
+                color: #848486;
+                font-weight: 900;
+                font-family: "Font Awesome 5 Free";
+                -webkit-font-smoothing: antialiased;
+                display: inline-block;
+                font-style: normal;
+                font-feature-settings: normal;
+                font-variant: normal;
+                text-rendering: auto;
+                line-height: 1;
+                text-align: center;
+                margin: 2em 0;
+            }
+
+            .dropzone-msg-desc {
+                color: #848486;
+                margin: 0;
+            }
+            h5 {
+                margin: 20px 0 5px;
+                color: #848486;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 28px;
+            }
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-weight: 800;
+            display: inline-block;
+            cursor: default;
+        }
+        .custom-file {
+            height: 50px;
+            cursor: pointer;
+            position: relative;
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 0;
+            input {
+                z-index: 2;
+                margin: 0;
+                opacity: 0;
+                position: relative;
+                width: 100%;
+                font-family: inherit;
+                font-size: inherit;
+                line-height: inherit;
+                overflow: visible;
+            }
+            label {
+                height: 50px;
+                padding: 8px 15px;
+                color: #6e6e6e;
+                line-height: 33px;
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+                    box-shadow 0.15s ease-in-out;
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                z-index: 1;
+                font-weight: 400;
+                background-color: #fff;
+                border-radius: 0.25rem;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+            label::after {
+                content: "Browse";
+                background-color: #f7f9fc;
+                padding: 8px 15px;
+                line-height: 33px;
+                height: 100%;
+                font-weight: bold;
+                bottom: 0;
+                z-index: 3;
+                display: block;
+                border-left: inherit;
+                border-radius: 0 0.25rem 0.25rem 0;
+                position: absolute;
+                top: 0;
+                right: 0;
+                color: #495057;
+            }
+        }
+    }
+}
+.displaynone {
+    display: none;
+}
