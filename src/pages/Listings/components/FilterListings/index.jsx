@@ -2,7 +2,9 @@ import React from 'react';
 import "./styles.scss"
 import SelectCustom from '../../../../components/Select/index';
 import ButtonSubmit from '../../../../components/Button';
+import { Collapse } from 'antd';
 
+const { Panel } = Collapse;
 
 
 const location = [
@@ -170,30 +172,35 @@ const types = [
 
 function FilterListings(props) {
     return (
-        <div className="filter-listings">
-            <h5>Lọc theo danh sách</h5>
-            <form className="filter-listings-form">
-                <div className="form-group acr-custom-select">
-                    <SelectCustom title="Vị trí" value={location} />
+        <Collapse defaultActiveKey={['1']} className="collapse collapse-filter">
+            <Panel header={<h5 className="title">Lọc theo danh sách</h5>} key="1">
+                <div className="filter-listings">
+                    <form className="filter-listings-form">
+                        <div className="form-group acr-custom-select">
+                            <SelectCustom title="Vị trí" value={location} />
+                        </div>
+                        <div className="form-group acr-custom-select">
+                            <SelectCustom title="Trạng thái" value={status} />
+                        </div>
+                        <div className="form-group acr-custom-select">
+                            <SelectCustom title="Giá tiền" value={price} />
+                        </div>
+                        <div className="form-group acr-custom-select">
+                            <SelectCustom title="Số phòng ngủ" value={beds} />
+                        </div>
+                        <div className="form-group acr-custom-select">
+                            <SelectCustom title="Số phòng tắm" value={bathrooms} />
+                        </div>
+                        <div className="form-group acr-custom-select">
+                            <SelectCustom title="Loại nhà" value={types} />
+                        </div>
+                        <ButtonSubmit value="Áp dụng" className="submit" />
+                    </form>
                 </div>
-                <div className="form-group acr-custom-select">
-                    <SelectCustom title="Trạng thái" value={status} />
-                </div>
-                <div className="form-group acr-custom-select">
-                    <SelectCustom title="Giá tiền" value={price} />
-                </div>
-                <div className="form-group acr-custom-select">
-                    <SelectCustom title="Số phòng ngủ" value={beds} />
-                </div>
-                <div className="form-group acr-custom-select">
-                    <SelectCustom title="Số phòng tắm" value={bathrooms} />
-                </div>
-                <div className="form-group acr-custom-select">
-                    <SelectCustom title="Loại nhà" value={types} />
-                </div>
-                <ButtonSubmit value="Áp dụng" className="submit" />
-            </form>
-        </div>
+
+            </Panel>
+
+        </Collapse>
     );
 }
 

@@ -1,9 +1,9 @@
+import { List, Tabs } from 'antd';
 import React from 'react';
-import { List } from 'antd';
-import "./styles.scss";
-import ThumbnailExtra from '../../../../components/Thumbnail/ThumbnailExtra'
+import ThumbnailExtra from '../../../../../../components/Thumbnail/ThumbnailExtra';
+import './styles.scss';
 
-
+const { TabPane } = Tabs;
 
 const listData = [];
 
@@ -13,11 +13,11 @@ for (let i = 0; i < 23; i++) {
     });
 }
 
-function ListHome(props) {
+function ListingPost() {
     return (
-        <List className="list-home"
+        <List className="listing-post-profile"
             itemLayout="vertical"
-            size="large"
+            size="small"
             pagination={{
                 onChange: page => {
                     console.log(page);
@@ -37,4 +37,4 @@ function ListHome(props) {
     );
 }
 
-export default ListHome;
+export default ListingPost;

@@ -1,5 +1,5 @@
 import React from 'react';
-import RecentItem from './Component/RecentItem';
+import ThumbnailSecondary from '../../../../../../components/Thumbnail/ThumbnailSecondary';
 import './styles.scss';
 function RecentList() {
 
@@ -7,10 +7,10 @@ function RecentList() {
         <div className="recent-listing">
             <h4 className="title">Danh sách gần đây</h4>
             <div className="container-fluid wrapper">
-                <RecentItem />
-                <RecentItem />
-                <RecentItem />
-                <RecentItem />
+                <ThumbnailSecondary />
+                <ThumbnailSecondary />
+                <ThumbnailSecondary />
+                <ThumbnailSecondary />
             </div>
         </div>
     );

@@ -1,9 +1,9 @@
 import React from 'react';
 import './styles.scss';
-function RecentItem() {
+function ThumbnailSecondary() {
 
     return (
-        <div class="listing listing-list">
+        <div class="listing listing-secondary">
             <div class="listing-thumbnail">
                 <a>
                     <img src="http://androthemes.com/themes/react/acres/assets/img/listings/1.jpg" alt="listing" />
@@ -22,4 +22,4 @@ function RecentItem() {
     );
 }
 
-export default RecentItem;
+export default ThumbnailSecondary;

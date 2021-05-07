@@ -3,8 +3,9 @@ import { Route, Switch } from "react-router";
 import Home from "../pages/Home";
 import Listings from "../pages/Listings";
 import DetailHome from "../pages/DetailHome";
-import Login from "../pages/Login";
-import Signup from "../pages/Signup";
+import NotFound from "../pages/NotFound";
+import Profile from "../pages/Profile";
+
 
 
 const ROUTES = [
@@ -21,6 +22,13 @@ const ROUTES = [
         display: "Chi Tiết",
         component: DetailHome
     },
+    {
+        path: "/trang-ca-nhan",
+        key: "PROFILE",
+        display: "Trang Cá Nhân",
+        component: Profile
+    },
+
 
 ];
 
@@ -53,7 +61,7 @@ export function RenderRoutes({ routes, setPath }) {
             {routes.map((route, i) => {
                 return <RouteWithSubRoutes setPath={setPath} key={route.key} {...route} />;
             })}
-            {/*<Route component={NotFound} /> */}
+            <Route component={NotFound} />
 
         </Switch>
     );

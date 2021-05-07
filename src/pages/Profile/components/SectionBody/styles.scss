@@ -1,0 +1,104 @@
+.profile-section-body-wrapper {
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 40px;
+    .tab-wrapper {
+        .ant-tabs-ink-bar {
+            display: none;
+        }
+
+        .ant-tabs-tab-active {
+            .tab-item-wrapper {
+                background-color: #519fff !important;
+                .tab-item {
+                    color: #fff !important;
+                }
+                &--red {
+                    background-color: #ff4764 !important;
+                    .tab-item {
+                        color: #fff !important;
+                    }
+                }
+                &__icon {
+                    i {
+                        font-size: 16px;
+                        margin-top: 4px;
+                        margin-right: 5px;
+                        color: #fff !important;
+                    }
+                }
+            }
+        }
+        .ant-tabs-nav {
+            flex-basis: 33.33%;
+        }
+        .ant-tabs-tab {
+            margin-bottom: 0px !important;
+            margin: 0px !important;
+            padding-right: 0px !important;
+        }
+        .ant-tabs-tab-btn {
+            width: 100%;
+        }
+        .tab-item-wrapper {
+            &--red {
+                background-color: #ffbfc9;
+                .tab-item {
+                    color: #ff4764 !important;
+                }
+                &:hover {
+                    background-color: #ffbfc9;
+                    .tab-item {
+                        color: #fff !important;
+                    }
+                }
+            }
+            &__icon {
+                display: flex;
+                i {
+                    font-size: 16px;
+                    margin-top: 4px;
+                    margin-right: 5px;
+                    color: #ff4764 !important;
+                }
+                &:hover {
+                    background-color: #ff4764 !important;
+                    i {
+                        color: #fff !important;
+                    }
+                }
+            }
+            border: 0px;
+            border-radius: 8px;
+            box-shadow: 0 2px 9px 0 rgba(34, 12, 43, 0.1);
+            background-color: #fff;
+            transition: 0.3s;
+            padding: 15px 30px;
+            width: 100%;
+            font-size: 8px;
+            color: #101737;
+            width: 100%;
+            &:hover {
+                background-color: #f7f9fc;
+                .tab-item {
+                    color: #101737;
+                }
+            }
+            .tab-item {
+                margin: 0;
+                text-align: left;
+            }
+        }
+        .ant-tabs-content-holder {
+            border-left: 0px;
+            flex-basis: 66.66%;
+            .empty {
+                height: 250px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
