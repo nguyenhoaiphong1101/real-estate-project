@@ -3,8 +3,9 @@ import { BrowserRouter } from 'react-router-dom';
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Listings from "./pages/Listings";
-import Login from "./pages/Login"
-import Signup from "./pages/Signup"
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import NotFound from "./pages/NotFound";
 
 
 function App() {
@@ -17,7 +18,6 @@ function App() {
                 <Header setContent={setContent} setEnableFooter={setEnableFooter} />
                 {content}
                 {enableFooter ? <Footer /> : ''}
-
             </div>
         </BrowserRouter>
     );

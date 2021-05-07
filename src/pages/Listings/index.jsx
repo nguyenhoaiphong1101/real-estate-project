@@ -15,16 +15,16 @@ function Listings(props) {
         <div className="section-listhome">
             <div className="sub-header">
                 <div className="container">
-                    <div class="subheader-inner">
-                        <h1 class="title">Danh sách</h1>
+                    <div className="subheader-inner">
+                        <h1 className="title">Danh sách</h1>
                         <nav>
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
+                            <ol className="breadcrumb">
+                                <li className="breadcrumb-item">
                                     <a>
-                                        <i class="fas fa-home"></i>
+                                        <i className="fas fa-home"></i>
                                     </a>
                                 </li>
-                                <li class="breadcrumb-item" aria-current="page">
+                                <li className="breadcrumb-item" aria-current="page">
                                     Danh sách
                                 </li>
                             </ol>
