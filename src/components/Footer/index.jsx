@@ -2,68 +2,71 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import './styles.scss';
+import Images from './../../constants/Images'
+
 
 function Footer(props) {
     return (
         <div className="footer-container">
-            <div className="footer-top">
-                <Row>
-                    <Col span={12} className="footer-col col-1">
-                        <img className="nav-logo" src="https://achaumedia.vn/wp-content/uploads/2020/03/Free_Vector_Logo_for_Real_Estate-300x138.jpg" alt="logo" />
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Odio ullam consequuntur tempora excepturi earum molestiae!
+            <div className="container">
+                <div className="footer-top">
+                    <Row>
+                        <Col span={12} className="footer-col col-1">
+                            <img className="nav-logo" src={Images.LOGO} alt="logo" />
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Odio ullam consequuntur tempora excepturi earum molestiae!
                         </p>
-                    </Col>
-                    <Col span={12} className="footer-col col-2">
-                        <Row>
-                            <Col span={8}>
-                                <h2>Danh mục</h2>
-                                <ul>
-                                    <li><a href="#">Tìm kiếm</a></li>
-                                    <li><a href="#">Thêm danh sách</a></li>
-                                    <li><a href="#">Danh sách</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                </ul>
-                            </Col>
-                            <Col span={8}>
-                                <h2>Thông tin</h2>
-                                <ul>
-                                    <li><a href="#">Về chúng tôi</a></li>
-                                    <li><a href="#">Liên hệ chúng tôi</a></li>
-                                    <li><a href="#">Dịch vụ</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                </ul>
-                            </Col>
-                            <Col span={8}>
-                                <h2>Pháp lý</h2>
-                                <ul>
-                                    <li><a href="#">Chính sách bảo mật</a></li>
-                                    <li><a href="#">Chính sách hoàn trả</a></li>
-                                    <li><a href="#">Chính sách Cookie</a></li>
-                                    <li><a href="#">Điều khoản pháp lý</a></li>
-                                </ul>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </div>
-            <div className="footer-bottom">
-                <Row>
-                    <Col span={12}>
-                        <p>
-                            © Copyright 2021 - KTPM 2018
+                        </Col>
+                        <Col span={12} className="footer-col col-2">
+                            <Row>
+                                <Col span={8}>
+                                    <h2>Danh mục</h2>
+                                    <ul>
+                                        <li><a href="#">Tìm kiếm</a></li>
+                                        <li><a href="#">Thêm danh sách</a></li>
+                                        <li><a href="#">Danh sách</a></li>
+                                        <li><a href="#">Blog</a></li>
+                                    </ul>
+                                </Col>
+                                <Col span={8}>
+                                    <h2>Thông tin</h2>
+                                    <ul>
+                                        <li><a href="#">Về chúng tôi</a></li>
+                                        <li><a href="#">Liên hệ chúng tôi</a></li>
+                                        <li><a href="#">Dịch vụ</a></li>
+                                        <li><a href="#">FAQ</a></li>
+                                    </ul>
+                                </Col>
+                                <Col span={8}>
+                                    <h2>Pháp lý</h2>
+                                    <ul>
+                                        <li><a href="#">Chính sách bảo mật</a></li>
+                                        <li><a href="#">Chính sách hoàn trả</a></li>
+                                        <li><a href="#">Chính sách Cookie</a></li>
+                                        <li><a href="#">Điều khoản pháp lý</a></li>
+                                    </ul>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </div>
+                <div className="footer-bottom">
+                    <Row>
+                        <Col span={12}>
+                            <p>
+                                © Copyright 2021 - KTPM 2018
                         </p>
-                    </Col>
-                    <Col span={12}>
-                        <ul className="nav-link">
-                            <li><a href="">Tìm nhà</a></li>
-                            <li><a href="">Thêm danh sách</a></li>
-                            <li><a href="">Xem đại lý</a></li>
-                        </ul>
-                    </Col>
-                </Row>
+                        </Col>
+                        <Col span={12}>
+                            <ul className="nav-link">
+                                <li><a href="">Tìm nhà</a></li>
+                                <li><a href="">Thêm danh sách</a></li>
+                                <li><a href="">Xem đại lý</a></li>
+                            </ul>
+                        </Col>
+                    </Row>
+                </div>
             </div>
-
         </div>
 
     );
