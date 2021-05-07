@@ -4,6 +4,7 @@ import "./styles.scss";
 import ThumbnailExtra from '../../../../components/Thumbnail/ThumbnailExtra'
 
 
+
 const listData = [];
 
 for (let i = 0; i < 23; i++) {
