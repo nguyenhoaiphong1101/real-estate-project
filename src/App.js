@@ -17,12 +17,7 @@ function App() {
             <div className="app">
                 <Header setContent={setContent} setEnableFooter={setEnableFooter} />
                 {content}
-<<<<<<< HEAD
-                {enableFooter ? <Footer /> : ''} */}
-                <SubmitList />
-=======
                 {enableFooter ? <Footer /> : ''}
->>>>>>> da4154cc617d522530c3f48cb2641ef278ae40df
             </div>
         </BrowserRouter>
     );

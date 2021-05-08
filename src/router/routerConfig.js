@@ -5,6 +5,7 @@ import Listings from "../pages/Listings";
 import DetailHome from "../pages/DetailHome";
 import NotFound from "../pages/NotFound";
 import Profile from "../pages/Profile";
+import SubmitList from "../pages/SubmitList";
 
 
 
@@ -28,7 +29,12 @@ const ROUTES = [
         display: "Trang Cá Nhân",
         component: Profile
     },
-
+    {
+        path: "/dang-bai",
+        key: "POST",
+        display: "Đăng Bài Viết",
+        component: SubmitList
+    },
 
 ];
 
