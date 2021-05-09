@@ -6,6 +6,7 @@ import Listings from "./pages/Listings";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import SubmitList from "./pages/SubmitList";
+import AgentArchive from "./pages/Agents/AgentArchive"
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
                 {/* <Header setContent={setContent} setEnableFooter={setEnableFooter} />
                 {content}
                 {enableFooter ? <Footer /> : ''} */}
-                <SubmitList />
+                <AgentArchive />
             </div>
         </BrowserRouter>
     );
