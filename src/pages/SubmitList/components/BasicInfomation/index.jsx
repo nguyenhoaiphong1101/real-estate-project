@@ -79,7 +79,7 @@ const rentalPeriod = [
     },
 ]
 
-function index(props) {
+function BasicInfomation(props) {
     return (
         <Row className="basicinfomation">
             <Col span={24} className="form-group">
@@ -135,4 +135,4 @@ function index(props) {
     );
 }
 
-export default index;
+export default BasicInfomation;

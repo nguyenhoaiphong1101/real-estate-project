@@ -6,6 +6,7 @@ import { Tabs } from 'antd';
 import BasicInfomation from "./components/BasicInfomation"
 import Gallery from "./components/Gallery"
 import Details from "./components/Details"
+import Features from "./components/Features"
 
 
 function SubmitList(props) {
@@ -36,7 +37,7 @@ function SubmitList(props) {
                             <a href="#" >Features</a>
                         </div>
                     } key="3">
-                        Features
+                        <Features />
                     </Tabs.TabPane>
                     <Tabs.TabPane tab={
                         <div className="nav-item">

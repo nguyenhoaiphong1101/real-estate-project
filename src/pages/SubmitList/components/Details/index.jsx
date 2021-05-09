@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 import Button from "../../../../components/Button"
 import { Checkbox } from 'antd';
 
-function index(props) {
+function Details(props) {
     return (
         <div className="detail">
             <Row >
@@ -43,4 +43,4 @@ function index(props) {
     );
 }
 
-export default index;
+export default Details;

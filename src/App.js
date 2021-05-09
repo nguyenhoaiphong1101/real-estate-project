@@ -15,9 +15,10 @@ function App() {
     return (
         <BrowserRouter>
             <div className="app">
-                <Header setContent={setContent} setEnableFooter={setEnableFooter} />
+                {/* <Header setContent={setContent} setEnableFooter={setEnableFooter} />
                 {content}
-                {enableFooter ? <Footer /> : ''}
+                {enableFooter ? <Footer /> : ''} */}
+                <SubmitList />
             </div>
         </BrowserRouter>
     );
