@@ -6,7 +6,7 @@ import Listings from "./pages/Listings";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import SubmitList from "./pages/SubmitList";
-import AgentArchive from "./pages/Agents/AgentArchive"
+import AgentDetail from "./pages/Agents/AgentDetail"
 
 
 function App() {
@@ -16,10 +16,9 @@ function App() {
     return (
         <BrowserRouter>
             <div className="app">
-                {/* <Header setContent={setContent} setEnableFooter={setEnableFooter} />
+                <Header setContent={setContent} setEnableFooter={setEnableFooter} />
                 {content}
-                {enableFooter ? <Footer /> : ''} */}
-                <AgentArchive />
+                {enableFooter ? <Footer /> : ''}
             </div>
         </BrowserRouter>
     );

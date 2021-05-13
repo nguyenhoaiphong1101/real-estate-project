@@ -1,0 +1,16 @@
+.agent-detail {
+    max-width: 1140px;
+    margin: auto;
+    margin-top: 80px;
+
+    .sticky {
+        position: sticky;
+        top: 30px;
+        transition: 0.3s;
+    }
+}
+
+.mr-mb {
+    padding-right: 15px;
+    padding-bottom: 30px;
+}
