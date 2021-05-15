@@ -1,5 +1,5 @@
-import Login from "../pages/Login";
-import Signup from "../pages/Signup";
+import Login from "../pages/User/Login";
+import Signup from "../pages/User/Signup";
 //////
 
 const ROUTESMENU = [

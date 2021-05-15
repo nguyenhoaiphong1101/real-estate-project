@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router";
-import Home from "../pages/Home";
-import Listings from "../pages/Listings";
-import DetailHome from "../pages/DetailHome";
-import NotFound from "../pages/NotFound";
-import Profile from "../pages/Profile";
-import SubmitList from "../pages/SubmitList";
+import Home from "../pages/User/Home";
+import Listings from "../pages/User/Listings";
+import DetailHome from "../pages/User/DetailHome";
+import NotFound from "../pages/User/NotFound";
+import Profile from "../pages/User/Profile";
+import SubmitList from "../pages/User/SubmitList";
 
 
 
