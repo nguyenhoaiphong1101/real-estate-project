@@ -1,8 +1,7 @@
-import { Row, Col, Form, Input, Popover } from 'antd';
+import { Row, Col, Form, Input } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React from 'react';
 import ButtonSubmit from '../../../../../../../components/Button';
-import ThumbnailExtra from '../../../../../../../components/Thumbnail/ThumbnailExtra';
 import './styles.scss';
 
 

@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom';
 import './styles.scss';
 
 import useDocumentScroll from './../../hooks/useDocumentScroll'
-import ROUTES, { RenderRoutes } from '../../router/routerConfig';
-import ROUTESMENU from '../../router/menuConfig';
+
 
 function Header(props) {
     const [path, setPath] = useState('');
     // const [topStyle, setTopStyle] = useState('');
     useEffect(() => {
-        props.setContent(() => <RenderRoutes setPath={setPath} routes={[...ROUTES, ...ROUTESMENU]} />);
         if (path === '/dang-ky' || path === '/dang-nhap') {
             props.setEnableFooter(false);
         } else {
@@ -42,34 +40,7 @@ function Header(props) {
         }
     }, [path])
     const [animation, setAnimation] = useState('')
-    // const [path, setPath] = useState('');
-    // useEffect(() => {
-    //     props.setContent(() => <RenderRoutes setPath={setPath} routes={[...ROUTES, ...ROUTESMENU]} />);
-    // }, [])
 
-    // const [shouldScrollHeader, setShouldScrollHeader] = useState(false);
-    // const [scroll, setScroll] = useState(0);
-
-    // const MINIMUM_SCROLL = 10;
-    // const TIMEOUT_DELAY = 0;
-
-    // useDocumentScroll(callbackData => {
-    //     const { previousScrollTop, currentScrollTop } = callbackData;
-    //     if (currentScrollTop > MINIMUM_SCROLL) {
-    //         setShouldScrollHeader(true)
-    //     } else {
-    //         setShouldScrollHeader(false)
-    //     }
-    // });
-    // useEffect(() => {
-    //     if (path === '/dang-ky' || path === '/dang-nhap') {
-    //         setShouldScrollHeader(true)
-    //     }
-    // })
-
-    // const topStyle = shouldScrollHeader ? 'nav-wrapper__scroll' : 'nav-wrapper__top';
-
-    // const [animation, setAnimation] = useState('')
     return (
         <div className={`nav-wrapper ${shouldLogin !== '' ? shouldLogin : shouldScrollHeader ? `${topStyle}` : `${animation} ${topStyle}`}  ${topStyle}`}
             //<div className={`nav-wrapper ${shouldScrollHeader ? '' : `${animation}`}  ${topStyle}`}
@@ -83,12 +54,50 @@ function Header(props) {
                     <i className="fab fa-linkedin-in"></i>
                     <i className="fab fa-twitter"></i>
                 </div>
-                {displayRouteLogin(ROUTESMENU, path)}
+                //Đăng nhập - Đăng ký
+                <ul className="nav-link">
+                    <React.Fragment>
+                        <li className={path === "/dang-nhap" ? "active" : ""}>
+                            <Link to='/dang-nhap' > Đăng nhập </Link>
+                        </li>
+                    </React.Fragment>
+                    <React.Fragment>
+                        <li className={path === "/dang-ky" ? "active" : ""}>
+                            <Link to='/dang-ky' > Đăng ký </Link>
+                        </li>
+                    </React.Fragment>
+                </ul>
             </div>
             <div className="main-header">
                 <nav className="nav">
                     <img className="nav-logo" src="https://achaumedia.vn/wp-content/uploads/2020/03/Free_Vector_Logo_for_Real_Estate-300x138.jpg" alt="logo" />
-                    {displayRouteMenu(ROUTES, path)}
+                    <ul className="nav-link">
+                        <React.Fragment>
+                            <li className={path === "/" ? "active" : ""}>
+                                <Link to='/' > Trang chủ </Link>
+                            </li>
+                        </React.Fragment>
+                        <React.Fragment>
+                            <li className={path === "/danh-sach" ? "active" : ""}>
+                                <Link to='/danh-sach' > Danh sách </Link>
+                            </li>
+                        </React.Fragment>
+                        <React.Fragment>
+                            <li className={path === "/trang-ca-nhan" ? "active" : ""}>
+                                <Link to='/trang-ca-nhan' > Trang Cá Nhân </Link>
+                            </li>
+                        </React.Fragment>
+                        <React.Fragment>
+                            <li className={path === "/dang-bai" ? "active" : ""}>
+                                <Link to='/dang-bai' > Đăng bài viết</Link>
+                            </li>
+                        </React.Fragment>
+                        <React.Fragment>
+                            <li className={path === "/dang-ky" ? "active" : ""}>
+                                <Link to='/dang-ky' > Đăng ký </Link>
+                            </li>
+                        </React.Fragment>
+                    </ul>
                 </nav>
                 <div className="button-wrap">
                     <Button className="btn" value="Gửi danh sách" icon="fas fa-plus" />

@@ -1,7 +1,6 @@
 import React from 'react';
 import "./styles.scss";
 import SubHeader from "../../../components/SubHeader";
-import { Row, Col } from "antd";
 import { Tabs } from 'antd';
 import BasicInfomation from "./components/BasicInfomation"
 import Gallery from "./components/Gallery"

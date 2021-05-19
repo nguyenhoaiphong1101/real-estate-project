@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 
-function Manage(props) {
+function AdminWrapper(props) {
     return (
         <div className="admin-manage">
             <Header />
@@ -25,4 +25,4 @@ function Manage(props) {
     );
 }
 
-export default Manage;
+export default AdminWrapper;

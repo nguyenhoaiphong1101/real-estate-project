@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row, Col } from 'antd';
 import './styles.scss';
 import SectionSlideIntroduce from '../SectionSlideIntroduce';
 import SectionPriceRange from '../SectionPriceRange';
