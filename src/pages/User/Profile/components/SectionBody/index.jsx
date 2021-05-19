@@ -1,7 +1,6 @@
 import React from 'react';
 import './styles.scss';
-import { Row, Col } from "antd";
-import { Tabs, Radio } from 'antd';
+import { Tabs } from 'antd';
 import { Empty } from 'antd';
 import ListingPost from './components/ListingPost';
 import FormEdit from './components/FormEdit';

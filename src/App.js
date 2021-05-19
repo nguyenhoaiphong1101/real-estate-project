@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -8,19 +8,21 @@ import Signup from "./pages/User/Signup";
 import SubmitList from "./pages/User/SubmitList";
 import AgentDetail from "./pages/User/Agents/AgentDetail"
 import Manage from "./pages/Admin/Manage"
+import loginApi from './api/loginApi';
 
 
 function App() {
     const [content, setContent] = useState();
     const [enableFooter, setEnableFooter] = useState(true);
 
+
     return (
         <BrowserRouter>
             <div className="app">
-                {/* <Header setContent={setContent} setEnableFooter={setEnableFooter} />
+                <Header setContent={setContent} setEnableFooter={setEnableFooter} />
                 {content}
-                {enableFooter ? <Footer /> : ''} */}
-                <Manage />
+                {enableFooter ? <Footer /> : ''}
+                {/* <Manage /> */}
             </div>
         </BrowserRouter>
     );
