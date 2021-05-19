@@ -58,12 +58,9 @@ function FormLogin() {
                     OR
                 </span>
             </div>
-            <button type="button" className="form-login-btn-facebook "><IconFont type="icon-facebook" className="mr-10" />Tiếp tục với Facebook</button>
-            <button type="button" className="form-login-btn-google"><GoogleOutlined className="mr-10" />Tiếp tục với Google</button>
             <p className="text-end">
                 Bạn chưa có tài khoản?
                 <a href="#">Tạo ngay</a>
-
             </p>
 
 

@@ -15,7 +15,6 @@ function App() {
     const [content, setContent] = useState();
     const [enableFooter, setEnableFooter] = useState(true);
 
-
     return (
         <BrowserRouter>
             <div className="app">
@@ -24,6 +23,31 @@ function App() {
                 {enableFooter ? <Footer /> : ''}
                 {/* <Manage /> */}
             </div>
+            {/*<Switch>
+                <Route path="/" exact>
+                    <Redirect push to="/create-organization" />
+                </Route>
+                <Route path="/userinformation/:id">
+                    <UserInformation />
+                </Route>
+                <Route path="/group"></Route>
+                <Route path="/create-organization">
+                    <CreateOrganization />
+                </Route>
+                <Route path="/organization/:id">
+                    <Organization />
+                </Route>
+                <Route path="/profile/:id">
+                    <UserProfile />
+                </Route>
+                <Route path="/user/:id">
+                    <User />
+                </Route>
+                <Route>
+                    <NotFound />
+                </Route>
+            </Switch>
+            */}
         </BrowserRouter>
     );
 }
