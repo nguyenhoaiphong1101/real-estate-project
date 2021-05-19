@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Route, Switch } from "react-router";
+import { Route, Switch, Redirect } from "react-router";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Home from "./Home"
@@ -15,6 +15,7 @@ import Signup from './Signup';
 function UserWrapper(props) {
     // const [content, setContent] = useState();
     const [enableFooter, setEnableFooter] = useState(true);
+    const token = localStorage.getItem('access_token');
     return (
         <BrowserRouter>
             <div className="user">

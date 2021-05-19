@@ -27,10 +27,7 @@ function AdminMenu(props) {
 
     return (
         <div style={collapsed ? { width: 90 } : { width: 256 }} className="admin-menu">
-            <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 5 }}>
-                <span>Menu</span>
-                {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
-            </Button>
+
             <Menu
                 defaultSelectedKeys={['1']}
                 defaultOpenKeys={['sub1']}
@@ -48,6 +45,10 @@ function AdminMenu(props) {
                     Quản lý comment
           </Menu.Item>
             </Menu>
+            <Button type="primary" onClick={toggleCollapsed} style={{ width: "100%" }}>
+                <span>Menu</span>
+                {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
+            </Button>
         </div>
     );
 }

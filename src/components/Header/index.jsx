@@ -17,6 +17,44 @@ function Header(props) {
         }
     }, [path])
 
+    const removeLocal = () => {
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('role')
+    }
+
+
+    const token = localStorage.getItem('access_token');
+
+    const checkLogin = () => {
+        if (token == null) {
+            return (
+                <ul className="nav-link">
+                    <React.Fragment>
+                        <li className={path === "/dang-nhap" ? "active" : ""}>
+                            <Link to='/dang-nhap' > Đăng nhập </Link>
+                        </li>
+                    </React.Fragment>
+                    <React.Fragment>
+                        <li className={path === "/dang-ky" ? "active" : ""}>
+                            <Link to='/dang-ky' > Đăng ký </Link>
+                        </li>
+                    </React.Fragment>
+                </ul>
+            )
+        } else {
+            return (
+                <ul className="nav-link">
+                    <React.Fragment>
+                        <li className={path === "/dang-nhap" ? "active" : ""}>
+                            <Link to='/' onClick={() => removeLocal()}> Đăng xuất </Link>
+                        </li>
+                    </React.Fragment>
+                </ul>
+            )
+        }
+    }
+
+
     const [shouldScrollHeader, setShouldScrollHeader] = useState(false);
     const [shouldLogin, setShouldLogin] = useState('');
 
@@ -54,19 +92,7 @@ function Header(props) {
                     <i className="fab fa-linkedin-in"></i>
                     <i className="fab fa-twitter"></i>
                 </div>
-                //Đăng nhập - Đăng ký
-                <ul className="nav-link">
-                    <React.Fragment>
-                        <li className={path === "/dang-nhap" ? "active" : ""}>
-                            <Link to='/dang-nhap' > Đăng nhập </Link>
-                        </li>
-                    </React.Fragment>
-                    <React.Fragment>
-                        <li className={path === "/dang-ky" ? "active" : ""}>
-                            <Link to='/dang-ky' > Đăng ký </Link>
-                        </li>
-                    </React.Fragment>
-                </ul>
+                {checkLogin()}
             </div>
             <div className="main-header">
                 <nav className="nav">

@@ -1,7 +1,7 @@
 .admin-header {
     .header {
         overflow: hidden;
-        background-color: #f1f1f1;
+        background-color: black;
         padding: 10px 10px;
     }
 
@@ -20,6 +20,7 @@
 
     /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
     .header a.logo {
+        color: #ddd;
         font-size: 25px;
         font-weight: bold;
     }
@@ -32,7 +33,7 @@
 
     /* Style the active/current link*/
     .header a.active {
-        background-color: dodgerblue;
+        background-color: rgb(86, 87, 90);
         color: white;
     }
 
