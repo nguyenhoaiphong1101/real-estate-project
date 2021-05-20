@@ -4,6 +4,7 @@ import { createFromIconfontCN, GoogleOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import { Input } from 'antd';
 import loginApi from "../../../../../api/loginApi"
+import { useHistory } from 'react-router-dom';
 
 const IconFont = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
@@ -11,9 +12,18 @@ const IconFont = createFromIconfontCN({
 
 function FormLogin() {
     const [form] = Form.useForm();
+    const history = useHistory();
+
+    const loginSuccess = (role) => {
+        if (role === "ADMIN") {
+            history.push("/admin")
+        } else {
+            history.push("/")
+        }
+    }
 
     const onFinish = (values) => {
-        loginApi.POST(values);
+        loginApi.POST(values, loginSuccess);
     };
 
     // const [state, setstate] = useState(initialState)

@@ -4,7 +4,7 @@ import Menu from "./components/Menu"
 import AdminRouting from "./components/Routing"
 import "./styles.scss"
 import {
-    BrowserRouter as Router,
+    BrowserRouter as BrowserRouter,
     Switch,
     Route,
     Link
@@ -14,12 +14,12 @@ import {
 function AdminWrapper(props) {
     return (
         <div className="admin-manage">
-            <Header />
+            {/* <Header /> */}
             <div style={{ display: 'flex' }} className="admin-manage-menu">
-                <Router>
+                <BrowserRouter>
                     <Menu />
                     <AdminRouting />
-                </Router>
+                </BrowserRouter>
             </div>
         </div>
     );

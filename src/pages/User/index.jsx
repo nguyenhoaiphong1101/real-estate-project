@@ -13,37 +13,25 @@ import Login from './Login';
 import Signup from './Signup';
 
 function UserWrapper(props) {
-    // const [content, setContent] = useState();
     const [enableFooter, setEnableFooter] = useState(true);
-    const token = localStorage.getItem('access_token');
     return (
         <BrowserRouter>
             <div className="user">
-                <Header setEnableFooter={setEnableFooter} />
                 <Switch>
                     <Route path="/" exact>
                         <Home />
                     </Route>
-                    <Route path="/chi-tiet">
+                    <Route path="/chi-tiet" >
                         <DetailHome />
                     </Route>
-                    <Route path="/trang-ca-nhan">
+                    <Route path="/trang-ca-nhan" >
                         <Profile />
                     </Route>
-                    <Route path="/dang-bai">
+                    <Route path="/dang-bai" >
                         <SubmitList />
                     </Route>
-                    <Route path="/danh-sach">
+                    <Route path="/danh-sach" >
                         <Listings />
-                    </Route>
-                    <Route path="/dang-nhap">
-                        <Login />
-                    </Route>
-                    <Route path="/dang-ky">
-                        <Signup />
-                    </Route>
-                    <Route>
-                        <NotFound />
                     </Route>
                 </Switch>
                 {enableFooter ? <Footer /> : ''}

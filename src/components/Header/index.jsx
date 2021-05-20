@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import './styles.scss';
 
 import useDocumentScroll from './../../hooks/useDocumentScroll'
 
 
 function Header(props) {
-    const [path, setPath] = useState('');
+    const [path, setPath] = useState(props.path);
     // const [topStyle, setTopStyle] = useState('');
+    const location = useLocation();
+    const history = useHistory();
+
     useEffect(() => {
-        if (path === '/dang-ky' || path === '/dang-nhap') {
+        if (location.pathname === '/dang-ky' || location.pathname === '/dang-nhap') {
             props.setEnableFooter(false);
         } else {
             props.setEnableFooter(true);
         }
-    }, [path])
+    }, [location.pathname])
 
     const removeLocal = () => {
         localStorage.removeItem('access_token')
         localStorage.removeItem('role')
+        history.push('/')
     }
 
 
@@ -46,7 +50,10 @@ function Header(props) {
                 <ul className="nav-link">
                     <React.Fragment>
                         <li className={path === "/dang-nhap" ? "active" : ""}>
-                            <Link to='/' onClick={() => removeLocal()}> Đăng xuất </Link>
+                            <Link to='/' onClick={() => {
+                                removeLocal()
+                                props.setLoading(true)
+                            }}> Đăng xuất </Link>
                         </li>
                     </React.Fragment>
                 </ul>
@@ -71,65 +78,84 @@ function Header(props) {
     const topStyle = shouldScrollHeader ? 'nav-wrapper__scroll' : 'nav-wrapper__top';
 
     useEffect(() => {
-        if (path === '/dang-ky' || path === '/dang-nhap') {
+        if (location.pathname === '/dang-ky' || location.pathname === '/dang-nhap') {
             setShouldLogin('nav-wrapper__full-top')
         } else {
             setShouldLogin('')
         }
-    }, [path])
+    }, [location.pathname])
     const [animation, setAnimation] = useState('')
 
     return (
-        <div className={`nav-wrapper ${shouldLogin !== '' ? shouldLogin : shouldScrollHeader ? `${topStyle}` : `${animation} ${topStyle}`}  ${topStyle}`}
-            //<div className={`nav-wrapper ${shouldScrollHeader ? '' : `${animation}`}  ${topStyle}`}
-            onMouseEnter={() => setAnimation('animation-header-appear')}
-            onMouseLeave={() => setAnimation('animation-header-disappear')}
-        >
-            <div className="top-navigation">
-                <div className="nav-icon">
-                    <i className="fab fa-facebook-f"></i>
-                    <i className="fab fa-pinterest-p"></i>
-                    <i className="fab fa-linkedin-in"></i>
-                    <i className="fab fa-twitter"></i>
-                </div>
-                {checkLogin()}
-            </div>
-            <div className="main-header">
-                <nav className="nav">
-                    <img className="nav-logo" src="https://achaumedia.vn/wp-content/uploads/2020/03/Free_Vector_Logo_for_Real_Estate-300x138.jpg" alt="logo" />
-                    <ul className="nav-link">
-                        <React.Fragment>
-                            <li className={path === "/" ? "active" : ""}>
-                                <Link to='/' > Trang chủ </Link>
-                            </li>
-                        </React.Fragment>
-                        <React.Fragment>
-                            <li className={path === "/danh-sach" ? "active" : ""}>
-                                <Link to='/danh-sach' > Danh sách </Link>
-                            </li>
-                        </React.Fragment>
-                        <React.Fragment>
-                            <li className={path === "/trang-ca-nhan" ? "active" : ""}>
-                                <Link to='/trang-ca-nhan' > Trang Cá Nhân </Link>
-                            </li>
-                        </React.Fragment>
-                        <React.Fragment>
-                            <li className={path === "/dang-bai" ? "active" : ""}>
-                                <Link to='/dang-bai' > Đăng bài viết</Link>
-                            </li>
-                        </React.Fragment>
-                        <React.Fragment>
-                            <li className={path === "/dang-ky" ? "active" : ""}>
-                                <Link to='/dang-ky' > Đăng ký </Link>
-                            </li>
-                        </React.Fragment>
-                    </ul>
-                </nav>
-                <div className="button-wrap">
-                    <Button className="btn" value="Gửi danh sách" icon="fas fa-plus" />
-                </div>
-            </div>
-        </div>
+        <>
+            {
+                props.role === 'ADMIN'
+                    ?
+                    <div className="admin-header">
+                        <div className="header">
+                            <a href="#default" className="logo">Admin</a>
+                            <div className="header-right">
+                                <a className="active" href="" onClick={() => {
+                                    removeLocal()
+                                    props.setLoading(true)
+                                }}>Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                    :
+                    <div className={`nav-wrapper ${shouldLogin !== '' ? shouldLogin : shouldScrollHeader ? `${topStyle}` : `${animation} ${topStyle}`}  ${topStyle}`}
+                        //<div className={`nav-wrapper ${shouldScrollHeader ? '' : `${animation}`}  ${topStyle}`}
+                        onMouseEnter={() => setAnimation('animation-header-appear')}
+                        onMouseLeave={() => setAnimation('animation-header-disappear')}
+                    >
+                        <div className="top-navigation">
+                            <div className="nav-icon">
+                                <i className="fab fa-facebook-f"></i>
+                                <i className="fab fa-pinterest-p"></i>
+                                <i className="fab fa-linkedin-in"></i>
+                                <i className="fab fa-twitter"></i>
+                            </div>
+                            {checkLogin()}
+                        </div>
+                        <div className="main-header">
+                            <nav className="nav">
+                                <img className="nav-logo" src="https://achaumedia.vn/wp-content/uploads/2020/03/Free_Vector_Logo_for_Real_Estate-300x138.jpg" alt="logo" />
+                                <ul className="nav-link">
+                                    <React.Fragment>
+                                        <li className={path === "/" ? "active" : ""}>
+                                            <Link to='/' > Trang chủ </Link>
+                                        </li>
+                                    </React.Fragment>
+                                    <React.Fragment>
+                                        <li className={path === "/danh-sach" ? "active" : ""}>
+                                            <Link to='/danh-sach' > Danh sách </Link>
+                                        </li>
+                                    </React.Fragment>
+                                    <React.Fragment>
+                                        <li className={path === "/trang-ca-nhan" ? "active" : ""}>
+                                            <Link to='/trang-ca-nhan' > Trang Cá Nhân </Link>
+                                        </li>
+                                    </React.Fragment>
+                                    <React.Fragment>
+                                        <li className={path === "/dang-bai" ? "active" : ""}>
+                                            <Link to='/dang-bai' > Đăng bài viết</Link>
+                                        </li>
+                                    </React.Fragment>
+                                    <React.Fragment>
+                                        <li className={path === "/dang-ky" ? "active" : ""}>
+                                            <Link to='/dang-ky' > Đăng ký </Link>
+                                        </li>
+                                    </React.Fragment>
+                                </ul>
+                            </nav>
+                            <div className="button-wrap">
+                                <Button className="btn" value="Gửi danh sách" icon="fas fa-plus" />
+                            </div>
+                        </div>
+                    </div>
+
+            }
+        </>
     );
 }
 

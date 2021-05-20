@@ -15,22 +15,24 @@ function AdminRouting(props) {
     return (
         <div classname="admin-routing" style={{ width: '100%' }}>
             <Switch>
-                <Route path="/admin/bai-viet">
+                <Route path="/admin/bai-viet" exact>
                     <div>
                         <ManageTopic />
                     </div>
                 </Route>
-                <Route path="/admin/tai-khoan">
+                <Route path="/admin/tai-khoan" exact>
                     <div>
                         <ManageAccount />
                     </div>
                 </Route>
-                <Route path="/admin/comment">
+                <Route path="/admin/comment" >
                     <div>
                         <ManageComment />
                     </div>
                 </Route>
-                <Redirect to="/admin/bai-viet" />
+                <Route>
+                    <Redirect to="/admin/bai-viet" />
+                </Route>
             </Switch>
         </div>
     );
