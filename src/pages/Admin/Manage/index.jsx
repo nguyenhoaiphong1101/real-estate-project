@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from "./components/Header"
 import Menu from "./components/Menu"
 import AdminRouting from "./components/Routing"
@@ -7,14 +7,23 @@ import {
     BrowserRouter as BrowserRouter,
     Switch,
     Route,
-    Link
+    Link,
+    useHistory
 } from "react-router-dom";
 
 
-function AdminWrapper(props) {
+function AdminWrapper() {
+
+    const history = useHistory();
+
+    useEffect(() => {
+        if (localStorage.getItem('role') !== 'ADMIN') {
+            history.push('/error')
+        }
+    }, [])
+
     return (
         <div className="admin-manage">
-            {/* <Header /> */}
             <div style={{ display: 'flex' }} className="admin-manage-menu">
                 <BrowserRouter>
                     <Menu />

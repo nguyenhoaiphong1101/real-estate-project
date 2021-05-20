@@ -7,9 +7,9 @@ function ThumbnailPrimary() {
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
-                <li><i class="fas fa-phone"></i>Gọi chúng tôi</li>
-                <li><i class="fas fa-th-list"></i>Nhắn tin</li>
-                <li><i class="fas fa-star"></i>Đặt lịch</li>
+                <li><i className="fas fa-phone"></i>Gọi chúng tôi</li>
+                <li><i className="fas fa-th-list"></i>Nhắn tin</li>
+                <li><i className="fas fa-star"></i>Đặt lịch</li>
             </ul>
         </div>
     );

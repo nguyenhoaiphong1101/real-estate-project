@@ -141,11 +141,6 @@ function Header(props) {
                                             <Link to='/dang-bai' > Đăng bài viết</Link>
                                         </li>
                                     </React.Fragment>
-                                    <React.Fragment>
-                                        <li className={path === "/dang-ky" ? "active" : ""}>
-                                            <Link to='/dang-ky' > Đăng ký </Link>
-                                        </li>
-                                    </React.Fragment>
                                 </ul>
                             </nav>
                             <div className="button-wrap">

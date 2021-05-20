@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, useLocation } from 'react-router-dom';
-import { Route, Switch, Redirect } from "react-router-dom";
-import UserWrapper from './pages/User';
-import AdminWrapper from './pages/Admin/Manage';
-import NotFound from './pages/User/NotFound';
-import Header from './components/Header';
-import HeaderAdmin from './pages/Admin/Manage/components/Header'
-import Footer from './components/Footer';
-import Login from './pages/User/Login';
-import Signup from './pages/User/Signup';
 import jwt_decode from "jwt-decode";
+import React, { useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import AdminWrapper from './pages/Admin/Manage';
+import UserWrapper from './pages/User';
+import DetailHome from "./pages/User/DetailHome";
+import Home from "./pages/User/Home";
+import Listings from "./pages/User/Listings";
+import Login from './pages/User/Login';
+import NotFound from './pages/User/NotFound';
+import Profile from "./pages/User/Profile";
+import Signup from './pages/User/Signup';
+import SubmitList from "./pages/User/SubmitList";
 
 function App() {
 
@@ -47,19 +50,29 @@ function App() {
             {
                 loading ?
                     <div className="loading">
-                        <ReactLoading color={'#000'} type={'spinningBubbles'} height={'10%'} width={'10%'} />
+                        <ReactLoading color={'#000'} type={'spinningBubbles'} height={'5%'} width={'5%'} />
                     </div>
                     :
                     <div className="app" >
                         <Header setEnableFooter={setEnableFooter} path={path} setLoading={setLoading} role={returnRole()} />
-                        {/* {token ? jwt_decode(token).role === "ADMIN" && location.pathname.includes('/admin') ? <HeaderAdmin />
-                            : <Header setEnableFooter={setEnableFooter} path={path} /> : <Header setEnableFooter={setEnableFooter} path={path} />} */}
                         <Switch>
                             <Route path="/admin" exact>
                                 <AdminWrapper />
                             </Route>
                             <Route path="/" exact>
-                                <UserWrapper />
+                                <Home />
+                            </Route>
+                            <Route path="/chi-tiet" >
+                                <DetailHome />
+                            </Route>
+                            <Route path="/trang-ca-nhan" >
+                                <Profile />
+                            </Route>
+                            <Route path="/dang-bai" >
+                                <SubmitList />
+                            </Route>
+                            <Route path="/danh-sach" >
+                                <Listings />
                             </Route>
                             <Route path="/dang-nhap" exact >
                                 <Login />

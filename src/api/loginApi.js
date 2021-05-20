@@ -36,7 +36,7 @@ const loginApi = {
             .then(res => {
                 const access_token = res.data.access_token;
                 localStorage.setItem('access_token', access_token);
-                // localStorage.setItem('role', jwt_decode(access_token).role);
+                localStorage.setItem('role', jwt_decode(access_token).role);
                 message.success("Success!");
                 loginSuccess(jwt_decode(access_token).role)
             })

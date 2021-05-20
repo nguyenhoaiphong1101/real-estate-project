@@ -1,6 +1,6 @@
-import "./styles.scss"
-import React, { useState, useRef, useEffect } from 'react';
 import { Select } from 'antd';
+import React, { useState } from 'react';
+import "./styles.scss";
 
 function SelectExtra(props) {
     const [currentValue, setCurrentValue] = useState("");

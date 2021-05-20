@@ -1,42 +1,39 @@
 import React, { useState } from 'react';
+import { Redirect, Route, Switch } from "react-router";
 import { BrowserRouter } from 'react-router-dom';
-import { Route, Switch, Redirect } from "react-router";
 import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Home from "./Home"
-import DetailHome from "./DetailHome"
-import Profile from "./Profile"
-import SubmitList from "./SubmitList"
-import Listings from "./Listings"
-import NotFound from "./NotFound"
-import Login from './Login';
-import Signup from './Signup';
+import DetailHome from "./DetailHome";
+import Home from "./Home";
+import Listings from "./Listings";
+import Profile from "./Profile";
+import SubmitList from "./SubmitList";
 
 function UserWrapper(props) {
     const [enableFooter, setEnableFooter] = useState(true);
     return (
-        <BrowserRouter>
-            <div className="user">
-                <Switch>
-                    <Route path="/" exact>
-                        <Home />
-                    </Route>
-                    <Route path="/chi-tiet" >
-                        <DetailHome />
-                    </Route>
-                    <Route path="/trang-ca-nhan" >
-                        <Profile />
-                    </Route>
-                    <Route path="/dang-bai" >
-                        <SubmitList />
-                    </Route>
-                    <Route path="/danh-sach" >
-                        <Listings />
-                    </Route>
-                </Switch>
-                {enableFooter ? <Footer /> : ''}
-            </div>
-        </BrowserRouter>
+        <div className="user">
+            <Switch>
+                <Route path="/home" exact>
+                    <Home />
+                </Route>
+                <Route path="/chi-tiet" >
+                    <DetailHome />
+                </Route>
+                <Route path="/trang-ca-nhan" >
+                    <Profile />
+                </Route>
+                <Route path="/dang-bai" >
+                    <SubmitList />
+                </Route>
+                <Route path="/danh-sach" >
+                    <Listings />
+                </Route>
+                <Route>
+                    <Redirect to="/home" />
+                </Route>
+            </Switch>
+            {enableFooter ? <Footer /> : ''}
+        </div>
     );
 }
 
