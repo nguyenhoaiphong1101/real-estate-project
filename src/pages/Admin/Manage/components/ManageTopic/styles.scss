@@ -1,7 +1,17 @@
 .admin-manage-topic {
+    background-color: #f1f1f1;
+    height: 100vh;
     h1 {
         font-weight: bold;
         font-size: 2rem;
         text-align: center;
+        padding-top: 50px;
+    }
+    .ant-spin-container {
+        padding: 0 40px 0 40px;
+        .ant-table {
+            padding: 1px;
+            border-radius: 7px;
+        }
     }
 }

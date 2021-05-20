@@ -32,10 +32,10 @@ function AdminMenu(props) {
                 defaultSelectedKeys={['1']}
                 defaultOpenKeys={['sub1']}
                 mode="inline"
-                theme="white"
+                theme="dark"
                 inlineCollapsed={collapsed}
             >
-                <Menu.Item key="1" icon={<PieChartOutlined />} onClick={() => history.push("/admin/bai-viet")}>
+                <Menu.Item className="mt-0" key="1" icon={<PieChartOutlined />} onClick={() => history.push("/admin/bai-viet")}>
                     Quản lý bài viết
           </Menu.Item>
                 <Menu.Item key="2" icon={<DesktopOutlined />} onClick={() => history.push("/admin/tai-khoan")}>
@@ -45,7 +45,7 @@ function AdminMenu(props) {
                     Quản lý comment
           </Menu.Item>
             </Menu>
-            <Button type="primary" onClick={toggleCollapsed} style={{ width: "100%" }}>
+            <Button type="primary" onClick={toggleCollapsed} style={{ width: "100%" }} className="btn-custom" >
                 <span>Menu</span>
                 {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
             </Button>
