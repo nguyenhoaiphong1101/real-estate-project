@@ -80,7 +80,7 @@ function ManageTopic(props) {
     return (
         <div className="admin-manage-topic">
             <h1>Quản lý bài viết</h1>
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
         </div>
     );
 }

@@ -94,7 +94,7 @@ function ManageComment(props) {
     return (
         <div className="admin-manage-comment">
             <h1>Quản lý Comment</h1>
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
         </div>
     );
 }

@@ -1,18 +1,19 @@
 .admin-manage-comment {
-    background-color: #f1f1f1;
-    height: 100vh;
+    background-color: #fff;
+    margin: 30px;
+    margin-top: 100px;
+    border-radius: 6px;
     h1 {
         font-weight: bold;
         font-size: 2rem;
         text-align: center;
-        padding-top: 50px;
+        padding-top: 10px;
     }
     .ant-spin-container {
         padding: 0 40px 0 40px;
         .ant-table {
             padding: 1px;
             border-radius: 7px;
-            border: 2px solid rgba(209, 199, 199, 0.5);
         }
     }
 }

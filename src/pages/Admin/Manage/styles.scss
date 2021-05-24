@@ -1,2 +1,11 @@
 .admin-manage {
+    .admin-col {
+        background-color: #f1f1f1;
+        max-height: 100vh;
+        height: 100vh;
+        overflow: scroll;
+        .admin-table {
+            width: 100%;
+        }
+    }
 }

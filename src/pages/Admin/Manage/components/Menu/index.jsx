@@ -45,7 +45,7 @@ function AdminMenu(props) {
                     Quản lý comment
           </Menu.Item>
             </Menu>
-            <Button type="primary" onClick={toggleCollapsed} style={{ width: "100%" }} className="btn-custom" >
+            <Button type="primary" onClick={toggleCollapsed} className="btn-custom" >
                 <span>Menu</span>
                 {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
             </Button>

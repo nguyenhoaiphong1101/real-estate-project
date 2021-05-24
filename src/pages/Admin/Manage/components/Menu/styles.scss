@@ -1,14 +1,18 @@
 .admin-menu {
+    margin-top: 9.4vh;
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #001529;
-    height: 100vh;
+    height: 91vh;
     .ant-menu-inline-collapsed {
         width: 100%;
     }
     .btn-custom {
         margin-bottom: 5px;
+        margin-right: 7px;
+        margin-left: 5px;
         border-radius: 5px;
     }
 

@@ -101,6 +101,35 @@ const data = [
         address: 'Sidney No. 1 Lake Park',
         tags: ['cool', 'teacher'],
     },
+    {
+        key: '8',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        tags: ['cool', 'teacher'],
+    },
+    {
+        key: '9',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        tags: ['cool', 'teacher'],
+    },
+    {
+        key: '10',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        tags: ['cool', 'teacher'],
+    },
+    {
+        key: '11',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+        tags: ['cool', 'teacher'],
+    },
+
 ];
 
 
@@ -108,7 +137,7 @@ function ManageAccount(props) {
     return (
         <div className="admin-manage-account">
             <h1>Quản lý tài khoản</h1>
-            <Table columns={columns} dataSource={data} />
+            <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
         </div>
     );
 }
