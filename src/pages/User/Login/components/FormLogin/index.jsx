@@ -3,7 +3,7 @@ import './styles.scss';
 import { createFromIconfontCN, GoogleOutlined } from '@ant-design/icons';
 import { Form } from 'antd';
 import { Input } from 'antd';
-import loginApi from "../../../../../api/loginApi"
+import { loginApi } from "../../../../../api/loginApi"
 import { useHistory } from 'react-router-dom';
 
 const IconFont = createFromIconfontCN({
@@ -24,6 +24,7 @@ function FormLogin() {
 
     const onFinish = (values) => {
         loginApi.POST(values, loginSuccess);
+        //const listCity = searchApi.GET()
     };
 
     // const [state, setstate] = useState(initialState)

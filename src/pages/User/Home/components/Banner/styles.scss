@@ -1,11 +1,17 @@
 .banner-home {
     background-image: url("http://androthemes.com/themes/react/acres/assets/img/banner/3.jpg");
     position: relative;
-    padding: 130px 0 50px;
-    margin-bottom: 60px;
+    padding: 130px 0 120px;
     background-position: 50%;
     background-size: cover;
     z-index: 1;
+    .ant-tabs-tab-btn {
+        font-size: 1rem;
+        font-weight: 750;
+    }
+    .pl-12 {
+        padding-left: 12px;
+    }
     .container {
         max-width: 1140px;
         margin: auto;

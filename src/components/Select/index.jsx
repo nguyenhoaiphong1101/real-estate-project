@@ -1,5 +1,6 @@
 import { Select, Input } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
+import { searchCity } from '../../api/searchApi';
 import Button from '../Button';
 import './styles.scss';
 const { Option } = Select;
@@ -24,13 +25,14 @@ const DisplayItem = ({ value, lastchild }) => {
     );
 };
 
-function SelectCustom({ title, value }) {
+function SelectCustom({ title, value, currentCountry }) {
     const [items, setItems] = useState(value);
     const [currentValue, setCurrentValue] = useState();
+    const [currentIdValue, setCurrentIdValue] = useState();
     const [valueSearch, setValueSearch] = useState('');
     const inputRef = useRef(null);
     const handleChange = (value) => {
-        setCurrentValue(value)
+        setCurrentValue(value);
     };
     const preventEvent = (e) => {
         e.stopPropagation();
@@ -40,8 +42,15 @@ function SelectCustom({ title, value }) {
     const onTodoChange = (value) => {
         setValueSearch(value);
     };
+
     useEffect(() => {
-        setItems(value.filter(item => item.value.toLowerCase().includes(valueSearch.toLowerCase())));
+        if (valueSearch === '') {
+            setItems(value);
+        }
+    })
+
+    useEffect(() => {
+        setItems(value.filter(item => item.name.toLowerCase().includes(valueSearch.toLowerCase())));
     }, [valueSearch])
     return (
         <div>
@@ -61,8 +70,8 @@ function SelectCustom({ title, value }) {
                 </Option>
                 {items.map((item, index) => {
                     return (
-                        <Option value={item.value} key={item.key}  >
-                            <DisplayItem value={item.value} lastchild={index == items.length - 1 ? 'last-child' : ''} />
+                        <Option value={item.name} key={item.id} >
+                            <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} />
                         </Option>
                     );
                 })}

@@ -1,206 +1,219 @@
 import { Col, Row } from 'antd';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../../../../../components/Button';
 import SelectCustom from '../../../../../components/Select/index';
 import './styles.scss';
+import { Tabs } from 'antd';
+import { searchCity, province } from '../../../../../api/searchApi';
+
+const { TabPane } = Tabs;
 
 
 const location = [
     {
-        key: -1,
-        value: 'Any Location'
+        id: -1,
+        name: 'Any Location'
     },
     {
-        key: 2,
-        value: 'California'
+        id: 2,
+        name: 'California'
     },
     {
-        key: 3,
-        value: 'Lawndale'
+        id: 3,
+        name: 'Lawndale'
     },
     {
-        key: 4,
-        value: 'Stroudsburg'
+        id: 4,
+        name: 'Stroudsburg'
     },
     {
-        key: 5,
-        value: 'West Roxbury'
+        id: 5,
+        name: 'West Roxbury'
     },
     {
-        key: 6,
-        value: 'Willingboro'
+        id: 6,
+        name: 'Willingboro'
     },
 ]
 
 const status = [
     {
-        key: -1,
-        value: 'Any Status'
+        id: -1,
+        name: 'Any Status'
     },
     {
-        key: 2,
-        value: 'For Rent'
+        id: 2,
+        name: 'For Rent'
     },
     {
-        key: 3,
-        value: 'Featured'
+        id: 3,
+        name: 'Featured'
     },
     {
-        key: 4,
-        value: 'For Sale'
+        id: 4,
+        name: 'For Sale'
     },
     {
-        key: 5,
-        value: 'Sold'
+        id: 5,
+        name: 'Sold'
     },
     {
-        key: 6,
-        value: 'Special Offer'
+        id: 6,
+        name: 'Special Offer'
     },
 ]
 
 const price = [
     {
-        key: -1,
-        value: 'Any Range'
+        id: -1,
+        name: 'Any Range'
     },
     {
-        key: 2,
-        value: '$60k - $80k'
+        id: 2,
+        name: '$60k - $80k'
     },
     {
-        key: 3,
-        value: '$80k - $100k'
+        id: 3,
+        name: '$80k - $100k'
     },
     {
-        key: 4,
-        value: '$100k - $120k'
+        id: 4,
+        name: '$100k - $120k'
     },
     {
-        key: 5,
-        value: '$120k - $140k'
+        id: 5,
+        name: '$120k - $140k'
     },
     {
-        key: 6,
-        value: '$140k - $160k'
+        id: 6,
+        name: '$140k - $160k'
     },
 ]
 
 const beds = [
     {
-        key: -1,
-        value: 'Any Amount'
+        id: -1,
+        name: 'Any Amount'
     },
     {
-        key: 2,
-        value: '1'
+        id: 2,
+        name: '1'
     },
     {
-        key: 3,
-        value: '2'
+        id: 3,
+        name: '2'
     },
     {
-        key: 4,
-        value: '3'
+        id: 4,
+        name: '3'
     },
     {
-        key: 5,
-        value: '4'
+        id: 5,
+        name: '4'
     },
     {
-        key: 6,
-        value: '5+'
+        id: 6,
+        name: '5+'
     },
 ]
 
 const bathrooms = [
     {
-        key: -1,
-        value: 'Any Amount'
+        id: -1,
+        name: 'Any Amount'
     },
     {
-        key: 2,
-        value: '1'
+        id: 2,
+        name: '1'
     },
     {
-        key: 3,
-        value: '2'
+        id: 3,
+        name: '2'
     },
     {
-        key: 4,
-        value: '3'
+        id: 4,
+        name: '3'
     },
     {
-        key: 5,
-        value: '4'
+        id: 5,
+        name: '4'
     },
     {
-        key: 6,
-        value: '5+'
+        id: 6,
+        name: '5+'
     },
 ]
 
 const types = [
     {
-        key: -1,
-        value: 'Any Types'
+        id: -1,
+        name: 'Any Types'
     },
     {
-        key: 2,
-        value: 'House'
+        id: 2,
+        name: 'House'
     },
     {
-        key: 3,
-        value: 'Apartment'
+        id: 3,
+        name: 'Apartment'
     },
     {
-        key: 4,
-        value: 'Condo'
+        id: 4,
+        name: 'Condo'
     },
     {
-        key: 5,
-        value: 'Townhome'
+        id: 5,
+        name: 'Townhome'
     },
     {
-        key: 6,
-        value: 'Villa'
+        id: 6,
+        name: 'Villa'
     },
 ]
 
 const diameters = [
     {
-        key: -1,
-        value: 'Any Ranges'
+        id: -1,
+        name: 'Any Ranges'
     },
     {
-        key: 2,
-        value: 'Within 2 miles'
+        id: 2,
+        name: 'Within 2 miles'
     },
     {
-        key: 3,
-        value: 'Within 4 miles'
+        id: 3,
+        name: 'Within 4 miles'
     },
     {
-        key: 4,
-        value: 'Within 6 miles'
+        id: 4,
+        name: 'Within 6 miles'
     },
     {
-        key: 5,
-        value: 'Within 8 miles'
+        id: 5,
+        name: 'Within 8 miles'
     },
     {
-        key: 6,
-        value: 'Within 8+ miles'
+        id: 6,
+        name: 'Within 8+ miles'
     },
 ]
 
 
-
 function Banner() {
     const [active, setActive] = useState(false);
+    const [searchCountry, setSearchCountry] = useState([]);
+    const [searchProvince, setSearchProvince] = useState([]);
+    const [currentCountry, setcurrentCountry] = useState({});
     const handleToggle = () => {
         setActive(!active);
     }
+    useEffect(() => {
+        searchCity.GET().then(res => setSearchCountry(res));
+        province.GET(2).then(res => setSearchProvince(res));
+        console.log(searchProvince);
+    }, [])
+
+
     return (
         <div className="banner-home">
             <div className="container">
@@ -213,23 +226,35 @@ function Banner() {
                                 own house today. </p>
                         </div>
                         <div className="acr-filter-form">
+                            <Tabs defaultActiveKey="1" className="pl-12">
+                                <TabPane tab="NHÀ ĐẤT BÁN" key="1" >
+                                </TabPane>
+                                <TabPane tab="NHÀ ĐẤT CHO THUÊ" key="2">
+                                </TabPane>
+                            </Tabs>
                             <form>
                                 <Row>
-                                    <Col span={6} className="item-form">
+                                    <Col span={5} className="item-form">
                                         <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Vị trí" value={location} />
+                                            <SelectCustom title="Thành Phố" value={searchCountry} currentCountry={currentCountry} />
                                         </div>
                                     </Col>
-                                    <Col span={6} className="item-form">
-                                        <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Trạng thái" value={status} />
-                                        </div>
-                                    </Col>
-                                    <Col span={8} className="item-form">
+                                    <Col span={5} className="item-form">
                                         <div className="form-group acr-custom-select">
                                             <SelectCustom title="Giá tiền" value={price} />
                                         </div>
                                     </Col>
+                                    <Col span={5} className="item-form">
+                                        <div className="form-group acr-custom-select">
+                                            <SelectCustom title="Diện tích" value={status} />
+                                        </div>
+                                    </Col>
+                                    <Col span={5} className="item-form">
+                                        <div className="form-group acr-custom-select">
+                                            <SelectCustom title="Dự Án" value={status} />
+                                        </div>
+                                    </Col>
+
                                     <Col className="submit-btn" span={4}>
                                         <div className="form-group">
                                             <Button className="btn-custom" value="Tìm kiếm nhà" />
@@ -238,24 +263,24 @@ function Banner() {
                                 </Row>
                                 <div className={`advanced-search d-block ${active == true ? 'active' : ''}`}>
                                     <Row >
-                                        <Col span={6} className="item-form">
+                                        <Col span={5} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Số phòng ngủ" value={beds} />
+                                                <SelectCustom title="Quận/Huyện" value={beds} />
                                             </div>
                                         </Col>
-                                        <Col span={6} className="item-form">
+                                        <Col span={5} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Số phòng tắm" value={bathrooms} />
+                                                <SelectCustom title="Đường phố" value={bathrooms} />
                                             </div>
                                         </Col>
-                                        <Col span={6} className="item-form">
+                                        <Col span={5} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Loại Nhà" value={types} />
+                                                <SelectCustom title="Số phòng" value={types} />
                                             </div>
                                         </Col>
-                                        <Col span={6} className="item-form">
+                                        <Col span={5} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Phạm vi" value={diameters} />
+                                                <SelectCustom title="Hướng nhà" value={diameters} />
                                             </div>
                                         </Col>
                                     </Row>

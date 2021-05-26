@@ -25,7 +25,7 @@ import { message } from 'antd';
 
 
 
-const loginApi = {
+export const loginApi = {
 
     POST: (value, loginSuccess) => {
         return axios({
@@ -45,5 +45,3 @@ const loginApi = {
             })
     }
 }
-
-export default loginApi;
