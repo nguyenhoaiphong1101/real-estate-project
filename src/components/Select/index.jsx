@@ -1,5 +1,8 @@
 import { Select, Input } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadProvince } from '../../actions/search';
+
 import { searchCity } from '../../api/searchApi';
 import Button from '../Button';
 import './styles.scss';
@@ -28,11 +31,13 @@ const DisplayItem = ({ value, lastchild }) => {
 function SelectCustom({ title, value, currentCountry }) {
     const [items, setItems] = useState(value);
     const [currentValue, setCurrentValue] = useState();
-    const [currentIdValue, setCurrentIdValue] = useState();
     const [valueSearch, setValueSearch] = useState('');
     const inputRef = useRef(null);
-    const handleChange = (value) => {
+    const dispatch = useDispatch()
+    const handleChange = (value, id) => {
         setCurrentValue(value);
+        console.log(id.key);
+        dispatch(loadProvince(id.key));
     };
     const preventEvent = (e) => {
         e.stopPropagation();

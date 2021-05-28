@@ -1,10 +1,11 @@
 import { Col, Row } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import Button from '../../../../../components/Button';
 import SelectCustom from '../../../../../components/Select/index';
 import './styles.scss';
 import { Tabs } from 'antd';
-import { searchCity, province } from '../../../../../api/searchApi';
+import { loadCountry } from '../../../../../actions/search';
 
 const { TabPane } = Tabs;
 
@@ -199,19 +200,24 @@ const diameters = [
 ]
 
 
+
 function Banner() {
     const [active, setActive] = useState(false);
-    const [searchCountry, setSearchCountry] = useState([]);
-    const [searchProvince, setSearchProvince] = useState([]);
-    const [currentCountry, setcurrentCountry] = useState({});
     const handleToggle = () => {
         setActive(!active);
     }
+
+    const listCountry = useSelector(state => state.search.country);
+    const listProvince = useSelector(state => state.search.province);
+
+
+    const dispatch = useDispatch();
+
+
     useEffect(() => {
-        searchCity.GET().then(res => setSearchCountry(res));
-        province.GET(2).then(res => setSearchProvince(res));
-        console.log(searchProvince);
+        dispatch(loadCountry());
     }, [])
+
 
 
     return (
@@ -236,7 +242,7 @@ function Banner() {
                                 <Row>
                                     <Col span={5} className="item-form">
                                         <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Thành Phố" value={searchCountry} currentCountry={currentCountry} />
+                                            <SelectCustom title="Thành Phố" value={listCountry} />
                                         </div>
                                     </Col>
                                     <Col span={5} className="item-form">
@@ -265,7 +271,7 @@ function Banner() {
                                     <Row >
                                         <Col span={5} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Quận/Huyện" value={beds} />
+                                                <SelectCustom title="Quận/Huyện" value={listProvince} />
                                             </div>
                                         </Col>
                                         <Col span={5} className="item-form">
