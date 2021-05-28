@@ -5,7 +5,8 @@ import Button from '../../../../../components/Button';
 import SelectCustom from '../../../../../components/Select/index';
 import './styles.scss';
 import { Tabs } from 'antd';
-import { loadCountry } from '../../../../../actions/search';
+import { loadCountry, loadProvince } from '../../../../../actions/search';
+
 
 const { TabPane } = Tabs;
 
@@ -213,6 +214,10 @@ function Banner() {
 
     const dispatch = useDispatch();
 
+    const getProvice = (id) => {
+        dispatch(loadProvince(id))
+    }
+
 
     useEffect(() => {
         dispatch(loadCountry());
@@ -242,7 +247,7 @@ function Banner() {
                                 <Row>
                                     <Col span={5} className="item-form">
                                         <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Thành Phố" value={listCountry} />
+                                            <SelectCustom title="Thành Phố" value={listCountry} callApi={getProvice} />
                                         </div>
                                     </Col>
                                     <Col span={5} className="item-form">

@@ -28,16 +28,17 @@ const DisplayItem = ({ value, lastchild }) => {
     );
 };
 
-function SelectCustom({ title, value, currentCountry }) {
+function SelectCustom({ title, value, currentCountry, callApi }) {
     const [items, setItems] = useState(value);
     const [currentValue, setCurrentValue] = useState();
     const [valueSearch, setValueSearch] = useState('');
     const inputRef = useRef(null);
     const dispatch = useDispatch()
+
     const handleChange = (value, id) => {
         setCurrentValue(value);
-        console.log(id.key);
-        dispatch(loadProvince(id.key));
+        if (callApi)
+            callApi(id.key)
     };
     const preventEvent = (e) => {
         e.stopPropagation();

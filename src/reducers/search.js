@@ -23,18 +23,15 @@ const setListProvince = (list) => {
 const SearchReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'LOAD_PROVINCE': {
-            province.GET(action.payload).then(res => setListProvince(res))
             return {
                 ...state,
-                province: listTempProvince,
+                province: action.payload,
             };
         }
         case 'LOAD_COUNTRY': {
-
-            searchCity.GET().then(res => setListCountry(res))
             return {
                 ...state,
-                country: listTempCountry,
+                country: action.payload,
             };
         }
         default:

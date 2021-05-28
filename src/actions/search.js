@@ -1,11 +1,24 @@
+
+import { province, searchCity } from "../api/searchApi"
+
 export const loadProvince = (id) => {
-    return {
-        type: 'LOAD_PROVINCE',
-        payload: id,
+    return (dispatch) => {
+        province.GET(id).then(res => {
+            dispatch({
+                type: 'LOAD_PROVINCE',
+                payload: res
+            })
+        })
     }
 }
+
 export const loadCountry = () => {
-    return {
-        type: 'LOAD_COUNTRY',
+    return (dispatch) => {
+        searchCity.GET().then(res => {
+            dispatch({
+                type: 'LOAD_COUNTRY',
+                payload: res,
+            })
+        })
     }
 }
