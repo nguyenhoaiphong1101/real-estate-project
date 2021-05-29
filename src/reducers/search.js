@@ -1,22 +1,7 @@
-import { resolveOnChange } from "antd/lib/input/Input";
-import { useState, useEffect } from "react";
-import { province, searchCity } from "../api/searchApi"
 
 const initialState = {
     country: [],
     province: [],
-}
-
-
-
-
-var listTempCountry = [];
-const setListCountry = (list) => {
-    listTempCountry = list;
-}
-var listTempProvince = [];
-const setListProvince = (list) => {
-    listTempProvince = list;
 }
 
 

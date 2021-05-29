@@ -1,9 +1,16 @@
 import { Popover } from 'antd';
 import React from 'react';
 import Button from '../../Button';
+import moment from 'moment';
 import './styles.scss';
 
-function ThumbnailPrimary() {
+function ThumbnailPrimary(props) {
+
+    const toTimeString = (seconds) => {
+        if (seconds)
+            return moment(seconds).format('DD-MM-YYYY');
+    }
+
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
@@ -37,9 +44,9 @@ function ThumbnailPrimary() {
                     </a>
                     <div className="media-body">
                         <h6>
-                            Vũ khánh
-                    </h6>
-                        <span>3 Tháng 3, 2020</span>
+                            {props.listLatestNew?.created_by?.username}
+                        </h6>
+                        <span>{toTimeString(props.listLatestNew?.created_at)}</span>
                     </div>
                     <div className="icon-wrapper">
                         <Popover className="popup" content={content} trigger="click">
@@ -52,23 +59,23 @@ function ThumbnailPrimary() {
                 </div>
                 <h5 class="listing-title">
                     <a title="Iris Watson, Frederick Nebraska 20620">
-                        Iris Watson, Frederick Nebraska 20620
+                        {props.listLatestNew?.address}
                     </a>
                 </h5>
-                <span class="listing-price">3,500$</span>
-                <p class="listing-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
+                <p class="listing-text">{props.listLatestNew?.title}</p>
                 <div class="acr-listing-icons">
                     <div class="acr-listing-icon">
                         <i class="flaticon-pillow"></i>
-                        <span class="acr-listing-icon-value">3</span>
+                        <span class="acr-listing-icon-value">{props.listLatestNew?.bedroom_quantity}</span>
                     </div>
                     <div class="acr-listing-icon">
                         <i class="flaticon-bathtub"></i>
-                        <span class="acr-listing-icon-value">2</span>
+                        <span class="acr-listing-icon-value">{props.listLatestNew?.bathroom_quantity}</span>
                     </div>
                     <div class="acr-listing-icon">
                         <i class="flaticon-ruler"></i>
-                        <span class="acr-listing-icon-value">2,499</span>
+                        <span class="acr-listing-icon-value">{props.listLatestNew?.area}</span>
                     </div>
                 </div>
                 <div class="listing-gallery-wrapper">

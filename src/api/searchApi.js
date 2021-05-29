@@ -4,7 +4,7 @@ import { API_URL } from "../constants/Config";
 
 export const searchCity = {
 
-    GET: (list) => {
+    GET: () => {
         return axios({
             method: 'get',
             data: null,

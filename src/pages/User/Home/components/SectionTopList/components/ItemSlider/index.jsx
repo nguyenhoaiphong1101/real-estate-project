@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../../../../../../../components/Button';
 import { Popover } from 'antd';
 import { Col, Row } from 'antd';
 import './styles.scss';
+import moment from 'moment';
 
-function ItemSlider() {
+function ItemSlider(props) {
+
+    const toTimeString = (seconds) => {
+        if (seconds)
+            return moment(seconds).format('DD-MM-YYYY');
+    }
+
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
@@ -22,8 +29,8 @@ function ItemSlider() {
                         <div className="listing__body">
                             <h5 class="listing-title">
                                 <a title="Iris Watson, Frederick Nebraska 20620">
-                                    Iris Watson, Frederick Nebraska 20620
-                    </a>
+                                    {props.listHighlight?.address}
+                                </a>
                             </h5>
                             <div className="author">
                                 <a>
@@ -31,9 +38,9 @@ function ItemSlider() {
                                 </a>
                                 <div className="media-body">
                                     <h6>
-                                        Vũ Khánh
-                    </h6>
-                                    <span>3 Tháng 3, 2020</span>
+                                        {props.listHighlight?.created_by?.username}
+                                    </h6>
+                                    <span>{toTimeString(props.listHighlight?.created_at)}</span>
                                 </div>
                                 <div className="icon-wrapper">
                                     <Popover className="popup" content={content} trigger="click">
@@ -44,20 +51,20 @@ function ItemSlider() {
                                     </Popover>
                                 </div>
                             </div>
-                            <span class="listing-price">3,500$</span>
-                            <p class="listing-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listHighlight?.total_price)}</span>
+                            <p class="listing-text">{props.listHighlight?.title}</p>
                             <div class="acr-listing-icons">
                                 <div class="acr-listing-icon">
                                     <i class="flaticon-pillow"></i>
-                                    <span class="acr-listing-icon-value">3</span>
+                                    <span class="acr-listing-icon-value">{props.listHighlight?.bedroom_quantity}</span>
                                 </div>
                                 <div class="acr-listing-icon">
                                     <i class="flaticon-bathtub"></i>
-                                    <span class="acr-listing-icon-value">2</span>
+                                    <span class="acr-listing-icon-value">{props.listHighlight?.bathroom_quantity}</span>
                                 </div>
                                 <div class="acr-listing-icon">
                                     <i class="flaticon-ruler"></i>
-                                    <span class="acr-listing-icon-value">2,499</span>
+                                    <span class="acr-listing-icon-value">{props.listHighlight?.area}</span>
                                 </div>
                             </div>
                             <div class="listing-gallery-wrapper">

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Redirect, Route, Switch } from "react-router";
-import { BrowserRouter } from 'react-router-dom';
 import Footer from "../../components/Footer";
 import DetailHome from "./DetailHome";
 import Home from "./Home";

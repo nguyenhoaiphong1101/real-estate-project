@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Row } from 'antd';
 import './styles.scss';
 import ThumbnailPrimary from '../../../../../components/Thumbnail/ThumbnailPrimary';
 import ThumbnailExtra from '../../../../../components/Thumbnail/ThumbnailExtra';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadListLatestNew } from '../../../../../actions/latestnew';
 
 function SectionRecentList() {
+
+
+
+    const listLatestNew = useSelector(state => state.latestnew.listLastetNew);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadListLatestNew());
+        console.log(listLatestNew[0]);
+    }, [])
     return (
         <div className="section-recent-list">
             <div className="container">
@@ -15,18 +27,19 @@ function SectionRecentList() {
                 <Row>
                     <Col span={16} className="col-left">
                         <div className="item">
-                            <ThumbnailExtra />
+                            <ThumbnailExtra listLatestNew={listLatestNew[0]}
+                            />
                         </div>
                         <div className="item">
-                            <ThumbnailPrimary />
+                            <ThumbnailPrimary listLatestNew={listLatestNew[1]} />
                         </div>
                     </Col>
                     <Col span={8}>
                         <div className="item">
-                            <ThumbnailPrimary />
+                            <ThumbnailPrimary listLatestNew={listLatestNew[2]} />
                         </div>
                         <div className="item">
-                            <ThumbnailPrimary />
+                            <ThumbnailPrimary listLatestNew={listLatestNew[3]} />
                         </div>
                     </Col>
                 </Row>
