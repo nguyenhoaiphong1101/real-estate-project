@@ -45,6 +45,32 @@
             border-radius: 8px;
             margin-top: 70px;
             border: 1px solid rgba(0, 0, 0, 0.1);
+            .seach-type-real {
+                margin-bottom: 15px;
+                padding-left: 10px;
+                .dropdown-search {
+                    width: 13.5%;
+                }
+
+                .input-search {
+                    width: 86.5%;
+                }
+                .ant-btn,
+                .ant-input {
+                    height: 50px;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 9px 0 rgba(34, 12, 43, 0.1);
+                    border: 0;
+                }
+                .ant-input {
+                    margin-left: 3px;
+                }
+
+                .ant-input-search-button {
+                    background-color: #01bbbc;
+                    padding: 8px 25px;
+                }
+            }
             .item-form {
                 padding: 0px 10px;
             }

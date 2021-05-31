@@ -14,9 +14,9 @@ function ThumbnailExtra(props) {
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
-                <li><i class="fas fa-phone"></i>Gọi chúng tôi</li>
-                <li><i class="fas fa-th-list"></i>Nhắn tin</li>
-                <li><i class="fas fa-star"></i>Đặt lịch</li>
+                <li><i className="fas fa-phone"></i>Gọi chúng tôi</li>
+                <li><i className="fas fa-th-list"></i>Nhắn tin</li>
+                <li><i className="fas fa-star"></i>Đặt lịch</li>
             </ul>
         </div>
     );
@@ -26,14 +26,14 @@ function ThumbnailExtra(props) {
                 <a>
                     <img src="http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg" alt="listing" />
                 </a>
-                <div class="listing-badges">
-                    <span class="listing-badge sale">
+                <div className="listing-badges">
+                    <span className="listing-badge sale">
                         Giảm giá
                     </span>
                 </div>
-                <div class="listing-controls">
-                    <a class="favorite">
-                        <i class="far fa-heart"></i>
+                <div className="listing-controls">
+                    <a className="favorite">
+                        <i className="far fa-heart"></i>
                     </a>
                 </div>
             </div>
@@ -55,28 +55,28 @@ function ThumbnailExtra(props) {
                         </Popover>
                     </div>
                 </div>
-                <h5 class="listing-title">
+                <h5 className="listing-title">
                     <a title="Iris Watson, Frederick Nebraska 20620">
                         {props.listLatestNew?.address}
                     </a>
                 </h5>
-                <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
-                <p class="listing-text">{props.listLatestNew?.title}</p>
-                <div class="acr-listing-icons">
-                    <div class="acr-listing-icon">
-                        <i class="flaticon-pillow"></i>
-                        <span class="acr-listing-icon-value">{props.listLatestNew?.bedroom_quantity}</span>
+                <span className="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
+                <p className="listing-text">{props.listLatestNew?.title}</p>
+                <div className="acr-listing-icons">
+                    <div className="acr-listing-icon">
+                        <i className="flaticon-pillow"></i>
+                        <span className="acr-listing-icon-value">{props.listLatestNew?.bedroom_quantity}</span>
                     </div>
-                    <div class="acr-listing-icon">
-                        <i class="flaticon-bathtub"></i>
-                        <span class="acr-listing-icon-value">{props.listLatestNew?.bathroom_quantity}</span>
+                    <div className="acr-listing-icon">
+                        <i className="flaticon-bathtub"></i>
+                        <span className="acr-listing-icon-value">{props.listLatestNew?.bathroom_quantity}</span>
                     </div>
-                    <div class="acr-listing-icon">
-                        <i class="flaticon-ruler"></i>
-                        <span class="acr-listing-icon-value">{props.listLatestNew?.area}</span>
+                    <div className="acr-listing-icon">
+                        <i className="flaticon-ruler"></i>
+                        <span className="acr-listing-icon-value">{props.listLatestNew?.area}</span>
                     </div>
                 </div>
-                <div class="listing-gallery-wrapper">
+                <div className="listing-gallery-wrapper">
                     <Button value="Xem chi tiết" className="view-detail"></Button>
                 </div>
             </div>

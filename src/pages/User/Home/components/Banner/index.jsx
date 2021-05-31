@@ -1,12 +1,15 @@
 import { Col, Row } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import React, { useState, useEffect } from 'react';
-import Button from '../../../../../components/Button';
+import ButtonCustom from '../../../../../components/Button';
 import SelectCustom from '../../../../../components/Select/index';
 import './styles.scss';
 import { Tabs } from 'antd';
 import { loadCountry, loadProvince } from '../../../../../actions/search';
-
+import { Menu, Dropdown, Button } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+import { Input, Space } from 'antd';
+import { AudioOutlined } from '@ant-design/icons';
 
 const { TabPane } = Tabs;
 
@@ -203,7 +206,30 @@ const diameters = [
 
 
 function Banner() {
-    const [active, setActive] = useState(false);
+
+    const [valueSearchType, setValueSearchType] = useState('Tất cả nhà đất')
+
+    function handleMenuClick(e) {
+        setValueSearchType(e.key);
+    }
+
+    const menu = (
+        <Menu onClick={handleMenuClick}>
+            <Menu.Item key="Tất cả nhà đất" >
+                Tất cả nhà đất
+          </Menu.Item>
+            <Menu.Item key="Nhà thuê" >
+                Nhà thuê
+          </Menu.Item>
+            <Menu.Item key="Nhà mua" >
+                Nhà mua
+          </Menu.Item>
+        </Menu>
+    );
+
+    const onSearch = value => console.log(value);
+
+    const [active, setActive] = useState(true);
     const handleToggle = () => {
         setActive(!active);
     }
@@ -243,53 +269,57 @@ function Banner() {
                                 <TabPane tab="NHÀ ĐẤT CHO THUÊ" key="2">
                                 </TabPane>
                             </Tabs>
+                            <div className="seach-type-real">
+                                <Dropdown overlay={menu} className="dropdown-search">
+                                    <Button>
+                                        {valueSearchType} <DownOutlined />
+                                    </Button>
+                                </Dropdown>
+                                <Input.Search className="input-search" placeholder="Tìm kiếm địa điểm, khu vực" onSearch={onSearch} enterButton='Tìm kiếm    ' />
+                            </div>
                             <form>
                                 <Row>
-                                    <Col span={5} className="item-form">
+                                    <Col span={6} className="item-form">
                                         <div className="form-group acr-custom-select">
                                             <SelectCustom title="Thành Phố" value={listCountry} callApi={getProvice} />
                                         </div>
                                     </Col>
-                                    <Col span={5} className="item-form">
+                                    <Col span={6} className="item-form">
                                         <div className="form-group acr-custom-select">
                                             <SelectCustom title="Giá tiền" value={price} />
                                         </div>
                                     </Col>
-                                    <Col span={5} className="item-form">
+                                    <Col span={6} className="item-form">
                                         <div className="form-group acr-custom-select">
                                             <SelectCustom title="Diện tích" value={status} />
                                         </div>
                                     </Col>
-                                    <Col span={5} className="item-form">
+                                    <Col span={6} className="item-form">
                                         <div className="form-group acr-custom-select">
                                             <SelectCustom title="Dự Án" value={status} />
                                         </div>
                                     </Col>
 
-                                    <Col className="submit-btn" span={4}>
-                                        <div className="form-group">
-                                            <Button className="btn-custom" value="Tìm kiếm nhà" />
-                                        </div>
-                                    </Col>
+
                                 </Row>
                                 <div className={`advanced-search d-block ${active == true ? 'active' : ''}`}>
                                     <Row >
-                                        <Col span={5} className="item-form">
+                                        <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
                                                 <SelectCustom title="Quận/Huyện" value={listProvince} />
                                             </div>
                                         </Col>
-                                        <Col span={5} className="item-form">
+                                        <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
                                                 <SelectCustom title="Đường phố" value={bathrooms} />
                                             </div>
                                         </Col>
-                                        <Col span={5} className="item-form">
+                                        <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
                                                 <SelectCustom title="Số phòng" value={types} />
                                             </div>
                                         </Col>
-                                        <Col span={5} className="item-form">
+                                        <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
                                                 <SelectCustom title="Hướng nhà" value={diameters} />
                                             </div>

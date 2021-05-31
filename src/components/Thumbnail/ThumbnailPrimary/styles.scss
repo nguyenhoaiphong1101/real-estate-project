@@ -95,18 +95,18 @@
                 }
             }
             .icon-wrapper {
-                .icon{
+                .icon {
                     cursor: pointer;
-                flex-grow: 1;
-                background-color: white;
-                width: 25px;
-                height: 30px;
-                border-radius: 5px;
-                color: #848486;
-                transition: 0.3s;
-                position: relative;
-                border: 1px solid rgba(0, 0, 0, 0.1);
-                    i{
+                    flex-grow: 1;
+                    background-color: white;
+                    width: 25px;
+                    height: 30px;
+                    border-radius: 5px;
+                    color: #848486;
+                    transition: 0.3s;
+                    position: relative;
+                    border: 1px solid rgba(0, 0, 0, 0.1);
+                    i {
                         position: absolute;
                         top: 25%;
                         left: 50%;
@@ -146,6 +146,9 @@
             margin-bottom: 15px;
             font-weight: 500;
             color: #515151;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .acr-listing-icons {
             display: flex;

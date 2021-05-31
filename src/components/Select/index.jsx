@@ -56,7 +56,7 @@ function SelectCustom({ title, value, currentCountry, callApi }) {
     })
 
     useEffect(() => {
-        setItems(value.filter(item => item.name.toLowerCase().includes(valueSearch.toLowerCase())));
+        setItems(value.filter(item => item.name?.toLowerCase().includes(valueSearch.toLowerCase())));
     }, [valueSearch])
     return (
         <div>
