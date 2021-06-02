@@ -36,10 +36,10 @@ function SectionRecentList() {
                     </Col>
                     <Col span={8}>
                         <div className="item">
-                            <ThumbnailPrimary listLatestNew={listLatestNew[2]} />
+                            <ThumbnailPrimary listLatestNew={listLatestNew[2]} className="pb-10" />
                         </div>
                         <div className="item">
-                            <ThumbnailPrimary listLatestNew={listLatestNew[3]} />
+                            <ThumbnailPrimary listLatestNew={listLatestNew[3]} className="pb-10" />
                         </div>
                     </Col>
                 </Row>

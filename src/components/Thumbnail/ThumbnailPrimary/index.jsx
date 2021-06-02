@@ -21,7 +21,7 @@ function ThumbnailPrimary(props) {
         </div>
     );
     return (
-        <div className="listing-primary">
+        <div className={`listing-primary ${props.className}`}>
             <div className="listing__thumbnail">
                 <a>
                     <img src="http://androthemes.com/themes/react/acres/assets/img/listings/1.jpg" alt="listing" />

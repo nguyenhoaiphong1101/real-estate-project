@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./styles.scss"
 import SelectCustom from '../../../../../components/Select/index';
 import ButtonSubmit from '../../../../../components/Button';
 import { Collapse } from 'antd';
+import { loadCountry, loadProvince } from '../../../../../actions/search';
+import { useDispatch, useSelector } from 'react-redux';
 
 const { Panel } = Collapse;
 
@@ -171,29 +173,46 @@ const types = [
 
 
 function FilterListings(props) {
+
+    const listCountry = useSelector(state => state.search.country);
+    const listProvince = useSelector(state => state.search.province);
+
+
+    const dispatch = useDispatch();
+
+    const getProvice = (id) => {
+        dispatch(loadProvince(id))
+    }
+
+
+    useEffect(() => {
+        dispatch(loadCountry());
+    }, [])
+
     return (
         <Collapse defaultActiveKey={['1']} className="collapse collapse-filter">
             <Panel header={<h5 className="title">Lọc theo danh sách</h5>} key="1">
                 <div className="filter-listings">
                     <form className="filter-listings-form">
                         <div className="form-group acr-custom-select">
-                            <SelectCustom title="Vị trí" value={location} />
+                            <SelectCustom title="Thành phố" value={listCountry} callApi={getProvice} />
                         </div>
                         <div className="form-group acr-custom-select">
-                            <SelectCustom title="Trạng thái" value={status} />
+                            <SelectCustom title="Quận huyện" value={listProvince} />
+                        </div>
+                        <div className="form-group acr-custom-select">
+                            <SelectCustom title="Đường phố" value={types} />
                         </div>
                         <div className="form-group acr-custom-select">
                             <SelectCustom title="Giá tiền" value={price} />
                         </div>
                         <div className="form-group acr-custom-select">
-                            <SelectCustom title="Số phòng ngủ" value={beds} />
+                            <SelectCustom title="Diện tích" value={beds} />
                         </div>
                         <div className="form-group acr-custom-select">
-                            <SelectCustom title="Số phòng tắm" value={bathrooms} />
+                            <SelectCustom title="Hướng nhà" value={bathrooms} />
                         </div>
-                        <div className="form-group acr-custom-select">
-                            <SelectCustom title="Loại nhà" value={types} />
-                        </div>
+
                         <ButtonSubmit value="Áp dụng" className="submit" />
                     </form>
                 </div>

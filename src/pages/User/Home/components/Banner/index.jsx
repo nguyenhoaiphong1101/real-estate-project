@@ -279,49 +279,37 @@ function Banner() {
                             </div>
                             <form>
                                 <Row>
-                                    <Col span={6} className="item-form">
+
+                                    <Col span={12} className="item-form">
                                         <div className="form-group acr-custom-select">
                                             <SelectCustom title="Thành Phố" value={listCountry} callApi={getProvice} />
                                         </div>
                                     </Col>
-                                    <Col span={6} className="item-form">
-                                        <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Giá tiền" value={price} />
-                                        </div>
-                                    </Col>
-                                    <Col span={6} className="item-form">
-                                        <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Diện tích" value={status} />
-                                        </div>
-                                    </Col>
-                                    <Col span={6} className="item-form">
-                                        <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Dự Án" value={status} />
-                                        </div>
-                                    </Col>
 
-
+                                    <Col span={12} className="item-form">
+                                        <div className="acr-custom-select form-group">
+                                            <SelectCustom title="Quận/Huyện" value={listProvince} />
+                                        </div>
+                                    </Col>
                                 </Row>
                                 <div className={`advanced-search d-block ${active == true ? 'active' : ''}`}>
                                     <Row >
-                                        <Col span={6} className="item-form">
+
+                                        <Col span={8} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Quận/Huyện" value={listProvince} />
+                                                <SelectCustom title="Mức giá" value={price} />
                                             </div>
                                         </Col>
-                                        <Col span={6} className="item-form">
+
+                                        <Col span={8} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Đường phố" value={bathrooms} />
+                                                <SelectCustom title="Diện tích" value={diameters} />
                                             </div>
                                         </Col>
-                                        <Col span={6} className="item-form">
+
+                                        <Col span={8} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Số phòng" value={types} />
-                                            </div>
-                                        </Col>
-                                        <Col span={6} className="item-form">
-                                            <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Hướng nhà" value={diameters} />
+                                                <SelectCustom title="Thể loại" value={diameters} />
                                             </div>
                                         </Col>
                                     </Row>

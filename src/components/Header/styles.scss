@@ -11,9 +11,9 @@
     }
     &__scroll {
         top: 0px;
-        z-index: 2;
         margin: 0 auto;
         width: 100%;
+        z-index: 11;
         background-color: white;
         box-shadow: 0 2px 9px 0px rgba(34, 12, 43, 0.1);
         .top-navigation {
@@ -83,6 +83,7 @@
         }
     }
     .main-header {
+        z-index: 1000;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         display: flex;
@@ -304,7 +305,6 @@
         border-radius: 1px;
     }
 }
-
 
 // admin
 .admin-header {
