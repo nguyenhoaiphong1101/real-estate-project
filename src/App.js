@@ -71,8 +71,11 @@ function App() {
                             <Route path="/dang-bai" >
                                 <SubmitList />
                             </Route>
-                            <Route path="/danh-sach" >
-                                <Listings />
+                            <Route path="/nha-dat-ban" >
+                                <Listings title="Nhà đất bán" />
+                            </Route>
+                            <Route path="/nha-dat-thue" >
+                                <Listings title="Nhà đất thuê" />
                             </Route>
                             <Route path="/dang-nhap" exact >
                                 <Login />

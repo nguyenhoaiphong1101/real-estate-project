@@ -15,7 +15,6 @@ function SectionRecentList() {
 
     useEffect(() => {
         dispatch(loadListLatestNew());
-        console.log(listLatestNew[0]);
     }, [])
     return (
         <div className="section-recent-list">

@@ -41,7 +41,7 @@ export const loginApi = {
                 loginSuccess(jwt_decode(access_token).role)
             })
             .catch(err => {
-                message.error(err.response.data?.message);
+                message.error(err.response?.data?.message);
             })
     }
 }

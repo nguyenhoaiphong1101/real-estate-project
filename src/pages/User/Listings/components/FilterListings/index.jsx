@@ -9,168 +9,101 @@ import { useDispatch, useSelector } from 'react-redux';
 const { Panel } = Collapse;
 
 
-const location = [
-    {
-        key: -1,
-        value: 'Any Location'
-    },
-    {
-        key: 2,
-        value: 'California'
-    },
-    {
-        key: 3,
-        value: 'Lawndale'
-    },
-    {
-        key: 4,
-        value: 'Stroudsburg'
-    },
-    {
-        key: 5,
-        value: 'West Roxbury'
-    },
-    {
-        key: 6,
-        value: 'Willingboro'
-    },
-]
-
-const status = [
-    {
-        key: -1,
-        value: 'Any Status'
-    },
-    {
-        key: 2,
-        value: 'For Rent'
-    },
-    {
-        key: 3,
-        value: 'Featured'
-    },
-    {
-        key: 4,
-        value: 'For Sale'
-    },
-    {
-        key: 5,
-        value: 'Sold'
-    },
-    {
-        key: 6,
-        value: 'Special Offer'
-    },
-]
-
 const price = [
     {
-        key: -1,
-        value: 'Any Range'
+        id: -1,
+        name: 'Tất cả'
     },
     {
-        key: 2,
-        value: '$60k - $80k'
+        id: 2,
+        name: '< 500 triệu'
     },
     {
-        key: 3,
-        value: '$80k - $100k'
+        id: 3,
+        name: '500 - 800 triệu'
     },
     {
-        key: 4,
-        value: '$100k - $120k'
+        id: 4,
+        name: '800 triệu - 1 tỷ'
     },
     {
-        key: 5,
-        value: '$120k - $140k'
+        id: 5,
+        name: '1 - 2 tỷ'
     },
     {
-        key: 6,
-        value: '$140k - $160k'
+        id: 6,
+        name: '3 - 5 tỷ'
+    },
+    {
+        id: 7,
+        name: '5 - 7 tỷ'
+    },
+    {
+        id: 8,
+        name: '7 - 10 tỷ'
+    },
+    {
+        id: 9,
+        name: '10 - 20 tỷ'
+    },
+    {
+        id: 10,
+        name: '20 - 30 tỷ'
+    },
+    {
+        id: 11,
+        name: '> 30 tỷ'
     },
 ]
 
-const beds = [
+const acreage = [
     {
-        key: -1,
-        value: 'Any Amount'
+        id: -1,
+        name: 'Tất cả'
     },
     {
-        key: 2,
-        value: '1'
+        id: 2,
+        name: '<= 30 m2'
     },
     {
-        key: 3,
-        value: '2'
+        id: 3,
+        name: '30 - 50 m2'
     },
     {
-        key: 4,
-        value: '3'
+        id: 4,
+        name: '50 - 80 m2'
     },
     {
-        key: 5,
-        value: '4'
+        id: 5,
+        name: '80 - 100 m2'
     },
     {
-        key: 6,
-        value: '5+'
-    },
-]
-
-const bathrooms = [
-    {
-        key: -1,
-        value: 'Any Amount'
+        id: 6,
+        name: '150 - 200 m2'
     },
     {
-        key: 2,
-        value: '1'
+        id: 7,
+        name: '200 - 250 m2'
     },
     {
-        key: 3,
-        value: '2'
+        id: 8,
+        name: '250 - 300 m2'
     },
     {
-        key: 4,
-        value: '3'
+        id: 9,
+        name: '300 - 500 m2'
     },
     {
-        key: 5,
-        value: '4'
-    },
-    {
-        key: 6,
-        value: '5+'
+        id: 9,
+        name: '>= 500 m2'
     },
 ]
 
-const types = [
-    {
-        key: -1,
-        value: 'Any Types'
-    },
-    {
-        key: 2,
-        value: 'House'
-    },
-    {
-        key: 3,
-        value: 'Apartment'
-    },
-    {
-        key: 4,
-        value: 'Condo'
-    },
-    {
-        key: 5,
-        value: 'Townhome'
-    },
-    {
-        key: 6,
-        value: 'Villa'
-    },
-]
 
+
+const diameters = [
+
+]
 
 function FilterListings(props) {
 
@@ -200,17 +133,15 @@ function FilterListings(props) {
                         <div className="form-group acr-custom-select">
                             <SelectCustom title="Quận huyện" value={listProvince} />
                         </div>
+
                         <div className="form-group acr-custom-select">
-                            <SelectCustom title="Đường phố" value={types} />
+                            <SelectCustom title="Mức giá" value={price} />
                         </div>
                         <div className="form-group acr-custom-select">
-                            <SelectCustom title="Giá tiền" value={price} />
+                            <SelectCustom title="Diện tích" value={acreage} />
                         </div>
                         <div className="form-group acr-custom-select">
-                            <SelectCustom title="Diện tích" value={beds} />
-                        </div>
-                        <div className="form-group acr-custom-select">
-                            <SelectCustom title="Hướng nhà" value={bathrooms} />
+                            <SelectCustom title="Dự án" value={diameters} />
                         </div>
 
                         <ButtonSubmit value="Áp dụng" className="submit" />

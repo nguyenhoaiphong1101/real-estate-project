@@ -50,6 +50,7 @@ function Header(props) {
                 <ul className="nav-link">
                     <React.Fragment>
                         <li className={path === "/dang-nhap" ? "active" : ""}>
+                            <Link className="mr-10" to='/trang-ca-nhan' > Hi, Nguyễn Hoài Phong </Link>
                             <Link to='/' onClick={() => {
                                 removeLocal()
                                 props.setLoading(true)
@@ -127,8 +128,13 @@ function Header(props) {
                                         </li>
                                     </React.Fragment>
                                     <React.Fragment>
-                                        <li className={path === "/danh-sach" ? "active" : ""}>
-                                            <Link to='/danh-sach' > Danh sách </Link>
+                                        <li className={path === "/nha-dat-ban" ? "active" : ""}>
+                                            <Link to='/nha-dat-ban' > Nhà đất bán </Link>
+                                        </li>
+                                    </React.Fragment>
+                                    <React.Fragment>
+                                        <li className={path === "/nha-dat-thue" ? "active" : ""}>
+                                            <Link to='/nha-dat-thue' > Nhà đất thuê </Link>
                                         </li>
                                     </React.Fragment>
                                     <React.Fragment>

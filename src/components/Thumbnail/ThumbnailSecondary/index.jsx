@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.scss';
-function ThumbnailSecondary() {
+function ThumbnailSecondary(props) {
 
     return (
         <div class="listing listing-secondary">
@@ -12,10 +12,9 @@ function ThumbnailSecondary() {
             <div class="listing-body">
                 <h6 class="listing-title">
                     <a title="Iris Watson, Frederick Nebraska 20620">
-                        Iris Watson, Frederick Nebraska 20620 </a>
+                        {props.listLatestNew?.address} </a>
                 </h6>
-                <span class="listing-price">3,500$
-                    <span>/month</span>
+                <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}
                 </span>
             </div>
         </div>

@@ -14,193 +14,101 @@ import { AudioOutlined } from '@ant-design/icons';
 const { TabPane } = Tabs;
 
 
-const location = [
-    {
-        id: -1,
-        name: 'Any Location'
-    },
-    {
-        id: 2,
-        name: 'California'
-    },
-    {
-        id: 3,
-        name: 'Lawndale'
-    },
-    {
-        id: 4,
-        name: 'Stroudsburg'
-    },
-    {
-        id: 5,
-        name: 'West Roxbury'
-    },
-    {
-        id: 6,
-        name: 'Willingboro'
-    },
-]
-
-const status = [
-    {
-        id: -1,
-        name: 'Any Status'
-    },
-    {
-        id: 2,
-        name: 'For Rent'
-    },
-    {
-        id: 3,
-        name: 'Featured'
-    },
-    {
-        id: 4,
-        name: 'For Sale'
-    },
-    {
-        id: 5,
-        name: 'Sold'
-    },
-    {
-        id: 6,
-        name: 'Special Offer'
-    },
-]
 
 const price = [
     {
         id: -1,
-        name: 'Any Range'
+        name: 'Tất cả'
     },
     {
         id: 2,
-        name: '$60k - $80k'
+        name: '< 500 triệu'
     },
     {
         id: 3,
-        name: '$80k - $100k'
+        name: '500 - 800 triệu'
     },
     {
         id: 4,
-        name: '$100k - $120k'
+        name: '800 triệu - 1 tỷ'
     },
     {
         id: 5,
-        name: '$120k - $140k'
+        name: '1 - 2 tỷ'
     },
     {
         id: 6,
-        name: '$140k - $160k'
+        name: '3 - 5 tỷ'
+    },
+    {
+        id: 7,
+        name: '5 - 7 tỷ'
+    },
+    {
+        id: 8,
+        name: '7 - 10 tỷ'
+    },
+    {
+        id: 9,
+        name: '10 - 20 tỷ'
+    },
+    {
+        id: 10,
+        name: '20 - 30 tỷ'
+    },
+    {
+        id: 11,
+        name: '> 30 tỷ'
     },
 ]
 
-const beds = [
+const acreage = [
     {
         id: -1,
-        name: 'Any Amount'
+        name: 'Tất cả'
     },
     {
         id: 2,
-        name: '1'
+        name: '<= 30 m2'
     },
     {
         id: 3,
-        name: '2'
+        name: '30 - 50 m2'
     },
     {
         id: 4,
-        name: '3'
+        name: '50 - 80 m2'
     },
     {
         id: 5,
-        name: '4'
+        name: '80 - 100 m2'
     },
     {
         id: 6,
-        name: '5+'
+        name: '150 - 200 m2'
+    },
+    {
+        id: 7,
+        name: '200 - 250 m2'
+    },
+    {
+        id: 8,
+        name: '250 - 300 m2'
+    },
+    {
+        id: 9,
+        name: '300 - 500 m2'
+    },
+    {
+        id: 9,
+        name: '>= 500 m2'
     },
 ]
 
-const bathrooms = [
-    {
-        id: -1,
-        name: 'Any Amount'
-    },
-    {
-        id: 2,
-        name: '1'
-    },
-    {
-        id: 3,
-        name: '2'
-    },
-    {
-        id: 4,
-        name: '3'
-    },
-    {
-        id: 5,
-        name: '4'
-    },
-    {
-        id: 6,
-        name: '5+'
-    },
-]
 
-const types = [
-    {
-        id: -1,
-        name: 'Any Types'
-    },
-    {
-        id: 2,
-        name: 'House'
-    },
-    {
-        id: 3,
-        name: 'Apartment'
-    },
-    {
-        id: 4,
-        name: 'Condo'
-    },
-    {
-        id: 5,
-        name: 'Townhome'
-    },
-    {
-        id: 6,
-        name: 'Villa'
-    },
-]
 
 const diameters = [
-    {
-        id: -1,
-        name: 'Any Ranges'
-    },
-    {
-        id: 2,
-        name: 'Within 2 miles'
-    },
-    {
-        id: 3,
-        name: 'Within 4 miles'
-    },
-    {
-        id: 4,
-        name: 'Within 6 miles'
-    },
-    {
-        id: 5,
-        name: 'Within 8 miles'
-    },
-    {
-        id: 6,
-        name: 'Within 8+ miles'
-    },
+
 ]
 
 
@@ -303,13 +211,13 @@ function Banner() {
 
                                         <Col span={8} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Diện tích" value={diameters} />
+                                                <SelectCustom title="Diện tích" value={acreage} />
                                             </div>
                                         </Col>
 
                                         <Col span={8} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Thể loại" value={diameters} />
+                                                <SelectCustom title="Dự án" value={diameters} />
                                             </div>
                                         </Col>
                                     </Row>

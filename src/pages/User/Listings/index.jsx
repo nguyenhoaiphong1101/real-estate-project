@@ -16,7 +16,7 @@ function Listings(props) {
             <div className="sub-header">
                 <div className="container">
                     <div className="subheader-inner">
-                        <h1 className="title">Danh sách</h1>
+                        <h1 className="title">{props.title}</h1>
                         <nav>
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item">
@@ -25,7 +25,7 @@ function Listings(props) {
                                     </a>
                                 </li>
                                 <li className="breadcrumb-item" aria-current="page">
-                                    Danh sách
+                                    {props.title}
                                 </li>
                             </ol>
                         </nav>
