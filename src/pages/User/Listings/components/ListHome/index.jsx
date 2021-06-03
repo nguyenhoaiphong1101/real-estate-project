@@ -1,35 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { List } from 'antd';
 import "./styles.scss";
 import ThumbnailExtra from '../../../../../components/Thumbnail/ThumbnailExtra'
+import { useDispatch, useSelector } from 'react-redux';
+import { loadListSearch } from '../../../../../actions/listsearch';
 
 
 
-const listData = [];
 
-for (let i = 0; i < 23; i++) {
-    listData.push({
-        title: `${i}`,
-    });
-}
 
 function ListHome(props) {
+    const listSearch = useSelector(state => state.listsearch.listSearch)
+    const totalItem = useSelector(state => state.listsearch.totalItem)
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadListSearch(1, 2));
+    }, [])
+
+
+
+
+
     return (
         <List className="list-home"
             itemLayout="vertical"
-            size="large"
+            size="small"
             pagination={{
                 onChange: page => {
-                    console.log(page);
+                    dispatch(loadListSearch(page, 2));
                 },
-                pageSize: 4,
+                pageSize: 2,
+                total: totalItem,
             }}
-            dataSource={listData}
+            dataSource={listSearch}
             renderItem={item => (
                 <List.Item className="item"
-                    key={item.title}
+                    key={item.id}
                 >
-                    <ThumbnailExtra />
+                    <ThumbnailExtra listLatestNew={item} />
                 </List.Item>
             )}
         >
