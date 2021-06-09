@@ -2,7 +2,17 @@ const initialState = {
     listSearch: [],
     total_page: null,
     totalItem: null,
-
+    // area: {
+    //     area_from: null,
+    //     area_to: null,
+    // },
+    // category_id: null,
+    // district_id: null,
+    // price: {
+    //     price_from: null,
+    //     price_to: null,
+    // },
+    // province_id: null,
 }
 
 

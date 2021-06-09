@@ -20,8 +20,8 @@ function RecentListings() {
             <Panel header={<h5 className="title">Danh sách gần đây</h5>} key="1">
                 <div className="recent-listing filter-listings">
                     <div className="container-fluid wrapper">
-                        {listLatestNew.map(item => {
-                            return <ThumbnailSecondary listLatestNew={item} />
+                        {listLatestNew.map((item, index) => {
+                            return <ThumbnailSecondary key={index} listLatestNew={item} />
                         })}
                     </div>
                 </div>

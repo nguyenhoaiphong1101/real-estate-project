@@ -1,16 +1,14 @@
 import axios from "axios"
-import { identity } from "lodash";
 import { API_URL } from "../constants/Config";
 
 
-export const listSearch = {
+export const listCategoryApi = {
 
-    GET: (params) => {
+    GET: () => {
         return axios({
             method: 'get',
             data: null,
-            params: params,
-            url: API_URL + '/public/apartment/search',
+            url: API_URL + '/public/all-category',
         })
             .then(res => res.data.data
             )

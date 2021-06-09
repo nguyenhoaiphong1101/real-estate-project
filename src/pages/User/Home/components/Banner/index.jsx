@@ -6,10 +6,11 @@ import SelectCustom from '../../../../../components/Select/index';
 import './styles.scss';
 import { Tabs } from 'antd';
 import { loadCountry, loadProvince } from '../../../../../actions/search';
-import { Menu, Dropdown, Button } from 'antd';
+import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
+import { loadListCategory } from '../../../../../actions/category';
 
 const { TabPane } = Tabs;
 
@@ -115,46 +116,66 @@ const diameters = [
 
 function Banner() {
 
-    const [valueSearchType, setValueSearchType] = useState('Tất cả nhà đất')
+    const listCategory = useSelector(state => state.category.listCategory)
 
-    function handleMenuClick(e) {
-        setValueSearchType(e.key);
-    }
+    const [valueSearchType, setValueSearchType] = useState(0)
 
-    const menu = (
-        <Menu onClick={handleMenuClick}>
-            <Menu.Item key="Tất cả nhà đất" >
-                Tất cả nhà đất
-          </Menu.Item>
-            <Menu.Item key="Nhà thuê" >
-                Nhà thuê
-          </Menu.Item>
-            <Menu.Item key="Nhà mua" >
-                Nhà mua
-          </Menu.Item>
-        </Menu>
-    );
+    const dispatch = useDispatch();
+
 
     const onSearch = value => console.log(value);
 
-    const [active, setActive] = useState(true);
+    const [active, setActive] = useState(false);
     const handleToggle = () => {
         setActive(!active);
+    }
+
+    const getProvice = (id) => {
+        dispatch(loadProvince(id));
+    }
+
+
+    const [valueCategory, setValueCategory] = useState({ id: null, name: '' });
+    const [valueCountry, setValueCountry] = useState({ id: null, name: '' });
+    const [valueProvince, setValueProvince] = useState({ id: null, name: '' });
+    const [valuePrice, setValuePrice] = useState({ id: null, name: '' });
+    const [valueArea, setValueArea] = useState({ id: null, name: '' });
+
+    useEffect(() => {
+        if (valueCountry.id)
+            getProvice(valueCountry.id);
+    }, [valueCountry]);
+
+    const changeValueCategory = (value, id) => {
+        setValueCategory({ id: id.key, name: value });
+    }
+    const changeValueCountry = (value, id) => {
+        setValueCountry({ id: id.key, name: value });
+
+    }
+    const changeValuePrice = (value, id) => {
+        let data = price.filter(el => el.id == id.key);
+        setValuePrice({ id: id.key, name: value, from: data[0]?.from, to: data[0]?.to });
+    }
+    const changeValueProvince = (value, id) => {
+        setValueProvince({ id: id.key, name: value });
+    }
+    const changeValueArea = (value, id) => {
+
+        let data = acreage.filter(el => el.id == id.key);
+
+        console.log(data);
+
+        setValueArea({ from: data[0]?.from, to: data[0]?.to });
     }
 
     const listCountry = useSelector(state => state.search.country);
     const listProvince = useSelector(state => state.search.province);
 
 
-    const dispatch = useDispatch();
-
-    const getProvice = (id) => {
-        dispatch(loadProvince(id))
-    }
-
-
     useEffect(() => {
         dispatch(loadCountry());
+        dispatch(loadListCategory())
     }, [])
 
 
@@ -177,47 +198,48 @@ function Banner() {
                                 <TabPane tab="NHÀ ĐẤT CHO THUÊ" key="2">
                                 </TabPane>
                             </Tabs>
-                            <div className="seach-type-real">
-                                <Dropdown overlay={menu} className="dropdown-search">
-                                    <Button>
-                                        {valueSearchType} <DownOutlined />
-                                    </Button>
-                                </Dropdown>
-                                <Input.Search className="input-search" placeholder="Tìm kiếm địa điểm, khu vực" onSearch={onSearch} enterButton='Tìm kiếm    ' />
+                            <div className="search-type-real">
+                                <Row>
+                                    <Col span={6}>
+                                        <SelectCustom title="Thể loại" onHandleChange={changeValueCategory} options={listCategory} />
+                                    </Col>
+                                    <Col span={14}>
+                                        <Input className="input" placeholder="Tìm kiếm địa điểm, khu vực" onSearch={onSearch} />
+                                    </Col>
+                                    <Col span={4}>
+                                        <ButtonCustom value="Tìm kiếm" className="btn-search" />
+                                    </Col>
+                                </Row>
+
+
                             </div>
                             <form>
                                 <Row>
 
                                     <Col span={12} className="item-form">
                                         <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Thành Phố" value={listCountry} callApi={getProvice} />
+                                            <SelectCustom title="Thành phố" onHandleChange={changeValueCountry} options={listCountry} />
                                         </div>
                                     </Col>
 
                                     <Col span={12} className="item-form">
                                         <div className="acr-custom-select form-group">
-                                            <SelectCustom title="Quận/Huyện" value={listProvince} />
+                                            <SelectCustom title="Quận huyện" onHandleChange={changeValueProvince} options={listProvince} />
                                         </div>
                                     </Col>
                                 </Row>
                                 <div className={`advanced-search d-block ${active == true ? 'active' : ''}`}>
                                     <Row >
 
-                                        <Col span={8} className="item-form">
+                                        <Col span={12} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Mức giá" value={price} />
+                                                <SelectCustom title="Mức giá" onHandleChange={changeValuePrice} options={price} />
                                             </div>
                                         </Col>
 
-                                        <Col span={8} className="item-form">
+                                        <Col span={12} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Diện tích" value={acreage} />
-                                            </div>
-                                        </Col>
-
-                                        <Col span={8} className="item-form">
-                                            <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Dự án" value={diameters} />
+                                                <SelectCustom title="Diện tích" onHandleChange={changeValueArea} options={acreage} />
                                             </div>
                                         </Col>
                                     </Row>

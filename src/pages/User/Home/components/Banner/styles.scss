@@ -47,19 +47,30 @@
             border-radius: 8px;
             margin-top: 70px;
             border: 1px solid rgba(0, 0, 0, 0.1);
-            .seach-type-real {
+            .search-type-real {
                 margin-bottom: 15px;
                 padding-left: 10px;
                 .dropdown-search {
                     width: 13.5%;
                 }
 
+                .btn-search {
+                    font-size: 18px;
+                    background-color: #0088a9;
+                    margin: 0;
+                    width: 90%;
+                    height: 58px;
+                    margin-left: 10px;
+                }
+
                 .input-search {
-                    width: 85.8%;
+                    width: 100%;
+                    margin-right: 10px;
+                    margin-bottom: 0;
                 }
                 .ant-btn,
                 .ant-input {
-                    height: 50px;
+                    height: 58px;
                     border-radius: 8px;
                     box-shadow: 0 2px 9px 0 rgba(34, 12, 43, 0.1);
                     border: 0;

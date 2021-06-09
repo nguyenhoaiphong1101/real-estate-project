@@ -13,13 +13,6 @@
         .form-group {
             margin-bottom: 18px;
         }
-
-        .submit {
-            font-size: 18px;
-            background-color: #0088a9;
-            margin: 0;
-            width: 100%;
-        }
     }
 }
 .collapse {
@@ -27,6 +20,13 @@
     border: 0px;
     border-bottom: 0;
     border-radius: 0;
+    .btn-submit {
+        font-size: 18px;
+        background-color: #0088a9;
+        margin: 0;
+        width: 90%;
+        margin-left: 20px;
+    }
     .ant-collapse-header {
         padding: 10px 0 10px 20px !important;
         .ant-collapse-arrow {

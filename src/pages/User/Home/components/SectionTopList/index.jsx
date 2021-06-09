@@ -14,7 +14,6 @@ function SectionTopList() {
 
     useEffect(() => {
         dispatch(loadListHighlight());
-        console.log(listHighlight);
     }, [])
 
     const settings = {

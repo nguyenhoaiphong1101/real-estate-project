@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './styles.scss'
 import { Row, Col } from 'antd'
+import { useDispatch, useSelector } from 'react-redux';
+import { loadListCategory } from '../../../../../actions/category';
 
 
 const items = [
@@ -44,6 +46,13 @@ const items = [
 
 
 function Category(props) {
+
+    const listCategory = useSelector(state => state.category.listCategory)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(loadListCategory());
+    }, [])
     return (
         <div className="category-section">
             <div className="container">
@@ -52,14 +61,14 @@ function Category(props) {
                     <h2>Tìm kiếm theo thể loại</h2>
                 </div>
                 <Row gutter={[16, 16]}>
-                    {items.map(item => {
+                    {listCategory.map(item => {
                         return (
-                            <Col span={8} className="category">
+                            <Col key={item.id} span={8} className="category">
                                 <div className="category-item">
-                                    <a href=""><img src={item.url} alt="#" /></a>
+                                    <a href=""><img src="http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg" alt="#" /></a>
                                     <div className="category-item-body">
                                         <h5><a>{item.name}</a></h5>
-                                        <span>{item.totalListing}</span>
+                                        <span>250</span>
                                     </div>
                                 </div>
 

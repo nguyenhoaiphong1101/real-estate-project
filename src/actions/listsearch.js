@@ -1,8 +1,8 @@
 import { listSearch } from "../api/listsearchApi"
 
-export const loadListSearch = (page, size) => {
+export const loadListSearch = (params) => {
     return (dispatch) => {
-        listSearch.GET(page, size).then(res => {
+        listSearch.GET(params).then(res => {
             dispatch({
                 type: 'LOAD_LISTSEARCH',
                 payload: res.contents,

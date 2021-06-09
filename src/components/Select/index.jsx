@@ -28,17 +28,25 @@ const DisplayItem = ({ value, lastchild }) => {
     );
 };
 
-function SelectCustom({ title, value, currentCountry, callApi }) {
-    const [items, setItems] = useState(value);
+function SelectCustom({ title, options, onHandleChange }) {
     const [currentValue, setCurrentValue] = useState();
     const [valueSearch, setValueSearch] = useState('');
+    const [items, setItems] = useState([]);
     const inputRef = useRef(null);
     const dispatch = useDispatch()
+    // const area_from = useSelector(state => state.listsearch.area.area_from)
+    // const area_to = useSelector(state => state.listsearch.area.area_to)
+    // const category_id = useSelector(state => state.listsearch.category_id)
+    // const district_id = useSelector(state => state.listsearch.district_id)
+    // const price_from = useSelector(state => state.listsearch.price.price_from)
+    // const price_to = useSelector(state => state.listsearch.price.price_to)
+    // const province_id = useSelector(state => state.listsearch.province_id)
 
     const handleChange = (value, id) => {
         setCurrentValue(value);
-        if (callApi)
-            callApi(id.key)
+        onHandleChange(value, id);
+        // if (callApi)
+        //     callApi(id.key)
     };
     const preventEvent = (e) => {
         e.stopPropagation();
@@ -51,12 +59,11 @@ function SelectCustom({ title, value, currentCountry, callApi }) {
 
     useEffect(() => {
         if (valueSearch === '') {
-            setItems(value);
+            setItems(options);
         }
     })
-
     useEffect(() => {
-        setItems(value.filter(item => item.name?.toLowerCase().includes(valueSearch.toLowerCase())));
+        setItems(options.filter(item => item.name?.toLowerCase().includes(valueSearch.toLowerCase())));
     }, [valueSearch])
     return (
         <div>
@@ -75,14 +82,28 @@ function SelectCustom({ title, value, currentCountry, callApi }) {
                     />
                 </Option>
                 {items.map((item, index) => {
+                    return (<Option value={item.name} key={item.id}>
+                        {item.name}
+                        {/* <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} /> */}
+                    </Option>)
+                })}
+                {/* <Option className="input-wrapper" key=''>
+                    <Input placeholder="Search"
+                        value={valueSearch}
+                        ref={inputRef}
+                        onChange={e => onTodoChange(e.target.value)}
+                        onClick={preventEvent}
+                    />
+                </Option>
+                {items.map((item, index) => {
                     return (
                         <Option value={item.name} key={item.id} >
                             <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} />
                         </Option>
                     );
-                })}
+                })} */}
             </Select>
-        </div>
+        </div >
     );
 }
 

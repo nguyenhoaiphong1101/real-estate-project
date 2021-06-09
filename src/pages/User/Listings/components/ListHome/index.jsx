@@ -15,9 +15,9 @@ function ListHome(props) {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(loadListSearch(1, 2));
-    }, [])
+    // useEffect(() => {
+    //     dispatch(loadListSearch(1, 2));
+    // }, [])
 
 
 
