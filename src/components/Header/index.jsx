@@ -4,6 +4,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import './styles.scss';
 
 import useDocumentScroll from './../../hooks/useDocumentScroll'
+import jwtDecode from 'jwt-decode';
 
 
 function Header(props) {
@@ -11,6 +12,9 @@ function Header(props) {
     // const [topStyle, setTopStyle] = useState('');
     const location = useLocation();
     const history = useHistory();
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
 
     useEffect(() => {
         if (location.pathname === '/dang-ky' || location.pathname === '/dang-nhap') {
@@ -25,6 +29,7 @@ function Header(props) {
         localStorage.removeItem('role')
         history.push('/')
     }
+
 
 
     const token = localStorage.getItem('access_token');
@@ -50,7 +55,7 @@ function Header(props) {
                 <ul className="nav-link">
                     <React.Fragment>
                         <li className={path === "/dang-nhap" ? "active" : ""}>
-                            <Link className="mr-10" to='/trang-ca-nhan' > Hi, Nguyễn Hoài Phong </Link>
+                            <Link className="mr-10" to='/trang-ca-nhan' > {`Hi ${jwtDecode(token).full_name ? jwtDecode(token).full_name : ''}`} </Link>
                             <Link to='/' onClick={() => {
                                 removeLocal()
                                 props.setLoading(true)
@@ -61,6 +66,20 @@ function Header(props) {
             )
         }
     }
+    const toPost = () => {
+        history.push("/dang-bai")
+    }
+
+    const checkButtonSubmit = () => {
+        if (token !== null) {
+            return <div className="button-wrap">
+                <Button className="btn" value="Gửi danh sách" onClick={() => toPost()} icon="fas fa-plus" />
+            </div>
+        }
+    };
+
+
+
 
 
     const [shouldScrollHeader, setShouldScrollHeader] = useState(false);
@@ -137,21 +156,14 @@ function Header(props) {
                                             <Link to='/nha-dat-thue' > Nhà đất thuê </Link>
                                         </li>
                                     </React.Fragment>
-                                    <React.Fragment>
-                                        <li className={path === "/trang-ca-nhan" ? "active" : ""}>
-                                            <Link to='/trang-ca-nhan' > Trang Cá Nhân </Link>
-                                        </li>
-                                    </React.Fragment>
-                                    <React.Fragment>
+                                    {/* <React.Fragment>
                                         <li className={path === "/dang-bai" ? "active" : ""}>
                                             <Link to='/dang-bai' > Đăng bài viết</Link>
                                         </li>
-                                    </React.Fragment>
+                                    </React.Fragment> */}
                                 </ul>
                             </nav>
-                            <div className="button-wrap">
-                                <Button className="btn" value="Gửi danh sách" icon="fas fa-plus" />
-                            </div>
+                            {checkButtonSubmit()}
                         </div>
                     </div>
 

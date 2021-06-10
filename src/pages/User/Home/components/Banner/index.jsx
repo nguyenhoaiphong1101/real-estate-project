@@ -11,16 +11,14 @@ import { DownOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
 import { loadListCategory } from '../../../../../actions/category';
+import { loadListFilter } from '../../../../../actions/listfilter';
+import { useHistory } from 'react-router';
 
 const { TabPane } = Tabs;
 
 
 
 const price = [
-    {
-        id: -1,
-        name: 'Tất cả'
-    },
     {
         id: 2,
         name: '< 500 triệu'
@@ -64,10 +62,6 @@ const price = [
 ]
 
 const acreage = [
-    {
-        id: -1,
-        name: 'Tất cả'
-    },
     {
         id: 2,
         name: '<= 30 m2'
@@ -122,6 +116,7 @@ function Banner() {
 
     const dispatch = useDispatch();
 
+    const history = useHistory();
 
     const onSearch = value => console.log(value);
 
@@ -164,21 +159,32 @@ function Banner() {
 
         let data = acreage.filter(el => el.id == id.key);
 
-        console.log(data);
-
         setValueArea({ from: data[0]?.from, to: data[0]?.to });
     }
 
     const listCountry = useSelector(state => state.search.country);
     const listProvince = useSelector(state => state.search.province);
+    const [typeAparment, setTypeAparment] = useState('1');
 
+    const onChangeType = (value) => {
+        setTypeAparment(value);
+    }
 
     useEffect(() => {
         dispatch(loadCountry());
         dispatch(loadListCategory())
     }, [])
 
+    const valueSearch = () => {
 
+        dispatch(loadListFilter(valueCategory, valueCountry, valueProvince, valuePrice, valueArea));
+        if (typeAparment == "1") {
+            history.push('/nha-dat-ban', { from: '/' });
+        }
+        else {
+            history.push('/nha-dat-thue', { from: '/' });
+        }
+    }
 
     return (
         <div className="banner-home">
@@ -192,7 +198,7 @@ function Banner() {
                                 own house today. </p>
                         </div>
                         <div className="acr-filter-form">
-                            <Tabs defaultActiveKey="1" className="pl-12">
+                            <Tabs defaultActiveKey="1" className="pl-12" onChange={(e) => onChangeType(e)}>
                                 <TabPane tab="NHÀ ĐẤT BÁN" key="1" >
                                 </TabPane>
                                 <TabPane tab="NHÀ ĐẤT CHO THUÊ" key="2">
@@ -206,7 +212,7 @@ function Banner() {
                                     <Col span={14}>
                                         <Input className="input" placeholder="Tìm kiếm địa điểm, khu vực" onSearch={onSearch} />
                                     </Col>
-                                    <Col span={4}>
+                                    <Col span={4} onClick={() => valueSearch()}>
                                         <ButtonCustom value="Tìm kiếm" className="btn-search" />
                                     </Col>
                                 </Row>

@@ -8,15 +8,15 @@ import { connectAdvanced, useDispatch, useSelector } from 'react-redux';
 import { loadListCategory } from '../../../../../actions/category';
 import { listSearch } from '../../../../../api/listsearchApi';
 import { loadListSearch } from '../../../../../actions/listsearch';
+import { loadListFilter } from '../../../../../actions/listfilter';
+import { useLocation } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
+
 
 const { Panel } = Collapse;
 
 
 const price = [
-    {
-        id: -1,
-        name: 'Tất cả'
-    },
     {
         id: 2,
         name: '< 500 triệu',
@@ -43,47 +43,50 @@ const price = [
     },
     {
         id: 6,
+        name: '2 - 3 tỷ',
+        from: 2000000000,
+        to: 3000000000,
+    },
+    {
+        id: 7,
         name: '3 - 5 tỷ',
         from: 3000000000,
         to: 5000000000,
     },
     {
-        id: 7,
+        id: 8,
         name: '5 - 7 tỷ',
         from: 5000000000,
         to: 7000000000,
     },
     {
-        id: 8,
+        id: 9,
         name: '7 - 10 tỷ',
         from: 7000000000,
         to: 10000000000,
     },
     {
-        id: 9,
+        id: 10,
         name: '10 - 20 tỷ',
         from: 10000000000,
         to: 20000000000,
     },
     {
-        id: 10,
+        id: 11,
         name: '20 - 30 tỷ',
         from: 20000000000,
         to: 30000000000,
     },
     {
-        id: 11,
+        id: 12,
         name: '> 30 tỷ',
         from: 3000000000,
-        to: 100000000000,
+        to: -1,
     },
 ]
 
 const acreage = [
-    {
-        id: -1,
-        name: 'Tất cả'
-    },
+
     {
         id: 2,
         name: '<= 30 m2',
@@ -142,15 +145,11 @@ const acreage = [
         id: 11,
         name: '>= 500 m2',
         from: 500,
-        to: 9999,
+        to: -1,
     },
 ]
 
 
-
-const diameters = [
-
-]
 
 function FilterListings(props) {
 
@@ -158,6 +157,7 @@ function FilterListings(props) {
     const listProvince = useSelector(state => state.search.province);
     const listCategory = useSelector(state => state.category.listCategory);
 
+    const filter = useSelector(state => state.listfilter)
 
     const [valueCategory, setValueCategory] = useState({ id: null, name: '' });
     const [valueCountry, setValueCountry] = useState({ id: null, name: '' });
@@ -171,16 +171,45 @@ function FilterListings(props) {
         dispatch(loadProvince(id));
     }
 
+    const location = useLocation();
 
     useEffect(() => {
         dispatch(loadCountry());
-        dispatch(loadListCategory())
+        dispatch(loadListCategory());
+        // dispatch(loadListSearch({
+        //     type_apartment: typeListing,
+        // }))
 
+        setValueCategory(filter.valueCategory);
+        setValueCountry(filter.valueCountry);
+        setValueProvince(filter.valueProvince);
+        setValuePrice(filter.valuePrice);
+        setValueArea(filter.valueArea);
+        // valueCategory, valueCountry, valueProvince, valuePrice, valueArea
     }, [])
+    useEffect(() => {
+        if (location.state?.from !== '/') {
+            dispatch(loadListSearch({
+                type_apartment: props.typeListing === "Nhà đất bán" ? "BUY" : "RENT",
+            }))
+            setValueCategory(null);
+            setValueCountry(null);
+            setValueProvince(null);
+            setValuePrice(null);
+            setValueArea(null);
+            dispatch(loadProvince(0))
+        }
+        else {
+            searchFilter(filter.valueCategory, filter.valueCountry, filter.valueProvince, filter.valuePrice, filter.valueArea)
+            console.log(valueCountry)
+            console.log(filter.valueCountry);
+        }
+
+    }, [props.typeListing])
 
     useEffect(() => {
-        if (valueCountry.id)
-            getProvice(valueCountry.id);
+        if (valueCountry?.id)
+            getProvice(valueCountry?.id);
     }, [valueCountry]);
 
     const changeValueCategory = (value, id) => {
@@ -201,25 +230,40 @@ function FilterListings(props) {
 
         let data = acreage.filter(el => el.id == id.key);
 
-        console.log(data);
 
         setValueArea({ from: data[0]?.from, to: data[0]?.to });
     }
+    const token = localStorage.getItem('access_token');
 
-    const searchFilter = () => {
+    const searchFilter = async (valueCategory, valueCountry, valueProvince, valuePrice, valueArea) => {
 
-        console.log(valuePrice)
 
-        dispatch(loadListSearch({
-            type_apartment: 'BUY',
-            area_from: valueArea.from && valueArea.id !== -1 ? valueArea.from : undefined,
-            area_to: valueArea.to && valueArea.id !== -1 ? valueArea.to : undefined,
-            category_id: valueCategory.id ? valueCategory.id : undefined,
-            district_id: valueProvince.id ? valueProvince.id : undefined,
-            price_from: valuePrice.from && valuePrice.id !== -1 ? valuePrice.from : undefined,
-            price_to: valuePrice.to && valuePrice.id !== -1 ? valuePrice.to : undefined,
-            province_id: valueCountry.id ? valueCountry.id : undefined,
-        }))
+        if (token) {
+            await dispatch(loadListSearch({
+                type_apartment: props.typeListing === "Nhà đất bán" ? "BUY" : "RENT",
+                area_from: valueArea?.from && valueArea?.id !== "-1" ? valueArea?.from : undefined,
+                area_to: valueArea?.to && valueArea?.id !== "-1" && valueArea?.to !== -1 ? valueArea.to : undefined,
+                category_id: valueCategory?.id && valueCategory?.id !== "-1" ? valueCategory?.id : undefined,
+                district_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
+                price_from: valuePrice?.from && valuePrice?.id !== "-1" ? valuePrice?.from : undefined,
+                price_to: valuePrice?.to && valuePrice?.id !== "-1" && valuePrice?.to !== -1 ? valuePrice.to : undefined,
+                province_id: valueCountry?.id && valueCountry?.id !== "-1" ? valueCountry?.id : undefined,
+                user_id: jwtDecode(token).id,
+            }))
+        } else {
+            await dispatch(loadListSearch({
+                type_apartment: props.typeListing === "Nhà đất bán" ? "BUY" : "RENT",
+                area_from: valueArea?.from && valueArea?.id !== "-1" ? valueArea?.from : undefined,
+                area_to: valueArea?.to && valueArea?.id !== "-1" && valueArea?.to !== -1 ? valueArea.to : undefined,
+                category_id: valueCategory?.id && valueCategory?.id !== "-1" ? valueCategory?.id : undefined,
+                district_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
+                price_from: valuePrice?.from && valuePrice?.id !== "-1" ? valuePrice?.from : undefined,
+                price_to: valuePrice?.to && valuePrice?.id !== "-1" && valuePrice?.to !== -1 ? valuePrice.to : undefined,
+                province_id: valueCountry?.id && valueCountry?.id !== "-1" ? valueCountry?.id : undefined,
+                user_id: null,
+            }))
+        }
+
         // (page, size, area_from, area_to, category_id, district_id, price_from, price_to, province_id)
 
     }
@@ -231,28 +275,26 @@ function FilterListings(props) {
                     <div className="filter-listings">
                         <form className="filter-listings-form">
                             <div className="form-group acr-custom-select">
-                                <SelectCustom title="Thể loại" onHandleChange={changeValueCategory} options={listCategory} />
+                                <SelectCustom title="Thể loại" value={valueCategory} onHandleChange={changeValueCategory} options={listCategory} />
                             </div>
                             <div className="form-group acr-custom-select">
-                                <SelectCustom title="Thành phố" onHandleChange={changeValueCountry} options={listCountry} />
+                                <SelectCustom title="Thành phố" value={valueCountry} onHandleChange={changeValueCountry} options={listCountry} />
                             </div>
                             <div className="form-group acr-custom-select">
-                                <SelectCustom title="Quận huyện" onHandleChange={changeValueProvince} options={listProvince} />
+                                <SelectCustom title="Quận huyện" value={valueProvince} onHandleChange={changeValueProvince} options={listProvince} />
                             </div>
 
                             <div className="form-group acr-custom-select">
-                                <SelectCustom title="Mức giá" onHandleChange={changeValuePrice} options={price} />
+                                <SelectCustom title="Mức giá" value={valuePrice} onHandleChange={changeValuePrice} options={price} />
                             </div>
                             <div className="form-group acr-custom-select">
-                                <SelectCustom title="Diện tích" onHandleChange={changeValueArea} options={acreage} />
+                                <SelectCustom title="Diện tích" value={valueArea} onHandleChange={changeValueArea} options={acreage} />
                             </div>
-
-
                         </form>
                     </div>
 
                 </Panel>
-                <div onClick={() => searchFilter()}>
+                <div onClick={() => searchFilter(valueCategory, valueCountry, valueProvince, valuePrice, valueArea)}>
                     <ButtonSubmit value="Áp dụng" className="btn-submit" />
                 </div>
 

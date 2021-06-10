@@ -36,7 +36,7 @@ function Listings(props) {
                 <div className="container">
                     <Row>
                         <Col span={9} className="sidebar-left">
-                            <FilterListings />
+                            <FilterListings typeListing={props.title} />
                             <RecentListings />
                             <MortgageCalculator />
                         </Col>

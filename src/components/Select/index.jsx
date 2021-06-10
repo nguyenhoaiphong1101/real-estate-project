@@ -28,9 +28,12 @@ const DisplayItem = ({ value, lastchild }) => {
     );
 };
 
-function SelectCustom({ title, options, onHandleChange }) {
+function SelectCustom({ title, options, onHandleChange, value }) {
     const [currentValue, setCurrentValue] = useState();
     const [valueSearch, setValueSearch] = useState('');
+
+    const [isReset, setIsReset] = useState(false)
+
     const [items, setItems] = useState([]);
     const inputRef = useRef(null);
     const dispatch = useDispatch()
@@ -41,6 +44,7 @@ function SelectCustom({ title, options, onHandleChange }) {
     // const price_from = useSelector(state => state.listsearch.price.price_from)
     // const price_to = useSelector(state => state.listsearch.price.price_to)
     // const province_id = useSelector(state => state.listsearch.province_id)
+
 
     const handleChange = (value, id) => {
         setCurrentValue(value);
@@ -56,6 +60,16 @@ function SelectCustom({ title, options, onHandleChange }) {
     const onTodoChange = (value) => {
         setValueSearch(value);
     };
+
+    useEffect(() => {
+
+        if (!value)
+            setCurrentValue(null)
+        else {
+            setCurrentValue(value.name)
+        }
+    }, [value])
+
 
     useEffect(() => {
         if (valueSearch === '') {
@@ -80,6 +94,10 @@ function SelectCustom({ title, options, onHandleChange }) {
                         onChange={e => onTodoChange(e.target.value)}
                         onClick={preventEvent}
                     />
+                </Option>
+                <Option value="Tất cả" key="-1">
+                    Tất cả
+                        {/* <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} /> */}
                 </Option>
                 {items.map((item, index) => {
                     return (<Option value={item.name} key={item.id}>

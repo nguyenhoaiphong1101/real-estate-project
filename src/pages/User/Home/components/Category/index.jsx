@@ -3,6 +3,8 @@ import './styles.scss'
 import { Row, Col } from 'antd'
 import { useDispatch, useSelector } from 'react-redux';
 import { loadListCategory } from '../../../../../actions/category';
+import { useHistory } from 'react-router';
+import { loadListFilter } from '../../../../../actions/listfilter';
 
 
 const items = [
@@ -49,10 +51,14 @@ function Category(props) {
 
     const listCategory = useSelector(state => state.category.listCategory)
     const dispatch = useDispatch();
+    const history = useHistory();
 
-    useEffect(() => {
-        dispatch(loadListCategory());
-    }, [])
+    const valueSearch = (value) => {
+        dispatch(loadListFilter(value, null, null, null, null));
+        history.push('/nha-dat-ban', { from: '/' });
+    }
+
+
     return (
         <div className="category-section">
             <div className="container">
@@ -63,9 +69,9 @@ function Category(props) {
                 <Row gutter={[16, 16]}>
                     {listCategory.map(item => {
                         return (
-                            <Col key={item.id} span={8} className="category">
-                                <div className="category-item">
-                                    <a href=""><img src="http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg" alt="#" /></a>
+                            <Col key={item.id} span={8} className="category" onClick={() => valueSearch(item)}>
+                                <div className="category-item" >
+                                    <a><img src="http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg" alt="#" /></a>
                                     <div className="category-item-body">
                                         <h5><a>{item.name}</a></h5>
                                         <span>250</span>

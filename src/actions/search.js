@@ -6,7 +6,7 @@ export const loadProvince = (id) => {
         province.GET(id).then(res => {
             dispatch({
                 type: 'LOAD_PROVINCE',
-                payload: res
+                payload: id ? res : []
             })
         })
     }

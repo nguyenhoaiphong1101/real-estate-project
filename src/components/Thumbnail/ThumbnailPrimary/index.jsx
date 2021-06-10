@@ -3,12 +3,31 @@ import React from 'react';
 import Button from '../../Button';
 import moment from 'moment';
 import './styles.scss';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { loadDetailHome } from '../../../actions/detailhome';
+import jwtDecode from 'jwt-decode';
 
 function ThumbnailPrimary(props) {
 
     const toTimeString = (seconds) => {
         if (seconds)
             return moment(seconds).format('DD-MM-YYYY');
+    }
+
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const token = localStorage.getItem('access_token');
+
+    const toDetailHome = () => {
+        if (token) {
+            dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))
+        }
+        else {
+            dispatch(loadDetailHome(props?.listLatestNew?.id, null))
+        }
+        history.push('/chi-tiet')
     }
 
     const content = (
@@ -79,7 +98,7 @@ function ThumbnailPrimary(props) {
                     </div>
                 </div>
                 <div class="listing-gallery-wrapper">
-                    <Button value="Xem chi tiết" className="view-detail"></Button>
+                    <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
                 </div>
             </div>
         </div>
