@@ -24,6 +24,10 @@ function FormEdit() {
     const [valueProvince, setValueProvince] = useState({ id: null, name: '' });
     const [valueDistrict, setValueDistrict] = useState({ id: null, name: '' });
 
+    useEffect(() => {
+        if (valueProvince.id)
+            getDistrict(valueProvince.id);
+    }, [valueProvince]);
 
 
     const user = useSelector(state => state.user.user)
@@ -36,6 +40,12 @@ function FormEdit() {
 
     const changeValueProvince = (value, id) => {
         setValueProvince({ id: id.key, name: value });
+        form.setFieldsValue({
+            district: {
+                id: null,
+                name: ''
+            }
+        })
     }
     const changeValueCountry = (value, id) => {
         setValueCountry({ id: id.key, name: value });
@@ -44,22 +54,18 @@ function FormEdit() {
         setValueDistrict({ id: id.key, name: value });
     }
 
-    useEffect(() => {
-        if (valueProvince.id)
-            getDistrict(valueProvince.id);
-    }, [valueProvince]);
 
     // function handleChangeName(e) {
     //     setValueForm({ ...valueForm, full_name: e.target.value });
     // }
-    useEffect(() => {
-        setValueCountry(listCountry[0]);
-    }, [listCountry]);
 
     useEffect(() => {
         form.setFieldsValue({
             full_name: user?.full_name,
-            country: listCountry[0],
+            country: {
+                id: user?.addressDto?.country_code,
+                name: user?.addressDto?.country_name,
+            },
             district: {
                 id: user?.addressDto?.district_id,
                 name: user?.addressDto?.district_name,
@@ -75,16 +81,21 @@ function FormEdit() {
             description: user?.description,
         })
 
-        setValueDistrict({
-            id: user?.addressDto?.district_id,
-            name: user?.addressDto?.district_name,
-        });
+        setValueCountry({
+            id: user?.addressDto?.country_code,
+            name: user?.addressDto?.country_name,
+        })
         setValueProvince(
             {
                 id: user?.addressDto?.province_id,
                 name: user?.addressDto?.province_name,
             }
         );
+        setValueDistrict({
+            id: user?.addressDto?.district_id,
+            name: user?.addressDto?.district_name,
+        });
+
     }, []);
     const token = localStorage.getItem('access_token');
     const onFinish = (values) => {
@@ -113,53 +124,54 @@ function FormEdit() {
             <Form form={form} className="form" onFinish={onFinish}>
                 <Row>
                     <Col span={12}>
-                        <label>Tên đầy đủ</label>
+                        <label className="pl-auto">Tên đầy đủ</label>
                         <Form.Item className="form-item" name="full_name" >
                             <Input />
                         </Form.Item>
                     </Col>
                     <Col span={12}>
-                        <label>Username</label>
+                        <label className="pl-auto">Username</label>
                         <Form.Item className="form-item" name="username" >
                             <Input disabled />
                         </Form.Item>
                     </Col>
                     <Col span={12}>
-                        <label>Email</label>
+                        <label className="pl-auto">Email</label>
                         <Form.Item className="form-item" name="email" >
                             <Input />
                         </Form.Item>
                     </Col>
                     <Col span={12}>
-                        <label>Số điện thoại</label>
+                        <label className="pl-auto">Số điện thoại</label>
                         <Form.Item className="form-item" name="phone" >
                             <Input />
                         </Form.Item>
                     </Col>
-
-                    <Col span={8}>
-                        <Form.Item className="form-item" name="province" >
-                            <SelectCustom title="Thành phố" onHandleChange={changeValueProvince} options={listProvince} />
-                        </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                        <Form.Item className="form-item" name="district" >
-                            <SelectCustom title="Quận/huyện" onHandleChange={changeValueDistrict} options={listDistrict} />
-                        </Form.Item>
-                    </Col>
-                    <Col span={8}>
-                        <Form.Item className="form-item" name="country" >
-                            <SelectCustom title="Quốc gia" disabled="true" onHandleChange={changeValueCountry} options={listCountry} />
-                        </Form.Item>
-                    </Col>
-                    <Col span={24}>
-                        <label>Địa chỉ</label>
+                    <Col span={12}>
+                        <label className="pl-auto">Địa chỉ</label>
                         <Form.Item className="form-item" name="address" >
                             <Input />
                         </Form.Item>
                     </Col>
+                    <Col span={12}>
+                        <Form.Item className="form-item pt-auto" name="district" >
+                            <SelectCustom title="Quận/huyện" value={valueDistrict} onHandleChange={changeValueDistrict} options={listDistrict} />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item className="form-item" name="province" >
+                            <SelectCustom title="Thành phố" onHandleChange={changeValueProvince} options={listProvince} />
+                        </Form.Item>
+                    </Col>
+
+                    <Col span={12}>
+                        <Form.Item className="form-item" name="country" >
+                            <SelectCustom title="Quốc gia" disabled="true" onHandleChange={changeValueCountry} options={listCountry} />
+                        </Form.Item>
+                    </Col>
+
                     <Col span={24}>
-                        <label>Thông tin thêm</label>
+                        <label className="pl-auto">Thông tin thêm</label>
                         <Form.Item className="form-item" name="description" >
                             <TextArea />
                         </Form.Item>

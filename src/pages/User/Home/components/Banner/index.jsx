@@ -5,7 +5,7 @@ import ButtonCustom from '../../../../../components/Button';
 import SelectCustom from '../../../../../components/Select/index';
 import './styles.scss';
 import { Tabs } from 'antd';
-import {  loadDistrict, loadProvince } from '../../../../../actions/search';
+import { loadDistrict, loadProvince } from '../../../../../actions/search';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
@@ -137,8 +137,12 @@ function Banner() {
     const [valueArea, setValueArea] = useState({ id: null, name: '' });
 
     useEffect(() => {
+        console.log('aaaa');
         if (valueProvince.id)
             getDistrict(valueProvince.id);
+
+        setValueDistrict({})
+
     }, [valueProvince]);
 
     const changeValueCategory = (value, id) => {
@@ -216,8 +220,6 @@ function Banner() {
                                         <ButtonCustom value="Tìm kiếm" className="btn-search" />
                                     </Col>
                                 </Row>
-
-
                             </div>
                             <form>
                                 <Row>
@@ -227,10 +229,9 @@ function Banner() {
                                             <SelectCustom title="Thành phố" onHandleChange={changeValueProvince} options={listProvince} />
                                         </div>
                                     </Col>
-
                                     <Col span={12} className="item-form">
                                         <div className="acr-custom-select form-group">
-                                            <SelectCustom title="Quận huyện" onHandleChange={changeValueDistrict} options={listDistrict} />
+                                            <SelectCustom title="Quận huyện" value={valueDistrict} onHandleChange={changeValueDistrict} options={listDistrict} />
                                         </div>
                                     </Col>
                                 </Row>

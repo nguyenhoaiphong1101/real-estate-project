@@ -208,6 +208,7 @@ function FilterListings(props) {
     useEffect(() => {
         if (valueProvince?.id)
             getDistrict(valueProvince?.id);
+        setValueDistrict({});
     }, [valueProvince]);
 
     const changeValueCategory = (value, id) => {
@@ -236,31 +237,17 @@ function FilterListings(props) {
     const searchFilter = async (valueCategory, valueProvince, valueDistrict, valuePrice, valueArea) => {
 
 
-        if (token) {
-            await dispatch(loadListSearch({
-                type_apartment: props.typeListing === "Nhà đất bán" ? "BUY" : "RENT",
-                area_from: valueArea?.from && valueArea?.id !== "-1" ? valueArea?.from : undefined,
-                area_to: valueArea?.to && valueArea?.id !== "-1" && valueArea?.to !== -1 ? valueArea.to : undefined,
-                category_id: valueCategory?.id && valueCategory?.id !== "-1" ? valueCategory?.id : undefined,
-                district_id: valueDistrict?.id && valueDistrict?.id !== "-1" ? valueDistrict?.id : undefined,
-                price_from: valuePrice?.from && valuePrice?.id !== "-1" ? valuePrice?.from : undefined,
-                price_to: valuePrice?.to && valuePrice?.id !== "-1" && valuePrice?.to !== -1 ? valuePrice.to : undefined,
-                province_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
-                user_id: jwtDecode(token).id,
-            }))
-        } else {
-            await dispatch(loadListSearch({
-                type_apartment: props.typeListing === "Nhà đất bán" ? "BUY" : "RENT",
-                area_from: valueArea?.from && valueArea?.id !== "-1" ? valueArea?.from : undefined,
-                area_to: valueArea?.to && valueArea?.id !== "-1" && valueArea?.to !== -1 ? valueArea.to : undefined,
-                category_id: valueCategory?.id && valueCategory?.id !== "-1" ? valueCategory?.id : undefined,
-                district_id: valueDistrict?.id && valueDistrict?.id !== "-1" ? valueDistrict?.id : undefined,
-                price_from: valuePrice?.from && valuePrice?.id !== "-1" ? valuePrice?.from : undefined,
-                price_to: valuePrice?.to && valuePrice?.id !== "-1" && valuePrice?.to !== -1 ? valuePrice.to : undefined,
-                province_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
-                user_id: null,
-            }))
-        }
+        await dispatch(loadListSearch({
+            type_apartment: props.typeListing === "Nhà đất bán" ? "BUY" : "RENT",
+            area_from: valueArea?.from && valueArea?.id !== "-1" ? valueArea?.from : undefined,
+            area_to: valueArea?.to && valueArea?.id !== "-1" && valueArea?.to !== -1 ? valueArea.to : undefined,
+            category_id: valueCategory?.id && valueCategory?.id !== "-1" ? valueCategory?.id : undefined,
+            district_id: valueDistrict?.id && valueDistrict?.id !== "-1" ? valueDistrict?.id : undefined,
+            price_from: valuePrice?.from && valuePrice?.id !== "-1" ? valuePrice?.from : undefined,
+            price_to: valuePrice?.to && valuePrice?.id !== "-1" && valuePrice?.to !== -1 ? valuePrice.to : undefined,
+            province_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
+            user_id: token ? jwtDecode(token).id : null,
+        }))
 
         // (page, size, area_from, area_to, category_id, district_id, price_from, price_to, province_id)
 

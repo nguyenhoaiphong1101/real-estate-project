@@ -7,7 +7,7 @@ import { API_URL } from "../constants/Config";
 export const listSearch = {
 
     GET: (params) => {
-        return AXIOS_INSTANCE({
+        return axios({
             method: 'get',
             data: null,
             params: params,

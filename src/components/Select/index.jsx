@@ -78,6 +78,15 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
     useEffect(() => {
         setItems(options.filter(item => item.name?.toLowerCase().includes(valueSearch.toLowerCase())));
     }, [valueSearch])
+
+
+    const checkTypeSelect = () => {
+        if (title == "Mức giá" || title == "Diện tích" || title == "Thể loại") {
+            return <Option value="Tất cả" key="-1">
+                Tất cả
+            </Option>
+        }
+    };
     return (
         <div>
             <Select
@@ -95,10 +104,11 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
                         onClick={preventEvent}
                     />
                 </Option>
-                <Option value="Tất cả" key="-1">
+
+                {/* <Option value="Tất cả" key="-1">
                     Tất cả
-                    {/* <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} /> */}
-                </Option>
+                </Option> */}
+                {checkTypeSelect()}
                 {items.map((item, index) => {
                     return (<Option value={item.name} key={item.id}>
                         {item.name}
