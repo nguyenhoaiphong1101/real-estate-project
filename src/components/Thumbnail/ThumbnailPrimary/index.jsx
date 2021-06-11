@@ -41,7 +41,7 @@ function ThumbnailPrimary(props) {
     );
     return (
         <div className={`listing-primary ${props.className}`}>
-            <div className="listing__thumbnail">
+            <div className="listing__thumbnail" onClick={() => toDetailHome()}>
                 <a>
                     <img src="http://androthemes.com/themes/react/acres/assets/img/listings/1.jpg" alt="listing" />
                 </a>
@@ -58,9 +58,11 @@ function ThumbnailPrimary(props) {
             </div>
             <div className="listing__body">
                 <div className="author">
-                    <a>
-                        <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
-                    </a>
+                    <div onClick={() => toDetailHome()}>
+                        <a >
+                            <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
+                        </a>
+                    </div>
                     <div className="media-body">
                         <h6>
                             {props.listLatestNew?.created_by?.username}
@@ -76,7 +78,7 @@ function ThumbnailPrimary(props) {
                         </Popover>
                     </div>
                 </div>
-                <h5 class="listing-title">
+                <h5 class="listing-title" onClick={() => toDetailHome()}>
                     <a title="Iris Watson, Frederick Nebraska 20620">
                         {props.listLatestNew?.address}
                     </a>

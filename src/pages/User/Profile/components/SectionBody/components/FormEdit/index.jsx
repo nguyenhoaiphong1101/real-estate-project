@@ -99,24 +99,21 @@ function FormEdit() {
     }, []);
     const token = localStorage.getItem('access_token');
     const onFinish = (values) => {
-        if (token) {
-            updateUser.PUT(token,
-                {
-                    address: {
-                        address: values.address,
-                        country_code: valueCountry.id,
-                        district_id: valueDistrict.id,
-                        province_id: valueProvince.id,
-                    },
-                    description: values.description,
-                    email: values.email,
-                    full_name: values.full_name,
-                    phone: values.phone,
-                }
-            )
-            dispatch(getInfoUser(token));
-        }
-
+        updateUser.PUT(
+            {
+                address: {
+                    address: values.address,
+                    country_code: valueCountry.id,
+                    district_id: valueDistrict.id,
+                    province_id: valueProvince.id,
+                },
+                description: values.description,
+                email: values.email,
+                full_name: values.full_name,
+                phone: values.phone,
+            }
+        )
+        dispatch(getInfoUser(token));
     };
 
     return (

@@ -1,5 +1,10 @@
 const initialState = {
-    user: {}
+    user: {},
+    postUser: {
+        post: [],
+        total_page: null,
+        totalItem: null,
+    },
 }
 
 
@@ -9,6 +14,16 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload,
+            };
+        }
+        case 'GET_POSTUSER': {
+            return {
+                ...state,
+                postUser:{
+                    post: action.payload,
+                    total_page: action.total_page,
+                    totalItem: action.totalItem
+                }
             };
         }
         default:

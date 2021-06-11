@@ -1,12 +1,24 @@
-import { infoUser } from "../api/userApi"
+import { getPost, infoUser } from "../api/userApi"
 
 
-export const getInfoUser = (token) => {
+export const getInfoUser = () => {
     return (dispatch) => {
-        infoUser.GET(token).then(res => {
+        infoUser.GET().then(res => {
             dispatch({
                 type: 'GET_INFOUSER',
                 payload: res
+            })
+        })
+    }
+}
+export const getPostUser = (params) => {
+    return (dispatch) => {
+        getPost.GET(params).then(res => {
+            dispatch({
+                type: 'GET_POSTUSER',
+                payload: res.contents,
+                total_page: res.total_page,
+                totalItem: res.totalItem
             })
         })
     }

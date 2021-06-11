@@ -24,9 +24,9 @@ function GridHome(props) {
             grid={{ gutter: 16, column: 2 }}
             pagination={{
                 onChange: page => {
-                    dispatch(loadListSearch(page, 2));
+                    dispatch(loadListSearch(page, 10));
                 },
-                pageSize: 2,
+                pageSize: 10,
                 total: totalItem,
             }}
             dataSource={listSearch}

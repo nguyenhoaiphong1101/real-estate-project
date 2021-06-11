@@ -14,7 +14,7 @@ function ThumbnailExtra(props) {
         if (seconds)
             return moment(seconds).format('DD-MM-YYYY');
     }
-    
+
 
     const dispatch = useDispatch()
     const history = useHistory()
@@ -42,7 +42,7 @@ function ThumbnailExtra(props) {
     );
     return (
         <div className="listing-extra">
-            <div className="listing__thumbnail">
+            <div className="listing__thumbnail" onClick={() => toDetailHome()}>
                 <a>
                     <img src="http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg" alt="listing" />
                 </a>
@@ -51,17 +51,20 @@ function ThumbnailExtra(props) {
                         Giảm giá
                     </span>
                 </div>
-                <div className="listing-controls">
+                <div className="listing-controls" >
                     <a className="favorite">
                         <i className="far fa-heart"></i>
                     </a>
                 </div>
             </div>
             <div className="listing__body">
-                <div className="author">
-                    <a>
+                <div className="author" >
+                {/* onClick={() => toDetailHome()} */}
+                    <div onClick={() => toDetailHome()}>
+                    <a >
                         <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
                     </a>
+                    </div>
                     <div className="media-body">
                         <h6>{props.listLatestNew?.created_by?.username}</h6>
                         <span>{toTimeString(props.listLatestNew?.created_at)}</span>
@@ -75,7 +78,7 @@ function ThumbnailExtra(props) {
                         </Popover>
                     </div>
                 </div>
-                <h5 className="listing-title">
+                <h5 onClick={() => toDetailHome()} className="listing-title">
                     <a title="Iris Watson, Frederick Nebraska 20620">
                         {props.listLatestNew?.address}
                     </a>

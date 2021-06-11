@@ -39,11 +39,9 @@ function Header(props) {
     const token = localStorage.getItem('access_token');
 
     useEffect(() => {
-        if (token) {
-            if (token) {
-                dispatch(getInfoUser(token));
-            }
-        }
+        // if (token) {
+        dispatch(getInfoUser(token));
+        // }
     }, [token]);
 
     const checkLogin = () => {
