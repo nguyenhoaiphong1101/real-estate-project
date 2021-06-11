@@ -1,7 +1,7 @@
 const initialState = {
     valueCategory: {},
-    valueCountry: {},
     valueProvince: {},
+    valueDistrict: {},
     valuePrice: {},
     valueArea: {},
     user_id: null,
@@ -14,7 +14,7 @@ const listFilterReducer = (state = initialState, action) => {
             return {
                 ...state,
                 valueCategory: action.payload.valueCategory,
-                valueCountry: action.payload.valueCountry,
+                valueDistrict: action.payload.valueDistrict,
                 valueProvince: action.payload.valueProvince,
                 valuePrice: action.payload.valuePrice,
                 valueArea: action.payload.valueArea,

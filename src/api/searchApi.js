@@ -2,7 +2,7 @@ import axios from "axios"
 import { API_URL } from "../constants/Config";
 
 
-export const searchCity = {
+export const province = {
 
     GET: () => {
         return axios({
@@ -14,7 +14,19 @@ export const searchCity = {
             )
     }
 }
-export const province = {
+export const country = {
+
+    GET: () => {
+        return axios({
+            method: 'get',
+            data: null,
+            url: API_URL + '/location/country',
+        })
+            .then(res => res.data.data
+            )
+    }
+}
+export const district = {
 
     GET: (params) => {
         return axios({

@@ -28,7 +28,7 @@ const DisplayItem = ({ value, lastchild }) => {
     );
 };
 
-function SelectCustom({ title, options, onHandleChange, value }) {
+function SelectCustom({ title, options, onHandleChange, value, disabled }) {
     const [currentValue, setCurrentValue] = useState();
     const [valueSearch, setValueSearch] = useState('');
 
@@ -62,7 +62,6 @@ function SelectCustom({ title, options, onHandleChange, value }) {
     };
 
     useEffect(() => {
-
         if (!value)
             setCurrentValue(null)
         else {
@@ -83,6 +82,7 @@ function SelectCustom({ title, options, onHandleChange, value }) {
         <div>
             <Select
                 className="selection-container"
+                disabled={disabled}
                 onChange={handleChange}
                 defaultValue={<DisplayContainer />}
                 value={<DisplayContainer value={currentValue} title={title} />}
@@ -97,7 +97,7 @@ function SelectCustom({ title, options, onHandleChange, value }) {
                 </Option>
                 <Option value="Tất cả" key="-1">
                     Tất cả
-                        {/* <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} /> */}
+                    {/* <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} /> */}
                 </Option>
                 {items.map((item, index) => {
                     return (<Option value={item.name} key={item.id}>

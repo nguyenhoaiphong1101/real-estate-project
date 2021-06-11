@@ -3,7 +3,7 @@ import "./styles.scss"
 import SelectCustom from '../../../../../components/Select/index';
 import ButtonSubmit from '../../../../../components/Button';
 import { Collapse } from 'antd';
-import { loadCountry, loadProvince } from '../../../../../actions/search';
+import { loadCountry, loadDistrict, loadProvince } from '../../../../../actions/search';
 import { connectAdvanced, useDispatch, useSelector } from 'react-redux';
 import { loadListCategory } from '../../../../../actions/category';
 import { listSearch } from '../../../../../api/listsearchApi';
@@ -153,35 +153,35 @@ const acreage = [
 
 function FilterListings(props) {
 
-    const listCountry = useSelector(state => state.search.country);
+    const listDistrict = useSelector(state => state.search.district);
     const listProvince = useSelector(state => state.search.province);
     const listCategory = useSelector(state => state.category.listCategory);
 
     const filter = useSelector(state => state.listfilter)
 
     const [valueCategory, setValueCategory] = useState({ id: null, name: '' });
-    const [valueCountry, setValueCountry] = useState({ id: null, name: '' });
+    const [valueDistrict, setValueDistrict] = useState({ id: null, name: '' });
     const [valueProvince, setValueProvince] = useState({ id: null, name: '' });
     const [valuePrice, setValuePrice] = useState({ id: null, name: '' });
     const [valueArea, setValueArea] = useState({ id: null, name: '' });
 
     const dispatch = useDispatch();
 
-    const getProvice = (id) => {
-        dispatch(loadProvince(id));
+    const getDistrict = (id) => {
+        dispatch(loadDistrict(id));
     }
 
     const location = useLocation();
 
     useEffect(() => {
-        dispatch(loadCountry());
+        dispatch(loadProvince());
         dispatch(loadListCategory());
         // dispatch(loadListSearch({
         //     type_apartment: typeListing,
         // }))
 
         setValueCategory(filter.valueCategory);
-        setValueCountry(filter.valueCountry);
+        setValueDistrict(filter.valueDistrict);
         setValueProvince(filter.valueProvince);
         setValuePrice(filter.valuePrice);
         setValueArea(filter.valueArea);
@@ -193,30 +193,28 @@ function FilterListings(props) {
                 type_apartment: props.typeListing === "Nhà đất bán" ? "BUY" : "RENT",
             }))
             setValueCategory(null);
-            setValueCountry(null);
+            setValueDistrict(null);
             setValueProvince(null);
             setValuePrice(null);
             setValueArea(null);
             dispatch(loadProvince(0))
         }
         else {
-            searchFilter(filter.valueCategory, filter.valueCountry, filter.valueProvince, filter.valuePrice, filter.valueArea)
-            console.log(valueCountry)
-            console.log(filter.valueCountry);
+            searchFilter(filter.valueCategory, filter.valueProvince, filter.valueDistrict, filter.valuePrice, filter.valueArea)
         }
 
     }, [props.typeListing])
 
     useEffect(() => {
-        if (valueCountry?.id)
-            getProvice(valueCountry?.id);
-    }, [valueCountry]);
+        if (valueProvince?.id)
+            getDistrict(valueProvince?.id);
+    }, [valueProvince]);
 
     const changeValueCategory = (value, id) => {
         setValueCategory({ id: id.key, name: value });
     }
-    const changeValueCountry = (value, id) => {
-        setValueCountry({ id: id.key, name: value });
+    const changeValueDistrict = (value, id) => {
+        setValueDistrict({ id: id.key, name: value });
 
     }
     const changeValuePrice = (value, id) => {
@@ -235,7 +233,7 @@ function FilterListings(props) {
     }
     const token = localStorage.getItem('access_token');
 
-    const searchFilter = async (valueCategory, valueCountry, valueProvince, valuePrice, valueArea) => {
+    const searchFilter = async (valueCategory, valueProvince, valueDistrict, valuePrice, valueArea) => {
 
 
         if (token) {
@@ -244,10 +242,10 @@ function FilterListings(props) {
                 area_from: valueArea?.from && valueArea?.id !== "-1" ? valueArea?.from : undefined,
                 area_to: valueArea?.to && valueArea?.id !== "-1" && valueArea?.to !== -1 ? valueArea.to : undefined,
                 category_id: valueCategory?.id && valueCategory?.id !== "-1" ? valueCategory?.id : undefined,
-                district_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
+                district_id: valueDistrict?.id && valueDistrict?.id !== "-1" ? valueDistrict?.id : undefined,
                 price_from: valuePrice?.from && valuePrice?.id !== "-1" ? valuePrice?.from : undefined,
                 price_to: valuePrice?.to && valuePrice?.id !== "-1" && valuePrice?.to !== -1 ? valuePrice.to : undefined,
-                province_id: valueCountry?.id && valueCountry?.id !== "-1" ? valueCountry?.id : undefined,
+                province_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
                 user_id: jwtDecode(token).id,
             }))
         } else {
@@ -256,10 +254,10 @@ function FilterListings(props) {
                 area_from: valueArea?.from && valueArea?.id !== "-1" ? valueArea?.from : undefined,
                 area_to: valueArea?.to && valueArea?.id !== "-1" && valueArea?.to !== -1 ? valueArea.to : undefined,
                 category_id: valueCategory?.id && valueCategory?.id !== "-1" ? valueCategory?.id : undefined,
-                district_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
+                district_id: valueDistrict?.id && valueDistrict?.id !== "-1" ? valueDistrict?.id : undefined,
                 price_from: valuePrice?.from && valuePrice?.id !== "-1" ? valuePrice?.from : undefined,
                 price_to: valuePrice?.to && valuePrice?.id !== "-1" && valuePrice?.to !== -1 ? valuePrice.to : undefined,
-                province_id: valueCountry?.id && valueCountry?.id !== "-1" ? valueCountry?.id : undefined,
+                province_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
                 user_id: null,
             }))
         }
@@ -278,10 +276,10 @@ function FilterListings(props) {
                                 <SelectCustom title="Thể loại" value={valueCategory} onHandleChange={changeValueCategory} options={listCategory} />
                             </div>
                             <div className="form-group acr-custom-select">
-                                <SelectCustom title="Thành phố" value={valueCountry} onHandleChange={changeValueCountry} options={listCountry} />
+                                <SelectCustom title="Thành phố" value={valueProvince} onHandleChange={changeValueProvince} options={listProvince} />
                             </div>
                             <div className="form-group acr-custom-select">
-                                <SelectCustom title="Quận huyện" value={valueProvince} onHandleChange={changeValueProvince} options={listProvince} />
+                                <SelectCustom title="Quận huyện" value={valueDistrict} onHandleChange={changeValueDistrict} options={listDistrict} />
                             </div>
 
                             <div className="form-group acr-custom-select">
@@ -294,7 +292,7 @@ function FilterListings(props) {
                     </div>
 
                 </Panel>
-                <div onClick={() => searchFilter(valueCategory, valueCountry, valueProvince, valuePrice, valueArea)}>
+                <div onClick={() => searchFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea)}>
                     <ButtonSubmit value="Áp dụng" className="btn-submit" />
                 </div>
 

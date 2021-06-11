@@ -5,7 +5,7 @@ import ButtonCustom from '../../../../../components/Button';
 import SelectCustom from '../../../../../components/Select/index';
 import './styles.scss';
 import { Tabs } from 'antd';
-import { loadCountry, loadProvince } from '../../../../../actions/search';
+import {  loadDistrict, loadProvince } from '../../../../../actions/search';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
@@ -125,27 +125,27 @@ function Banner() {
         setActive(!active);
     }
 
-    const getProvice = (id) => {
-        dispatch(loadProvince(id));
+    const getDistrict = (id) => {
+        dispatch(loadDistrict(id));
     }
 
 
     const [valueCategory, setValueCategory] = useState({ id: null, name: '' });
-    const [valueCountry, setValueCountry] = useState({ id: null, name: '' });
+    const [valueDistrict, setValueDistrict] = useState({ id: null, name: '' });
     const [valueProvince, setValueProvince] = useState({ id: null, name: '' });
     const [valuePrice, setValuePrice] = useState({ id: null, name: '' });
     const [valueArea, setValueArea] = useState({ id: null, name: '' });
 
     useEffect(() => {
-        if (valueCountry.id)
-            getProvice(valueCountry.id);
-    }, [valueCountry]);
+        if (valueProvince.id)
+            getDistrict(valueProvince.id);
+    }, [valueProvince]);
 
     const changeValueCategory = (value, id) => {
         setValueCategory({ id: id.key, name: value });
     }
-    const changeValueCountry = (value, id) => {
-        setValueCountry({ id: id.key, name: value });
+    const changeValueDistrict = (value, id) => {
+        setValueDistrict({ id: id.key, name: value });
 
     }
     const changeValuePrice = (value, id) => {
@@ -162,7 +162,7 @@ function Banner() {
         setValueArea({ from: data[0]?.from, to: data[0]?.to });
     }
 
-    const listCountry = useSelector(state => state.search.country);
+    const listDistrict = useSelector(state => state.search.district);
     const listProvince = useSelector(state => state.search.province);
     const [typeAparment, setTypeAparment] = useState('1');
 
@@ -171,13 +171,13 @@ function Banner() {
     }
 
     useEffect(() => {
-        dispatch(loadCountry());
+        dispatch(loadProvince());
         dispatch(loadListCategory())
     }, [])
 
     const valueSearch = () => {
 
-        dispatch(loadListFilter(valueCategory, valueCountry, valueProvince, valuePrice, valueArea));
+        dispatch(loadListFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea));
         if (typeAparment == "1") {
             history.push('/nha-dat-ban', { from: '/' });
         }
@@ -224,13 +224,13 @@ function Banner() {
 
                                     <Col span={12} className="item-form">
                                         <div className="form-group acr-custom-select">
-                                            <SelectCustom title="Thành phố" onHandleChange={changeValueCountry} options={listCountry} />
+                                            <SelectCustom title="Thành phố" onHandleChange={changeValueProvince} options={listProvince} />
                                         </div>
                                     </Col>
 
                                     <Col span={12} className="item-form">
                                         <div className="acr-custom-select form-group">
-                                            <SelectCustom title="Quận huyện" onHandleChange={changeValueProvince} options={listProvince} />
+                                            <SelectCustom title="Quận huyện" onHandleChange={changeValueDistrict} options={listDistrict} />
                                         </div>
                                     </Col>
                                 </Row>

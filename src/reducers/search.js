@@ -2,6 +2,7 @@
 const initialState = {
     country: [],
     province: [],
+    district: [],
 }
 
 
@@ -17,6 +18,12 @@ const SearchReducer = (state = initialState, action) => {
             return {
                 ...state,
                 country: action.payload,
+            };
+        }
+        case 'LOAD_DISTRICT': {
+            return {
+                ...state,
+                district: action.payload,
             };
         }
         default:

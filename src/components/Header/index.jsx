@@ -5,6 +5,8 @@ import './styles.scss';
 
 import useDocumentScroll from './../../hooks/useDocumentScroll'
 import jwtDecode from 'jwt-decode';
+import { useDispatch } from 'react-redux';
+import { getInfoUser } from '../../actions/user';
 
 
 function Header(props) {
@@ -30,9 +32,19 @@ function Header(props) {
         history.push('/')
     }
 
+    const dispatch = useDispatch();
+
 
 
     const token = localStorage.getItem('access_token');
+
+    useEffect(() => {
+        if (token) {
+            if (token) {
+                dispatch(getInfoUser(token));
+            }
+        }
+    }, [token]);
 
     const checkLogin = () => {
         if (token == null) {

@@ -5,12 +5,16 @@ import { Form } from 'antd';
 import { Input } from 'antd';
 import { loginApi } from "../../../../../api/loginApi"
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getInfoUser } from '../../../../../actions/user';
 
 const IconFont = createFromIconfontCN({
     scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
 });
 
 function FormLogin() {
+
+    const dispatch = useDispatch()
     const [form] = Form.useForm();
     const history = useHistory();
 
@@ -24,6 +28,7 @@ function FormLogin() {
 
     const onFinish = (values) => {
         loginApi.POST(values, loginSuccess);
+        
         //const listCity = searchApi.GET()
     };
 
