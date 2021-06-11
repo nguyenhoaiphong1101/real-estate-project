@@ -4,6 +4,7 @@ import ReactLoading from 'react-loading';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import { doAxiosRequestIntercept } from "./config/interceptor";
 import AdminWrapper from './pages/Admin/Manage';
 import UserWrapper from './pages/User';
 import DetailHome from "./pages/User/DetailHome";
@@ -44,7 +45,7 @@ function App() {
     useEffect(() => {
         setToken(localToken);
     }, [localToken])
-
+    doAxiosRequestIntercept();
     return (
         <BrowserRouter >
             {

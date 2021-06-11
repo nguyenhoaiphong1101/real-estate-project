@@ -1,12 +1,13 @@
 import axios from "axios"
 import { identity } from "lodash";
+import { AXIOS_INSTANCE } from "../config/interceptor";
 import { API_URL } from "../constants/Config";
 
 
 export const listSearch = {
 
     GET: (params) => {
-        return axios({
+        return AXIOS_INSTANCE({
             method: 'get',
             data: null,
             params: params,
