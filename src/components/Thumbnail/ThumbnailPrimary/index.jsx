@@ -51,7 +51,7 @@ function ThumbnailPrimary(props) {
                     </span>
                 </div>
                 <div class="listing-controls">
-                    <a class="favorite">
+                    <a class={props?.listLatestNew?.favorite?"favorite":"un-favorite"}>
                         <i class="far fa-heart"></i>
                     </a>
                 </div>

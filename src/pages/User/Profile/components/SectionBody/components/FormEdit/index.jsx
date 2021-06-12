@@ -113,7 +113,7 @@ function FormEdit() {
                 phone: values.phone,
             }
         )
-        dispatch(getInfoUser(token));
+        dispatch(getInfoUser());
     };
 
     return (

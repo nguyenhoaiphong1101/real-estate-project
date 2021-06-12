@@ -52,3 +52,18 @@ export const getPost = {
             )
     }
 }
+export const getFavorite = {
+
+    GET: (params) => {
+        return AXIOS_INSTANCE({
+            method: 'get',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: null,
+            params: params,
+            url: API_URL + '/user/token/apartment/favourite',
+        }).then(res => res.data.data
+            )
+    }
+}

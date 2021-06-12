@@ -5,6 +5,11 @@ const initialState = {
         total_page: null,
         totalItem: null,
     },
+    postFavorite: {
+        post: [],
+        total_page: null,
+        totalItem: null,
+    },
 }
 
 
@@ -24,6 +29,24 @@ const userReducer = (state = initialState, action) => {
                     total_page: action.total_page,
                     totalItem: action.totalItem
                 }
+            };
+        }
+        case 'GET_FAVORITEUSER': {
+            return {
+                ...state,
+                postFavorite:{
+                    post: action.payload,
+                    total_page: action.total_page,
+                    totalItem: action.totalItem
+                }
+            };
+        }
+        case 'RESET_USER': {
+            return {
+                ...state,
+                user: action.payload.user,
+                postUser:action.payload.postUser,
+                postFavorite:action.payload.postFavorite,
             };
         }
         default:

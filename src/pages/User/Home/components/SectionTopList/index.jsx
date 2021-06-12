@@ -10,11 +10,15 @@ function SectionTopList() {
     const carousel = useRef(null);
 
     const listHighlight = useSelector(state => state.highlight.listHighlight)
+    const user = useSelector(state => state.user.user);
     const dispatch = useDispatch()
 
+
     useEffect(() => {
-        dispatch(loadListHighlight());
-    }, [])
+        dispatch(loadListHighlight({
+            user_id:user.id
+        }));
+    }, [user])
 
     const settings = {
         dots: false,

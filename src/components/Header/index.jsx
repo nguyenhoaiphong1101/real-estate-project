@@ -6,7 +6,7 @@ import './styles.scss';
 import useDocumentScroll from './../../hooks/useDocumentScroll'
 import jwtDecode from 'jwt-decode';
 import { useDispatch } from 'react-redux';
-import { getInfoUser } from '../../actions/user';
+import { getInfoUser, resetUser } from '../../actions/user';
 
 
 function Header(props) {
@@ -40,7 +40,7 @@ function Header(props) {
 
     useEffect(() => {
         // if (token) {
-        dispatch(getInfoUser(token));
+        dispatch(getInfoUser());
         // }
     }, [token]);
 
@@ -68,6 +68,7 @@ function Header(props) {
                             <Link className="mr-10" to='/trang-ca-nhan' > {`Hi ${jwtDecode(token).full_name ? jwtDecode(token).full_name : ''}`} </Link>
                             <Link to='/' onClick={() => {
                                 removeLocal()
+                                dispatch(resetUser());
                                 props.setLoading(true)
                             }}> Đăng xuất </Link>
                         </li>

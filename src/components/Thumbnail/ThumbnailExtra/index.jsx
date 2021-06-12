@@ -52,7 +52,7 @@ function ThumbnailExtra(props) {
                     </span>
                 </div>
                 <div className="listing-controls" >
-                    <a className="favorite">
+                    <a className={props?.listLatestNew?.favorite?"favorite":"un-favorite"}>
                         <i className="far fa-heart"></i>
                     </a>
                 </div>

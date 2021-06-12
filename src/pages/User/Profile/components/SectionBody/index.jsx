@@ -4,6 +4,7 @@ import { Tabs } from 'antd';
 import { Empty } from 'antd';
 import ListingPost from './components/ListingPost';
 import FormEdit from './components/FormEdit';
+import ListingFavorite from './components/ListingFavorite';
 
 const { TabPane } = Tabs;
 
@@ -31,7 +32,7 @@ function SectionBody() {
                         <h1 className="tab-item">Danh sách yêu thích</h1>
                     </div>
                 } key="3">
-                    <Empty className="empty" />
+                   <ListingFavorite />
                 </TabPane>
                 <TabPane tab={
                     <div className="tab-item-wrapper tab-item-wrapper__icon tab-item-wrapper--red">

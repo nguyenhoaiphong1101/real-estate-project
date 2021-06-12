@@ -11,11 +11,15 @@ function SectionRecentList() {
 
 
     const listLatestNew = useSelector(state => state.latestnew.listLastetNew);
+    const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
 
+
     useEffect(() => {
-        dispatch(loadListLatestNew());
-    }, [])
+        dispatch(loadListLatestNew({
+            user_id:user.id
+        }));
+    }, [user])
     return (
         <div className="section-recent-list">
             <div className="container">
