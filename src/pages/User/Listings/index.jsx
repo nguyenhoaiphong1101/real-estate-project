@@ -46,12 +46,12 @@ function Listings(props) {
                                     <TabPane className="tab-item" tab={
                                         <i className="fas fa-th-list"></i>
                                     } key="1">
-                                        <ListHome />
+                                        <ListHome typeListing={props.title}/>
                                     </TabPane>
                                     <TabPane tab={
                                         <i class="fas fa-th-large"></i>
                                     } key="2">
-                                        <GridHome />
+                                        <GridHome typeListing={props.title}/>
                                     </TabPane>
                                 </Tabs>
                             </div>

@@ -23,7 +23,9 @@ function ListingFavorite() {
             size="small"
             pagination={{
                 onChange: page => {
-                    dispatch(getPostUser(page, 10));
+                    dispatch(getFavoriteUser({
+                        page:page
+                         }));
                 },
                 pageSize: 10,
                 total: totalItem,

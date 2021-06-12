@@ -23,7 +23,9 @@ function ListingPost() {
             size="small"
             pagination={{
                 onChange: page => {
-                    dispatch(getPostUser(page, 10));
+                    dispatch(getPostUser({
+                        page:page,
+                    }));
                 },
                 pageSize: 10,
                 total: totalItem,

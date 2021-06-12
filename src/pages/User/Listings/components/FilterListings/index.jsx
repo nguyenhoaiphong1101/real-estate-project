@@ -247,10 +247,10 @@ function FilterListings(props) {
             price_to: valuePrice?.to && valuePrice?.id !== "-1" && valuePrice?.to !== -1 ? valuePrice.to : undefined,
             province_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
             user_id: token ? jwtDecode(token).id : null,
+            page:1,
         }))
-
+        dispatch(loadListFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea));
         // (page, size, area_from, area_to, category_id, district_id, price_from, price_to, province_id)
-
     }
 
     return (

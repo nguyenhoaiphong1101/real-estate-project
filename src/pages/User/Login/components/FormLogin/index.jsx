@@ -28,7 +28,7 @@ function FormLogin() {
 
     const onFinish = (values) => {
         loginApi.POST(values, loginSuccess);
-        
+
         //const listCity = searchApi.GET()
     };
 
@@ -37,7 +37,6 @@ function FormLogin() {
         <Form form={form} className="form-login" onFinish={onFinish}>
             <div className="form-login-text">
                 <h3>Đăng Nhập</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae est voluptatibus aliquid repellat impedit. Quidem quae blanditiis ex consequuntur officiis corporis odio repellat aspernatur temporibus, aut rerum. Nulla, porro cum.</p>
             </div>
             <div className="form-login-group">
                 <label>Tài khoản</label>
