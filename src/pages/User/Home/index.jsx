@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from './components/Banner';
 import Category from './components/Category';
+import ListRecomend from './components/ListRecommend';
 import NeedMore from './components/NeedMore';
 import SectionFunction from './components/SectionFunction';
 import SectionRecentList from './components/SectionRecentList';
@@ -12,6 +13,7 @@ function Home(props) {
         <div>
             <Banner />
             <Category />
+            <ListRecomend/>
             <SectionFunction />
             <NeedMore />
             <SectionRecentList />
