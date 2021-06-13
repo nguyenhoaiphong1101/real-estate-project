@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
-import { Menu, Button } from 'antd';
 import {
-    AppstoreOutlined,
-    MenuUnfoldOutlined,
-    MenuFoldOutlined,
-    PieChartOutlined,
-    DesktopOutlined,
-    ContainerOutlined,
-    MailOutlined,
+    ContainerOutlined, DesktopOutlined, PieChartOutlined
 } from '@ant-design/icons';
-import "./styles.scss"
+import { Menu } from 'antd';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
+import "./styles.scss";
 
 
 const { SubMenu } = Menu;
@@ -26,29 +21,50 @@ function AdminMenu(props) {
     };
 
     return (
-        <div style={collapsed ? { width: 90 } : { width: 256 }} className="admin-menu">
-
+        <div style={collapsed ? { width: 90 } : {}} className="admin-menu">
             <Menu
                 defaultSelectedKeys={['1']}
                 defaultOpenKeys={['sub1']}
                 mode="inline"
-                theme="dark"
+                theme="light"
                 inlineCollapsed={collapsed}
             >
-                <Menu.Item className="mt-0" key="1" icon={<PieChartOutlined />} onClick={() => history.push("/admin/bai-viet")}>
-                    Quản lý bài viết
-          </Menu.Item>
-                <Menu.Item key="2" icon={<DesktopOutlined />} onClick={() => history.push("/admin/tai-khoan")}>
-                    Quản lý tài khoản
-          </Menu.Item>
-                <Menu.Item key="3" icon={<ContainerOutlined />} onClick={() => history.push("/admin/comment")}>
-                    Quản lý comment
-          </Menu.Item>
+                <Menu.Item className="mt-0" key="1" icon={<PieChartOutlined />} >
+                    <Link to="/admin/tong-quan">
+                        Tổng Quan
+                    </Link>
+                </Menu.Item>
+                <Menu.Item className="mt-0" key="2" icon={<PieChartOutlined />} >
+                    <Link to="/admin/bai-viet">
+                        Quản lý bài viết
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="3" icon={<DesktopOutlined />}>
+                    <Link to="/admin/tai-khoan">
+                        Quản lý tài khoản
+                    </Link>
+                </Menu.Item>
+                <Menu.Item key="4" icon={<ContainerOutlined />}>
+                    <Link to="/admin/comment">
+                        Quản lý comment
+                    </Link>
+                </Menu.Item>
+                <div class="separator-custom"></div>
+                <SubMenu key="sub1" icon={<ContainerOutlined />} title="Cài Đặt">
+                    <Menu.Item key="5">
+                        <Link to="/admin">
+                            Quản Lý Thể Loại
+                        </Link>
+                    </Menu.Item>
+                </SubMenu>
             </Menu>
-            {/* <Button type="primary" onClick={toggleCollapsed} className="btn-custom" >
+            {/* 
+              <Button type="primary" onClick={toggleCollapsed} className="btn-custom" >
                 <span>Menu</span>
                 {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
-            </Button> */}
+            </Button>
+            */}
+
         </div>
     );
 }

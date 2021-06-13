@@ -15,6 +15,11 @@ function AdminRouting(props) {
     return (
         <div classname="admin-routing" style={{ width: '100%' }}>
             <Switch>
+                <Route path="/admin/tong-quan" exact>
+                    <div>
+                        Tổng Quan
+                    </div>
+                </Route>
                 <Route path="/admin/bai-viet" exact>
                     <div>
                         <ManageTopic />

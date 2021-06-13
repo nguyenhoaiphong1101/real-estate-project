@@ -1,11 +1,31 @@
+@import "./../../../variables/variable_admin.scss";
+
 .admin-manage {
+    a,
+    svg,
+    span {
+        font-weight: 400 !important;
+        color: $color-blue-black !important;
+    }
+
+    .col-sidebar {
+        .logo-admin-wrapper {
+            height: 70px;
+            border-bottom: 1px solid #eee;
+            border-right: 1px solid #eee;
+            background: transparent;
+            text-align: center;
+            img {
+                width: auto;
+                height: 130px;
+                transform: translateY(-30px);
+            }
+        }
+    }
     .admin-col {
-        background-color: #f1f1f1;
+        background-color: $color-gray-light;
+        overflow-x: hidden;
         max-height: 100vh;
         height: 100vh;
-        overflow: scroll;
-        .admin-table {
-            width: 100%;
-        }
     }
 }

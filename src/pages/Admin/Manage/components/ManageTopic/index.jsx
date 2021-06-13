@@ -1,6 +1,7 @@
+import { Col, Input, Row, Space, Table, Tag } from 'antd';
 import React from 'react';
-import "./styles.scss"
-import { Table, Tag, Space } from 'antd';
+import SelectExtra from '../../../../../components/SelectExtra';
+import "./styles.scss";
 
 const columns = [
     {
@@ -24,7 +25,7 @@ const columns = [
         key: 'tags',
         dataIndex: 'tags',
         render: tags => (
-            <>
+            <div>
                 {tags.map(tag => {
                     let color = tag.length > 5 ? 'geekblue' : 'green';
                     if (tag === 'loser') {
@@ -36,7 +37,7 @@ const columns = [
                         </Tag>
                     );
                 })}
-            </>
+            </div>
         ),
     },
     {
@@ -75,12 +76,52 @@ const data = [
     },
 ];
 
-
+const propertyStatus = [
+    {
+        key: 1,
+        value: 'OPEN'
+    },
+    {
+        key: 2,
+        value: 'CLOSE'
+    },
+]
 function ManageTopic(props) {
     return (
         <div className="admin-manage-topic">
-            <h1>Quản lý bài viết</h1>
-            <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
+            <Row>
+                <Col span={24}>
+                    <div className="title-wrapper">
+                        <div className="title">
+                            Quản Lý Căn Hộ
+                        </div>
+                        <div className="sub-title">
+                            Nơi Quản Lý Tất Cả Căn Hộ
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+            <div className="table-wrapper">
+                <div className="table-tool">
+                    <Row>
+                        <Col span={12}>
+                            <Input className="input" placeholder="Tìm kiếm..." />
+                        </Col>
+                        <Col offset={8} span={4}>
+                            <SelectExtra className="form-control select" defaultValue='OPEN' name="status" listdata={propertyStatus} >
+                            </SelectExtra>
+                        </Col>
+                    </Row>
+
+                </div>
+                <div className="separator"></div>
+                <Table
+                    className="table"
+                    columns={columns}
+                    dataSource={data}
+                    pagination={{ pageSize: 5 }} />
+            </div>
+
         </div>
     );
 }

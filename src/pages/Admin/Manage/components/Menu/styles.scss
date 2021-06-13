@@ -1,11 +1,35 @@
+@import "./../../../../../variables/variable_admin.scss";
+
 .admin-menu {
-    margin-top: 9.4vh;
-    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #001529;
-    height: 91vh;
+    margin: 10px 10px 0px 10px;
+    .separator-custom {
+        border-bottom: 1px solid #eee;
+    }
+    .ant-menu {
+        border: none !important;
+        .ant-menu-item {
+            border-radius: 5px !important;
+            border: none !important;
+            &:hover > span > a {
+                color: $color-green-dark !important;
+            }
+        }
+        .ant-menu-submenu-arrow {
+            color: $color-blue-black !important;
+        }
+        .ant-menu-item-selected {
+            &::after {
+                opacity: 0 !important;
+            }
+            background-color: $color-green-light !important;
+            svg {
+                color: $color-green-dark !important;
+            }
+        }
+    }
     .ant-menu-inline-collapsed {
         width: 100%;
     }

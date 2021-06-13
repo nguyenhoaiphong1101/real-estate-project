@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react';
-import Header from "./components/Header"
-import Menu from "./components/Menu"
-import AdminRouting from "./components/Routing"
-import { Row, Col } from "antd"
-import "./styles.scss"
+import { Col, Row } from "antd";
+import React from 'react';
 import {
-    BrowserRouter as BrowserRouter,
-    Switch,
-    Route,
-    Link,
-    useHistory
+    BrowserRouter
 } from "react-router-dom";
-import ManageAccount from './components/ManageAccount';
+import Images from "../../../constants/Images";
+import FooterAdmin from "./components/FooterAdmin/FooterAdmin";
+import Menu from "./components/Menu";
+import NavigationAdmin from "./components/NavigationAdmin";
+import AdminRouting from "./components/Routing";
+import "./styles.scss";
 
 
 function AdminWrapper() {
@@ -26,17 +23,19 @@ function AdminWrapper() {
 
     return (
         <div className="admin-manage">
-            <Header />
             <div style={{ display: 'flex' }} className="admin-manage-menu">
                 <BrowserRouter>
                     <Row style={{ width: '100%' }}>
-                        <Col span={4} style={{ backgroundColor: '#f1f1f1' }}>
+                        <Col span={5} className="col-sidebar">
+                            <div className="logo-admin-wrapper">
+                                <img src={Images.LOGO_ADMIN} alt="Real Estate" />
+                            </div>
                             <Menu />
                         </Col>
-                        <Col span={20} className="admin-col" >
-                            <div className="admin-table">
-                                <AdminRouting />
-                            </div>
+                        <Col span={19} className="admin-col" >
+                            <NavigationAdmin />
+                            <AdminRouting />
+                            <FooterAdmin />
                         </Col>
                     </Row>
                 </BrowserRouter>

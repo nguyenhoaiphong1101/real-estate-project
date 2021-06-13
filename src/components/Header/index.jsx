@@ -122,17 +122,18 @@ function Header(props) {
             {
                 props.role === 'ADMIN'
                     ?
-                    <div className="admin-header">
-                        <div className="header">
-                            <a href="#default" className="logo">Admin</a>
-                            <div className="header-right">
-                                <a className="active" href="" onClick={() => {
-                                    removeLocal()
-                                    props.setLoading(true)
-                                }}>Logout</a>
-                            </div>
-                        </div>
-                    </div>
+                    ''
+                    // <div className="admin-header">
+                    //     <div className="header">
+                    //         <a href="#default" className="logo">Admin</a>
+                    //         <div className="header-right">
+                    //             <a className="active" href="" onClick={() => {
+                    //                 removeLocal()
+                    //                 props.setLoading(true)
+                    //             }}>Logout</a>
+                    //         </div>
+                    //     </div>
+                    // </div>
                     :
                     <div className={`nav-wrapper ${shouldLogin !== '' ? shouldLogin : shouldScrollHeader ? `${topStyle}` : `${animation} ${topStyle}`}  ${topStyle}`}
                         //<div className={`nav-wrapper ${shouldScrollHeader ? '' : `${animation}`}  ${topStyle}`}
