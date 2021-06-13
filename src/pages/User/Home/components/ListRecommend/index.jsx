@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./styles.scss"
 import Slider from "react-slick";
 import { useRef } from 'react';
 import ThumbnailRecomend from '../../../../../components/Thumbnail/ThumbnailRecommend';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadListRecommend } from '../../../../../actions/recommend';
 
 function ListRecomend(props) {
 
@@ -23,6 +25,20 @@ function ListRecomend(props) {
     const previous = () => {
         slide.current.slickPrev();
     }
+
+
+    const listRecommend = useSelector(state => state.recommend.listRecommend);
+    const user = useSelector(state => state.user.user);
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(loadListRecommend({
+            user_id: user.id
+        }));
+    }, [user])
+
+
     return (
         <div>
             <div className="container">
@@ -34,7 +50,12 @@ function ListRecomend(props) {
                         </button>
                         <div>
                             <Slider ref={slide} {...settings}>
-                                <div>
+                                {listRecommend.map(item => {
+                                    return (<div key={item?.id}>
+                                        <ThumbnailRecomend list={item} />
+                                    </div>);
+                                })}
+                                {/* <div>
                                     <ThumbnailRecomend />
                                 </div>
                                 <div>
@@ -51,7 +72,7 @@ function ListRecomend(props) {
                                 </div>
                                 <div>
                                     <ThumbnailRecomend />
-                                </div>
+                                </div> */}
                             </Slider>
                         </div>
                         <button className="button-next" onClick={next}>

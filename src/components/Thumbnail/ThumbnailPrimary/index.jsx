@@ -16,10 +16,10 @@ function ThumbnailPrimary(props) {
     }
 
     const dispatch = useDispatch()
-    const history = useHistory()
-
     const token = localStorage.getItem('access_token');
 
+
+    const history = useHistory()
     const toDetailHome = () => {
         if (token) {
             dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))

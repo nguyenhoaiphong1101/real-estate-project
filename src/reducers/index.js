@@ -7,6 +7,7 @@ import categoryReducer from "./category";
 import listFilterReducer from "./listfilter";
 import detailHomeReducer from "./detailhome";
 import userReducer from "./user";
+import recommendReducer from "./recommend";
 
 const rootReducer = combineReducers({
     search: SearchReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     listfilter: listFilterReducer,
     detailhome: detailHomeReducer,
     user: userReducer,
+    recommend:recommendReducer,
 });
 
 export default rootReducer;

@@ -168,6 +168,11 @@ function Header(props) {
                                             <Link to='/nha-dat-thue' > Nhà đất thuê </Link>
                                         </li>
                                     </React.Fragment>
+                                    <React.Fragment>
+                                        <li className={path === "/danh-sach-phu-hop" ? "active" : ""}>
+                                            <Link to='/dang-sach-phu-hop' > Danh sách phù hợp </Link>
+                                        </li>
+                                    </React.Fragment>
                                     {/* <React.Fragment>
                                         <li className={path === "/dang-bai" ? "active" : ""}>
                                             <Link to='/dang-bai' > Đăng bài viết</Link>

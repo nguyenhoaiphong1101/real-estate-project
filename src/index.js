@@ -3,6 +3,9 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Recommend from './pages/User/Recommend';
+import ThumbnailDetailRecommend from './components/Thumbnail/ThumbnailDetailRecommend';
+
 import store from './store';
 import reportWebVitals from './reportWebVitals';
 
@@ -10,6 +13,8 @@ ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
       <App />
+      {/* <ThumbnailDetailRecommend /> */}
+      {/* <Recommend/> */}
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

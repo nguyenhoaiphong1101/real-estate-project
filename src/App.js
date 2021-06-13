@@ -13,6 +13,7 @@ import Listings from "./pages/User/Listings";
 import Login from './pages/User/Login';
 import NotFound from './pages/User/NotFound';
 import Profile from "./pages/User/Profile";
+import Recommend from "./pages/User/Recommend";
 import Signup from './pages/User/Signup';
 import SubmitList from "./pages/User/SubmitList";
 
@@ -62,27 +63,39 @@ function App() {
                             </Route>
                             <Route path="/" exact>
                                 <Home />
+                                <Footer />
                             </Route>
                             <Route path="/chi-tiet" >
                                 <DetailHome />
+                                <Footer />
                             </Route>
                             <Route path="/trang-ca-nhan" >
                                 <Profile />
+                                <Footer />
                             </Route>
                             <Route path="/dang-bai" >
                                 <SubmitList />
+                                <Footer />
                             </Route>
                             <Route path="/nha-dat-ban" >
                                 <Listings title="Nhà đất bán" />
+                                <Footer />
                             </Route>
                             <Route path="/nha-dat-thue" >
                                 <Listings title="Nhà đất thuê" />
+                                <Footer />
                             </Route>
                             <Route path="/dang-nhap" exact >
                                 <Login />
+                                <Footer />
                             </Route>
                             <Route path="/dang-ky" exact>
                                 <Signup />
+                                <Footer />
+                            </Route>
+                            <Route path="/dang-sach-phu-hop" exact>
+                                <Recommend />
+                                <Footer />
                             </Route>
                             <Route>
                                 <Header setEnableFooter={setEnableFooter} />
