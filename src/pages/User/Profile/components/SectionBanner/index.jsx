@@ -2,10 +2,12 @@ import React from 'react';
 import './styles.scss';
 import Button from '../../../../../components/Button';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 function SectionBanner() {
     const user = useSelector(state => state.user.user)
+    const history = useHistory();
 
     return (
         <div className="profile-section-banner-wrapper">
@@ -17,7 +19,7 @@ function SectionBanner() {
                             <h3 className="text">{user?.full_name}</h3>
                             <span className="email">{user?.email}</span>
                         </div>
-                        <Button value="Đăng bài viết" className="btn" icon="fas fa-plus" />
+                        <Button onClick={()=>{history.push('/dang-bai')}} value="Đăng bài viết" className="btn" icon="fas fa-plus" />
                     </div>
                 </div>
             </div>

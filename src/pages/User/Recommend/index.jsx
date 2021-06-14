@@ -48,14 +48,15 @@ function Recommend(props) {
                 <List className="grid-home container"
                     grid={{ gutter: 16, column: 4, row: 3 }}
                     pagination={{
-                        onChange: page => { dispatch(loadListRecommend({
-                            user_id: user.id,
-                            page: page,
-                            size: 12,
-                        }));
+                        onChange: page => {
+                            dispatch(loadListRecommend({
+                                user_id: user.id,
+                                page: page,
+                                size: 12,
+                            }));
                         },
                         pageSize: 12,
-                        total: totalItem,
+                        totalItem: {totalItem},
                     }}
                     dataSource={listRecommend}
                     renderItem={item => (

@@ -1,10 +1,11 @@
 import { Popover } from 'antd';
 import jwtDecode from 'jwt-decode';
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { loadDetailHome } from '../../../actions/detailhome';
+import { postFavorite } from '../../../api/favorite';
 import Button from '../../Button';
 import './styles.scss';
 
@@ -31,6 +32,17 @@ function ThumbnailExtra(props) {
         history.push('/chi-tiet')
     }
 
+    const [isFavorite, setIsFavorite] = useState();
+
+    const setFavorite =()=>{
+        setIsFavorite(!isFavorite);
+        postFavorite.POST(props.listLatestNew?.id);
+    }
+
+     useEffect(()  => {
+        setIsFavorite(props?.listLatestNew?.favourite);
+    },[props?.listLatestNew?.favourite]);
+
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
@@ -42,28 +54,28 @@ function ThumbnailExtra(props) {
     );
     return (
         <div className="listing-extra">
-            <div className="listing__thumbnail" onClick={() => toDetailHome()}>
-                <a>
+            <div className="listing__thumbnail" >
+                <a onClick={() => toDetailHome()}>
                     <img src="http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg" alt="listing" />
                 </a>
                 <div className="listing-badges">
                     <span className="listing-badge sale">
-                        Giảm giá
+                        {props.listLatestNew?.type_apartment}
                     </span>
                 </div>
-                <div className="listing-controls" >
-                    <a className={props?.listLatestNew?.favorite?"favorite":"un-favorite"}>
-                        <i className="far fa-heart"></i>
+                <div class="listing-controls" onClick={()=>setFavorite()}>
+                    <a class={isFavorite?"favorite":"un-favorite"}>
+                        <i class="far fa-heart"></i>
                     </a>
                 </div>
             </div>
             <div className="listing__body">
                 <div className="author" >
-                {/* onClick={() => toDetailHome()} */}
+                    {/* onClick={() => toDetailHome()} */}
                     <div onClick={() => toDetailHome()}>
-                    <a >
-                        <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
-                    </a>
+                        <a >
+                            <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
+                        </a>
                     </div>
                     <div className="media-body">
                         <h6>{props.listLatestNew?.created_by?.username}</h6>
@@ -79,9 +91,9 @@ function ThumbnailExtra(props) {
                     </div>
                 </div>
                 <h5 onClick={() => toDetailHome()} className="listing-title">
-                    <a title="Iris Watson, Frederick Nebraska 20620">
+                    <p title="Iris Watson, Frederick Nebraska 20620">
                         {props.listLatestNew?.address}
-                    </a>
+                    </p>
                 </h5>
                 <span className="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
                 <p className="listing-text">{props.listLatestNew?.title}</p>

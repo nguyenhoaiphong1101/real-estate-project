@@ -34,14 +34,7 @@ function SectionBody() {
                 } key="3">
                    <ListingFavorite />
                 </TabPane>
-                <TabPane tab={
-                    <div className="tab-item-wrapper tab-item-wrapper__icon tab-item-wrapper--red">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <h1 className="tab-item">Đăng xuất</h1>
-                    </div>
-                } key="4">
-                    Content of Tab Pane 3
-                </TabPane>
+               
             </Tabs>
         </div>
     );

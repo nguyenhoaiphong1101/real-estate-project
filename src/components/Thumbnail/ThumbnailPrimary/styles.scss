@@ -61,10 +61,10 @@
                 transform: translateX(10px);
                 // &:hover {
                 // }
-                &:hover {
-                    background-color: #ff0f59 !important;
-                    color: #fff !important;
-                }
+                // &:hover {
+                //     background-color: #ff0f59 !important;
+                //     color: #fff !important;
+                // }
             }
             .favorite{
                 background-color: #ff0f59;
@@ -87,10 +87,10 @@
                     
                     
                 // }
-                &:hover {
-                    background-color: #fff;
-                    color: #515151;
-                }
+                // &:hover {
+                //     background-color: #fff;
+                //     color: #515151;
+                // }
             }
         }
     }
@@ -150,16 +150,16 @@
         .listing-title {
             margin-bottom: 0px;
             font-size: 18px;
-            a {
+            p {
                 display: block;
                 margin-bottom: 15px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 color: #101737;
-                &:hover {
-                    color: #478adc;
-                }
+                // &:hover {
+                //     color: #478adc;
+                // }
             }
         }
         .listing-price {

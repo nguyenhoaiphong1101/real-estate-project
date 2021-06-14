@@ -137,7 +137,6 @@ function Banner() {
     const [valueArea, setValueArea] = useState({ id: null, name: '' });
 
     useEffect(() => {
-        console.log('aaaa');
         if (valueProvince.id)
             getDistrict(valueProvince.id);
 
@@ -191,7 +190,7 @@ function Banner() {
     }
 
     return (
-        <div className="banner-home">
+        <div className="banner-home" style={active ? {marginBottom: "70px"} : { marginBottom: "150px" }}>
             <div className="container">
                 <div className="banner-item">
                     <div className="banner-inner">

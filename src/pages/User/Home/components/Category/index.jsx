@@ -74,7 +74,7 @@ function Category(props) {
                                     <a><img src="http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg" alt="#" /></a>
                                     <div className="category-item-body">
                                         <h5><a>{item.name}</a></h5>
-                                        <span>{item.totalItem}</span>
+                                        <span>({item.totalItem})</span>
                                     </div>
                                 </div>
 

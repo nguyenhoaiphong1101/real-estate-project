@@ -9,11 +9,18 @@ import SectionTopList from './components/SectionTopList';
 import Testimonials from './components/Testimonials';
 
 function Home(props) {
+    const token = localStorage.getItem('access_token');
+    const checkLogin = () =>{
+        if(token)
+        {
+            return <ListRecomend/>
+        }
+    }
     return (
         <div>
             <Banner />
+            {checkLogin()}
             <Category />
-            <ListRecomend/>
             <SectionFunction />
             <NeedMore />
             <SectionRecentList />

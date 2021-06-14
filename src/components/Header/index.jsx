@@ -84,7 +84,7 @@ function Header(props) {
     const checkButtonSubmit = () => {
         if (token !== null) {
             return <div className="button-wrap">
-                <Button className="btn" value="Gửi danh sách" onClick={() => toPost()} icon="fas fa-plus" />
+                <Button className="btn" value="Đăng bài viết" onClick={() => toPost()} icon="fas fa-plus" />
             </div>
         }
     };

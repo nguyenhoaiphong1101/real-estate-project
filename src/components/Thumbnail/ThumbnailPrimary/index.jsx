@@ -1,5 +1,5 @@
 import { Popover } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../Button';
 import moment from 'moment';
 import './styles.scss';
@@ -7,8 +7,11 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { loadDetailHome } from '../../../actions/detailhome';
 import jwtDecode from 'jwt-decode';
+import { postFavorite } from '../../../api/favorite';
 
 function ThumbnailPrimary(props) {
+
+    
 
     const toTimeString = (seconds) => {
         if (seconds)
@@ -29,6 +32,16 @@ function ThumbnailPrimary(props) {
         }
         history.push('/chi-tiet')
     }
+    const [isFavorite, setIsFavorite] = useState();
+
+    const setFavorite =()=>{
+        setIsFavorite(!isFavorite);
+        postFavorite.POST(props.listLatestNew?.id);
+    }
+
+     useEffect(()  => {
+        setIsFavorite(props?.listLatestNew?.favourite);
+    },[props?.listLatestNew?.favourite]);
 
     const content = (
         <div className="popup-content-wrapper">
@@ -41,17 +54,17 @@ function ThumbnailPrimary(props) {
     );
     return (
         <div className={`listing-primary ${props.className}`}>
-            <div className="listing__thumbnail" onClick={() => toDetailHome()}>
-                <a>
+            <div className="listing__thumbnail" >
+                <a onClick={() => toDetailHome()}>
                     <img src="http://androthemes.com/themes/react/acres/assets/img/listings/1.jpg" alt="listing" />
                 </a>
                 <div class="listing-badges">
                     <span class="listing-badge sale">
-                        Giảm giá
+                        {props.listLatestNew?.type_apartment}
                     </span>
                 </div>
-                <div class="listing-controls">
-                    <a class={props?.listLatestNew?.favorite?"favorite":"un-favorite"}>
+                <div class="listing-controls" onClick={()=>setFavorite()}>
+                    <a class={isFavorite?"favorite":"un-favorite"}>
                         <i class="far fa-heart"></i>
                     </a>
                 </div>
@@ -79,9 +92,9 @@ function ThumbnailPrimary(props) {
                     </div>
                 </div>
                 <h5 class="listing-title" onClick={() => toDetailHome()}>
-                    <a title="Iris Watson, Frederick Nebraska 20620">
+                    <p title="Iris Watson, Frederick Nebraska 20620">
                         {props.listLatestNew?.address}
-                    </a>
+                    </p>
                 </h5>
                 <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
                 <p class="listing-text">{props.listLatestNew?.title}</p>

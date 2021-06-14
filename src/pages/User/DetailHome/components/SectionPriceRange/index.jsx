@@ -3,11 +3,13 @@ import './styles.scss';
 
 function SectionPriceRange() {
     const detailHome = useSelector(state => state.detailhome.detailHome)
+
+
     //new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)
     return (
         <div className="section-price-wrapper">
             <div className="section-price">
-                <span className="current-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(detailHome?.total_price)}</span>
+                <span style={{left:`${detailHome?.total_price/100000000000*100}%`}} className="current-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(detailHome?.total_price)}</span>
                 <div className="progress">
                     <div class="progress-bar"></div>
                 </div>

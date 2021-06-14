@@ -11,11 +11,9 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <Provider store={store}>
-    <React.StrictMode>
       <App />
       {/* <ThumbnailDetailRecommend /> */}
       {/* <Recommend/> */}
-    </React.StrictMode>
   </Provider>,
   document.getElementById('root')
 );
