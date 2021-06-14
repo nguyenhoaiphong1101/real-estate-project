@@ -240,3 +240,18 @@
         }
     }
 }
+
+
+.popup{
+    .ant-modal-content {
+        padding: 2px !important;
+        border-radius: 8px;
+        .ant-modal-title{
+            font-weight: bold;
+            color: #1890ff;
+        }
+        .ant-btn{
+            border-radius: 15px;
+        }
+    }
+}

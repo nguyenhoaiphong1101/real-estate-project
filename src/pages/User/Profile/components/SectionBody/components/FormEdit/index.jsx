@@ -95,9 +95,7 @@ function FormEdit() {
             id: user?.addressDto?.district_id,
             name: user?.addressDto?.district_name,
         });
-
-    }, []);
-    const token = localStorage.getItem('access_token');
+    }, [user]);
     const onFinish = (values) => {
         updateUser.PUT(
             {
@@ -113,7 +111,6 @@ function FormEdit() {
                 phone: values.phone,
             }
         )
-        dispatch(getInfoUser());
     };
 
     return (

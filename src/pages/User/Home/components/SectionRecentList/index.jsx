@@ -5,21 +5,22 @@ import ThumbnailPrimary from '../../../../../components/Thumbnail/ThumbnailPrima
 import ThumbnailExtra from '../../../../../components/Thumbnail/ThumbnailExtra';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadListLatestNew } from '../../../../../actions/latestnew';
+import jwtDecode from 'jwt-decode';
 
 function SectionRecentList() {
 
 
 
     const listLatestNew = useSelector(state => state.latestnew.listLastetNew);
-    const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
 
+    const token = localStorage.getItem('access_token');
 
     useEffect(() => {
         dispatch(loadListLatestNew({
-            user_id:user.id
+            user_id: token ? jwtDecode(token).id : null
         }));
-    }, [user])
+    }, [])
     return (
         <div className="section-recent-list">
             <div className="container">

@@ -190,7 +190,7 @@ function Banner() {
     }
 
     return (
-        <div className="banner-home" style={active ? {marginBottom: "70px"} : { marginBottom: "150px" }}>
+        <div className="banner-home" style={active ? { marginBottom: "70px" } : { marginBottom: "150px" }}>
             <div className="container">
                 <div className="banner-item">
                     <div className="banner-inner">

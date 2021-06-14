@@ -1,4 +1,5 @@
 import { Carousel } from 'antd';
+import jwtDecode from 'jwt-decode';
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadListHighlight } from '../../../../../actions/highlight';
@@ -10,15 +11,14 @@ function SectionTopList() {
     const carousel = useRef(null);
 
     const listHighlight = useSelector(state => state.highlight.listHighlight)
-    const user = useSelector(state => state.user.user);
     const dispatch = useDispatch()
-
+    const token = localStorage.getItem('access_token');
 
     useEffect(() => {
         dispatch(loadListHighlight({
-            user_id:user.id
+            user_id: token ? jwtDecode(token).id : null
         }));
-    }, [user])
+    }, [])
 
     const settings = {
         dots: false,

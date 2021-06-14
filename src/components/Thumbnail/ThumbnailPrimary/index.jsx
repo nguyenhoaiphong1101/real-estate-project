@@ -8,10 +8,11 @@ import { useHistory } from 'react-router';
 import { loadDetailHome } from '../../../actions/detailhome';
 import jwtDecode from 'jwt-decode';
 import { postFavorite } from '../../../api/favorite';
+import Modal from 'antd/lib/modal/Modal';
 
 function ThumbnailPrimary(props) {
 
-    
+
 
     const toTimeString = (seconds) => {
         if (seconds)
@@ -34,14 +35,29 @@ function ThumbnailPrimary(props) {
     }
     const [isFavorite, setIsFavorite] = useState();
 
-    const setFavorite =()=>{
-        setIsFavorite(!isFavorite);
-        postFavorite.POST(props.listLatestNew?.id);
+    const setFavorite = () => {
+        if (token) {
+            setIsFavorite(!isFavorite);
+            postFavorite.POST(props.listLatestNew?.id);
+        } else {
+            console.log("=====");
+            setIsVisible(true);
+        }
     }
 
-     useEffect(()  => {
+    useEffect(() => {
         setIsFavorite(props?.listLatestNew?.favourite);
-    },[props?.listLatestNew?.favourite]);
+    }, [props?.listLatestNew?.favourite]);
+
+    const [isVisible, setIsVisible] = useState(false);
+
+    const handleOk = () => {
+        history.push('/dang-nhap')
+    }
+
+    const handleCancel = () => {
+        setIsVisible(false);
+    }
 
     const content = (
         <div className="popup-content-wrapper">
@@ -54,6 +70,11 @@ function ThumbnailPrimary(props) {
     );
     return (
         <div className={`listing-primary ${props.className}`}>
+
+            <Modal className='popup' title="Yêu cầu" visible={isVisible} onOk={handleOk} onCancel={handleCancel} okText="Đăng nhập">
+                <p>Vui lòng đăng nhập để thực hiện thao tác !</p>
+            </Modal>
+
             <div className="listing__thumbnail" >
                 <a onClick={() => toDetailHome()}>
                     <img src="http://androthemes.com/themes/react/acres/assets/img/listings/1.jpg" alt="listing" />
@@ -63,8 +84,8 @@ function ThumbnailPrimary(props) {
                         {props.listLatestNew?.type_apartment}
                     </span>
                 </div>
-                <div class="listing-controls" onClick={()=>setFavorite()}>
-                    <a class={isFavorite?"favorite":"un-favorite"}>
+                <div class="listing-controls" onClick={() => setFavorite()}>
+                    <a class={isFavorite ? "favorite" : "un-favorite"}>
                         <i class="far fa-heart"></i>
                     </a>
                 </div>

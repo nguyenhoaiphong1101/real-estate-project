@@ -6,6 +6,7 @@ import ThumbnailRecomend from '../../../../../components/Thumbnail/ThumbnailReco
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadListRecommend } from '../../../../../actions/recommend';
+import jwtDecode from 'jwt-decode';
 
 function ListRecomend(props) {
 
@@ -28,15 +29,16 @@ function ListRecomend(props) {
 
 
     const listRecommend = useSelector(state => state.recommend.listRecommend);
-    const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
+
+    const token = localStorage.getItem('access_token');
 
 
     useEffect(() => {
         dispatch(loadListRecommend({
-            user_id: user.id
+            user_id: token ? jwtDecode(token).id : null
         }));
-    }, [user])
+    }, [])
 
 
     return (
