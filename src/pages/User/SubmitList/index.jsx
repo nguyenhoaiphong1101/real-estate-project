@@ -1,5 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Col, DatePicker, Form, Input, Modal, Row, Upload } from 'antd';
+import axios from "axios";
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -13,6 +14,7 @@ import Button from '../../../components/Button';
 import HTMLEditor from '../../../components/HTMLEditor';
 import SelectCustom from '../../../components/Select';
 import SubHeader from "../../../components/SubHeader";
+import { API_URL } from "../../../constants/Config";
 import Feature from './components/Feature';
 import "./styles.scss";
 
@@ -43,15 +45,6 @@ function SubmitList(props) {
 
     const handleCancel = () => { setPreviewVisible(false) };
 
-    const handlePreview = async file => {
-        if (!file.url && !file.preview) {
-            file.preview = await getBase64(file.originFileObj);
-        }
-
-        setPreviewImage(file.url || file.preview,);
-        setPreviewVisible(true);
-        setPreviewTitle(file.name || file.url.substring(file.url.lastIndexOf('/') + 1));
-    };
     const dispatch = useDispatch();
     const [form] = Form.useForm();
     const listDistrict = useSelector(state => state.search.district);
@@ -62,8 +55,9 @@ function SubmitList(props) {
     const [valueProvince, setValueProvince] = useState({ id: null, name: '' });
     const [valueTypeApartment, setValueTypeApartment] = useState({ id: null, name: '' });
     const [valueCategory, setValueCategory] = useState({ id: null, name: '' });
-    const [descriptionEditor, setDescriptionEditor] = useState('')
-
+    const [descriptionEditor, setDescriptionEditor] = useState('');
+    const [photos, setPhotos] = useState([]);
+    const token = localStorage.getItem('access_token');
 
     useEffect(() => {
         if (valueProvince.id)
@@ -94,14 +88,13 @@ function SubmitList(props) {
     const changeValueCategory = (value, id) => {
         setValueCategory({ id: id.key, name: value });
     }
-
+    const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
 
     useEffect(() => {
         dispatch(loadProvince());
         dispatch(loadListCategory());
     }, [])
 
-    const handleChange = ({ fileList }) => { setFileList(fileList); console.log(fileList.thumbUrl); };
 
     const [arr1, setArr1] = useState([
         {
@@ -175,12 +168,52 @@ function SubmitList(props) {
     }
 
     function submitData() {
-
+        // handle save photos
+        const bodyFormData = new FormData();
+        let imgFiles = [];
+        fileList.forEach((file) => {
+          if (file.file) {
+            imgFiles.push(file.file);
+          }
+        });
+        if (imgFiles.length !== 0) {
+            for (let i = 0; i < imgFiles.length; i++) {
+              bodyFormData.append("files", imgFiles[i]);
+            }
+            axios
+              .request({
+                url: API_URL + '/upload/photo',
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                data: bodyFormData,
+              })
+              .then((res) => {
+                // bodyFormData.delete("files");
+                let formatFileList = [];
+                fileList.forEach((file) => {
+                  if (!file.file) {
+                    formatFileList.push({
+                      originalName: file.originalName,
+                      name: file.name,
+                      extension: file.extension,
+                    });
+                  }
+                });
+                res.data.data.forEach((file) => {
+                  formatFileList.push({
+                    originalName: file.originalName,
+                    name: file.name,
+                    extension: file.extension,
+                  });
+                });
+                setPhotos(formatFileList);
+              });
+            }
+        
+        //
         const dataForm = form.getFieldValue();
-
-
-        // createPost.POST()
-
         const dataPost = {
             apartment_address: {
                 address: dataForm.address,
@@ -207,6 +240,7 @@ function SubmitList(props) {
             title: dataForm.title,
             total_price: dataForm.total_price,
             type_apartment: valueTypeApartment.id,
+            photos: photos,
         }
 
         if (history.location.pathname === '/dang-bai') {
@@ -276,9 +310,46 @@ function SubmitList(props) {
             id: detailHome?.type_apartment === 'Bán' ? 'BUY' : 'RENT',
             name: detailHome?.type_apartment,
         });
-        setDescriptionEditor(detailHome?.apartment_detail?.description,);
+        setDescriptionEditor(detailHome?.apartment_detail?.description);
+        let imgs = [];
+        detailHome.photos?.forEach((item, index) => {
+            imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
+            console.log(imgs);
+        });
+        setFileList(imgs);
     }, [detailHome]);
 
+    const handleChange = info => {
+        const newList = [...info.fileList]
+        newList.forEach(item => {
+          item.status = "done"
+          let mapItem = fileList.find(file => file.uid === item.uid)
+          if (mapItem) {
+            item.url = mapItem.url
+            item.file = mapItem.file
+          }
+        })
+        if (info.file.originFileObj) {
+          getBase64(info.file.originFileObj, imageUrl => {
+            newList.forEach(item => {
+              if (item.uid === info.file.uid) {
+                item.url = imageUrl
+              }
+            })
+            setFileList(newList)
+          });
+        }
+        setFileList(newList)
+      };
+    const beforeUpload = (file) => {
+        setFileList([
+            ...fileList,
+            {
+            file: file,
+            uid: file.uid,
+            name: file.name,
+            }])
+    }
     return (
         <div className="sublist">
             <SubHeader title={history.location.pathname === '/dang-bai'?"Đăng bài":"Chỉnh Sửa Bài Đăng"} />
@@ -327,9 +398,9 @@ function SubmitList(props) {
                         <div className="wrapper-space">
                             <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Hình ảnh</h1>
                             <Upload
-                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                 listType="picture-card"
-                                onPreview={handlePreview}
+                                fileList={fileList}
+                                beforeUpload={beforeUpload}
                                 onChange={handleChange}
                             >
                                 {uploadButton}
