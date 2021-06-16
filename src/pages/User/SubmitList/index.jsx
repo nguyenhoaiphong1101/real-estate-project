@@ -118,6 +118,16 @@ function SubmitList(props) {
             label: "Hướng nhà",
             name: 'house_direction'
         },
+        {
+            icon: "flaticon-garage",
+            label: "Hướng ban công",
+            name: 'balcony_direction'
+        },
+        {
+            icon: "flaticon-ruler",
+            label: "Số tầng",
+            name: 'floor_quantity'
+        },
     ]);
     const [arr2, setArr2] = useState([
         {
@@ -140,23 +150,7 @@ function SubmitList(props) {
             label: "Kích thước",
             name: 'area'
         },
-    ]);
-    const [disable, setDisable] = useState('');
-    function showMore(e) {
-        e.preventDefault();
-        setArr1([...arr1,
         {
-            icon: "flaticon-garage",
-            label: "Hướng ban công",
-            name: 'balcony_direction'
-        },
-        {
-            icon: "flaticon-ruler",
-            label: "Số tầng",
-            name: 'floor_quantity'
-        },
-        ])
-        setArr2([...arr2, {
             icon: "flaticon-new",
             label: "Tình trạng",
             name: 'type_apartment',
@@ -166,9 +160,8 @@ function SubmitList(props) {
             icon: "flaticon-view",
             label: "View",
             name: 'overview'
-        },])
-        setDisable('disable');
-    }
+        }
+    ]);
 
     function disabledDate(current) {
         // Can not select days before today and today
@@ -193,7 +186,7 @@ function SubmitList(props) {
                 balcony_direction: dataForm.balcony_direction,
                 bathroom_quantity: dataForm.bathroom_quantity,
                 bedroom_quantity: dataForm.bedroom_quantity,
-                description: dataForm.description,
+                // description: dataForm.description,
                 entrance_building: dataForm.entrance_building,
                 floor_quantity: dataForm.floor_quantity,
                 front_building: dataForm.front_building,
@@ -228,7 +221,7 @@ function SubmitList(props) {
             balcony_direction: detailHome?.apartment_detail?.balcony_direction,
             bathroom_quantity: detailHome?.apartment_detail?.bathroom_quantity,
             bedroom_quantity: detailHome?.apartment_detail?.bedroom_quantity,
-            description: detailHome?.apartment_detail?.description,
+            // description: detailHome?.apartment_detail?.description,
             entrance_building: detailHome?.apartment_detail?.entrance_building,
             floor_quantity: detailHome?.apartment_detail?.floor_quantity,
             front_building: detailHome?.apartment_detail?.front_building,
@@ -277,101 +270,95 @@ function SubmitList(props) {
 
     return (
         <div className="sublist">
-            <SubHeader title="Submit Listing" />
-            <Form form={form} className="container">
-                <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Tiêu đề</h1>
-                <Form.Item name="title">
-                    <Input style={{ backgroundColor: 'transparent', border: '0' }} placeholder="Tiêu đề"></Input>
-                </Form.Item>
-                <Form.Item name="category">
-                    <SelectCustom title="Thể loại" onHandleChange={changeValueCategory} options={listCategory} />
-                </Form.Item>
-                <Form.Item className="pl-auto" label="Ngày hết hạn" name="expired_date">
-                    <DatePicker disabledDate={disabledDate} />
-                </Form.Item>
-
-                <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Hình ảnh</h1>
-                <Upload
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    listType="picture-card"
-                    onPreview={handlePreview}
-                    onChange={handleChange}
-                >
-                    {uploadButton}
-                </Upload>
-                <Modal
-                    visible={previewVisible}
-                    title={previewTitle}
-                    footer={null}
-                    onCancel={handleCancel}
-                >
-                    <img alt="example" style={{ width: '100%' }} src={previewImage} />
+            <SubHeader title="Chỉnh Sửa Bài Đăng" />
+            <Form form={form} className="container form-submit-listing">
+                <Row className="row">
+                    <Col span={12}>
+                        <div className="wrapper-space">
+                            <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Tiêu đề</h1>
+                            <Form.Item name="title" className="form-control">
+                                <Input className="input" type="text" placeholder="Tiêu đề"></Input>
+                            </Form.Item>
+                            <Form.Item name="category" className="form-control">
+                                <SelectCustom title="Thể loại" onHandleChange={changeValueCategory} options={listCategory} />
+                            </Form.Item>
+                            <Form.Item className="pl-auto label" label="Ngày Hết Hạn" name="expired_date">
+                                <DatePicker className="input"  disabledDate={disabledDate} />
+                            </Form.Item>
+                            <Form.Item className="pl-auto label" name="total_price" label="Tổng Giá">
+                                <Input className="input" ></Input>
+                            </Form.Item>
+                        </div>
+                    </Col>
+                    <Col span={12}>
+                        <div className="wrapper-space">
+                            <h1 style={{ fontSize: '2rem', fontWeight: '800' }} className="title">Địa chỉ</h1>
+                            <Row>
+                                <Col span={12} className="pr-20">
+                                    <Form.Item name="province">
+                                        <SelectCustom title="Thành phố" onHandleChange={changeValueProvince} options={listProvince} />
+                                    </Form.Item>
+                                </Col>
+                                <Col span={12}>
+                                    <Form.Item name="district">
+                                        <SelectCustom title="Quận/huyện" value={valueDistrict} onHandleChange={changeValueDistrict} options={listDistrict} />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                            <Form.Item name="address">
+                                <Input className="input" placeholder="Địa chỉ cụ thể"></Input>
+                            </Form.Item>
+                        </div>
+                    </Col>
+                </Row>
+                <Row className="row">
+                    <Col span={24}>
+                        <div className="wrapper-space">
+                        <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Hình ảnh</h1>
+                            <Upload
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                listType="picture-card"
+                                onPreview={handlePreview}
+                                onChange={handleChange}
+                            >
+                                {uploadButton}
+                            </Upload>
+                        </div>
+                        <Modal
+                        visible={previewVisible}
+                        title={previewTitle}
+                        footer={null}
+                        onCancel={handleCancel}
+                        >
+                        <img alt="example" style={{ width: '100%' }} src={previewImage} />
                 </Modal>
-                <div className="section-overview">
-                    <h1 className="title">Tổng quan</h1>
-                    <Form.Item name="description">
-                        <Input style={{ backgroundColor: 'transparent', border: '0' }} placeholder="description"></Input>
-                    </Form.Item>
-                    <h1 className="title">Địa chỉ</h1>
-                    <Row>
-                        <Col span={12} className="pr-20">
-                            <Form.Item name="province">
-                                <SelectCustom title="Thành phố" onHandleChange={changeValueProvince} options={listProvince} />
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item name="district">
-                                <SelectCustom title="Quận/huyện" value={valueDistrict} onHandleChange={changeValueDistrict} options={listDistrict} />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Form.Item name="address">
-                        <Input style={{ marginTop: '15px', backgroundColor: 'transparent', border: '0' }} placeholder="Địa chỉ cụ thể"></Input>
-
-                    </Form.Item>
-                </div>
-                <div className="section-price-wrapper">
-                    <div className="section-price">
-                        <span className="current-price"><Form.Item name="total_price"><Input style={{ backgroundColor: 'transparent', border: '0',width:'100px' }}></Input></Form.Item></span>
-                        <div className="progress">
-                            <div class="progress-bar"></div>
-                        </div>
-                        <div className="area-price">
-                            <div className="price-min">
-                                <h5>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(1000000)}</h5>
-                                <span>Thấp nhất</span>
-                            </div>
-                            <h5>Khoảng giá trong khu vực</h5>
-                            <div className="price-max">
-                                <h5>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(100000000000)}</h5>
-                                <span>Cao nhất</span>
+                    </Col>
+                </Row>
+                <Row className="row">
+                    <Col span={24}>
+                        <div className="wrapper-space">
+                            <div className="section-feature">
+                                <h4 className="title">Đặc điểm</h4>
+                                <div className="container-fluid wrapper">
+                                    <div className="list-feature">
+                                        <Row>
+                                            <Col span={12}>{arr1.map((item, index) => {
+                                                return <Feature key={index} name={item.name} icon={item.icon} label={item.label} />
+                                            })}</Col>
+                                            <Col span={12}>{arr2.map((item, index) => {
+                                                if (item.name == 'type_apartment') {
+                                                    return <Feature key={index} onchange={changeValueTypeApartment} name={item.name} icon={item.icon} label={item.label} />
+                                                } else {
+                                                    return <Feature key={index} name={item.name} icon={item.icon} label={item.label} />
+                                                }
+                                            })}</Col>
+                                        </Row>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="section-feature">
-                    <h4 className="title">Đặc điểm</h4>
-                    <div className="container-fluid wrapper">
-                        <div className="list-feature">
-                            <Row>
-                                <Col span={12}>{arr1.map((item, index) => {
-
-                                    return <Feature key={index} name={item.name} icon={item.icon} label={item.label} />
-                                })}</Col>
-                                <Col span={12}>{arr2.map((item, index) => {
-                                    if (item.name == 'type_apartment') {
-                                        return <Feature key={index} onchange={changeValueTypeApartment} name={item.name} icon={item.icon} label={item.label} />
-                                    } else {
-                                        return <Feature key={index} name={item.name} icon={item.icon} label={item.label} />
-                                    }
-                                })}</Col>
-                            </Row>
-                            <Row>
-                                <button className={`show-more ${disable}`} onClick={showMore}>Show More</button>
-                            </Row>
-                        </div>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
                 <Button className="btn-custom" value={detailHome!=={} ? "Chỉnh sửa" : "Đăng bài"} onClick={() => submitData()}></Button>
             </Form>
         </div >

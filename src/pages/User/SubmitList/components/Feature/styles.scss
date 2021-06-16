@@ -1,7 +1,8 @@
 .feature {
     display: flex;
     align-items: center;
-    margin: 5px 0;
+    margin: 15px 0;
+
     .ant-select{
         width: 150px;
     }
@@ -26,4 +27,17 @@
         font-weight: 400;
         font-size: 16px;
     }
+        .input{
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 15px 20px;
+            height: 100%;
+            
+        }
+        .ant-form-item{
+            margin-bottom: 0px;
+            display: flex;
+            text-align: left;
+            align-items: center;
+        }
+    
 }

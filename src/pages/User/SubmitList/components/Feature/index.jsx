@@ -25,7 +25,7 @@ function Feature({ icon, label, name, onchange }) {
                 </Form.Item>
                 :
                 <Form.Item name={name}>
-                    <Input style={{ backgroundColor: 'transparent', border: '0' ,marginTop:'20px'}} placeholder="value" />
+                    <Input  className="input"  placeholder={`Thông Tin ${label}`} />
                 </Form.Item>
             }
             {/* <Input name={name} style={{backgroundColor:'transparent',border:'0'}} placeholder="value"/> */}
