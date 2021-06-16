@@ -41,6 +41,12 @@ function ThumbnailExtra(props) {
             dispatch(loadDetailHome(props?.listLatestNew?.id, null))
         }
         history.push('/chi-tiet')
+
+    }
+
+    const toUpdatePost = () => {
+        dispatch(loadDetailHome(props?.listLatestNew?.id, null))
+        history.push(`/chinh-sua/${props?.listLatestNew?.id}`, props?.listLatestNew)
     }
 
     const [isFavorite, setIsFavorite] = useState();
@@ -133,9 +139,15 @@ function ThumbnailExtra(props) {
                         <span className="acr-listing-icon-value">{props.listLatestNew?.area}</span>
                     </div>
                 </div>
-                <div className="listing-gallery-wrapper">
-                    <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
-                </div>
+                {props?.type ?
+                    <div className="listing-gallery-wrapper">
+                        <Button value="Chỉnh sửa" className="view-detail" onClick={() => toUpdatePost()}></Button>
+                    </div>
+                    :
+                    <div className="listing-gallery-wrapper">
+                        <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
+                    </div>
+                }
             </div>
         </div>
     );

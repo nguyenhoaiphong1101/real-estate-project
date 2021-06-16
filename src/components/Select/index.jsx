@@ -10,7 +10,7 @@ const { Option } = Select;
 const DisplayContainer = ({ title, value }) => {
     return (
         <span className="select-container" dir="ltr" data-select2-id="2">
-            <label>{title}: </label>
+            <label>{title} </label>
             <span className="selection">
                 <span className="select-value">
                     {value}
@@ -48,6 +48,7 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
 
     const handleChange = (value, id) => {
         setCurrentValue(value);
+        if(onHandleChange)
         onHandleChange(value, id);
         // if (callApi)
         //     callApi(id.key)

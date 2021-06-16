@@ -1,72 +1,119 @@
 .sublist {
+    
     .container {
         max-width: 1140px;
         width: 100%;
         margin-right: auto;
         margin-left: auto;
 
-        .container-tab {
-            padding-top: 80px;
+        .current-price{
+            .ant-form-item{
+                margin-bottom: 0px;
+                
+            }
+            
+        }
+        
 
-            .ant-tabs-nav-more {
-                display: none;
-            }
+        .btn-custom{
+            background-color:#01bbbc;
+            font-size: 16px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
-        .ant-tabs-ink-bar {
-            display: none;
-        }
-        .nav-item {
-            a {
-                font-weight: 800;
-            }
-        }
-
-        .ant-tabs-nav-list {
-            padding: 5px;
-            margin-right: 150px;
-            width: 100%;
-        }
-        .ant-tabs-tab {
-            margin-bottom: 20px !important;
-            outline: none;
-            width: 100%;
-            position: relative;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            z-index: 1;
-            box-shadow: 0 2px 9px 0 rgba(34, 12, 43, 0.1);
-            color: #101737;
-            font-weight: 800;
-            span {
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                margin-right: 15px;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                border: 1px solid rgba(0, 0, 0, 0.1);
-                transition: 0.3s;
-                font-weight: 800;
-            }
-            a {
-                color: black;
-            }
-        }
-        .ant-tabs-tab-active {
+        .submit {
             background-color: #519fff;
-            a {
-                color: #fff;
+            font-size: 16px;
+            margin-top: 15px;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        .selection-container{
+            height: 50px;
+        }
+
+        .sublist-title{
+            font-size: 3rem;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+    
+            .pd-auto{
+                padding: 1px;
+                margin-top: -5px;
             }
-            span {
+    
+            .input-group {
+                position: relative;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: stretch;
+                width: 100%;
+    
+                input {
+                    position: relative;
+                    flex: 1 1 auto;
+                    width: 1%;
+                    min-width: 0;
+                    margin-bottom: 0;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+    
+                .input-group-prepend {
+                    margin-right: -1px;
+                    display: flex;
+    
+                    span {
+                        padding: 10px 20px;
+                        font-size: 14px;
+                        font-weight: 600;
+                        background-color: transparent;
+                        border: 1px solid rgba(0, 0, 0, 0.1);
+                        display: flex;
+                        align-items: center;
+                        margin-bottom: 0;
+                        line-height: 1.5;
+                        color: #495057;
+                        text-align: center;
+                        white-space: nowrap;
+                        border-radius: 0.25rem;
+                    }
+                }
+            }
+    
+            label {
+                margin-bottom: 10px;
+                font-weight: 800;
+                display: inline-block;
+            }
+            .form-control {
+                padding: 8px 15px;
+                border-radius: 8px;
+                width: 100%;
+                color: #6e6e6e;
+                border: 1px solid #e5e1dc;
                 background-color: #fff;
+                letter-spacing: 0.1px;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 1.5;
+                background-clip: padding-box;
+                background-clip: padding-box;
+            }
+            input,
+            select {
+                height: 50px;
             }
         }
-        .ant-tabs-content-holder {
-            border-left: 0ch;
-        }
+    }
+    .pr-20 {
+        padding-right: 30px;
+    }
+    .pl-auto{
+        padding-left: 10px;
     }
 }

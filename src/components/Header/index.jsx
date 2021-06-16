@@ -7,6 +7,7 @@ import useDocumentScroll from './../../hooks/useDocumentScroll'
 import jwtDecode from 'jwt-decode';
 import { useDispatch } from 'react-redux';
 import { getInfoUser, resetUser } from '../../actions/user';
+import { resetDetail } from '../../actions/detailhome';
 
 
 function Header(props) {
@@ -74,6 +75,7 @@ function Header(props) {
         }
     }
     const toPost = () => {
+        dispatch(resetDetail());
         history.push("/dang-bai")
     }
 

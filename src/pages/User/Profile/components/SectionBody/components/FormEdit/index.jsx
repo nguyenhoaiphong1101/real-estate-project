@@ -115,7 +115,7 @@ function FormEdit() {
 
     return (
         <div className="form-edit">
-            <Form form={form} className="form" onFinish={onFinish}>
+            <Form form={form} className="form-edit" onFinish={onFinish}>
                 <Row>
                     <Col span={12}>
                         <label className="pl-auto">Tên đầy đủ</label>

@@ -1,5 +1,10 @@
+import { useEffect } from 'react';
 import './styles.scss';
 function Feature({ icon, label, value }) {
+    // const [valueInput, setValueInput] = useState('');
+    // useEffect(() => {
+    //     setValueInput(value);
+    // }, [value]);
 
     return (
         <div className="feature">

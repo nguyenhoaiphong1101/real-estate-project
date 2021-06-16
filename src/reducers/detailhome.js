@@ -11,6 +11,12 @@ const detailHomeReducer = (state = initialState, action) => {
                 detailHome: action.payload,
             };
         }
+        case 'RESET_DETAILHOME': {
+            return {
+                ...state,
+                detailHome: action.payload,
+            };
+        }
         default:
             return state;
     }

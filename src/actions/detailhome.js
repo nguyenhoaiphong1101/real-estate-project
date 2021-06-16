@@ -11,3 +11,9 @@ export const loadDetailHome = (id, user_id) => {
         })
     }
 }
+export const resetDetail = () => {
+    return {
+        type: 'RESET_DETAILHOME',
+        payload: {}
+    }
+}

@@ -35,7 +35,7 @@ function ListingPost() {
                 <List.Item className="item"
                     key={item.id}
                 >
-                    <ThumbnailExtra listLatestNew={item} />
+                    <ThumbnailExtra listLatestNew={item} type="update"/>
                 </List.Item>
             )}
         >

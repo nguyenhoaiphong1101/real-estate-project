@@ -9,7 +9,7 @@ function SectionBanner() {
             <div className="detail-section-banner">
                 <div className="container">
                     <div className="sub-header">
-                        <span className="listing-badge">Cho thuê</span>
+                        <span className="listing-badge">{detailHome?.type_apartment}</span>
                         <h1 className="title">{detailHome?.title}</h1>
                         <span className="address">
                             <i class="fas fa-map-marker-alt"></i>

@@ -77,6 +77,10 @@ function App() {
                                 <SubmitList />
                                 <Footer />
                             </Route>
+                            <Route path="/chinh-sua/:id" >
+                                <SubmitList />
+                                <Footer />
+                            </Route>
                             <Route path="/nha-dat-ban" >
                                 <Listings title="Nhà đất bán" />
                                 <Footer />
