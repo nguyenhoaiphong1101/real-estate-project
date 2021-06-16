@@ -11,10 +11,11 @@ import Testimonials from './components/Testimonials';
 function Home(props) {
     const token = localStorage.getItem('access_token');
     const checkLogin = () =>{
-        if(token)
-        {
-            return <ListRecomend/>
-        }
+        return <ListRecomend/>
+
+        // if(token)
+        // {
+        // }
     }
     return (
         <div>

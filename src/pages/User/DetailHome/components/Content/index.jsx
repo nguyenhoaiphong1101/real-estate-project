@@ -5,6 +5,7 @@ import SectionPriceRange from '../SectionPriceRange';
 import SectionFeatures from '../SectionFeatures';
 import SectionSimilarListing from '../SectionSimilarListing';
 import { useSelector } from 'react-redux';
+import { Markup } from 'interweave';
 
 function Content() {
 
@@ -14,7 +15,7 @@ function Content() {
             <SectionSlideIntroduce />
             <div className="section-overview">
                 <h1 className="title">Tổng quan</h1>
-                <p>{detailHome?.apartment_detail?.description}</p>
+                <Markup content={detailHome?.apartment_detail?.description} />
             </div>
             <SectionPriceRange />
             <SectionFeatures />
