@@ -209,11 +209,11 @@ function SubmitList(props) {
             type_apartment: valueTypeApartment.id,
         }
 
-        if (detailHome !== {}) {
-            updatePost.PUT(dataPost, detailHome.id);
+        if (history.location.pathname === '/dang-bai') {
+            createPost.POST(dataPost);
         }
         else {
-            createPost.POST(dataPost);
+            updatePost.PUT(dataPost, detailHome.id);
         }
     }
 

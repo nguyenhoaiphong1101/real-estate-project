@@ -34,13 +34,13 @@ function ThumbnailExtra(props) {
     const token = localStorage.getItem('access_token');
 
     const toDetailHome = () => {
-        if (token) {
-            dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))
-        }
-        else {
-            dispatch(loadDetailHome(props?.listLatestNew?.id))
-        }
-        history.push(`/chi-tiet/${props?.listLatestNew?.id}`,props?.listLatestNew)
+        // if (token) {
+        //     dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))
+        // }
+        // else {
+        //     dispatch(loadDetailHome(props?.listLatestNew?.id))
+        // }
+        history.push(`/chi-tiet/${props?.listLatestNew?.id}`, props?.listLatestNew)
 
     }
 
@@ -86,9 +86,21 @@ function ThumbnailExtra(props) {
                     <img src="http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg" alt="listing" />
                 </a>
                 <div className="listing-badges">
-                    <span className="listing-badge sale">
+                    <span className="listing-badge sale" >
                         {props.listLatestNew?.type_apartment}
                     </span>
+                    <br />
+
+                    {history.location.pathname === '/trang-ca-nhan' ?
+                        <span style={{ marginTop: "15px", display: "block" }} className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`} >
+                            {props.listLatestNew?.status}
+                        </span>
+                        :
+                        null
+                    }
+                    {/* <span style={{ marginTop: "15px", display: "block" }} className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`} >
+                        {props.listLatestNew?.status}
+                    </span> */}
                 </div>
                 <div class="listing-controls" onClick={() => setFavorite()}>
                     <a class={isFavorite ? "favorite" : "un-favorite"}>

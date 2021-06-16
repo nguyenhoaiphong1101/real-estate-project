@@ -25,13 +25,7 @@ function ThumbnailPrimary(props) {
 
     const history = useHistory()
     const toDetailHome = () => {
-        if (token) {
-            dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))
-        }
-        else {
-            dispatch(loadDetailHome(props?.listLatestNew?.id, null))
-        }
-        history.push('/chi-tiet')
+        history.push(`/chi-tiet/${props?.listLatestNew?.id}`, props?.listLatestNew)
     }
     const [isFavorite, setIsFavorite] = useState();
 
@@ -80,7 +74,7 @@ function ThumbnailPrimary(props) {
                     <img src="http://androthemes.com/themes/react/acres/assets/img/listings/1.jpg" alt="listing" />
                 </a>
                 <div class="listing-badges">
-                    <span class="listing-badge sale">
+                    <span className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`}>
                         {props.listLatestNew?.type_apartment}
                     </span>
                 </div>

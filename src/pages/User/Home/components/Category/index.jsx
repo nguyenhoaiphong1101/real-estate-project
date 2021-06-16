@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadListCategory } from '../../../../../actions/category';
 import { useHistory } from 'react-router';
 import { loadListFilter } from '../../../../../actions/listfilter';
+import background from '../../../../../assets/images/Category/1.jpg';
+
 
 
 const items = [
@@ -67,12 +69,12 @@ function Category(props) {
                     <h2>Tìm kiếm theo thể loại</h2>
                 </div>
                 <Row gutter={[16, 16]}>
-                    {listCategory.map(item => {
+                    {listCategory.map((item, index) => {
                         return (
                             <Col key={item.id} span={8} className="category" onClick={() => valueSearch(item)}>
                                 <div className="category-item" >
                                     {/* <a><img src="http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg" alt="#" /></a> */}
-                                    <div className="recomend-img" ></div>
+                                    <div className={`recomend-img recomend-img-${index}`}></div>
                                     <div className="category-item-body">
                                         <h5><a>{item.name}</a></h5>
                                         <span>({item.totalItem})</span>
