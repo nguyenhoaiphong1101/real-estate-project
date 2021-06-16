@@ -6,7 +6,7 @@ import { AXIOS_INSTANCE } from "../config/interceptor";
 
 export const createPost = {
 
-    POST: ( body) => {
+    POST: (body) => {
         return AXIOS_INSTANCE({
             method: 'POST',
             // headers: {
@@ -24,7 +24,7 @@ export const createPost = {
 }
 export const updatePost = {
 
-    PUT: ( body,id) => {
+    PUT: (body, id) => {
         return AXIOS_INSTANCE({
             method: 'put',
             // headers: {
@@ -34,9 +34,8 @@ export const updatePost = {
             url: API_URL + `/apartment/${id}/update`,
         }).then(res => {
             message.success("Success!");
+        }).catch(err => {
+            message.error(err.response.data.message);
         })
-            .catch(err => {
-                message.error(err.message);
-            })
     }
 }

@@ -3,6 +3,7 @@
     margin: auto;
 }
 
+
 .title-category {
     h5 {
         color: #519fff;
@@ -25,11 +26,20 @@
             position: relative;
             transition: 0.3s;
 
-            img {
-                border-radius: 8px;
+            .recomend-img {
+                cursor: pointer;
+                background-image: url('../../../../../assets/images/Category/1.jpg');
+                border-radius: 4px;
                 max-width: 100%;
-                height: auto;
+                height: 250px;
+                background-size: cover;
             }
+
+            // img {
+            //     border-radius: 8px;
+            //     max-width: 100%;
+            //     height: auto;
+            // }
 
             .category-item-body {
                 position: absolute;

@@ -13,6 +13,7 @@ import { createPost, updatePost } from '../../../api/createPostApartment';
 import { loadListCategory } from '../../../actions/category';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
+import { loadDetailHome } from '../../../actions/detailhome';
 
 
 function getBase64(file) {
@@ -203,15 +204,19 @@ function SubmitList(props) {
             type_apartment: valueTypeApartment.id,
         }
 
-        if(detailHome!=={})
-        {
-            updatePost.PUT(dataPost,detailHome.id);
+        if (detailHome !== {}) {
+            updatePost.PUT(dataPost, detailHome.id);
         }
-        else{
+        else {
             createPost.POST(dataPost);
         }
     }
 
+    const history = useHistory();
+
+    useEffect(() => {
+        dispatch(loadDetailHome(history?.location?.state?.id))
+    }, []);
 
 
 
@@ -270,7 +275,7 @@ function SubmitList(props) {
 
     return (
         <div className="sublist">
-            <SubHeader title="Chỉnh Sửa Bài Đăng" />
+            <SubHeader title={history.location.pathname === '/dang-bai'?"Đăng bài":"Chỉnh Sửa Bài Đăng"} />
             <Form form={form} className="container form-submit-listing">
                 <Row className="row">
                     <Col span={12}>
@@ -283,7 +288,7 @@ function SubmitList(props) {
                                 <SelectCustom title="Thể loại" onHandleChange={changeValueCategory} options={listCategory} />
                             </Form.Item>
                             <Form.Item className="pl-auto label" label="Ngày Hết Hạn" name="expired_date">
-                                <DatePicker className="input"  disabledDate={disabledDate} />
+                                <DatePicker className="input" disabledDate={disabledDate} />
                             </Form.Item>
                             <Form.Item className="pl-auto label" name="total_price" label="Tổng Giá">
                                 <Input className="input" ></Input>
@@ -314,7 +319,7 @@ function SubmitList(props) {
                 <Row className="row">
                     <Col span={24}>
                         <div className="wrapper-space">
-                        <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Hình ảnh</h1>
+                            <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Hình ảnh</h1>
                             <Upload
                                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                                 listType="picture-card"
@@ -325,13 +330,13 @@ function SubmitList(props) {
                             </Upload>
                         </div>
                         <Modal
-                        visible={previewVisible}
-                        title={previewTitle}
-                        footer={null}
-                        onCancel={handleCancel}
+                            visible={previewVisible}
+                            title={previewTitle}
+                            footer={null}
+                            onCancel={handleCancel}
                         >
-                        <img alt="example" style={{ width: '100%' }} src={previewImage} />
-                </Modal>
+                            <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                        </Modal>
                     </Col>
                 </Row>
                 <Row className="row">
@@ -359,7 +364,7 @@ function SubmitList(props) {
                         </div>
                     </Col>
                 </Row>
-                <Button className="btn-custom" value={detailHome!=={} ? "Chỉnh sửa" : "Đăng bài"} onClick={() => submitData()}></Button>
+                <Button className="btn-custom" value={history.location.pathname === '/dang-bai'? "Đăng bài" : "Chỉnh sửa"} onClick={() => submitData()}></Button>
             </Form>
         </div >
     );

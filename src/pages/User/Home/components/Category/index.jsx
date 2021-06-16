@@ -71,7 +71,8 @@ function Category(props) {
                         return (
                             <Col key={item.id} span={8} className="category" onClick={() => valueSearch(item)}>
                                 <div className="category-item" >
-                                    <a><img src="http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg" alt="#" /></a>
+                                    {/* <a><img src="http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg" alt="#" /></a> */}
+                                    <div className="recomend-img" ></div>
                                     <div className="category-item-body">
                                         <h5><a>{item.name}</a></h5>
                                         <span>({item.totalItem})</span>

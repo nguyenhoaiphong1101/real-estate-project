@@ -65,7 +65,7 @@ function App() {
                                 <Home />
                                 <Footer />
                             </Route>
-                            <Route path="/chi-tiet" >
+                            <Route path="/chi-tiet/:id" >
                                 <DetailHome />
                                 <Footer />
                             </Route>

@@ -38,14 +38,13 @@ function ThumbnailExtra(props) {
             dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))
         }
         else {
-            dispatch(loadDetailHome(props?.listLatestNew?.id, null))
+            dispatch(loadDetailHome(props?.listLatestNew?.id))
         }
-        history.push('/chi-tiet')
+        history.push(`/chi-tiet/${props?.listLatestNew?.id}`,props?.listLatestNew)
 
     }
 
     const toUpdatePost = () => {
-        dispatch(loadDetailHome(props?.listLatestNew?.id, null))
         history.push(`/chinh-sua/${props?.listLatestNew?.id}`, props?.listLatestNew)
     }
 

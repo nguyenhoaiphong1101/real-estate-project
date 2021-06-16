@@ -5,6 +5,8 @@
     }
     .ant-input{
         font-size: 16px;
+        border-radius: 8px;
+        height: 58px;
     }
     label {
         font-size: 16px;
@@ -20,6 +22,8 @@
         margin: 5px 10px;
     }
     .submit {
+        margin-top: 10px;
+        font-size: 16px;
         background-color: #519fff;
     }
 }
