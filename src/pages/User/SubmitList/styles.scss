@@ -13,6 +13,17 @@
             padding: 20px;
             margin: 0 15px;
             border-radius: 10px;
+            .wrapper-editor{
+                background-color: #fff;
+                border-radius: 10px;
+                .toolbar{
+                    padding: 10px;
+                    border-radius: 10px 10px 0 0;
+                }
+                .editor{
+                    padding: 10px 20px;
+                }
+            }
         }
         .current-price{
             .ant-form-item{

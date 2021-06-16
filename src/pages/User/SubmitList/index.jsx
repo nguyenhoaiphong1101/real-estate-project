@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import "./styles.scss";
-import SubHeader from "../../../components/SubHeader";
-import { Upload, Modal, DatePicker } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { Row, Col, Input, Form } from 'antd';
-import Feature from './components/Feature';
-import SelectCustom from '../../../components/Select';
-import Button from '../../../components/Button';
-import { loadDistrict, loadProvince } from '../../../actions/search';
-import { useDispatch, useSelector } from 'react-redux';
-import { createPost, updatePost } from '../../../api/createPostApartment';
-import { loadListCategory } from '../../../actions/category';
+import { Col, DatePicker, Form, Input, Modal, Row, Upload } from 'antd';
 import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { loadListCategory } from '../../../actions/category';
 import { loadDetailHome } from '../../../actions/detailhome';
+import { loadDistrict, loadProvince } from '../../../actions/search';
+import { createPost, updatePost } from '../../../api/createPostApartment';
+import Button from '../../../components/Button';
+import HTMLEditor from '../../../components/HTMLEditor';
+import SelectCustom from '../../../components/Select';
+import SubHeader from "../../../components/SubHeader";
+import Feature from './components/Feature';
+import "./styles.scss";
 
 
 function getBase64(file) {
@@ -61,6 +62,8 @@ function SubmitList(props) {
     const [valueProvince, setValueProvince] = useState({ id: null, name: '' });
     const [valueTypeApartment, setValueTypeApartment] = useState({ id: null, name: '' });
     const [valueCategory, setValueCategory] = useState({ id: null, name: '' });
+    const [descriptionEditor, setDescriptionEditor] = useState('')
+
 
     useEffect(() => {
         if (valueProvince.id)
@@ -70,7 +73,9 @@ function SubmitList(props) {
     const getDistrict = (id) => {
         dispatch(loadDistrict(id));
     }
-
+    const handleChangeOverview = (e) => {
+        setDescriptionEditor(e)
+    }
     const changeValueProvince = (value, id) => {
         setValueProvince({ id: id.key, name: value });
         form.setFieldsValue({
@@ -187,7 +192,7 @@ function SubmitList(props) {
                 balcony_direction: dataForm.balcony_direction,
                 bathroom_quantity: dataForm.bathroom_quantity,
                 bedroom_quantity: dataForm.bedroom_quantity,
-                // description: dataForm.description,
+                description: descriptionEditor,
                 entrance_building: dataForm.entrance_building,
                 floor_quantity: dataForm.floor_quantity,
                 front_building: dataForm.front_building,
@@ -226,7 +231,7 @@ function SubmitList(props) {
             balcony_direction: detailHome?.apartment_detail?.balcony_direction,
             bathroom_quantity: detailHome?.apartment_detail?.bathroom_quantity,
             bedroom_quantity: detailHome?.apartment_detail?.bedroom_quantity,
-            // description: detailHome?.apartment_detail?.description,
+            description: detailHome?.apartment_detail?.description,
             entrance_building: detailHome?.apartment_detail?.entrance_building,
             floor_quantity: detailHome?.apartment_detail?.floor_quantity,
             front_building: detailHome?.apartment_detail?.front_building,
@@ -271,6 +276,7 @@ function SubmitList(props) {
             id: detailHome?.type_apartment === 'Bán' ? 'BUY' : 'RENT',
             name: detailHome?.type_apartment,
         });
+        setDescriptionEditor(detailHome?.apartment_detail?.description,);
     }, [detailHome]);
 
     return (
@@ -339,6 +345,24 @@ function SubmitList(props) {
                         </Modal>
                     </Col>
                 </Row>
+                <Row className="row">
+                    <Col span={24}>
+                        <div className="wrapper-space">
+                        <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Tổng quan</h1>
+                            <Form.Item name="description">
+                                <HTMLEditor
+                                        wrapperClassName="wrapper-editor"
+                                        editorClassName="editor"
+                                        toolbarClassName="toolbar"
+                                        onChange={handleChangeOverview}
+                                        value={descriptionEditor === null || descriptionEditor === "<p></p>\n" ? "" : descriptionEditor}
+                                        />
+                               
+                            </Form.Item>
+                        </div>
+                    </Col>
+                </Row>
+               
                 <Row className="row">
                     <Col span={24}>
                         <div className="wrapper-space">
