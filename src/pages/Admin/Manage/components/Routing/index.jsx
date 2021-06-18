@@ -1,7 +1,4 @@
 import React from 'react';
-import ManageAccount from "../ManageAccount"
-import ManageComment from "../ManageComment"
-import ManageTopic from "../ManageTopic"
 import {
     BrowserRouter as Router,
     Switch,
@@ -9,6 +6,9 @@ import {
     Link,
     Redirect
 } from "react-router-dom";
+import ManageApartment from '../ManageApartment';
+import ManageCategory from '../ManageCategory';
+import ManageUser from '../ManageUser';
 import "./styles.scss"
 
 function AdminRouting(props) {
@@ -20,23 +20,23 @@ function AdminRouting(props) {
                         Tổng Quan
                     </div>
                 </Route>
-                <Route path="/admin/bai-viet" exact>
+                <Route path="/admin/can-ho" exact>
                     <div>
-                        <ManageTopic />
+                        <ManageApartment />
                     </div>
                 </Route>
-                <Route path="/admin/tai-khoan" exact>
+                <Route path="/admin/nguoi-dung" exact>
                     <div>
-                        <ManageAccount />
+                        <ManageUser />
                     </div>
                 </Route>
-                <Route path="/admin/comment" >
+                <Route path="/admin/the-loai" >
                     <div>
-                        <ManageComment />
+                        <ManageCategory />
                     </div>
                 </Route>
                 <Route>
-                    <Redirect to="/admin/bai-viet" />
+                    <Redirect to="/admin/tong-quan" />
                 </Route>
             </Switch>
         </div>

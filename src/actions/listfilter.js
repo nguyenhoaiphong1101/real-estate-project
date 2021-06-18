@@ -1,5 +1,5 @@
 
-export const loadListFilter = (valueCategory, valueProvince, valueDistrict, valuePrice, valueArea) => {
+export const loadListFilter = (valueCategory, valueProvince, valueDistrict, valuePrice, valueArea, inputSearch) => {
     return {
         type: 'LOAD_LISTFILTER',
         payload: {
@@ -8,6 +8,7 @@ export const loadListFilter = (valueCategory, valueProvince, valueDistrict, valu
             valueDistrict: valueDistrict,
             valuePrice: valuePrice,
             valueArea: valueArea,
+            inputSearch: inputSearch,
         }
     }
 }

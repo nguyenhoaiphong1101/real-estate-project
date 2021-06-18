@@ -4,6 +4,7 @@ const initialState = {
     valueDistrict: {},
     valuePrice: {},
     valueArea: {},
+    inputSearch: '',
     user_id: null,
 }
 
@@ -18,6 +19,7 @@ const listFilterReducer = (state = initialState, action) => {
                 valueProvince: action.payload.valueProvince,
                 valuePrice: action.payload.valuePrice,
                 valueArea: action.payload.valueArea,
+                inputSearch: action.payload.inputSearch,
             };
         }
         default:

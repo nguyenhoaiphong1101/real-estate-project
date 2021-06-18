@@ -35,28 +35,28 @@ function AdminMenu(props) {
                     </Link>
                 </Menu.Item>
                 <Menu.Item className="mt-0" key="2" icon={<PieChartOutlined />} >
-                    <Link to="/admin/bai-viet">
-                        Quản lý bài viết
+                    <Link to="/admin/can-ho">
+                        Quản lý căn hộ
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="3" icon={<DesktopOutlined />}>
-                    <Link to="/admin/tai-khoan">
-                        Quản lý tài khoản
+                    <Link to="/admin/nguoi-dung">
+                        Quản lý người dùng
                     </Link>
                 </Menu.Item>
                 <Menu.Item key="4" icon={<ContainerOutlined />}>
-                    <Link to="/admin/comment">
-                        Quản lý comment
+                    <Link to="/admin/the-loai">
+                        Quản lý thể loại
                     </Link>
                 </Menu.Item>
                 <div class="separator-custom"></div>
-                <SubMenu key="sub1" icon={<ContainerOutlined />} title="Cài Đặt">
+                {/* <SubMenu key="sub1" icon={<ContainerOutlined />} title="Cài Đặt">
                     <Menu.Item key="5">
                         <Link to="/admin">
                             Quản Lý Thể Loại
                         </Link>
                     </Menu.Item>
-                </SubMenu>
+                </SubMenu> */}
             </Menu>
             {/* 
               <Button type="primary" onClick={toggleCollapsed} className="btn-custom" >

@@ -200,7 +200,7 @@ function FilterListings(props) {
             dispatch(loadProvince(0))
         }
         else {
-            searchFilter(filter.valueCategory, filter.valueProvince, filter.valueDistrict, filter.valuePrice, filter.valueArea)
+            searchFilter(filter.valueCategory, filter.valueProvince, filter.valueDistrict, filter.valuePrice, filter.valueArea, filter.inputSearch)
         }
 
     }, [props.typeListing])
@@ -234,7 +234,7 @@ function FilterListings(props) {
     }
     const token = localStorage.getItem('access_token');
 
-    const searchFilter = async (valueCategory, valueProvince, valueDistrict, valuePrice, valueArea) => {
+    const searchFilter = async (valueCategory, valueProvince, valueDistrict, valuePrice, valueArea, inputSearch) => {
 
 
         await dispatch(loadListSearch({
@@ -246,8 +246,9 @@ function FilterListings(props) {
             price_from: valuePrice?.from && valuePrice?.id !== "-1" ? valuePrice?.from : undefined,
             price_to: valuePrice?.to && valuePrice?.id !== "-1" && valuePrice?.to !== -1 ? valuePrice.to : undefined,
             province_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
+            search: inputSearch ? inputSearch : undefined,
             user_id: token ? jwtDecode(token).id : null,
-            page:1,
+            page: 1,
         }))
         dispatch(loadListFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea));
         // (page, size, area_from, area_to, category_id, district_id, price_from, price_to, province_id)

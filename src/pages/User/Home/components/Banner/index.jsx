@@ -115,7 +115,9 @@ function Banner() {
 
     const history = useHistory();
 
-    const onSearch = value => console.log(value);
+    const onSearch = e => {
+        setInputSearch(e.target.value);
+    };
 
     const [active, setActive] = useState(false);
     const handleToggle = () => {
@@ -132,6 +134,7 @@ function Banner() {
     const [valueProvince, setValueProvince] = useState({ id: null, name: '' });
     const [valuePrice, setValuePrice] = useState({ id: null, name: '' });
     const [valueArea, setValueArea] = useState({ id: null, name: '' });
+    const [inputSearch, setInputSearch] = useState('');
 
     useEffect(() => {
         if (valueProvince.id)
@@ -177,7 +180,7 @@ function Banner() {
 
     const valueSearch = () => {
 
-        dispatch(loadListFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea));
+        dispatch(loadListFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea, inputSearch));
         if (typeAparment == "1") {
             history.push('/nha-dat-ban', { from: '/' });
         }
@@ -210,7 +213,7 @@ function Banner() {
                                         <SelectCustom title="Thể loại" onHandleChange={changeValueCategory} options={listCategory} />
                                     </Col>
                                     <Col span={14}>
-                                        <Input className="input" placeholder="Tìm kiếm địa điểm, khu vực" onSearch={onSearch} />
+                                        <Input className="input" placeholder="Tìm kiếm địa điểm, khu vực" onChange={onSearch} />
                                     </Col>
                                     <Col span={4} onClick={() => valueSearch()}>
                                         <ButtonCustom value="Tìm kiếm" className="btn-search" />
