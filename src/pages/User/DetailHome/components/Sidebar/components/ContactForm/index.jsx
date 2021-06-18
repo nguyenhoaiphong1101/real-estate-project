@@ -1,9 +1,11 @@
 import { Form, Input, Popover } from 'antd';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import ButtonSubmit from '../../../../../../../components/Button';
 import './styles.scss';
 
 function ContactForm() {
+    const detailHome = useSelector(state => state.detailhome.detailHome)
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
@@ -22,9 +24,9 @@ function ContactForm() {
                 </a>
                 <div className="media-body">
                     <h6>
-                        Freddy Burben
+                        {detailHome?.author?.full_name}
                     </h6>
-                    <span>Company Agent</span>
+                    <span>{detailHome?.author?.email}</span>
                 </div>
                 <Popover className="popup" content={content} trigger="click">
                     <i className="fas fa-ellipsis-v">

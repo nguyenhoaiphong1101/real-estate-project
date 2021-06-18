@@ -3,7 +3,6 @@ import TextArea from 'antd/lib/input/TextArea';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadDistrict } from '../../../../../../../actions/search';
-import { getInfoUser } from '../../../../../../../actions/user';
 import { updateUser } from '../../../../../../../api/userApi';
 import ButtonSubmit from '../../../../../../../components/Button';
 import SelectCustom from '../../../../../../../components/Select';
@@ -27,7 +26,7 @@ function FormEdit() {
     useEffect(() => {
         if (valueProvince.id)
             getDistrict(valueProvince.id);
-    }, [valueProvince]);
+    }, []);
 
 
     const user = useSelector(state => state.user.user)

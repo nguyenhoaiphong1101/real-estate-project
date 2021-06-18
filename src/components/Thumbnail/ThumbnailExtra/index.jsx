@@ -7,12 +7,14 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { loadDetailHome } from '../../../actions/detailhome';
 import { postFavorite } from '../../../api/favorite';
+import { API_URL } from '../../../constants/Config';
 import Button from '../../Button';
 import './styles.scss';
 
 function ThumbnailExtra(props) {
 
     const [isVisible, setIsVisible] = useState(false);
+    const [image, setImage] = useState({});
 
     const handleOk = () => {
         history.push('/dang-nhap')
@@ -41,7 +43,6 @@ function ThumbnailExtra(props) {
         //     dispatch(loadDetailHome(props?.listLatestNew?.id))
         // }
         history.push(`/chi-tiet/${props?.listLatestNew?.id}`, props?.listLatestNew)
-
     }
 
     const toUpdatePost = () => {
@@ -60,11 +61,21 @@ function ThumbnailExtra(props) {
         }
     }
 
+    const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
+
+
+
 
 
     useEffect(() => {
         setIsFavorite(props?.listLatestNew?.favourite);
-    }, [props?.listLatestNew?.favourite]);
+        let imgs = [];
+        props?.listLatestNew?.photos?.forEach((item, index) => {
+            imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
+        });
+        setImage(imgs[0]);
+    }, [props?.listLatestNew]);
+
 
     const content = (
         <div className="popup-content-wrapper">
@@ -82,17 +93,19 @@ function ThumbnailExtra(props) {
             </Modal>
 
             <div className="listing__thumbnail" >
+                {/* <div className="listing__thumbnail-image" style={{ backgroundImage: `url(${image !== {} ? image?.url : "http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg"})` }} >
+
+                </div> */}
                 <a onClick={() => toDetailHome()}>
-                    <img src="http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg" alt="listing" />
+                    <img src={image !== {} ? image?.url : "http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg"} alt="listing" />
                 </a>
                 <div className="listing-badges">
                     <span className="listing-badge sale" >
                         {props.listLatestNew?.type_apartment}
                     </span>
                     <br />
-
                     {history.location.pathname === '/trang-ca-nhan' ?
-                        <span style={{ marginTop: "15px", display: "block" }} className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`} >
+                        <span style={{ marginTop: "15px", display: "inline-block" }} className={`listing-status  ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`} >
                             {props.listLatestNew?.status}
                         </span>
                         :

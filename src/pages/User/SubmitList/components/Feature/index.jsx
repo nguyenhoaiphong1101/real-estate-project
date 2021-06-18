@@ -1,6 +1,6 @@
 import './styles.scss';
-import { Row, Col, Input, Form } from 'antd';
 import SelectCustom from '../../../../../components/Select';
+import { Form, Input } from 'antd';
 function Feature({ icon, label, name, onchange }) {
 
     const typeApartment = [
@@ -20,12 +20,12 @@ function Feature({ icon, label, name, onchange }) {
             <i className={icon}></i>
             <h6 className="feature-label">{label}</h6>
             {name === 'type_apartment' ?
-                <Form.Item name={name} className="feature-item">
+                <Form.Item name={name} className="feature-item" rules={[{ required: true, message: `Vui lòng nhập thông tin !` }]}>
                     <SelectCustom onHandleChange={onchange} options={typeApartment} />
                 </Form.Item>
                 :
-                <Form.Item name={name}>
-                    <Input  className="input"  placeholder={`Thông Tin ${label}`} />
+                <Form.Item name={name} rules={[{ required: true, message: `Vui lòng nhập thông tin !` }]}>
+                    <Input className="input" placeholder={`Thông Tin ${label}`} />
                 </Form.Item>
             }
             {/* <Input name={name} style={{backgroundColor:'transparent',border:'0'}} placeholder="value"/> */}

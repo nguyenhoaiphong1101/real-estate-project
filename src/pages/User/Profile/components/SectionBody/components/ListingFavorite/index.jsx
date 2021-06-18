@@ -1,7 +1,7 @@
 import { List, Tabs } from 'antd';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFavoriteUser, getPostUser } from '../../../../../../../actions/user';
+import { getFavoriteUser } from '../../../../../../../actions/user';
 import ThumbnailExtra from '../../../../../../../components/Thumbnail/ThumbnailExtra';
 import './styles.scss';
 

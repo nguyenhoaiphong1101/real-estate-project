@@ -9,9 +9,10 @@ import { loadDetailHome } from '../../../actions/detailhome';
 import jwtDecode from 'jwt-decode';
 import { postFavorite } from '../../../api/favorite';
 import Modal from 'antd/lib/modal/Modal';
+import { API_URL } from '../../../constants/Config';
 
 function ThumbnailPrimary(props) {
-
+    const [image, setImage] = useState({});
 
 
     const toTimeString = (seconds) => {
@@ -62,6 +63,22 @@ function ThumbnailPrimary(props) {
             </ul>
         </div>
     );
+
+
+    const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
+
+
+
+
+
+    useEffect(() => {
+        setIsFavorite(props?.listLatestNew?.favourite);
+        let imgs = [];
+        props?.listLatestNew?.photos?.forEach((item, index) => {
+            imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
+        });
+        setImage(imgs[0]);
+    }, [props?.listLatestNew]);
     return (
         <div className={`listing-primary ${props.className}`}>
 
@@ -71,7 +88,7 @@ function ThumbnailPrimary(props) {
 
             <div className="listing__thumbnail" >
                 <a onClick={() => toDetailHome()}>
-                    <img src="http://androthemes.com/themes/react/acres/assets/img/listings/1.jpg" alt="listing" />
+                    <img src={image !== {} ? image?.url : "http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg"} alt="listing" />
                 </a>
                 <div class="listing-badges">
                     <span className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`}>

@@ -48,8 +48,8 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
 
     const handleChange = (value, id) => {
         setCurrentValue(value);
-        if(onHandleChange)
-        onHandleChange(value, id);
+        if (onHandleChange)
+            onHandleChange(value, id);
         // if (callApi)
         //     callApi(id.key)
     };
@@ -77,7 +77,7 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
         }
     })
     useEffect(() => {
-        setItems(options.filter(item => item.name?.toLowerCase().includes(valueSearch.toLowerCase())));
+        setItems(options?.filter(item => item.name?.toLowerCase().includes(valueSearch.toLowerCase())));
     }, [valueSearch])
 
 

@@ -30,11 +30,11 @@ function SectionRecentList() {
                 </div>
                 <Row>
                     <Col span={16} className="col-left">
-                        <div className="item">
+                        <div className="item" style={{ height: "25.3%" }} >
                             <ThumbnailExtra listLatestNew={listLatestNew[0]}
                             />
                         </div>
-                        <div className="item">
+                        <div className="item" style={{ height: "70%" }}>
                             <ThumbnailPrimary listLatestNew={listLatestNew[1]} />
                         </div>
                     </Col>

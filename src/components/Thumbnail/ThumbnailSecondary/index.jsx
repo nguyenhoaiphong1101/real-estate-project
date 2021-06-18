@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { API_URL } from '../../../constants/Config';
 import './styles.scss';
 function ThumbnailSecondary(props) {
+
+    const [image, setImage] = useState({});
+
+
+    const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
+
+
+    useEffect(() => {
+        let imgs = [];
+        props?.listLatestNew?.photos?.forEach((item, index) => {
+            imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
+        });
+        setImage(imgs);
+    }, [props?.listLatestNew]);
 
     return (
         <div class="listing listing-secondary">
             <div class="listing-thumbnail">
                 <a>
-                    <img src="http://androthemes.com/themes/react/acres/assets/img/listings/1.jpg" alt="listing" />
+                    <img src={image[0]?.url} alt="listing" />
                 </a>
             </div>
             <div class="listing-body">

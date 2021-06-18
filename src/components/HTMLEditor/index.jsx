@@ -23,6 +23,8 @@ const HTMLEditor = (props) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   useEffect(() => {
+    // setEditorState('');
+    // it cannot coming here so value is not change 
     if (!isEditing && props.value) {
       const contentBlock = convertFromHTML(props.value);
 
@@ -34,6 +36,10 @@ const HTMLEditor = (props) => {
         const editorState = EditorState.createWithContent(contentState);
         setEditorState(editorState);
       }
+
+    }
+    if (props.value === undefined) {
+      setEditorState('');
     }
   }, [props.value])
 
@@ -49,11 +55,12 @@ const HTMLEditor = (props) => {
     var exportedValue = draftToExportType(rawDraftContentState);
 
     if (props.setFieldsValue) {
+
       var fields = {};
-      fields[`${props["data-__field"].name}`] = exportedValue;
+      fields[`${props["data-__field"].name}`] = exportedValue === '<p></p>\n' ? '' : exportedValue;
       props.setFieldsValue({ ...fields });
     } else if (props.onChange) {
-      props.onChange(exportedValue);
+      props.onChange(exportedValue === '<p></p>\n' ? '' : exportedValue);
     }
   };
 
@@ -80,30 +87,30 @@ const HTMLEditor = (props) => {
   return (
     !loading && (
       <div>
-          <Editor
-            toolbar={{
-              image: {
-                uploadEnabled: false,
-                inputAccept:
-                  "image/gif,image/jpeg,image/jpg,image/png,image/svg",
-                defaultSize: {
-                  height: "100%",
-                  width: "100%",
-                },
+        <Editor
+          toolbar={{
+            image: {
+              uploadEnabled: false,
+              inputAccept:
+                "image/gif,image/jpeg,image/jpg,image/png,image/svg",
+              defaultSize: {
+                height: "100%",
+                width: "100%",
               },
-              fontSize: {
-                options: [8, 10, 12, 16, 18, 24, 36, 48, 72],
-              },
-              ...toolbar,
-            }}
-            editorState={editorState}
-            wrapperClassName={wrapperClassName}
-            editorClassName={editorClasses}
-            toolbarClassName={toolbarClassName}
-            onEditorStateChange={onEditorStateChange}
-            onChange={onChange}
-            placeholder={placeholder}
-          />
+            },
+            fontSize: {
+              options: [8, 10, 12, 16, 18, 24, 36, 48, 72],
+            },
+            ...toolbar,
+          }}
+          editorState={editorState}
+          wrapperClassName={wrapperClassName}
+          editorClassName={editorClasses}
+          toolbarClassName={toolbarClassName}
+          onEditorStateChange={onEditorStateChange}
+          onChange={onChange}
+          placeholder={placeholder}
+        />
         {footer && <div className="editor-footer">{footer}</div>}
       </div>
     )

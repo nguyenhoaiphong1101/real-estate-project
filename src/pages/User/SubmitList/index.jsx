@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Col, DatePicker, Form, Input, Modal, Row, Upload } from 'antd';
+import { Col, DatePicker, Form, Input, message, Modal, Row, Upload } from 'antd';
 import axios from "axios";
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
@@ -19,17 +19,18 @@ import Feature from './components/Feature';
 import "./styles.scss";
 
 
-function getBase64(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
-}
+
 
 function SubmitList(props) {
 
+    function getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
 
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
@@ -73,21 +74,53 @@ function SubmitList(props) {
     const changeValueProvince = (value, id) => {
         setValueProvince({ id: id.key, name: value });
         form.setFieldsValue({
+            province: {
+                id: id.key,
+                name: value,
+            }
+        })
+        form.setFieldsValue({
             district: {
                 id: null,
-                name: ''
+                name: '',
             }
         })
     }
+
     const changeValueDistrict = (value, id) => {
         setValueDistrict({ id: id.key, name: value });
+        form.setFieldsValue({
+            district: {
+                id: id.key,
+                name: value,
+            }
+        })
     }
     const changeValueTypeApartment = (value, id) => {
         setValueTypeApartment({ id: id.key, name: value });
+        form.setFieldsValue({
+            type_apartment: {
+                id: id.key,
+                name: value,
+            }
+        })
     }
     const changeValueCategory = (value, id) => {
         setValueCategory({ id: id.key, name: value });
+        form.setFieldsValue({
+            category: {
+                id: id.key,
+                name: value,
+            }
+        })
     }
+
+    useEffect(() => {
+        if (form.getFieldValue().district?.id === null)
+            form.setFieldsValue({
+                district: null
+            })
+    }, [form.getFieldValue().district]);
     const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
 
     useEffect(() => {
@@ -167,94 +200,114 @@ function SubmitList(props) {
         return current && current.valueOf() < Date.now();
     }
 
-    function submitData() {
-        // handle save photos
+    function callApiImage() {
         const bodyFormData = new FormData();
         let imgFiles = [];
         fileList.forEach((file) => {
-          if (file.file) {
-            imgFiles.push(file.file);
-          }
+            if (file.file) {
+                imgFiles.push(file.file);
+            }
         });
         if (imgFiles.length !== 0) {
             for (let i = 0; i < imgFiles.length; i++) {
-              bodyFormData.append("files", imgFiles[i]);
+                bodyFormData.append("files", imgFiles[i]);
             }
-            axios
-              .request({
-                url: API_URL + '/upload/photo',
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-                data: bodyFormData,
-              })
-              .then((res) => {
-                // bodyFormData.delete("files");
-                let formatFileList = [];
-                fileList.forEach((file) => {
-                  if (!file.file) {
-                    formatFileList.push({
-                      originalName: file.originalName,
-                      name: file.name,
-                      extension: file.extension,
+            return axios
+                .request({
+                    url: API_URL + '/upload/photo',
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                    data: bodyFormData,
+                })
+                .then((res) => {
+                    // bodyFormData.delete("files");
+                    let formatFileList = [];
+                    fileList.forEach((file) => {
+                        if (!file.file) {
+                            formatFileList.push({
+                                originalName: file.originalName,
+                                name: file.name,
+                                extension: file.extension,
+                            });
+                        }
                     });
-                  }
-                });
-                res.data.data.forEach((file) => {
-                  formatFileList.push({
-                    originalName: file.originalName,
-                    name: file.name,
-                    extension: file.extension,
-                  });
-                });
-                setPhotos(formatFileList);
-              });
-            }
-        
-        //
-        const dataForm = form.getFieldValue();
-        const dataPost = {
-            apartment_address: {
-                address: dataForm.address,
-                country_code: "VN",
-                district_id: valueDistrict.id,
-                province_id: valueProvince.id,
-            },
-            apartment_detail: {
-                balcony_direction: dataForm.balcony_direction,
-                bathroom_quantity: dataForm.bathroom_quantity,
-                bedroom_quantity: dataForm.bedroom_quantity,
-                description: descriptionEditor,
-                entrance_building: dataForm.entrance_building,
-                floor_quantity: dataForm.floor_quantity,
-                front_building: dataForm.front_building,
-                furniture: dataForm.furniture,
-                house_direction: dataForm.house_direction,
-                toilet_quantity: dataForm.toilet_quantity
-            },
-            area: dataForm.area,
-            category_id: valueCategory.id,
-            expired_date: moment(dataForm.expired_date).format("YYYY-MM-DDTHH:mm:ss") + 'Z',
-            overview: dataForm.overview,
-            title: dataForm.title,
-            total_price: dataForm.total_price,
-            type_apartment: valueTypeApartment.id,
-            photos: photos,
-        }
+                    res.data.data.forEach((file) => {
+                        formatFileList.push({
+                            originalName: file.originalName,
+                            name: file.name,
+                            extension: file.extension,
+                        });
+                    });
 
-        if (history.location.pathname === '/dang-bai') {
-            createPost.POST(dataPost);
+                    return formatFileList;
+                    setPhotos(formatFileList);
+                });
         }
-        else {
-            updatePost.PUT(dataPost, detailHome.id);
+    }
+
+    async function submitData() {
+
+        let listphoto = [];
+        await callApiImage()?.then(res => listphoto = res)
+
+
+        const dataForm = form.getFieldValue();
+        // if (fileList === []) {
+        //     message.error("Vui lòng chọn hình ảnh !");
+        // } else {
+
+
+        if (listphoto.length === 0) {
+            message.error("Vui lòng chọn hình ảnh !")
+        } else {
+            const dataPost = {
+                apartment_address: {
+                    address: dataForm.address,
+                    country_code: "VN",
+                    district_id: valueDistrict.id,
+                    province_id: valueProvince.id,
+                },
+                apartment_detail: {
+                    balcony_direction: dataForm.balcony_direction,
+                    bathroom_quantity: dataForm.bathroom_quantity,
+                    bedroom_quantity: dataForm.bedroom_quantity,
+                    description: descriptionEditor,
+                    entrance_building: dataForm.entrance_building,
+                    floor_quantity: dataForm.floor_quantity,
+                    front_building: dataForm.front_building,
+                    furniture: dataForm.furniture,
+                    house_direction: dataForm.house_direction,
+                    toilet_quantity: dataForm.toilet_quantity
+                },
+                area: dataForm.area,
+                category_id: valueCategory.id,
+                expired_date: moment(dataForm.expired_date).format("YYYY-MM-DDTHH:mm:ss") + 'Z',
+                overview: dataForm.overview,
+                title: dataForm.title,
+                total_price: dataForm.total_price,
+                type_apartment: valueTypeApartment.id,
+                photos: listphoto,
+            }
+
+
+            if (history.location.pathname === '/dang-bai') {
+                createPost.POST(dataPost);
+
+            }
+            else {
+                updatePost.PUT(dataPost, detailHome.id);
+            }
         }
+        // }
     }
 
     const history = useHistory();
 
     useEffect(() => {
-        dispatch(loadDetailHome(history?.location?.state?.id))
+        if (history.location.pathname === `/chinh-sua/${history?.location?.state?.id}`)
+            dispatch(loadDetailHome(history?.location?.state?.id))
     }, []);
 
 
@@ -277,22 +330,22 @@ function SubmitList(props) {
             overview: detailHome?.overview,
             title: detailHome?.title,
             total_price: detailHome?.total_price,
-            district: {
+            district: !!detailHome?.addressDetail?.district_id ? {
                 id: detailHome?.addressDetail?.district_id,
                 name: detailHome?.addressDetail?.district_name,
-            },
-            province: {
+            } : null,
+            province: !!detailHome?.addressDetail?.province_id ? {
                 id: detailHome?.addressDetail?.province_id,
                 name: detailHome?.addressDetail?.province_name,
-            },
-            category: {
+            } : null,
+            category: !!detailHome?.category_id ? {
                 id: detailHome?.category_id,
                 name: detailHome?.category_name,
-            },
-            type_apartment: {
+            } : null,
+            type_apartment: !!detailHome?.type_apartment ? {
                 id: detailHome?.type_apartment === 'Bán' ? 'BUY' : 'RENT',
                 name: detailHome?.type_apartment,
-            },
+            } : null,
         })
         setValueCategory({
             id: detailHome?.category_id,
@@ -314,60 +367,74 @@ function SubmitList(props) {
         let imgs = [];
         detailHome.photos?.forEach((item, index) => {
             imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
-            console.log(imgs);
         });
         setFileList(imgs);
+
+
     }, [detailHome]);
+
+
+
+
+
+    const valueFormChange = () => {
+
+    }
 
     const handleChange = info => {
         const newList = [...info.fileList]
         newList.forEach(item => {
-          item.status = "done"
-          let mapItem = fileList.find(file => file.uid === item.uid)
-          if (mapItem) {
-            item.url = mapItem.url
-            item.file = mapItem.file
-          }
+            item.status = "done"
+            let mapItem = fileList.find(file => file.uid === item.uid)
+            if (mapItem) {
+                item.url = mapItem.url
+                item.file = mapItem.file
+            }
         })
         if (info.file.originFileObj) {
-          getBase64(info.file.originFileObj, imageUrl => {
-            newList.forEach(item => {
-              if (item.uid === info.file.uid) {
-                item.url = imageUrl
-              }
-            })
-            setFileList(newList)
-          });
+            getBase64(info.file.originFileObj, imageUrl => {
+                newList.forEach(item => {
+                    if (item.uid === info.file.uid) {
+                        item.url = imageUrl
+                    }
+                })
+                setFileList(newList)
+            });
         }
         setFileList(newList)
-      };
+    };
+
+
+
     const beforeUpload = (file) => {
         setFileList([
             ...fileList,
             {
-            file: file,
-            uid: file.uid,
-            name: file.name,
+                file: file,
+                uid: file.uid,
+                name: file.name,
             }])
     }
     return (
         <div className="sublist">
-            <SubHeader title={history.location.pathname === '/dang-bai'?"Đăng bài":"Chỉnh Sửa Bài Đăng"} />
-            <Form form={form} className="container form-submit-listing">
+            <SubHeader title={history.location.pathname === '/dang-bai' ? "Đăng bài" : "Chỉnh Sửa Bài Đăng"} />
+            <Form onValuesChange={valueFormChange} form={form} className="container form-submit-listing">
                 <Row className="row">
                     <Col span={12}>
                         <div className="wrapper-space">
                             <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Tiêu đề</h1>
-                            <Form.Item name="title" className="form-control">
+                            <Form.Item name="title" className="form-control"
+                                rules={[{ required: true, message: 'Vui lòng nhập tiêu đề !' }]}
+                            >
                                 <Input className="input" type="text" placeholder="Tiêu đề"></Input>
                             </Form.Item>
-                            <Form.Item name="category" className="form-control">
+                            <Form.Item name="category" className="form-control" rules={[{ required: true, message: 'Vui lòng chọn thể loại !' }]}>
                                 <SelectCustom title="Thể loại" onHandleChange={changeValueCategory} options={listCategory} />
                             </Form.Item>
-                            <Form.Item className="pl-auto label" label="Ngày Hết Hạn" name="expired_date">
+                            <Form.Item className="pl-auto label" label="Ngày Hết Hạn" name="expired_date" rules={[{ required: true, message: 'Vui lòng nhập ngày !' }]}>
                                 <DatePicker className="input" disabledDate={disabledDate} />
                             </Form.Item>
-                            <Form.Item className="pl-auto label" name="total_price" label="Tổng Giá">
+                            <Form.Item className="pl-auto label" name="total_price" label="Tổng Giá" rules={[{ required: true, message: 'Vui lòng nhập giá !' }]}>
                                 <Input className="input" ></Input>
                             </Form.Item>
                         </div>
@@ -377,17 +444,17 @@ function SubmitList(props) {
                             <h1 style={{ fontSize: '2rem', fontWeight: '800' }} className="title">Địa chỉ</h1>
                             <Row>
                                 <Col span={12} className="pr-20">
-                                    <Form.Item name="province">
+                                    <Form.Item name="province" rules={[{ required: true, message: 'Vui lòng chọn thành phố !' }]}>
                                         <SelectCustom title="Thành phố" onHandleChange={changeValueProvince} options={listProvince} />
                                     </Form.Item>
                                 </Col>
                                 <Col span={12}>
-                                    <Form.Item name="district">
+                                    <Form.Item name="district" rules={[{ required: true, message: 'Vui lòng chọn quận/huyện !' }]}>
                                         <SelectCustom title="Quận/huyện" value={valueDistrict} onHandleChange={changeValueDistrict} options={listDistrict} />
                                     </Form.Item>
                                 </Col>
                             </Row>
-                            <Form.Item name="address">
+                            <Form.Item name="address" rules={[{ required: true, message: 'Vui lòng nhập địa chỉ !' }]}>
                                 <Input className="input" placeholder="Địa chỉ cụ thể"></Input>
                             </Form.Item>
                         </div>
@@ -419,21 +486,20 @@ function SubmitList(props) {
                 <Row className="row">
                     <Col span={24}>
                         <div className="wrapper-space">
-                        <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Tổng quan</h1>
-                            <Form.Item name="description">
+                            <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Tổng quan</h1>
+                            <Form.Item name="description" rules={[{ required: true, message: 'Vui lòng nhập mô tả !' }]}>
                                 <HTMLEditor
-                                        wrapperClassName="wrapper-editor"
-                                        editorClassName="editor"
-                                        toolbarClassName="toolbar"
-                                        onChange={handleChangeOverview}
-                                        value={descriptionEditor === null || descriptionEditor === "<p></p>\n" ? "" : descriptionEditor}
-                                        />
-                               
+                                    wrapperClassName="wrapper-editor"
+                                    editorClassName="editor"
+                                    toolbarClassName="toolbar"
+                                    onChange={handleChangeOverview}
+                                    value={descriptionEditor === undefined || descriptionEditor === null || descriptionEditor === "<p></p>\n" ? "" : descriptionEditor}
+                                />
                             </Form.Item>
                         </div>
                     </Col>
                 </Row>
-               
+
                 <Row className="row">
                     <Col span={24}>
                         <div className="wrapper-space">
@@ -446,7 +512,7 @@ function SubmitList(props) {
                                                 return <Feature key={index} name={item.name} icon={item.icon} label={item.label} />
                                             })}</Col>
                                             <Col span={12}>{arr2.map((item, index) => {
-                                                if (item.name == 'type_apartment') {
+                                                if (item.name === 'type_apartment') {
                                                     return <Feature key={index} onchange={changeValueTypeApartment} name={item.name} icon={item.icon} label={item.label} />
                                                 } else {
                                                     return <Feature key={index} name={item.name} icon={item.icon} label={item.label} />
@@ -459,7 +525,7 @@ function SubmitList(props) {
                         </div>
                     </Col>
                 </Row>
-                <Button className="btn-custom" value={history.location.pathname === '/dang-bai'? "Đăng bài" : "Chỉnh sửa"} onClick={() => submitData()}></Button>
+                <Button className="btn-custom" value={history.location.pathname === '/dang-bai' ? "Đăng bài" : "Chỉnh sửa"} onClick={() => submitData()}></Button>
             </Form>
         </div >
     );

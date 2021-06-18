@@ -23,11 +23,30 @@
                 transform: scale(1.1);
             }
         }
+        // .listing__thumbnail-image {
+        //     border-radius: 8px;
+        //     transition: 0.3s;
+        //     max-width: 100%;
+        //     max-height: 260px;
+        //     height: 400px;
+        //     background-size: cover;
+        //     &:hover {
+        //         transform: scale(1.1);
+        //     }
+        // }
         .listing-badges {
             position: absolute;
             top: 15px;
             left: 10px;
             .listing-badge {
+                font-size: 12px;
+                font-weight: 600;
+                color: #fff;
+                border-radius: 8px;
+                padding: 9px 6px;
+                margin-right: 5px;
+            }
+            .listing-status {
                 font-size: 12px;
                 font-weight: 600;
                 color: #fff;
@@ -107,10 +126,10 @@
              }
         }
     }
-    &:hover .listing__thumbnail .listing-controls a {
-        transform: translateX(0);
-        opacity: 1;
-    }
+    // &:hover .listing__thumbnail .listing-controls a {
+    //     transform: translateX(0);
+    //     opacity: 1;
+    // }
     .listing__body {
         .author {
             display: flex;

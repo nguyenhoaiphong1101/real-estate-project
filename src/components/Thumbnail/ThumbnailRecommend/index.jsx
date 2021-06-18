@@ -10,8 +10,7 @@ function ThumbnailRecomend(props) {
     const dispatch = useDispatch()
     const history = useHistory()
     const toDetailHome = () => {
-            dispatch(loadDetailHome(props?.list?.id, user?.id))
-        history.push('/chi-tiet')
+        history.push(`/chi-tiet/${props?.list?.id}`,props?.list)
     }
     return (
         <div className="recomend-item" >
