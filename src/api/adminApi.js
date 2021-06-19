@@ -50,3 +50,44 @@ export const getCategory = {
             )
     }
 }
+export const postCategory = {
+
+    POST: (body) => {
+        return AXIOS_INSTANCE({
+            method: 'post',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: body,
+            url: API_URL + '/dashboard/category/create',
+        })
+            .then(res => res.data.data
+            )
+    }
+}
+export const deleteCategory = {
+
+    DELETE: (id) => {
+        return AXIOS_INSTANCE({
+            method: 'delete',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: null,
+            url: API_URL + `/dashboard/category/delete/${id}`,
+        })
+    }
+}
+export const putCategory = {
+
+    PUT: (body, id) => {
+        return AXIOS_INSTANCE({
+            method: 'put',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: body,
+            url: API_URL + `/dashboard/category/update/${id}`,
+        })
+    }
+}

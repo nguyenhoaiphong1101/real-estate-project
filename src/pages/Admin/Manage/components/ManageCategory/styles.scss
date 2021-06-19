@@ -1,8 +1,33 @@
 @import "./../../../../../variables/variable_admin.scss";
 
+.modal-topic {
+    .ant-btn-primary{
+        border-radius: 15px !important;
+        // background-color: #cee6e4;
+        background-color: #fff;
+        color: black;
+        border-color: #d9d9d9;
+    }
+    .ant-btn-primary:hover{
+        background-color: #cee6e4 !important;
+    }
+    .ant-btn{
+        color: black !important;
+        border-radius: 15px !important;
+    }
+    .ant-btn:hover{
+        color: black;
+        border-color: #d9d9d9;
+        background-color: rgb(245, 116, 116);
+    }
+}
+
 .admin-manage-topic {
     width: 94%;
     margin: 0 auto;
+    
+        
+        
     .title-wrapper {
         margin: 25px 0;
         .title {
@@ -26,6 +51,9 @@
             border-bottom: 1px solid #eee;
         }
         .table-tool {
+            .admin-btn-add-category{
+                background-color: #cee6e4;
+            }
             .input {
                 background-color: $color-white-purple-light;
                 box-shadow: none !important;

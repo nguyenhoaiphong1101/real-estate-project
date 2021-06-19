@@ -16,4 +16,41 @@
             border-radius: 7px;
         }
     }
+    
+}
+.admin-btn-edit{
+    border: 0 !important;
+    box-shadow: 0 0 0.25em rgba($color: #333, $alpha: 0.3);
+    border-radius: 8px !important;
+    transition: 0.3s !important;
+}
+.admin-btn-edit:hover{
+    background-color: #cee6e4;
+    // span{
+    //     color: white !important;
+    // }
+}
+.admin-btn-delete{
+    border: 0 !important;
+    box-shadow: 0 0 0.25em rgba($color: #333, $alpha: 0.3);
+    border-radius: 8px !important;
+    transition: 0.3s !important;
+}
+.admin-btn-delete:hover{
+    background-color: rgb(245, 116, 116);
+    span{
+        color: white !important;
+    }
+}
+.admin-btn-approve{
+    border: 0 !important;
+    box-shadow: 0 0 0.25em rgba($color: #333, $alpha: 0.3);
+    border-radius: 8px !important;
+    transition: 0.3s !important;
+}
+.admin-btn-approve:hover{
+    background-color: rgb(118, 162, 243);
+    span{
+        color: white !important;
+    }
 }

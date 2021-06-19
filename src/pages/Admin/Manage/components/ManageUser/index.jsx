@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import "./styles.scss"
-import { Table, Tag, Space, Col, Row, Input } from 'antd';
+import { Table, Tag, Space, Col, Row, Input, Button } from 'antd';
 import SelectExtra from '../../../../../components/SelectExtra';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListUser } from '../../../../../actions/admin';
@@ -62,8 +62,8 @@ const columns = [
         key: 'action',
         render: (text, record) => (
             <Space size="middle">
-                {/* <a>Invite {record.name}</a> */}
-                <a>Delete</a>
+                <Button className="admin-btn-edit">Edit</Button>
+                <Button className="admin-btn-delete">Delete</Button>
             </Space>
         ),
     },
