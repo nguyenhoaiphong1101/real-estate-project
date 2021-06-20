@@ -4,12 +4,23 @@ import { Popover } from 'antd';
 import { Col, Row } from 'antd';
 import './styles.scss';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 
 function ItemSlider(props) {
 
     const toTimeString = (seconds) => {
         if (seconds)
             return moment(seconds).format('DD-MM-YYYY');
+    }
+    const history = useHistory();
+    const toDetailHome = () => {
+        // if (token) {
+        //     dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))
+        // }
+        // else {
+        //     dispatch(loadDetailHome(props?.listLatestNew?.id))
+        // }
+        history.push(`/chi-tiet/${props?.listHighlight?.id}`, props?.listHighlight)
     }
 
     const content = (
@@ -68,7 +79,7 @@ function ItemSlider(props) {
                                 </div>
                             </div>
                             <div class="listing-gallery-wrapper">
-                                <Button value="Xem chi tiết" className="view-detail"></Button>
+                                <Button value="Xem chi tiết" onClick={() => toDetailHome()} className="view-detail"></Button>
                             </div>
                         </div>
                     </div>

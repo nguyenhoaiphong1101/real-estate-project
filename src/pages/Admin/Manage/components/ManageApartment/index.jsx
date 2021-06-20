@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./styles.scss"
-import { Table, Tag, Space, Row, Col, Input } from 'antd';
+import { Table, Tag, Space, Row, Col, Input, Modal, Upload } from 'antd';
 import { Select } from 'antd';
 import { getListApartment } from '../../../../../actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd/lib/radio';
 import { Option } from 'antd/lib/mentions';
+import { AlignLeftOutlined, PlusOutlined } from '@ant-design/icons';
 
 
 
@@ -44,60 +45,104 @@ function ManageApartment(props) {
             dataIndex: 'type_apartment',
             key: 'id',
         },
-        // {
-        //     title: 'Tags',
-        //     key: 'tags',
-        //     dataIndex: 'tags',
-        //     render: tags => (
-        //         <>
-        //             {tags.map(tag => {
-        //                 let color = tag.length > 5 ? 'geekblue' : 'green';
-        //                 if (tag === 'loser') {
-        //                     color = 'volcano';
-        //                 }
-        //                 return (
-        //                     <Tag color={color} key={tag}>
-        //                         {tag.toUpperCase()}
-        //                     </Tag>
-        //                 );
-        //             })}
-        //         </>
-        //     ),
-        // },
         {
             title: 'Action',
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <Button className="admin-btn-edit" onClick={() => editChange(text, record)}>Edit</Button>
-                    <Button className="admin-btn-delete">Delete</Button>
-                    {text.status === "PENDING" ? <Button className="admin-btn-approve">Approve</Button> : null}
+                    <Button className="admin-btn-edit" onClick={() => showModalChange(record)}>Sửa</Button>
+                    <Button className="admin-btn-delete">Xóa</Button>
+                    {text.status === "PENDING" ? <Button className="admin-btn-approve">Duyệt</Button> : null}
                 </Space>
             ),
         },
     ];
 
+    const [typeButton, setTypeButton] = useState('');
 
+    const [isModalVisibleFilter, setIsModalVisibleFilter] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(false);
 
-    const propertyStatus = [
-        {
-            key: 1,
-            value: 'OPEN'
-        },
-        {
-            key: 2,
-            value: 'PENDING'
-        },
-        {
-            key: 3,
-            value: 'CLOSE'
-        },
-    ]
+    const showModalAdd = () => {
+        setTypeButton("ADD");
+        setIsModalVisible(true);
+    };
+    const showModalChange = () => {
+        setTypeButton("CHANGE");
+        setIsModalVisible(true);
+    };
 
-    const editChange = (text, record) => {
-        console.log(text);
-        console.log(record);
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+    const showModalFilter = () => {
+        setIsModalVisibleFilter(true);
+    };
+
+    const handleOkFilter = () => {
+        setIsModalVisibleFilter(false);
+    };
+
+    const handleCancelFilter = () => {
+        setIsModalVisibleFilter(false);
+    };
+
+    //Hình ảnh
+    const [fileList, setFileList] = useState([]);
+
+    function getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
     }
+    const uploadButton = (
+        <div>
+            <PlusOutlined />
+            <div style={{ paddingTop: '10px' }}>Upload</div>
+        </div>
+    );
+
+    const beforeUpload = (file) => {
+        setFileList([
+            ...fileList,
+            {
+                file: file,
+                uid: file.uid,
+                name: file.name,
+            }])
+    }
+    const handleChange = info => {
+        const newList = [...info.fileList]
+        newList.forEach(item => {
+            item.status = "done"
+            let mapItem = fileList.find(file => file.uid === item.uid)
+            if (mapItem) {
+                item.url = mapItem.url
+                item.file = mapItem.file
+            }
+        })
+        if (info.file.originFileObj) {
+            getBase64(info.file.originFileObj, imageUrl => {
+                newList.forEach(item => {
+                    if (item.uid === info.file.uid) {
+                        item.url = imageUrl
+                    }
+                })
+                setFileList(newList)
+            });
+        }
+        setFileList(newList)
+    };
+    //
+
     const listApartment = useSelector(state => state.admin.apartment.listApartment);
     const totalItem = useSelector(state => state.admin.apartment.totalItem);
     const dispatch = useDispatch()
@@ -106,14 +151,43 @@ function ManageApartment(props) {
     }, []);
 
     return (
-        <div className="admin-manage-topic">
+
+        <div className="admin-manage-apartment">
+            <Modal className="modal-apartment" width={800} title={typeButton === "ADD" ? "Thêm căn hộ" : "Chỉnh sửa căn hộ"} visible={isModalVisible} onOk={handleOk} okText={typeButton === "ADD" ? "Thêm" : "Chỉnh sửa"} cancelText="Hủy" onCancel={handleCancel}>
+                <Row>
+                    <Col span={24}>
+                        <h1 style={{ textAlign: "center" }}>Thông tin</h1>
+                    </Col>
+                    <Col span={24}>
+                        <h1 style={{ fontSize: '1rem', fontWeight: '800' }}>Hình ảnh</h1>
+                        <Upload
+                            listType="picture-card"
+                            fileList={fileList}
+                            beforeUpload={beforeUpload}
+                            onChange={handleChange}
+                        >
+                            {uploadButton}
+                        </Upload>
+                    </Col>
+                    <Col span={11}>
+                        <h1 style={{ fontSize: '1rem', fontWeight: '800' }}>Tiêu đề</h1>
+                        <Input className="input" type="text" placeholder="Tiêu đề"></Input>
+                    </Col>
+
+                </Row>
+            </Modal>
+            <Modal className="modal-apartment" title="Lọc" visible={isModalVisibleFilter} onOk={handleOkFilter} okText="Lọc" onCancel={handleCancelFilter} cancelText="Hủy">
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Modal>
             <Row>
                 <Col span={24}>
                     <div className="title-wrapper">
-                        <div className="title">
+                        <div className="title" style={{ textAlign: "center" }}>
                             Quản Lý Căn Hộ
                         </div>
-                        <div className="sub-title">
+                        <div className="sub-title" style={{ textAlign: "center" }}>
                             Nơi Quản Lý Tất Cả Căn Hộ
                         </div>
                     </div>
@@ -122,15 +196,21 @@ function ManageApartment(props) {
             <div className="table-wrapper">
                 <div className="table-tool">
                     <Row>
-                        <Col span={12}>
-                            <Input className="input" placeholder="Tìm kiếm..." />
+                        <Col span={2}>
+                            <Button style={{ width: '100% ', textAlign: "center" }} onClick={() => showModalFilter()} className="admin-btn-add-apartment">Lọc <AlignLeftOutlined /></Button>
                         </Col>
-                        <Col offset={8} span={4}>
-                            <Select className="form-control select" defaultValue="all"  >
-                                <Option value="all">ALL</Option>
-                                <Option value="open">OPEN</Option>
-                                <Option value="pending">PENDING</Option>
-                                <Option value="close">CLOSE</Option>
+                        <Col offset={1} span={3}>
+                            <Button className="admin-btn-add-apartment" onClick={() => showModalAdd()}>Thêm thể loại <PlusOutlined /></Button>
+                        </Col>
+                        <Col offset={12} span={2}>
+                            <p style={{ margin: "5px 0px 0px 20px" }}>Sắp xếp</p>
+                        </Col>
+                        <Col span={4}>
+                            <Select className="form-control select" defaultValue="ALL"  >
+                                <Option value="ALL">ALL</Option>
+                                <Option value="ID">ID</Option>
+                                <Option value="AREA">AREA</Option>
+                                <Option value="PRICE">PRICE</Option>
                             </Select>
                         </Col>
                     </Row>
@@ -146,7 +226,7 @@ function ManageApartment(props) {
 
                         },
                         pageSize: 10,
-                        totalItem: { totalItem },
+                        total: totalItem,
                     }} />
             </div>
 

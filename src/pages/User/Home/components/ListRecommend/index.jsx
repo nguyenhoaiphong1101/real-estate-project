@@ -57,24 +57,6 @@ function ListRecomend(props) {
                                         <ThumbnailRecomend list={item} />
                                     </div>);
                                 })}
-                                {/* <div>
-                                    <ThumbnailRecomend />
-                                </div>
-                                <div>
-                                    <ThumbnailRecomend />
-                                </div>
-                                <div>
-                                    <ThumbnailRecomend />
-                                </div>
-                                <div>
-                                    <ThumbnailRecomend />
-                                </div>
-                                <div>
-                                    <ThumbnailRecomend />
-                                </div>
-                                <div>
-                                    <ThumbnailRecomend />
-                                </div> */}
                             </Slider>
                         </div>
                         <button className="button-next" onClick={next}>

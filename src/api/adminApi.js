@@ -91,3 +91,19 @@ export const putCategory = {
         })
     }
 }
+
+export const getDetailUser = {
+
+    GET: (id) => {
+        return AXIOS_INSTANCE({
+            method: 'get',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: null,
+            url: API_URL + `/dashboard/user/apartment/${id}`,
+        })
+            .then(res => res.data.data
+            )
+    }
+}

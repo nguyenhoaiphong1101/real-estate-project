@@ -22,7 +22,7 @@ function ManageCategory(props) {
     const [params, setParams] = useState({ sort_direction: "ASC", sort_by: '', search: '', page: 1 });
     useEffect(() => {
         dispatch(getListCategory({
-            sort_direction: "ASC"
+            ...params
         }))
     }, []);
 
@@ -47,8 +47,8 @@ function ManageCategory(props) {
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <Button className="admin-btn-edit" onClick={() => showModalChange(record)}>Edit</Button>
-                    <Button className="admin-btn-delete" onClick={() => deleteCate(record)}>Delete</Button>
+                    <Button className="admin-btn-edit" onClick={() => showModalChange(record)}>Sửa</Button>
+                    <Button className="admin-btn-delete" onClick={() => deleteCate(record)}>Xóa</Button>
                 </Space>
             ),
         },
@@ -65,11 +65,11 @@ function ManageCategory(props) {
     const sortChange = (value) => {
         dispatch(getListCategory({
             ...params,
-            sort_by: value,
+            sort_by: value === "ALL" ? '' : value,
         }))
         setParams({
             ...params,
-            sort_by: value,
+            sort_by: value === "ALL" ? '' : value,
         });
     }
 
@@ -106,7 +106,6 @@ function ManageCategory(props) {
     const addCate = async () => {
         let res = await form.validateFields();
 
-        console.log(res?.name);
 
         if (res?.name) {
             await postCategory.POST({
@@ -128,8 +127,6 @@ function ManageCategory(props) {
 
     const changeCate = async () => {
         let res = await form.validateFields();
-
-        console.log(res?.name);
 
         if (res?.name) {
             await putCategory.PUT({
@@ -158,8 +155,8 @@ function ManageCategory(props) {
     };
 
     return (
-        <div className="admin-manage-topic">
-            <Modal className="modal-topic" title={typeButton === "ADD" ? "Thêm thể loại" : "Chỉnh sửa thể loại"} visible={isModalVisible} onOk={typeButton === "ADD" ? addCate : changeCate} onCancel={handleCancel} okText={typeButton === "ADD" ? "Thêm" : "Chỉnh sửa"}>
+        <div className="admin-manage-category">
+            <Modal className="modal-category" title={typeButton === "ADD" ? "Thêm thể loại" : "Chỉnh sửa thể loại"} visible={isModalVisible} onOk={typeButton === "ADD" ? addCate : changeCate} onCancel={handleCancel} okText={typeButton === "ADD" ? "Thêm" : "Chỉnh sửa"}>
                 <Form form={form}
                     name="basic"
                 >
@@ -175,10 +172,10 @@ function ManageCategory(props) {
             <Row>
                 <Col span={24}>
                     <div className="title-wrapper">
-                        <div className="title">
+                        <div className="title" style={{ textAlign: "center" }}>
                             Quản Lý Thể Loại
                         </div>
-                        <div className="sub-title">
+                        <div className="sub-title" style={{ textAlign: "center" }}>
                             Nơi Quản Lý Tất Cả Thể Loại
                         </div>
                     </div>
@@ -206,8 +203,7 @@ function ManageCategory(props) {
                             <Button onClick={() => showModalAdd()} className="admin-btn-add-category">Thêm thể loại<PlusOutlined /></Button>
                         </Col>
                         <Col offset={1} span={2}>
-                            <p style={{ margin: "18px 0px 0px 20px" }}>Sort by</p>
-
+                            <p style={{ margin: "18px 0px 0px 20px" }}>Sắp xếp</p>
                         </Col>
                         <Col span={4}>
                             <Select className="form-control select" defaultValue="ALL" onChange={sortChange}>

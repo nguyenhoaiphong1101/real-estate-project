@@ -13,7 +13,8 @@ const initialState = {
         listCategory: [],
         total_page: null,
         totalItem: null,
-    }
+    },
+    detailUser: {}
 }
 
 
@@ -47,6 +48,12 @@ const adminReducer = (state = initialState, action) => {
                     total_page: action.payload.total_page,
                     totalItem: action.payload.totalItem
                 }
+            };
+        }
+        case 'GET_DETAILUSER': {
+            return {
+                ...state,
+                detailUser: action.payload
             };
         }
 

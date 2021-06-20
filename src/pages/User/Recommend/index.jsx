@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles.scss'
 import { List } from 'antd';
 import ThumbnailDetailRecommend from '../../../components/Thumbnail/ThumbnailDetailRecommend';
@@ -10,15 +10,19 @@ function Recommend(props) {
     const listRecommend = useSelector(state => state.recommend.listRecommend);
     const totalItem = useSelector(state => state.recommend.totalItem);
     const user = useSelector(state => state.user.user);
+    const [params, setParams] = useState({ size: 12, page: 1, user_id: '' });
     const dispatch = useDispatch();
 
 
     useEffect(() => {
         dispatch(loadListRecommend({
+            ...params,
             user_id: user.id,
-            page: 1,
-            size: 12,
         }));
+        setParams({
+            ...params,
+            user_id: user.id,
+        })
     }, [user])
     return (
         <div className="section-recommend">
@@ -50,13 +54,16 @@ function Recommend(props) {
                     pagination={{
                         onChange: page => {
                             dispatch(loadListRecommend({
-                                user_id: user.id,
-                                page: page,
-                                size: 12,
+                                ...params,
+                                page: page
                             }));
+                            setParams({
+                                ...params,
+                                page: page
+                            })
                         },
                         pageSize: 12,
-                        totalItem: {totalItem},
+                        totalItem: { totalItem },
                     }}
                     dataSource={listRecommend}
                     renderItem={item => (

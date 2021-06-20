@@ -1,23 +1,94 @@
-.admin-manage-comment {
-    background-color: #fff;
-    margin: 30px;
-    margin-top: 100px;
-    border-radius: 6px;
-    h1 {
-        font-weight: bold;
-        font-size: 2rem;
-        text-align: center;
-        padding-top: 10px;
+
+@import "./../../../../../variables/variable_admin.scss";
+
+.modal-apartment {
+    .ant-btn-primary{
+        border-radius: 15px !important;
+        // background-color: #cee6e4;
+        background-color: #fff;
+        color: black;
+        border-color: #d9d9d9;
     }
-    .ant-spin-container {
-        padding: 0 40px 0 40px;
-        .ant-table {
-            padding: 1px;
-            border-radius: 7px;
+    .ant-btn-primary:hover{
+        background-color: #cee6e4 !important;
+    }
+    .ant-btn{
+        color: black !important;
+        border-radius: 15px !important;
+    }
+    .ant-btn:hover{
+        color: black;
+        border-color: #d9d9d9;
+        background-color: rgb(245, 116, 116);
+    }
+}
+
+.admin-manage-apartment {
+    width: 94%;
+    margin: 0 auto;
+    .title-wrapper {
+        margin: 25px 0;
+        .title {
+            font-size: 25px;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+        .sub-title {
+            padding-left: 4px;
+            font-size: 13px;
+            font-weight: 500;
         }
     }
-    
+    .table-wrapper {
+        background-color: $color-white;
+        padding: 25px;
+        width: 100%;
+        border-radius: 10px;
+        .separator {
+            margin: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .table-tool {
+            .admin-btn-add-apartment{
+                background-color: #cee6e4;
+                border-radius: 8px;
+            }
+            .input {
+                background-color: $color-white-purple-light;
+                box-shadow: none !important;
+            }
+            .input-search {
+                width: 100%;
+                margin-right: 10px;
+                margin-bottom: 0;
+            }
+            .ant-btn,
+            .ant-input {
+                height: 58px;
+                border-radius: 8px;
+                box-shadow: 0 2px 9px 0 rgba(34, 12, 43, 0.1);
+                border: 0;
+            }
+            .ant-input {
+                margin-left: 3px;
+            }
+            .select {
+                width: 100%;
+                height: 100%;
+                background-color: $color-white-purple-light;
+                border-radius: 10px;
+                .ant-select-selector {
+                    height: 100%;
+                    .ant-select-selection-item {
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
 }
+
 .admin-btn-edit{
     border: 0 !important;
     box-shadow: 0 0 0.25em rgba($color: #333, $alpha: 0.3);
