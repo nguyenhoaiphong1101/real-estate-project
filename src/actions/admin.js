@@ -1,9 +1,9 @@
 import { getApartment, getCategory, getDetailUser, getUser } from "../api/adminApi"
 
 
-export const getListApartment = () => {
+export const getListApartment = (params) => {
     return (dispatch) => {
-        getApartment.GET().then(res => {
+        getApartment.GET(params).then(res => {
             dispatch({
                 type: 'GET_LISTAPARTMENT',
                 payload: {

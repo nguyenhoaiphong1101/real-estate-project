@@ -203,6 +203,7 @@ function SubmitList(props) {
     function callApiImage() {
         const bodyFormData = new FormData();
         let imgFiles = [];
+        let result = fileList;
         fileList.forEach((file) => {
             if (file.file) {
                 imgFiles.push(file.file);
@@ -212,7 +213,7 @@ function SubmitList(props) {
             for (let i = 0; i < imgFiles.length; i++) {
                 bodyFormData.append("files", imgFiles[i]);
             }
-            return axios
+            axios
                 .request({
                     url: API_URL + '/upload/photo',
                     method: "POST",
@@ -239,24 +240,27 @@ function SubmitList(props) {
                             name: file.name,
                             extension: file.extension,
                         });
+                        result.push({
+                            originalName: file.originalName,
+                            name: file.name,
+                            extension: file.extension,
+                        });
                     });
 
-                    return formatFileList;
-                    setPhotos(formatFileList);
+                    // setPhotos(formatFileList);
                 });
         }
+        return result;
     }
 
     async function submitData() {
 
         let listphoto = [];
-        await callApiImage()?.then(res => listphoto = res)
-
+        await callApiImage().forEach((item) => {
+            listphoto.push(item);
+        });
 
         const dataForm = form.getFieldValue();
-        // if (fileList === []) {
-        //     message.error("Vui lòng chọn hình ảnh !");
-        // } else {
 
 
         if (listphoto.length === 0) {

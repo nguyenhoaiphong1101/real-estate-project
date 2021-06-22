@@ -18,6 +18,63 @@ export const getApartment = {
             )
     }
 }
+export const createApartment = {
+
+    POST: (body) => {
+        return AXIOS_INSTANCE({
+            method: 'post',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: body,
+            url: API_URL + '/dashboard/apartment/create',
+        })
+    }
+}
+export const validateApartment = {
+
+    POST: (params, id) => {
+        return AXIOS_INSTANCE({
+            method: 'post',
+            params: params,
+            data: null,
+            url: API_URL + `/dashboard/apartment/${id}/validate`,
+        })
+    }
+}
+export const highlightApartment = {
+
+    POST: (id) => {
+        return AXIOS_INSTANCE({
+            method: 'post',
+            data: null,
+            url: API_URL + `/dashboard/apartment/validate/highlight/${id}/`,
+        })
+    }
+}
+export const closeApartment = {
+
+    POST: (id) => {
+        return AXIOS_INSTANCE({
+            method: 'post',
+            data: null,
+            url: API_URL + `/dashboard/apartment/close/${id}/`,
+        })
+    }
+}
+export const updateApartment = {
+
+    PUT: (body, id) => {
+        return AXIOS_INSTANCE({
+            method: 'put',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: body,
+            url: API_URL + `/dashboard/apartment/${id}/update`,
+        })
+    }
+}
 export const getUser = {
 
     GET: (params) => {

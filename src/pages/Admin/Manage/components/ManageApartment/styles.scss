@@ -2,6 +2,31 @@
 @import "./../../../../../variables/variable_admin.scss";
 
 .modal-apartment {
+
+    .ant-radio-button-wrapper {
+        &::before {
+            display: none;
+        }
+    }
+
+
+    .select {
+        width: 100%;
+        height: 100%;
+        background-color: $color-white-purple-light;
+        border-radius: 10px;
+        .ant-select-selector {
+            height: 100%;
+            .ant-select-selection-item {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+    .wrapper-editor{
+        margin: 5px;
+        box-shadow: 0 0 0.25em rgba($color: #333, $alpha: 0.3);
+    }
     .ant-btn-primary{
         border-radius: 15px !important;
         // background-color: #cee6e4;
@@ -21,6 +46,14 @@
         border-color: #d9d9d9;
         background-color: rgb(245, 116, 116);
     }
+    .ant-btn-return{
+        color: black !important;
+        border-radius: 15px !important;
+    }
+    .ant-btn-return:hover{
+        color: black;
+        border-color: #d9d9d9;
+    }
 }
 
 .admin-manage-apartment {
@@ -39,6 +72,7 @@
             font-weight: 500;
         }
     }
+    
     .table-wrapper {
         background-color: $color-white;
         padding: 25px;

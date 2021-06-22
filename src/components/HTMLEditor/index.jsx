@@ -110,6 +110,7 @@ const HTMLEditor = (props) => {
           onEditorStateChange={onEditorStateChange}
           onChange={onChange}
           placeholder={placeholder}
+          className={props.className}
         />
         {footer && <div className="editor-footer">{footer}</div>}
       </div>
