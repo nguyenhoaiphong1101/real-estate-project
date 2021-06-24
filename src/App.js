@@ -45,6 +45,10 @@ function App() {
 
     useEffect(() => {
         setToken(localToken);
+
+        console.log("====", returnRole());
+
+
     }, [localToken])
     doAxiosRequestIntercept();
     return (
@@ -58,9 +62,8 @@ function App() {
                     <div className="app" >
                         <Header setEnableFooter={setEnableFooter} path={path} setLoading={setLoading} role={returnRole()} />
                         <Switch>
-                            <Route path="/admin" exact>
-                                <AdminWrapper />
-                            </Route>
+                            {returnRole() === 'ADMIN' &&
+                                <AdminWrapper />}
                             <Route path="/" exact>
                                 <Home />
                                 <Footer />

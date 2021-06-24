@@ -11,7 +11,7 @@ function NavigationAdmin(props) {
     const removeLocal = () => {
         localStorage.removeItem('access_token')
         localStorage.removeItem('role')
-        history.push('/')
+        window.location.pathname = "/";
     }
     const content = (
         <div className="popup-content-wrapper">

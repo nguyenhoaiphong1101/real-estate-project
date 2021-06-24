@@ -24,7 +24,7 @@ function Home(props) {
             <NeedMore />
             <SectionRecentList />
             <SectionTopList />
-            <Testimonials />
+            {/* <Testimonials /> */}
         </div>
     );
 }

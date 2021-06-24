@@ -1,6 +1,18 @@
 .profile-section-banner-wrapper {
     height: 80vh;
     margin: 0;
+    .ant-upload{
+        border-radius: 8px;
+    }
+    .anticon-plus{
+        position: absolute;
+    }
+    .anticon-loading{
+        position: absolute;
+    }
+    .ant-upload-picture-card-wrapper {
+        width: auto;
+    }
     .profile-section-banner {
         background-image: url("./../../../../../assets/images/Home/2.jpg");
         background-repeat: no-repeat;
@@ -33,7 +45,6 @@
                 align-items: center;
                 img {
                     width: 100px;
-                    margin-right: 20px;
                     border-radius: 8px;
                     max-width: 100%;
                     height: auto;

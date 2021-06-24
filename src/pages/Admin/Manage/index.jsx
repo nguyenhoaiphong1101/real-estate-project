@@ -24,21 +24,19 @@ function AdminWrapper() {
     return (
         <div className="admin-manage">
             <div style={{ display: 'flex' }} className="admin-manage-menu">
-                <BrowserRouter>
-                    <Row style={{ width: '100%' }}>
-                        <Col span={5} className="col-sidebar">
-                            <div className="logo-admin-wrapper">
-                                <img src={Images.LOGO_ADMIN} alt="Real Estate" />
-                            </div>
-                            <Menu />
-                        </Col>
-                        <Col span={19} className="admin-col" >
-                            <NavigationAdmin />
-                            <AdminRouting />
-                            <FooterAdmin />
-                        </Col>
-                    </Row>
-                </BrowserRouter>
+                <Row style={{ width: '100%' }}>
+                    <Col span={5} className="col-sidebar">
+                        <div className="logo-admin-wrapper">
+                            <img src={Images.LOGO_ADMIN} alt="Real Estate" />
+                        </div>
+                        <Menu />
+                    </Col>
+                    <Col span={19} className="admin-col" >
+                        <NavigationAdmin />
+                        <AdminRouting />
+                        <FooterAdmin />
+                    </Col>
+                </Row>
             </div>
         </div>
     );

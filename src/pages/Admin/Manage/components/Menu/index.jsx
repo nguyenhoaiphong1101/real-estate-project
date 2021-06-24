@@ -23,28 +23,28 @@ function AdminMenu(props) {
     return (
         <div style={collapsed ? { width: 90 } : {}} className="admin-menu">
             <Menu
-                defaultSelectedKeys={['1']}
+                // defaultSelectedKeys={['1']}
                 defaultOpenKeys={['sub1']}
                 mode="inline"
                 theme="light"
                 inlineCollapsed={collapsed}
             >
-                <Menu.Item className="mt-0" key="1" icon={<PieChartOutlined />} >
+                {/* <Menu.Item className="mt-0" key="1" icon={<PieChartOutlined />} >
                     <Link to="/admin/tong-quan">
                         Tổng Quan
                     </Link>
-                </Menu.Item>
-                <Menu.Item className="mt-0" key="2" icon={<PieChartOutlined />} >
+                </Menu.Item> */}
+                <Menu.Item className="mt-0" key="1" icon={<PieChartOutlined />} >
                     <Link to="/admin/can-ho">
                         Quản lý căn hộ
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="3" icon={<DesktopOutlined />}>
+                <Menu.Item key="2" icon={<DesktopOutlined />}>
                     <Link to="/admin/nguoi-dung">
                         Quản lý người dùng
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="4" icon={<ContainerOutlined />}>
+                <Menu.Item key="3" icon={<ContainerOutlined />}>
                     <Link to="/admin/the-loai">
                         Quản lý thể loại
                     </Link>

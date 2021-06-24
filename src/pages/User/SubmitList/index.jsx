@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Col, DatePicker, Form, Input, message, Modal, Row, Upload } from 'antd';
+import { Col, DatePicker, Form, Input, message, Modal, Row, Upload, InputNumber } from 'antd';
 import axios from "axios";
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
@@ -203,7 +203,7 @@ function SubmitList(props) {
     function callApiImage() {
         const bodyFormData = new FormData();
         let imgFiles = [];
-        let result = fileList;
+        let result = fileList; // đây này. nó là 1 cái mảng thì foreach, còn m 1 phần tử thì k cần
         fileList.forEach((file) => {
             if (file.file) {
                 imgFiles.push(file.file);
@@ -371,21 +371,26 @@ function SubmitList(props) {
         let imgs = [];
         detailHome.photos?.forEach((item, index) => {
             imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
-        });
+        }); // dòng này là nó set img đây nè, ban đầu nếu chưa có img thì cái này nó sẽ rỗng, m sẽ hiển thị image mặc định
         setFileList(imgs);
 
 
     }, [detailHome]);
-
-
-
-
 
     const valueFormChange = () => {
 
     }
 
     const handleChange = info => {
+        // Khi người ta thực hiện upload
+        // Chỗ này sẽ gọi api để lưu hình -> Api sẽ trả về url
+        // m push url đó vào cái file
+        /// tương tự như thế này 
+        // detailHome.photos?.forEach((item, index) => {
+        //     imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
+        // }); // dòng này là nó set img đây nè, ban đầu nếu chưa có img thì cái này nó sẽ rỗng, m sẽ hiển thị image mặc định
+        // setFileList(imgs);
+        // Thì giờ cái file m đã thay đổi
         const newList = [...info.fileList]
         newList.forEach(item => {
             item.status = "done"
@@ -439,7 +444,7 @@ function SubmitList(props) {
                                 <DatePicker className="input" disabledDate={disabledDate} />
                             </Form.Item>
                             <Form.Item className="pl-auto label" name="total_price" label="Tổng Giá" rules={[{ required: true, message: 'Vui lòng nhập giá !' }]}>
-                                <Input className="input" ></Input>
+                                <InputNumber className="input" />
                             </Form.Item>
                         </div>
                     </Col>
@@ -469,6 +474,10 @@ function SubmitList(props) {
                         <div className="wrapper-space">
                             <h1 style={{ fontSize: '2rem', fontWeight: '800' }}>Hình ảnh</h1>
                             <Upload
+                                // m phải tìm thuộc tính để truyền cái image vào trong này, image truyền vào không phải image mà người ta chọn
+                                // khi cái file m đã thay đổi thì file truyền vào đây cũng sẽ thay đổi, nên việc hiển thị ảnh ở
+                                // đây là do server của mình, mà k phải do server của ant, nên mới quản lý được
+                                // Chứ giờ m tìm hiểu cái này, thì tí tìm hiểu xong dùng api call thì cũng xóa đi thôi à
                                 listType="picture-card"
                                 fileList={fileList}
                                 beforeUpload={beforeUpload}

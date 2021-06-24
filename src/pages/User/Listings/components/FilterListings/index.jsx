@@ -159,6 +159,8 @@ function FilterListings(props) {
 
     const filter = useSelector(state => state.listfilter)
 
+
+
     const [valueCategory, setValueCategory] = useState({ id: null, name: '' });
     const [valueDistrict, setValueDistrict] = useState({ id: null, name: '' });
     const [valueProvince, setValueProvince] = useState({ id: null, name: '' });
@@ -248,8 +250,9 @@ function FilterListings(props) {
             province_id: valueProvince?.id && valueProvince?.id !== "-1" ? valueProvince?.id : undefined,
             search: inputSearch ? inputSearch : undefined,
             user_id: token ? jwtDecode(token).id : null,
-            page: 1,
         }))
+
+
         dispatch(loadListFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea));
         // (page, size, area_from, area_to, category_id, district_id, price_from, price_to, province_id)
     }

@@ -63,6 +63,8 @@ function ThumbnailExtra(props) {
 
     const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
 
+    const getPhotosImgAvatar = (name) => `${API_URL}/public/image/avatar/${name}`;
+
 
 
 
@@ -126,7 +128,7 @@ function ThumbnailExtra(props) {
                     {/* onClick={() => toDetailHome()} */}
                     <div onClick={() => toDetailHome()}>
                         <a >
-                            <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
+                            <img src={props.listLatestNew?.author?.avatar?.name ? getPhotosImgAvatar(props.listLatestNew?.author?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/-leE7hK7HNnHvhUaXXj3XCxJpaqc2gVCm7U2m4-iA4UyQwocXrfHEVBqujHobCMqnG_3XDgMKmB3r9RozmQrZP7U1cjGcXc"} alt="agent" />
                         </a>
                     </div>
                     <div className="media-body">

@@ -11,6 +11,7 @@ export const getInfoUser = () => {
         })
     }
 }
+
 export const getPostUser = (params) => {
     return (dispatch) => {
         getPost.GET(params).then(res => {
@@ -39,7 +40,7 @@ export const resetUser = () => {
     return {
         type: 'RESET_USER',
         payload: {
-            user:{},
+            user: {},
             postUser: {
                 post: [],
                 total_page: null,

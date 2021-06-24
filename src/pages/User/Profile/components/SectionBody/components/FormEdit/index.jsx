@@ -3,6 +3,7 @@ import TextArea from 'antd/lib/input/TextArea';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadDistrict } from '../../../../../../../actions/search';
+import { getInfoUser } from '../../../../../../../actions/user';
 import { updateUser } from '../../../../../../../api/userApi';
 import ButtonSubmit from '../../../../../../../components/Button';
 import SelectCustom from '../../../../../../../components/Select';
@@ -26,7 +27,7 @@ function FormEdit() {
     useEffect(() => {
         if (valueProvince.id)
             getDistrict(valueProvince.id);
-    }, []);
+    }, [valueProvince.id]);
 
 
     const user = useSelector(state => state.user.user)
@@ -62,8 +63,8 @@ function FormEdit() {
         form.setFieldsValue({
             full_name: user?.full_name,
             country: {
-                id: user?.addressDto?.country_code,
-                name: user?.addressDto?.country_name,
+                id: 'VN',
+                name: 'Việt Nam',
             },
             district: {
                 id: user?.addressDto?.district_id,
@@ -95,8 +96,8 @@ function FormEdit() {
             name: user?.addressDto?.district_name,
         });
     }, [user]);
-    const onFinish = (values) => {
-        updateUser.PUT(
+    const onFinish = async (values) => {
+        await updateUser.PUT(
             {
                 address: {
                     address: values.address,
@@ -110,6 +111,7 @@ function FormEdit() {
                 phone: values.phone,
             }
         )
+        dispatch(getInfoUser())
     };
 
     return (

@@ -21,7 +21,7 @@ export const infoUser = {
 }
 export const updateUser = {
 
-    PUT: ( body) => {
+    PUT: (body) => {
         return AXIOS_INSTANCE({
             method: 'put',
             // headers: {
@@ -29,6 +29,21 @@ export const updateUser = {
             // },
             data: body,
             url: API_URL + '/user/token/update',
+        }).then(res => {
+            message.success("Success!");
+        })
+            .catch(err => {
+                message.error(err.response?.data?.message);
+            })
+    }
+}
+export const changePasswordUser = {
+
+    PUT: (body) => {
+        return AXIOS_INSTANCE({
+            method: 'put',
+            data: body,
+            url: API_URL + '/auth/change-password',
         }).then(res => {
             message.success("Success!");
         })
@@ -49,7 +64,7 @@ export const getPost = {
             params: params,
             url: API_URL + '/user/token/apartment/author',
         }).then(res => res.data.data
-            )
+        )
     }
 }
 export const getFavorite = {
@@ -64,6 +79,6 @@ export const getFavorite = {
             params: params,
             url: API_URL + '/user/token/apartment/favourite',
         }).then(res => res.data.data
-            )
+        )
     }
 }

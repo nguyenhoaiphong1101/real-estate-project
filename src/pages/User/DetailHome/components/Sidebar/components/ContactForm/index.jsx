@@ -2,6 +2,7 @@ import { Form, Input, Popover } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import ButtonSubmit from '../../../../../../../components/Button';
+import { API_URL } from '../../../../../../../constants/Config';
 import './styles.scss';
 
 function ContactForm() {
@@ -14,13 +15,15 @@ function ContactForm() {
                 <li><i class="fas fa-star"></i>Book Tour</li>
             </ul>
         </div>
+
     );
+    const getPhotosImgAvatar = (name) => `${API_URL}/public/image/avatar/${name}`;
     return (
         <div className="contact-form-wrapper">
             <h5>Gặp gỡ đại lý</h5>
             <div className="media">
                 <a>
-                    <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
+                    <img src={detailHome?.author?.avatar?.name ? getPhotosImgAvatar(detailHome?.author?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/-leE7hK7HNnHvhUaXXj3XCxJpaqc2gVCm7U2m4-iA4UyQwocXrfHEVBqujHobCMqnG_3XDgMKmB3r9RozmQrZP7U1cjGcXc"} alt="agent" />
                 </a>
                 <div className="media-body">
                     <h6>
