@@ -126,10 +126,10 @@
              }
         }
     }
-    // &:hover .listing__thumbnail .listing-controls a {
-    //     transform: translateX(0);
-    //     opacity: 1;
-    // }
+    &:hover .listing__thumbnail .listing-controls a {
+        transform: translateX(0);
+        opacity: 1;
+    }
     .listing__body {
         .author {
             display: flex;

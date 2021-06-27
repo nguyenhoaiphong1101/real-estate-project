@@ -10,6 +10,7 @@ import jwtDecode from 'jwt-decode';
 import { postFavorite } from '../../../api/favorite';
 import Modal from 'antd/lib/modal/Modal';
 import { API_URL } from '../../../constants/Config';
+import Img from '../../../assets/images/noavatar.png'
 
 function ThumbnailPrimary(props) {
     const [image, setImage] = useState({});
@@ -106,12 +107,12 @@ function ThumbnailPrimary(props) {
                 <div className="author">
                     <div onClick={() => toDetailHome()}>
                         <a >
-                            <img src={props.listLatestNew?.author?.avatar?.name ? getPhotosImgAvatar(props.listLatestNew?.author?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/-leE7hK7HNnHvhUaXXj3XCxJpaqc2gVCm7U2m4-iA4UyQwocXrfHEVBqujHobCMqnG_3XDgMKmB3r9RozmQrZP7U1cjGcXc"} alt="agent" />
+                            <img src={props.listLatestNew?.author?.avatar?.name ? getPhotosImgAvatar(props.listLatestNew?.author?.avatar?.name) : Img} alt="agent" />
                         </a>
                     </div>
                     <div className="media-body">
                         <h6>
-                            {props.listLatestNew?.created_by?.username}
+                            {props.listLatestNew?.author?.full_name}
                         </h6>
                         <span>{toTimeString(props.listLatestNew?.created_at)}</span>
                     </div>

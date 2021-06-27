@@ -5,13 +5,14 @@ import './styles.scss';
 
 import useDocumentScroll from './../../hooks/useDocumentScroll'
 import jwtDecode from 'jwt-decode';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getInfoUser, resetUser } from '../../actions/user';
 import { resetDetail } from '../../actions/detailhome';
 
 
 function Header(props) {
     const [path, setPath] = useState(props.path);
+    const user = useSelector(state => state.user.user)
     // const [topStyle, setTopStyle] = useState('');
     const location = useLocation();
     const history = useHistory();
@@ -62,7 +63,7 @@ function Header(props) {
                 <ul className="nav-link">
                     <React.Fragment>
                         <li className={path === "/dang-nhap" ? "active" : ""}>
-                            <Link className="mr-10" to='/trang-ca-nhan' > {`Hi ${jwtDecode(token).full_name ? jwtDecode(token).full_name : ''}`} </Link>
+                            <Link className="mr-10" to='/trang-ca-nhan' > {`Hi ${user?.full_name ? user?.full_name : ''}`} </Link>
                             <Link to='/' onClick={() => {
                                 removeLocal()
                                 dispatch(resetUser());

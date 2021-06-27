@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ButtonSubmit from '../../../../../../../components/Button';
 import { API_URL } from '../../../../../../../constants/Config';
 import './styles.scss';
+import Img from '../../../../../../../assets/images/noavatar.png'
 
 function ContactForm() {
     const detailHome = useSelector(state => state.detailhome.detailHome)
@@ -23,7 +24,7 @@ function ContactForm() {
             <h5>Gặp gỡ đại lý</h5>
             <div className="media">
                 <a>
-                    <img src={detailHome?.author?.avatar?.name ? getPhotosImgAvatar(detailHome?.author?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/-leE7hK7HNnHvhUaXXj3XCxJpaqc2gVCm7U2m4-iA4UyQwocXrfHEVBqujHobCMqnG_3XDgMKmB3r9RozmQrZP7U1cjGcXc"} alt="agent" />
+                    <img src={detailHome?.author?.avatar?.name ? getPhotosImgAvatar(detailHome?.author?.avatar?.name) : Img} alt="agent" />
                 </a>
                 <div className="media-body">
                     <h6>

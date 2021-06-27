@@ -5,6 +5,7 @@ import { Col, Row } from 'antd';
 import './styles.scss';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
+import { API_URL } from '../../../../../../../constants/Config';
 
 function ItemSlider(props) {
 
@@ -22,7 +23,7 @@ function ItemSlider(props) {
         // }
         history.push(`/chi-tiet/${props?.listHighlight?.id}`, props?.listHighlight)
     }
-
+    const getPhotosImgAvatar = (name) => `${API_URL}/public/image/avatar/${name}`;
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
@@ -45,11 +46,11 @@ function ItemSlider(props) {
                             </h5>
                             <div className="author">
                                 <a>
-                                    <img src="http://androthemes.com/themes/react/acres/assets/img/listing-single/6.jpg" alt="agent" />
+                                    <img src={props.listHighlight?.author?.avatar?.name ? getPhotosImgAvatar(props.listHighlight?.author?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/-leE7hK7HNnHvhUaXXj3XCxJpaqc2gVCm7U2m4-iA4UyQwocXrfHEVBqujHobCMqnG_3XDgMKmB3r9RozmQrZP7U1cjGcXc"} alt="agent" />
                                 </a>
                                 <div className="media-body">
                                     <h6>
-                                        {props.listHighlight?.created_by?.username}
+                                        {props.listHighlight?.author?.full_name}
                                     </h6>
                                     <span>{toTimeString(props.listHighlight?.created_at)}</span>
                                 </div>

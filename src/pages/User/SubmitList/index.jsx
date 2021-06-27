@@ -36,6 +36,7 @@ function SubmitList(props) {
     const [previewImage, setPreviewImage] = useState('');
     const [previewTitle, setPreviewTitle] = useState('');
     const [fileList, setFileList] = useState([]);
+    const [isChange, setIsChange] = useState(false);
 
     const uploadButton = (
         <div>
@@ -200,20 +201,31 @@ function SubmitList(props) {
         return current && current.valueOf() < Date.now();
     }
 
-    function callApiImage() {
+    async function callApiImage() {
         const bodyFormData = new FormData();
         let imgFiles = [];
-        let result = fileList; // đây này. nó là 1 cái mảng thì foreach, còn m 1 phần tử thì k cần
+        let result = [];
+        fileList.forEach((file) => {
+            if (!file.file) {
+                result.push({
+                    originalName: file.originalName,
+                    name: file.name,
+                    extension: file.extension,
+                });
+            }
+        });
         fileList.forEach((file) => {
             if (file.file) {
                 imgFiles.push(file.file);
             }
         });
-        if (imgFiles.length !== 0) {
+
+        if (imgFiles.length !== 0 && isChange === true) {
+            setIsChange(false);
             for (let i = 0; i < imgFiles.length; i++) {
                 bodyFormData.append("files", imgFiles[i]);
             }
-            axios
+            await axios
                 .request({
                     url: API_URL + '/upload/photo',
                     method: "POST",
@@ -224,44 +236,33 @@ function SubmitList(props) {
                 })
                 .then((res) => {
                     // bodyFormData.delete("files");
-                    let formatFileList = [];
-                    fileList.forEach((file) => {
-                        if (!file.file) {
-                            formatFileList.push({
-                                originalName: file.originalName,
-                                name: file.name,
-                                extension: file.extension,
-                            });
-                        }
-                    });
                     res.data.data.forEach((file) => {
-                        formatFileList.push({
-                            originalName: file.originalName,
-                            name: file.name,
-                            extension: file.extension,
-                        });
                         result.push({
                             originalName: file.originalName,
                             name: file.name,
                             extension: file.extension,
                         });
+                        // result.push({
+                        //     originalName: file.originalName,
+                        //     name: file.name,
+                        //     extension: file.extension,
+                        // });
                     });
 
-                    // setPhotos(formatFileList);
-                });
+                })
         }
+
         return result;
     }
 
     async function submitData() {
+        // await callApiImage().forEach((item) => {
+        //     listphoto.push(item);
+        // });
 
-        let listphoto = [];
-        await callApiImage().forEach((item) => {
-            listphoto.push(item);
-        });
+        let listphoto = await callApiImage();
 
         const dataForm = form.getFieldValue();
-
 
         if (listphoto.length === 0) {
             message.error("Vui lòng chọn hình ảnh !")
@@ -298,11 +299,13 @@ function SubmitList(props) {
 
             if (history.location.pathname === '/dang-bai') {
                 createPost.POST(dataPost);
-
+                form.resetFields();
+                setFileList(null);
             }
             else {
                 updatePost.PUT(dataPost, detailHome.id);
             }
+
         }
         // }
     }
@@ -382,15 +385,6 @@ function SubmitList(props) {
     }
 
     const handleChange = info => {
-        // Khi người ta thực hiện upload
-        // Chỗ này sẽ gọi api để lưu hình -> Api sẽ trả về url
-        // m push url đó vào cái file
-        /// tương tự như thế này 
-        // detailHome.photos?.forEach((item, index) => {
-        //     imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
-        // }); // dòng này là nó set img đây nè, ban đầu nếu chưa có img thì cái này nó sẽ rỗng, m sẽ hiển thị image mặc định
-        // setFileList(imgs);
-        // Thì giờ cái file m đã thay đổi
         const newList = [...info.fileList]
         newList.forEach(item => {
             item.status = "done"
@@ -409,6 +403,7 @@ function SubmitList(props) {
                 })
                 setFileList(newList)
             });
+            setIsChange(true);
         }
         setFileList(newList)
     };

@@ -9,6 +9,9 @@ import { API_URL } from '../../../../../constants/Config';
 import axios from 'axios';
 import { getInfoUser } from '../../../../../actions/user';
 
+import Img from '../../../../../assets/images/noavatar.png'
+
+
 
 
 function SectionBanner() {
@@ -17,7 +20,7 @@ function SectionBanner() {
     const getPhotosImg = (name) => `${API_URL}/public/image/avatar/${name}`; // api này tí t sẽ đưa cho m
     console.log(user?.avatar?.name);
     const [loading, setLoading] = useState(false);
-    const [imageUrl, setImageUrl] = useState(user?.avatar?.name ? getPhotosImg(user?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/-leE7hK7HNnHvhUaXXj3XCxJpaqc2gVCm7U2m4-iA4UyQwocXrfHEVBqujHobCMqnG_3XDgMKmB3r9RozmQrZP7U1cjGcXc");
+    const [imageUrl, setImageUrl] = useState(user?.avatar?.name ? getPhotosImg(user?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/stQT4Uk85iJrYfMcA1eZjpy-Mli-xMmuWDRcuO53eE1sOLRtuq0Taf_B1w5xxzgMD6sE_tDKO0bsrgCvAi8mhFR_zSHbDGM");
     const token = localStorage.getItem('access_token');
 
     const [form] = Form.useForm();
@@ -138,7 +141,7 @@ function SectionBanner() {
                             onChange={handleChange}
                         >
                             {loading ? <LoadingOutlined style={{ position: "absolute" }} /> : null}
-                            <img src={user?.avatar?.name ? getPhotosImg(user?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/-leE7hK7HNnHvhUaXXj3XCxJpaqc2gVCm7U2m4-iA4UyQwocXrfHEVBqujHobCMqnG_3XDgMKmB3r9RozmQrZP7U1cjGcXc"} alt="avatar" style={{ width: '100%', height: "100%" }} />
+                            <img src={user?.avatar?.name ? getPhotosImg(user?.avatar?.name) : Img} alt="avatar" style={{ width: '100%', height: "100%" }} />
                         </Upload>
                         <div className="body">
                             <h3 className="text">{user?.full_name}</h3>
