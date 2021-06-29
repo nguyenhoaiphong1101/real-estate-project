@@ -69,6 +69,11 @@ function Header(props) {
                 <ul className="nav-link">
                     <React.Fragment>
                         <li className={path === "/dang-nhap" ? "active" : ""}>
+                            {
+                                localStorage.getItem('role') === 'ADMIN' ?
+                                    <Link className="mr-10" onClick={() => { window.location.pathname = "/admin"; }} > Tới trang quản trị </Link>
+                                    : ''
+                            }
                             <Link className="mr-10" to='/trang-ca-nhan' > {`Hi ${user?.full_name ? user?.full_name : user?.username}`} </Link>
                             <Link to='/' onClick={() => {
                                 removeLocal()

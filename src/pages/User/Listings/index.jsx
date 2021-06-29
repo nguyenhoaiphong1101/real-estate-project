@@ -13,9 +13,13 @@ const { Option } = Select;
 function Listings(props) {
 
     const [sortBy, setSortBy] = useState();
+    const [sortDirection, setSortDirection] = useState("ASC");
 
     const handleChange = (value) => {
         setSortBy(value);
+    }
+    const handleChangeDirection = (value) => {
+        setSortDirection(value);
     }
 
     return (
@@ -49,12 +53,18 @@ function Listings(props) {
                         <Col span={15} className="sidebar-right">
                             <div className="tab-wrapper">
                                 <Row style={{ marginBottom: "20px" }}>
-                                    <Col offset={18} span={6}>
+                                    <Col offset={15} span={6} >
                                         <span >Sort by  </span>
-                                        <Select className="select" style={{ width: 120 }} onChange={handleChange}>
-                                            <Option value="ID">ID</Option>
+                                        <Select style={{ paddingRight: "5px" }} className="select" style={{ width: 120 }} defaultValue="ID" onChange={handleChange}>
+                                            <Option value="ID">Mặc định</Option>
                                             <Option value="AREA">Diện tích</Option>
                                             <Option value="TOTAL_PRICE">Giá tiền</Option>
+                                        </Select>
+                                    </Col>
+                                    <Col span={2}>
+                                        <Select className="select" style={{ width: 120 }} defaultValue="ASC" onChange={handleChangeDirection}>
+                                            <Option value="ASC">Tăng dần</Option>
+                                            <Option value="DESC">Giảm dần</Option>
                                         </Select>
                                     </Col>
                                 </Row>
@@ -62,12 +72,12 @@ function Listings(props) {
                                     <TabPane className="tab-item" tab={
                                         <i className="fas fa-th-list"></i>
                                     } key="1">
-                                        <ListHome typeListing={props.title} sortBy={sortBy} />
+                                        <ListHome typeListing={props.title} sortBy={sortBy} sortDirection={sortDirection} />
                                     </TabPane>
                                     <TabPane tab={
                                         <i class="fas fa-th-large"></i>
                                     } key="2">
-                                        <GridHome typeListing={props.title} sortBy={sortBy} />
+                                        <GridHome typeListing={props.title} sortBy={sortBy} sortDirection={sortDirection} />
                                     </TabPane>
                                 </Tabs>
                             </div>

@@ -63,7 +63,8 @@ function App() {
                         <Header setEnableFooter={setEnableFooter} path={path} setLoading={setLoading} role={returnRole()} />
                         <Switch>
                             {returnRole() === 'ADMIN' &&
-                                <AdminWrapper />}
+                                <AdminWrapper />
+                            }
                             <Route path="/" exact>
                                 <Home />
                                 <Footer />

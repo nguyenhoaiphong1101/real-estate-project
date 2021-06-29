@@ -36,11 +36,13 @@ function ManageApartment(props) {
             title: 'Tiêu đề',
             dataIndex: 'title',
             key: 'id',
+            width: 250
         },
         {
             title: 'Địa chỉ',
             dataIndex: 'address',
             key: 'id',
+            width: 100
         },
         {
             title: 'Diện tích',
@@ -57,7 +59,7 @@ function ManageApartment(props) {
             title: 'Nổi bật',
             dataIndex: 'is_highlight',
             key: 'id',
-            width: 100,
+            width: 78,
             render: (text, record) => record?.is_highlight ? <i style={{ color: 'yellow', cursor: "pointer" }} onClick={() => changeHighlight(record)} class="fas fa-star"></i> : <i onClick={() => changeHighlight(record)} style={{ color: 'yellow', cursor: "pointer" }} class="far fa-star"></i>
         },
         {
@@ -233,12 +235,12 @@ function ManageApartment(props) {
     const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
     const [params, setParams] = useState({
         sort_direction: "ASC",
-        sort_by: '',//
-        status: '',//
-        type_apartment: '',//
+        sort_by: "ID",//
+        status: undefined,//
+        type_apartment: undefined,//
         size: 10,//
         page: 1,//
-        search: '',//
+        search: undefined,//
         province_id: undefined,//
         price_to: undefined,
         price_from: undefined,
@@ -362,7 +364,7 @@ function ManageApartment(props) {
         setTypeButton("ADD");
         setIsModalVisible(true);
     };
-    const user = useSelector(state=>state.user.user)
+    const user = useSelector(state => state.user.user)
     const showModalChange = (record) => {
         dispatch(loadDetailHome(record.id, user.id))
         setIsModalVisible(true);
@@ -1023,10 +1025,10 @@ function ManageApartment(props) {
                 <Col span={24}>
                     <div className="title-wrapper">
                         <div className="title" style={{ textAlign: "center" }}>
-                            Quản Lý Căn Hộ
+                            Quản Lý Bất Động Sản
                         </div>
                         <div className="sub-title" style={{ textAlign: "center" }}>
-                            Nơi Quản Lý Tất Cả Căn Hộ
+                            Nơi Quản Lý Tất Cả Bất Động Sản
                         </div>
                     </div>
                 </Col>
@@ -1043,18 +1045,17 @@ function ManageApartment(props) {
                         <Col offset={1} span={3}>
                             <Button className="admin-btn-add-apartment" onClick={() => showModalAdd()}>Thêm căn hộ <PlusOutlined /></Button>
                         </Col>
-                        <Col offset={7} span={2}>
+                        <Col offset={6} span={2}>
                             <p style={{ margin: "5px 0px 0px 20px" }}>Sắp xếp</p>
                         </Col>
                         <Col span={3} style={{ paddingRight: "10px" }}>
-                            <Select className="form-control select" onChange={(value) => onSort(value)} defaultValue="ALL"  >
-                                <Option value="ALL">ALL</Option>
-                                <Option value="ID">ID</Option>
+                            <Select className="form-control select" onChange={(value) => onSort(value)} defaultValue="ID"  >
+                                <Option value="ID">Mặc định</Option>
                                 <Option value="AREA">Diện tích</Option>
                                 <Option value="TOTAL_PRICE">Tổng tiền</Option>
                             </Select>
                         </Col>
-                        <Col span={2}>
+                        <Col span={3}>
                             <Select className="form-control select" onChange={(value) => onDirection(value)} defaultValue="ASC"  >
                                 <Option value="ASC">Tăng dần</Option>
                                 <Option value="DESC">Giảm dần</Option>

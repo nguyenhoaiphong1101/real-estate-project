@@ -19,7 +19,7 @@ function ManageCategory(props) {
     const totalItem = useSelector(state => state.admin.category.totalItem);
     const [typeButton, setTypeButton] = useState('');
     const dispatch = useDispatch()
-    const [params, setParams] = useState({ sort_direction: "ASC", sort_by: undefined, search: undefined, page: 1 });
+    const [params, setParams] = useState({ sort_direction: "ASC", sort_by: "ID", search: undefined, page: 1 });
     useEffect(() => {
         dispatch(getListCategory({
             ...params
@@ -215,7 +215,7 @@ function ManageCategory(props) {
             <div className="table-wrapper">
                 <div className="table-tool">
                     <Row>
-                        <Col span={12}>
+                        <Col span={10}>
                             <Form form={search}
                                 name="basic"
                             >
@@ -236,14 +236,13 @@ function ManageCategory(props) {
                         <Col offset={1} span={2}>
                             <p style={{ margin: "18px 0px 0px 20px" }}>Sắp xếp</p>
                         </Col>
-                        <Col span={2} style={{ paddingRight: "5px" }}>
-                            <Select className="form-control select" defaultValue="ALL" onChange={sortChange}>
-                                <Option value="ALL">ALL</Option>
-                                <Option value="ID">ID</Option>
-                                <Option value="NAME">NAME</Option>
+                        <Col span={3} style={{ paddingRight: "5px" }}>
+                            <Select className="form-control select" defaultValue="ID" onChange={sortChange}>
+                                <Option value="ID">Mặc định</Option>
+                                <Option value="NAME">Tên</Option>
                             </Select>
                         </Col>
-                        <Col span={2} >
+                        <Col span={3} >
                             <Select className="form-control select" defaultValue="ASC" onChange={sortDirection}>
                                 <Option value="ASC">Tăng dần</Option>
                                 <Option value="DESC">Giảm dần</Option>

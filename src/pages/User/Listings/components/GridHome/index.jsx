@@ -17,10 +17,10 @@ function GridHome(props) {
 
     const filter = useSelector(state => state.listfilter)
     const token = localStorage.getItem('access_token');
-    const [params, setParams] = useState({ sort_by: undefined, page: 1 });
+    const [params, setParams] = useState({ sort_by: undefined, sort_direction: undefined, page: 1 });
 
     useEffect(() => {
-        if (props?.sortBy) {
+        if (props?.sortBy || props?.sortDirection) {
             dispatch(loadListSearch({
                 ...params,
                 type_apartment: props.typeListing === "Nhà đất bán" ? "BUY" : "RENT",
@@ -33,14 +33,16 @@ function GridHome(props) {
                 province_id: filter?.valueProvince?.id && filter?.valueProvince?.id !== "-1" ? filter?.valueProvince?.id : undefined,
                 user_id: token ? jwtDecode(token).id : null,
                 sort_by: props.sortBy,
+                sort_direction: props.sortDirection,
             }))
             setParams({
                 ...params,
                 sort_by: props.sortBy,
+                sort_direction: props.sortDirection,
             })
         }
 
-    }, [props?.sortBy]);
+    }, [props]);
 
     // useEffect(() => {
     //     dispatch(loadListSearch(1, 2));

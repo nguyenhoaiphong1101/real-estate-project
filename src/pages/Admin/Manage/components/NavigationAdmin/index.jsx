@@ -6,17 +6,24 @@ import "./styles.scss"
 
 
 function NavigationAdmin(props) {
-    const history = useHistory();
 
     const removeLocal = () => {
         localStorage.removeItem('access_token')
         localStorage.removeItem('role')
         window.location.pathname = "/";
     }
+
+    const toHome = () => {
+        window.location.pathname = "/";
+    }
+    const toInfo = () => {
+        window.location.pathname = "/trang-ca-nhan";
+    }
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
-                <li>Thông tin</li>
+                <li onClick={() => toHome()}>Trang chủ</li>
+                <li onClick={() => toInfo()}>Thông tin</li>
                 <li onClick={() => removeLocal()}>Đăng xuất</li>
             </ul>
         </div>

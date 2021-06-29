@@ -20,7 +20,7 @@ function ManageUser(props) {
     const listUser = useSelector(state => state.admin.user.listUser);
     const totalItem = useSelector(state => state.admin.user.totalItem);
     const detailUser = useSelector(state => state.admin.detailUser);
-    const [params, setParams] = useState({ sort_direction: "ASC", sort_by: '', page: 1, search: undefined });
+    const [params, setParams] = useState({ sort_direction: "ASC", sort_by: "ID", page: 1, search: undefined });
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getListUser({
@@ -260,7 +260,7 @@ function ManageUser(props) {
             <div className="table-wrapper">
                 <div className="table-tool">
                     <Row>
-                        <Col span={12}>
+                        <Col span={10}>
                             <Form form={search}
                                 name="basic"
                             >
@@ -278,15 +278,14 @@ function ManageUser(props) {
                         <Col offset={5} span={2}>
                             <p style={{ margin: "18px 0px 0px 20px" }}>Sắp xếp</p>
                         </Col>
-                        <Col span={2} style={{ paddingRight: "5px" }} >
-                            <Select className="form-control select" defaultValue="ALL" onChange={sortChange}>
-                                <Option value="ALL">ALL</Option>
-                                <Option value="ID">ID</Option>
+                        <Col span={3} style={{ paddingRight: "5px" }} >
+                            <Select className="form-control select" defaultValue="ID" onChange={sortChange}>
+                                <Option value="ID">Mặc định</Option>
                                 <Option value="FULL_NAME">Tên</Option>
                                 <Option value="EMAIL">Email</Option>
                             </Select>
                         </Col>
-                        <Col span={2}  >
+                        <Col span={3}  >
                             <Select className="form-control select" defaultValue="ASC" onChange={sortDirection}>
                                 <Option value="ASC">Tăng dần</Option>
                                 <Option value="DESC">Giảm dần</Option>
