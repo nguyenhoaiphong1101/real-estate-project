@@ -12,20 +12,22 @@ function DetailHome() {
     const history = useHistory()
     const dispatch = useDispatch();
     useEffect(() => {
+        let idTemp = parseInt(history.location.pathname.slice(10));
         if (token) {
-            dispatch(loadDetailHome(history?.location?.state?.id, jwtDecode(token).id));
+            dispatch(loadDetailHome(idTemp, jwtDecode(token).id));
         }
         else {
-            dispatch(loadDetailHome(history?.location?.state?.id))
+            dispatch(loadDetailHome(idTemp))
         }
     }, []);
 
     const isRender = () => {
+        let idTemp = parseInt(history.location.pathname.slice(10));
         if (token) {
-            dispatch(loadDetailHome(history?.location?.state?.id, jwtDecode(token).id));
+            dispatch(loadDetailHome(idTemp, jwtDecode(token).id));
         }
         else {
-            dispatch(loadDetailHome(history?.location?.state?.id))
+            dispatch(loadDetailHome(idTemp))
         }
     }
 

@@ -362,8 +362,9 @@ function ManageApartment(props) {
         setTypeButton("ADD");
         setIsModalVisible(true);
     };
+    const user = useSelector(state=>state.user.user)
     const showModalChange = (record) => {
-        dispatch(loadDetailHome(record.id))
+        dispatch(loadDetailHome(record.id, user.id))
         setIsModalVisible(true);
         setTypeButton("CHANGE");
     };
@@ -460,10 +461,7 @@ function ManageApartment(props) {
     };
 
     const changeApartment = async () => {
-        let listphoto = [];
-        await callApiImage().forEach((item) => {
-            listphoto.push(item);
-        });
+        let listphoto = await callApiImage();
 
         const dataForm = formMain.getFieldValue();
 

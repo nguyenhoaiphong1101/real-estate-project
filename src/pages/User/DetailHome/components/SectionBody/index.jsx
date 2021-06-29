@@ -10,7 +10,7 @@ function SectionBody(props) {
             <div className="container">
                 <Row>
                     <Col span={16}><Content isRender={props.isRender} /></Col>
-                    <Col span={8}><SideBar /></Col>
+                    <Col span={8}><SideBar isRender={props.isRender}/></Col>
                 </Row>
             </div>
         </div>

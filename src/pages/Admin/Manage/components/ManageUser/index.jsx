@@ -78,7 +78,7 @@ function ManageUser(props) {
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <Button className="admin-btn-edit" onClick={(record) => toDetailHome(record)} >Xem bài đăng</Button>
+                    <Button className="admin-btn-edit" onClick={() => toDetailHome(record)} >Xem bài đăng</Button>
                 </Space>
             ),
         },
@@ -87,13 +87,8 @@ function ManageUser(props) {
     const history = useHistory();
 
     const toDetailHome = (record) => {
-        // if (token) {
-        //     dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))
-        // }
-        // else {
-        //     dispatch(loadDetailHome(props?.listLatestNew?.id))
-        // }
-        history.push(`/chi-tiet/${record?.id}`, record)
+        const win = window.open(`/chi-tiet/${record?.id}`, "_blank");
+        win.focus();
     }
 
     const columns = [
@@ -218,9 +213,8 @@ function ManageUser(props) {
                     </Col>
                     <Col span={19}>
                         <Collapse defaultActiveKey={['1']} ghost>
-
                             <Panel header="Danh sách bài đăng" key="1">
-                                <div style={{ height: "300px", overflowY: "scroll" }}>
+                                <div style={{ maxHeight: "300px", overflowY: "scroll" }}>
                                     <Table
                                         className="table"
                                         columns={columnsApartment}
@@ -234,7 +228,7 @@ function ManageUser(props) {
                                 </div>
                             </Panel>
                             <Panel header="Danh sách bài yêu thích" key="2">
-                                <div style={{ height: "300px", overflowY: "scroll" }}>
+                                <div style={{ maxHeight: "300px", overflowY: "scroll" }}>
                                     <Table
                                         className="table"
                                         columns={columnsApartment}

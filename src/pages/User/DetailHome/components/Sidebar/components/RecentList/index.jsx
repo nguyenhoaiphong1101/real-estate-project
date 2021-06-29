@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadListLatestNew } from '../../../../../../../actions/latestnew';
 import ThumbnailSecondary from '../../../../../../../components/Thumbnail/ThumbnailSecondary';
 import './styles.scss';
-function RecentList() {
+function RecentList(props) {
     const listLatestNew = useSelector(state => state.latestnew.listLastetNew);
     const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ function RecentList() {
             <h4 className="title">Danh sách gần đây</h4>
             <div className="container-fluid wrapper">
                 {listLatestNew.map((item, index) => {
-                    return <ThumbnailSecondary key={index} listLatestNew={item} />
+                    return <ThumbnailSecondary key={index} listLatestNew={item} isRender={props.isRender} />
                 })}
             </div>
         </div>

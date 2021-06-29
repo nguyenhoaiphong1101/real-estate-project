@@ -249,8 +249,7 @@ function Banner() {
                         <div className="banner-text">
                             <h1 className="title text-white">Find Your Ideal Home Today</h1>
                             <p className="subtitle text-white">
-                                Thousands of people have their flats up for grabs. Don't miss your chance to grab your
-                                own house today. </p>
+                            Tìm kiếm nơi ở phù hợp cho bạn ngay hôm nay. Hàng nghìn sự lựa chọn hoàn hảo đang chờ đợi </p>
                         </div>
                         <div className="acr-filter-form">
                             <Tabs defaultActiveKey="1" className="pl-12" onChange={(e) => onChangeType(e)}>
@@ -265,7 +264,7 @@ function Banner() {
                                         <SelectCustom title="Thể loại" onHandleChange={changeValueCategory} options={listCategory} />
                                     </Col>
                                     <Col span={14}>
-                                        <Input className="input" placeholder="Tìm kiếm địa điểm, khu vực" onChange={onSearch} />
+                                        <Input className="input" placeholder="Tìm kiếm..." onChange={onSearch} />
                                     </Col>
                                     <Col span={4} onClick={() => valueSearch()}>
                                         <ButtonCustom value="Tìm kiếm" className="btn-search" />

@@ -15,7 +15,7 @@ function Content(props) {
             <SectionSlideIntroduce />
             <div className="section-overview">
                 <h1 className="title">Tổng quan</h1>
-                <Markup content={detailHome?.apartment_detail?.description} />
+                <Markup className="content-body" content={detailHome?.apartment_detail?.description} />
             </div>
             <SectionPriceRange />
             <SectionFeatures />
