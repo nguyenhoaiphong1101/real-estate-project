@@ -61,10 +61,26 @@ export const getPost = {
             //     Authorization: `Bearer ${token}`
             // },
             data: null,
-            params: params,
+            params: {
+                ...params,
+                size: 10,
+            },
             url: API_URL + '/user/token/apartment/author',
         }).then(res => res.data.data
         )
+    }
+}
+export const deletePost = {
+
+    DELETE: (id) => {
+        return AXIOS_INSTANCE({
+            method: 'delete',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: null,
+            url: API_URL + `/delete/${id}/`,
+        })
     }
 }
 export const getFavorite = {

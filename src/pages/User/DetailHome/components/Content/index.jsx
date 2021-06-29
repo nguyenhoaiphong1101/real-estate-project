@@ -7,7 +7,7 @@ import SectionSimilarListing from '../SectionSimilarListing';
 import { useSelector } from 'react-redux';
 import { Markup } from 'interweave';
 
-function Content() {
+function Content(props) {
 
     const detailHome = useSelector(state => state.detailhome.detailHome)
     return (
@@ -19,7 +19,7 @@ function Content() {
             </div>
             <SectionPriceRange />
             <SectionFeatures />
-            <SectionSimilarListing />
+            <SectionSimilarListing isRender={props.isRender} />
         </div>
     );
 }

@@ -11,6 +11,7 @@ import { postFavorite } from '../../../api/favorite';
 import Modal from 'antd/lib/modal/Modal';
 import { API_URL } from '../../../constants/Config';
 import Img from '../../../assets/images/noavatar.png'
+import { isBuffer } from 'lodash';
 
 function ThumbnailPrimary(props) {
     const [image, setImage] = useState({});
@@ -28,6 +29,9 @@ function ThumbnailPrimary(props) {
     const history = useHistory()
     const toDetailHome = () => {
         history.push(`/chi-tiet/${props?.listLatestNew?.id}`, props?.listLatestNew)
+        if (props.isRender) {
+            props.isRender();
+        }
     }
     const [isFavorite, setIsFavorite] = useState();
 

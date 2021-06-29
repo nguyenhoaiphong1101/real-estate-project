@@ -64,9 +64,9 @@ function FormLogin() {
                     <Input type="password" className="form-login-group-control" placeholder="Mật khẩu" name="password" />
                 </Form.Item>
             </div>
-            <div className="form-login-group">
+            {/* <div className="form-login-group">
                 <a className="form-login-group-forgot-password" href="#">Quên mật khẩu?</a>
-            </div>
+            </div> */}
             <button type="submit" className="form-login-btn-submit">Đăng nhập</button>
             <div className="auth-seperator">
                 <span>
@@ -75,7 +75,7 @@ function FormLogin() {
             </div>
             <p className="text-end">
                 Bạn chưa có tài khoản?
-                <a href="#">Tạo ngay</a>
+                <a href="/dang-ky">Tạo ngay</a>
             </p>
 
 

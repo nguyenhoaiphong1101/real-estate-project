@@ -4,7 +4,7 @@ import './styles.scss';
 import ThumbnailPrimary from '../../../../../components/Thumbnail/ThumbnailPrimary';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadListRecommend } from '../../../../../actions/recommend';
-function SectionSimilarListing() {
+function SectionSimilarListing(props) {
 
     const listRecommend = useSelector(state => state.recommend.listRecommend);
     const user = useSelector(state => state.user.user);
@@ -25,10 +25,10 @@ function SectionSimilarListing() {
                 <div className="list-feature">
                     <Row>
                         <Col span={12}>
-                            <ThumbnailPrimary listLatestNew={listRecommend[0]} />
+                            <ThumbnailPrimary listLatestNew={listRecommend[0]} isRender={props.isRender} />
                         </Col>
                         <Col span={12}>
-                            <ThumbnailPrimary listLatestNew={listRecommend[1]} />
+                            <ThumbnailPrimary listLatestNew={listRecommend[1]} isRender={props.isRender} />
                         </Col>
                     </Row>
                 </div>

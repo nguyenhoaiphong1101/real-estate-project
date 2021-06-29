@@ -203,6 +203,7 @@ function FilterListings(props) {
         }
         else {
             searchFilter(filter.valueCategory, filter.valueProvince, filter.valueDistrict, filter.valuePrice, filter.valueArea, filter.inputSearch)
+            console.log(filter.valuePrice);
         }
 
     }, [props.typeListing])
@@ -228,11 +229,8 @@ function FilterListings(props) {
         setValueProvince({ id: id.key, name: value });
     }
     const changeValueArea = (value, id) => {
-
         let data = acreage.filter(el => el.id == id.key);
-
-
-        setValueArea({ from: data[0]?.from, to: data[0]?.to });
+        setValueArea({ id: id.key, name: value, from: data[0]?.from, to: data[0]?.to });
     }
     const token = localStorage.getItem('access_token');
 

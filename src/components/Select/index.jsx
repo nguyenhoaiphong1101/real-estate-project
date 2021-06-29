@@ -1,6 +1,7 @@
 import { Select, Input } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { loadProvince } from '../../actions/search';
 
 import { searchCity } from '../../api/searchApi';
@@ -70,7 +71,9 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
         }
     }, [value])
 
+    const history = useHistory();
 
+    const detailHome = useSelector(state => state.detailhome.detailHome)
     useEffect(() => {
         if (valueSearch === '') {
             setItems(options);
@@ -82,7 +85,9 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
 
 
     const checkTypeSelect = () => {
-        if (title == "Mức giá" || title == "Diện tích" || title == "Thể loại") {
+        if (history.location.pathname === '/dang-bai' || history.location.pathname === `/chinh-sua/${detailHome.id}`)
+            return ''
+        else if (title == "Mức giá" || title == "Diện tích" || title == "Thể loại") {
             return <Option value="Tất cả" key="-1">
                 Tất cả
             </Option>

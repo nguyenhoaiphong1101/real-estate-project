@@ -133,7 +133,7 @@ function SubmitList(props) {
     const [arr1, setArr1] = useState([
         {
             icon: "flaticon-paint",
-            label: "Sân nhà",
+            label: "Mặt tiền",
             name: 'front_building'
         },
         {
@@ -300,7 +300,7 @@ function SubmitList(props) {
             if (history.location.pathname === '/dang-bai') {
                 createPost.POST(dataPost);
                 form.resetFields();
-                setFileList(null);
+                setFileList([]);
             }
             else {
                 updatePost.PUT(dataPost, detailHome.id);

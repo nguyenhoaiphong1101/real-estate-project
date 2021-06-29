@@ -70,7 +70,7 @@ function Category(props) {
                 </div>
                 <Row gutter={[16, 16]}>
                     {listCategory.map((item, index) => {
-                        return (
+                        if (index < 6) return (
                             <Col key={item.id} span={8} className="category" onClick={() => valueSearch(item)}>
                                 <div className="category-item" >
                                     {/* <a><img src="http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg" alt="#" /></a> */}

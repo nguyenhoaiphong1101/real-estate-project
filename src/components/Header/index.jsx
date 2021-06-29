@@ -33,12 +33,18 @@ function Header(props) {
         localStorage.removeItem('role')
         history.push('/')
     }
+    const token = localStorage.getItem('access_token');
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        if (token) {
+            dispatch(getInfoUser())
+        }
+    }, [token]);
 
 
-    const token = localStorage.getItem('access_token');
+
 
 
 
@@ -63,7 +69,7 @@ function Header(props) {
                 <ul className="nav-link">
                     <React.Fragment>
                         <li className={path === "/dang-nhap" ? "active" : ""}>
-                            <Link className="mr-10" to='/trang-ca-nhan' > {`Hi ${user?.full_name ? user?.full_name : ''}`} </Link>
+                            <Link className="mr-10" to='/trang-ca-nhan' > {`Hi ${user?.full_name ? user?.full_name : user?.username}`} </Link>
                             <Link to='/' onClick={() => {
                                 removeLocal()
                                 dispatch(resetUser());

@@ -235,11 +235,17 @@
         .listing-gallery-wrapper {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content:flex-start;
             .view-detail {
                 font-size: 13px;
                 background-color: #01bbbc;
                 margin: 0;
+            }
+            .view-detail-delete {
+                font-size: 13px;
+                background-color: #ff0f59;
+                margin: 0;
+                margin-left: 10px;
             }
         }
     }

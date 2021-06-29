@@ -19,10 +19,20 @@ function DetailHome() {
             dispatch(loadDetailHome(history?.location?.state?.id))
         }
     }, []);
+
+    const isRender = () => {
+        if (token) {
+            dispatch(loadDetailHome(history?.location?.state?.id, jwtDecode(token).id));
+        }
+        else {
+            dispatch(loadDetailHome(history?.location?.state?.id))
+        }
+    }
+
     return (
         <div>
             <SectionBanner />
-            <SectionBody />
+            <SectionBody isRender={isRender} />
         </div>
     );
 }

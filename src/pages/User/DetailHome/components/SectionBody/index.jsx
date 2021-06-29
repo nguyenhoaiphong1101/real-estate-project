@@ -4,12 +4,12 @@ import './styles.scss';
 import Content from '../Content';
 import SideBar from '../Sidebar';
 
-function SectionBody() {
+function SectionBody(props) {
     return (
         <div className="section-body-wrapper">
             <div className="container">
                 <Row>
-                    <Col span={16}><Content /></Col>
+                    <Col span={16}><Content isRender={props.isRender} /></Col>
                     <Col span={8}><SideBar /></Col>
                 </Row>
             </div>

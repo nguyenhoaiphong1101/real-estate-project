@@ -52,8 +52,8 @@ function ListRecomend(props) {
                         </button>
                         <div>
                             <Slider ref={slide} {...settings}>
-                                {listRecommend.map(item => {
-                                    return (<div key={item?.id}>
+                                {listRecommend.map((item, index) => {
+                                    if (index < 10) return (<div key={item?.id}>
                                         <ThumbnailRecomend list={item} />
                                     </div>);
                                 })}

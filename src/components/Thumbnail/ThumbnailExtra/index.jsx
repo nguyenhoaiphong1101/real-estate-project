@@ -11,6 +11,8 @@ import { API_URL } from '../../../constants/Config';
 import Button from '../../Button';
 import './styles.scss';
 import Img from '../../../assets/images/noavatar.png'
+import { deletePost } from '../../../api/userApi';
+import { getPostUser } from '../../../actions/user';
 
 function ThumbnailExtra(props) {
 
@@ -67,7 +69,10 @@ function ThumbnailExtra(props) {
     const getPhotosImgAvatar = (name) => `${API_URL}/public/image/avatar/${name}`;
 
 
-
+    const toDeletePost = async () => {
+        await deletePost.DELETE(props.listLatestNew?.id);
+        dispatch(getPostUser());
+    }
 
 
     useEffect(() => {
@@ -167,14 +172,22 @@ function ThumbnailExtra(props) {
                     </div>
                 </div>
                 {props?.type ?
-                    <div className="listing-gallery-wrapper">
+                    <div className="listing-gallery-wrapper" >
                         <Button value="Chỉnh sửa" className="view-detail" onClick={() => toUpdatePost()}></Button>
+                        <Button value="Xóa bài" className="view-detail-delete" onClick={() => toDeletePost()}></Button>
                     </div>
                     :
                     <div className="listing-gallery-wrapper">
                         <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
                     </div>
                 }
+                {/* {history.location.pathname === '/trang-ca-nhan' ?
+                    <div className="listing-gallery-wrapper">
+                        <Button value="Xóa bài" className="view-detail" onClick={() => toUpdatePost()}></Button>
+                    </div>
+                    :
+                    null
+                } */}
             </div>
         </div>
     );

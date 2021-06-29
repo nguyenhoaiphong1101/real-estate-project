@@ -38,7 +38,6 @@ function SectionSlideIntroduce() {
             imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
         });
         setImage(imgs);
-        console.log(imgs);
     }, [detailHome]);
     return (
         <div className="slide-introduce">
