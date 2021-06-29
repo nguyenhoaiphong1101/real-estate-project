@@ -10,6 +10,7 @@ import { Option } from 'antd/lib/mentions';
 import {
     SearchOutlined
 } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 const { Panel } = Collapse;
 
@@ -77,11 +78,23 @@ function ManageUser(props) {
             key: 'action',
             render: (text, record) => (
                 <Space size="middle">
-                    <Button className="admin-btn-edit" >Xem bài đăng</Button>
+                    <Button className="admin-btn-edit" onClick={(record) => toDetailHome(record)} >Xem bài đăng</Button>
                 </Space>
             ),
         },
     ];
+
+    const history = useHistory();
+
+    const toDetailHome = (record) => {
+        // if (token) {
+        //     dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))
+        // }
+        // else {
+        //     dispatch(loadDetailHome(props?.listLatestNew?.id))
+        // }
+        history.push(`/chi-tiet/${record?.id}`, record)
+    }
 
     const columns = [
         {

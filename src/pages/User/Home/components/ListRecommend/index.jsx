@@ -11,6 +11,8 @@ import jwtDecode from 'jwt-decode';
 function ListRecomend(props) {
 
     const slide = useRef(null);
+    const listRecommend = useSelector(state => state.recommend.listRecommend);
+
 
     const settings = {
         dots: true,
@@ -28,7 +30,6 @@ function ListRecomend(props) {
     }
 
 
-    const listRecommend = useSelector(state => state.recommend.listRecommend);
 
 
 
@@ -46,7 +47,7 @@ function ListRecomend(props) {
                         <div>
                             <Slider ref={slide} {...settings}>
                                 {listRecommend.map((item, index) => {
-                                    if (index < 10) return (<div key={item?.id}>
+                                    if (index < 10) return (<div key={index}>
                                         <ThumbnailRecomend list={item} />
                                     </div>);
                                 })}
