@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import "./styles.scss"
-import { Table, Tag, Space, Col, Row, Input, Button, Modal, Select } from 'antd';
+import { Table, Tag, Space, Col, Row, Input, Button, Modal, Select, Form } from 'antd';
 import SelectExtra from '../../../../../components/SelectExtra';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListUser, getUserDetail } from '../../../../../actions/admin';
 import { Collapse } from 'antd';
 import { Option } from 'antd/lib/mentions';
+
+import {
+    SearchOutlined
+} from '@ant-design/icons';
 
 const { Panel } = Collapse;
 
@@ -15,7 +19,7 @@ function ManageUser(props) {
     const listUser = useSelector(state => state.admin.user.listUser);
     const totalItem = useSelector(state => state.admin.user.totalItem);
     const detailUser = useSelector(state => state.admin.detailUser);
-    const [params, setParams] = useState({ sort_direction: "ASC", sort_by: '', page: 1 });
+    const [params, setParams] = useState({ sort_direction: "ASC", sort_by: '', page: 1, search: undefined });
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getListUser({
@@ -81,34 +85,45 @@ function ManageUser(props) {
 
     const columns = [
         {
-            title: 'ID',
-            dataIndex: 'id',
+            title: 'STT',
+            // dataIndex: 'id',
             key: 'id',
+            render: (text, record) => <td>{
+                listUser.map((item, index) => {
+                    if (item.id === record.id) {
+                        return index + (params.page - 1) * 10 + 1
+                    }
+                })
+            }</td>,
         },
         {
-            title: 'USERNAME',
+            title: 'Tài khoản',
             dataIndex: 'username',
             key: 'id',
         },
         {
-            title: 'FULL_NAME',
+            title: 'Tên',
             dataIndex: 'full_name',
             key: 'id',
+            render: text => text ? <td>{text}</td> : <td>Chưa cập nhật</td>
         },
         {
-            title: 'EMAIL',
+            title: 'Email',
             dataIndex: 'email',
             key: 'id',
+            render: text => text ? <td>{text}</td> : <td>Chưa cập nhật</td>
         },
         {
-            title: 'PHONE',
+            title: 'Điện thoại',
             dataIndex: 'phone',
             key: 'id',
+            render: text => text ? <td>{text}</td> : <td>Chưa cập nhật</td>
         },
         {
-            title: 'DESCRIPTION',
+            title: 'Mô tả',
             dataIndex: 'description',
             key: 'id',
+            render: text => text ? <td>{text}</td> : <td>Chưa cập nhật</td>
         },
         {
             title: 'Action',
@@ -120,6 +135,19 @@ function ManageUser(props) {
             ),
         },
     ];
+
+    const [search] = Form.useForm();
+
+    const onSearch = () => {
+        dispatch(getListUser({
+            ...params,
+            search: search.getFieldValue().search ? search.getFieldValue().search : undefined,
+        }))
+        setParams({
+            ...params,
+            search: search.getFieldValue().search ? search.getFieldValue().search : undefined,
+        });
+    }
 
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -135,6 +163,17 @@ function ManageUser(props) {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+
+    const sortDirection = (value) => {
+        dispatch(getListUser({
+            ...params,
+            sort_direction: value,
+        }))
+        setParams({
+            ...params,
+            sort_direction: value,
+        });
+    }
 
     return (
         <div className="admin-manage-user">
@@ -201,15 +240,36 @@ function ManageUser(props) {
             <div className="table-wrapper">
                 <div className="table-tool">
                     <Row>
-                        <Col offset={18} span={2}>
-                            <p style={{ margin: "5px 0px 0px 20px" }}>Sắp xếp</p>
+                        <Col span={12}>
+                            <Form form={search}
+                                name="basic"
+                            >
+                                <Form.Item
+                                    style={{ marginBottom: "0px" }}
+                                    name="search"
+                                >
+                                    <Input className="input" placeholder="Tìm kiếm..." />
+                                </Form.Item>
+                            </Form>
                         </Col>
-                        <Col span={4} >
+                        <Col span={1}>
+                            <Button onClick={() => onSearch()} className="admin-btn-add-category"><SearchOutlined /></Button>
+                        </Col>
+                        <Col offset={5} span={2}>
+                            <p style={{ margin: "18px 0px 0px 20px" }}>Sắp xếp</p>
+                        </Col>
+                        <Col span={2} style={{ paddingRight: "5px" }} >
                             <Select className="form-control select" defaultValue="ALL" onChange={sortChange}>
                                 <Option value="ALL">ALL</Option>
                                 <Option value="ID">ID</Option>
-                                <Option value="FULL_NAME">FULL_NAME</Option>
-                                <Option value="EMAIL">EMAIL</Option>
+                                <Option value="FULL_NAME">Tên</Option>
+                                <Option value="EMAIL">Email</Option>
+                            </Select>
+                        </Col>
+                        <Col span={2}  >
+                            <Select className="form-control select" defaultValue="ASC" onChange={sortDirection}>
+                                <Option value="ASC">Tăng dần</Option>
+                                <Option value="DESC">Giảm dần</Option>
                             </Select>
                         </Col>
                     </Row>

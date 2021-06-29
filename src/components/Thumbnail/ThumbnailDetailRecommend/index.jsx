@@ -9,7 +9,7 @@ function ThumbnailDetailRecommend(props) {
     const [image, setImage] = useState({});
     const history = useHistory()
     const toDetailHome = () => {
-        history.push(`/chi-tiet/${props?.listLatestNew?.id}`, props?.list)
+        history.push(`/chi-tiet/${props?.list?.id}`, props?.list)
     }
 
     const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;

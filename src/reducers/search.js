@@ -26,6 +26,12 @@ const SearchReducer = (state = initialState, action) => {
                 district: action.payload,
             };
         }
+        case 'RESET_DISTRICT': {
+            return {
+                ...state,
+                district: action.payload,
+            };
+        }
         default:
             return state;
     }

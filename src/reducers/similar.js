@@ -1,16 +1,16 @@
 const initialState = {
-    listRecommend: [],
+    listSimilar: [],
     total_page: null,
     totalItem: null,
 }
 
 
-const recommendReducer = (state = initialState, action) => {
+const similarReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'LOAD_RECOMMEND': {
+        case 'LOAD_SIMILAR': {
             return {
                 ...state,
-                listRecommend: action.payload,
+                listSimilar: action.payload,
                 total_page: action.total_page,
                 totalItem: action.totalItem,
             };
@@ -19,4 +19,5 @@ const recommendReducer = (state = initialState, action) => {
             return state;
     }
 }
-export default recommendReducer;
+
+export default similarReducer;

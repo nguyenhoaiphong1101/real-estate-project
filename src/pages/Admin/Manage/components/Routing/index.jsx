@@ -31,9 +31,9 @@ function AdminRouting(props) {
                     <ManageCategory />
                 </div>
             </Route>
-            {/* <Route>
-                <Redirect to="/not-found" />
-            </Route> */}
+            <Route path="/admin">
+                <Redirect to="/admin/can-ho" />
+            </Route>
         </div>
     );
 }

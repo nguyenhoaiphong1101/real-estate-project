@@ -19,7 +19,7 @@ function ManageCategory(props) {
     const totalItem = useSelector(state => state.admin.category.totalItem);
     const [typeButton, setTypeButton] = useState('');
     const dispatch = useDispatch()
-    const [params, setParams] = useState({ sort_direction: "ASC", sort_by: '', search: '', page: 1 });
+    const [params, setParams] = useState({ sort_direction: "ASC", sort_by: undefined, search: undefined, page: 1 });
     useEffect(() => {
         dispatch(getListCategory({
             ...params
@@ -28,17 +28,24 @@ function ManageCategory(props) {
 
     const columns = [
         {
-            title: 'ID',
-            dataIndex: 'id',
+            title: 'STT',
+            // dataIndex: 'id',
             key: 'id',
+            render: (text, record) => <td>{
+                listCategory.map((item, index) => {
+                    if (item.id === record.id) {
+                        return index + (params.page - 1) * 10 + 1
+                    }
+                })
+            }</td>,
         },
         {
-            title: 'NAME',
+            title: 'Tên',
             dataIndex: 'name',
             key: 'id',
         },
         {
-            title: 'TOTAL',
+            title: 'Tổng số bài',
             dataIndex: 'totalItem',
             key: 'id',
         },
@@ -146,6 +153,17 @@ function ManageCategory(props) {
 
     };
 
+    const sortDirection = (value) => {
+        dispatch(getListCategory({
+            ...params,
+            sort_direction: value,
+        }))
+        setParams({
+            ...params,
+            sort_direction: value,
+        });
+    }
+
     const handleCancel = () => {
         form.setFieldsValue({
             name: '',
@@ -205,11 +223,17 @@ function ManageCategory(props) {
                         <Col offset={1} span={2}>
                             <p style={{ margin: "18px 0px 0px 20px" }}>Sắp xếp</p>
                         </Col>
-                        <Col span={4}>
+                        <Col span={2} style={{ paddingRight: "5px" }}>
                             <Select className="form-control select" defaultValue="ALL" onChange={sortChange}>
                                 <Option value="ALL">ALL</Option>
                                 <Option value="ID">ID</Option>
                                 <Option value="NAME">NAME</Option>
+                            </Select>
+                        </Col>
+                        <Col span={2} >
+                            <Select className="form-control select" defaultValue="ASC" onChange={sortDirection}>
+                                <Option value="ASC">Tăng dần</Option>
+                                <Option value="DESC">Giảm dần</Option>
                             </Select>
                         </Col>
 
@@ -236,7 +260,7 @@ function ManageCategory(props) {
                         total: totalItem,
                     }} />
             </div>
-        </div>
+        </div >
     );
 }
 

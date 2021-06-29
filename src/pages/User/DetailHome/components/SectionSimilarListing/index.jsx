@@ -4,14 +4,15 @@ import './styles.scss';
 import ThumbnailPrimary from '../../../../../components/Thumbnail/ThumbnailPrimary';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadListRecommend } from '../../../../../actions/recommend';
+import { loadListSimilar } from '../../../../../actions/similar';
 function SectionSimilarListing(props) {
 
-    const listRecommend = useSelector(state => state.recommend.listRecommend);
+    const listSimilar = useSelector(state => state.similar.listSimilar);
     const user = useSelector(state => state.user.user);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadListRecommend({
+        dispatch(loadListSimilar({
             user_id: user.id,
             page: 1,
             size: 12,
@@ -25,10 +26,10 @@ function SectionSimilarListing(props) {
                 <div className="list-feature">
                     <Row>
                         <Col span={12}>
-                            <ThumbnailPrimary listLatestNew={listRecommend[0]} isRender={props.isRender} />
+                            <ThumbnailPrimary listLatestNew={listSimilar[0]} isRender={props.isRender} />
                         </Col>
                         <Col span={12}>
-                            <ThumbnailPrimary listLatestNew={listRecommend[1]} isRender={props.isRender} />
+                            <ThumbnailPrimary listLatestNew={listSimilar[1]} isRender={props.isRender} />
                         </Col>
                     </Row>
                 </div>

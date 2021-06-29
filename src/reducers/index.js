@@ -9,6 +9,7 @@ import detailHomeReducer from "./detailhome";
 import userReducer from "./user";
 import recommendReducer from "./recommend";
 import adminReducer from "./admin";
+import similarReducer from "./similar";
 
 const rootReducer = combineReducers({
     search: SearchReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     recommend: recommendReducer,
     admin: adminReducer,
+    similar: similarReducer,
 });
 
 export default rootReducer;

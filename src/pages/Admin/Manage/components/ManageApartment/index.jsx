@@ -21,10 +21,16 @@ import { loadDetailHome, resetDetail } from '../../../../../actions/detailhome';
 function ManageApartment(props) {
     const columns = [
         {
-            title: 'ID',
-            dataIndex: 'id',
+            title: 'STT',
             key: 'id',
-            width: 60,
+            render: (text, record) => <td>{
+                listApartment.map((item, index) => {
+                    if (item.id === record.id) {
+                        return index + (params.page - 1) * 10 + 1
+                    }
+                })
+            }</td>,
+            width: 30,
         },
         {
             title: 'Tiêu đề',
@@ -40,6 +46,7 @@ function ManageApartment(props) {
             title: 'Diện tích',
             dataIndex: 'area',
             key: 'id',
+            width: 100,
         },
         {
             title: 'Tổng tiền',
@@ -50,12 +57,14 @@ function ManageApartment(props) {
             title: 'Nổi bật',
             dataIndex: 'is_highlight',
             key: 'id',
+            width: 100,
             render: (text, record) => record?.is_highlight ? <i style={{ color: 'yellow', cursor: "pointer" }} onClick={() => changeHighlight(record)} class="fas fa-star"></i> : <i onClick={() => changeHighlight(record)} style={{ color: 'yellow', cursor: "pointer" }} class="far fa-star"></i>
         },
         {
             title: 'Trạng thái',
             dataIndex: 'status',
             key: 'id',
+            width: 100,
             render: status => <Tag color={status === "OPEN" ? "green" : status === "PENDING" ? "geekblue" : "volcano"}>
                 {status}
             </Tag>
@@ -64,6 +73,7 @@ function ManageApartment(props) {
             title: 'Tình trạng',
             dataIndex: 'type_apartment',
             key: 'id',
+            width: 100,
         },
         {
             title: 'Action',
@@ -71,10 +81,11 @@ function ManageApartment(props) {
             render: (text, record) => (
                 <Space size="middle">
                     <Button className="admin-btn-edit" onClick={() => showModalChange(record)}>Sửa</Button>
-                    <Button className="admin-btn-delete" onClick={() => showModalNoti(record)}>Xóa</Button>
+                    {text.status === "CLOSE" ? <Button className="admin-btn-approve" onClick={() => showModalReset(record)}>Mở lại</Button> : <Button className="admin-btn-delete" onClick={() => showModalNoti(record)}>Xóa</Button>}
                     {text.status === "PENDING" ? <Button className="admin-btn-approve" onClick={() => showModalStatus(record)}>Duyệt</Button> : null}
                 </Space>
             ),
+            width: 240,
         },
     ];
 
@@ -216,6 +227,8 @@ function ManageApartment(props) {
         dispatch(getListApartment(params))
     }
 
+    const [isChange, setIsChange] = useState(false);
+
     const token = localStorage.getItem('access_token');
     const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
     const [params, setParams] = useState({
@@ -235,20 +248,31 @@ function ManageApartment(props) {
         area_from: undefined,
     });
 
-    function callApiImage() {
+    async function callApiImage() {
         const bodyFormData = new FormData();
         let imgFiles = [];
-        let result = fileList;
+        let result = [];
+        fileList.forEach((file) => {
+            if (!file.file) {
+                result.push({
+                    originalName: file.originalName,
+                    name: file.name,
+                    extension: file.extension,
+                });
+            }
+        });
         fileList.forEach((file) => {
             if (file.file) {
                 imgFiles.push(file.file);
             }
         });
-        if (imgFiles.length !== 0) {
+
+        if (imgFiles.length !== 0 && isChange === true) {
+            setIsChange(false);
             for (let i = 0; i < imgFiles.length; i++) {
                 bodyFormData.append("files", imgFiles[i]);
             }
-            axios
+            await axios
                 .request({
                     url: API_URL + '/upload/photo',
                     method: "POST",
@@ -259,32 +283,22 @@ function ManageApartment(props) {
                 })
                 .then((res) => {
                     // bodyFormData.delete("files");
-                    let formatFileList = [];
-                    fileList.forEach((file) => {
-                        if (!file.file) {
-                            formatFileList.push({
-                                originalName: file.originalName,
-                                name: file.name,
-                                extension: file.extension,
-                            });
-                        }
-                    });
                     res.data.data.forEach((file) => {
-                        formatFileList.push({
-                            originalName: file.originalName,
-                            name: file.name,
-                            extension: file.extension,
-                        });
                         result.push({
                             originalName: file.originalName,
                             name: file.name,
                             extension: file.extension,
                         });
+                        // result.push({
+                        //     originalName: file.originalName,
+                        //     name: file.name,
+                        //     extension: file.extension,
+                        // });
                     });
 
-                    // setPhotos(formatFileList);
-                });
+                })
         }
+
         return result;
     }
 
@@ -357,9 +371,14 @@ function ManageApartment(props) {
         setIdTemp(record.id);
         setIsModalVisibleStatus(true);
     };
+    const showModalReset = (record) => {
+        setIdTemp(record.id);
+        setIsVisibleNotiReset(true);
+    };
 
 
-    useEffect(() => {
+    useEffect(async () => {
+        await dispatch(loadDistrict(detailHome?.addressDetail?.province_id));
         formMain.setFieldsValue({
             address: detailHome?.addressDetail?.address,
             balcony_direction: detailHome?.apartment_detail?.balcony_direction,
@@ -397,12 +416,7 @@ function ManageApartment(props) {
     }, [detailHome]);
 
     const addApartment = async () => {
-        let listphoto = [];
-        await callApiImage().forEach((item) => {
-            listphoto.push(item);
-        });
-
-
+        let listphoto = await callApiImage();
 
         const dataForm = formMain.getFieldValue();
 
@@ -450,8 +464,6 @@ function ManageApartment(props) {
         await callApiImage().forEach((item) => {
             listphoto.push(item);
         });
-
-
 
         const dataForm = formMain.getFieldValue();
 
@@ -646,6 +658,7 @@ function ManageApartment(props) {
             area_to: undefined,
             area_from: undefined,
         })
+        dispatch(loadDistrict())
     }
 
     const onSort = (value) => {
@@ -686,21 +699,40 @@ function ManageApartment(props) {
     };
 
     const [isVisibleNoti, setIsVisibleNoti] = useState(false);
+    const [isVisibleNotiReset, setIsVisibleNotiReset] = useState(false);
 
     const handleOkNoti = async () => {
         await closeApartment.POST(idTemp);
         dispatch(getListApartment(params));
         setIsVisibleNoti(false);
     }
+    const handleOkNotiReset = async () => {
+        await validateApartment.POST({ decision: true }, idTemp)
+        dispatch(getListApartment(params))
+        setIsVisibleNotiReset(false);
+    }
     const showModalNoti = (record) => {
         setIdTemp(record.id);
         setIsVisibleNoti(true);
     }
+    const handleCancelNotiReset = () => {
+        setIsVisibleNotiReset(false);
+    }
+
     const handleCancelNoti = () => {
         setIsVisibleNoti(false);
     }
 
-
+    const onDirection = (value) => {
+        dispatch(getListApartment({
+            ...params,
+            sort_direction: value,
+        }))
+        setParams({
+            ...params,
+            sort_direction: value,
+        })
+    }
 
 
     return (
@@ -738,9 +770,6 @@ function ManageApartment(props) {
                                         {listProvince.map(item =>
                                             <Option key={item?.id} value={item.id}>{item?.name}</Option>
                                         )}
-                                        {/* <Option value="ALL">ALL</Option>
-                                        <Option value="ID">ID</Option>
-                                        <Option value="NAME">NAME</Option> */}
                                     </Select>
                                 </Form.Item>
                             </Col>
@@ -989,6 +1018,9 @@ function ManageApartment(props) {
             <Modal className='modal-apartment' title="Thông báo" visible={isVisibleNoti} onOk={handleOkNoti} onCancel={handleCancelNoti} okText="Xác nhận">
                 <p>Bạn có chắc chắn muốn xóa ? (Sau khi xóa bài viết sẽ có trạng thái CLOSE)</p>
             </Modal>
+            <Modal className='modal-apartment' title="Thông báo" visible={isVisibleNotiReset} onOk={handleOkNotiReset} onCancel={handleCancelNotiReset} okText="Xác nhận">
+                <p>Bạn có chắc chắn muốn mở lại bài viết ? (Sau khi mở lại bài viết sẽ có trạng thái OPEN)</p>
+            </Modal>
             <Row>
                 <Col span={24}>
                     <div className="title-wrapper">
@@ -1016,12 +1048,18 @@ function ManageApartment(props) {
                         <Col offset={7} span={2}>
                             <p style={{ margin: "5px 0px 0px 20px" }}>Sắp xếp</p>
                         </Col>
-                        <Col span={4}>
+                        <Col span={3} style={{ paddingRight: "10px" }}>
                             <Select className="form-control select" onChange={(value) => onSort(value)} defaultValue="ALL"  >
                                 <Option value="ALL">ALL</Option>
                                 <Option value="ID">ID</Option>
-                                <Option value="AREA">DIỆN TÍCH</Option>
-                                <Option value="TOTAL_PRICE">TỔNG TIỀN</Option>
+                                <Option value="AREA">Diện tích</Option>
+                                <Option value="TOTAL_PRICE">Tổng tiền</Option>
+                            </Select>
+                        </Col>
+                        <Col span={2}>
+                            <Select className="form-control select" onChange={(value) => onDirection(value)} defaultValue="ASC"  >
+                                <Option value="ASC">Tăng dần</Option>
+                                <Option value="DESC">Giảm dần</Option>
                             </Select>
                         </Col>
                     </Row>

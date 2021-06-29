@@ -1,6 +1,7 @@
 import axios from "axios"
 import { API_URL } from "../constants/Config"
 import { AXIOS_INSTANCE } from "../config/interceptor";
+import { message } from "antd";
 
 export const getApartment = {
 
@@ -28,7 +29,12 @@ export const createApartment = {
             // },
             data: body,
             url: API_URL + '/dashboard/apartment/create',
+        }).then(res => {
+            message.success("Success!");
         })
+            .catch(err => {
+                message.error(err.response?.data?.message);
+            })
     }
 }
 export const validateApartment = {
@@ -72,7 +78,12 @@ export const updateApartment = {
             // },
             data: body,
             url: API_URL + `/dashboard/apartment/${id}/update`,
+        }).then(res => {
+            message.success("Success!");
         })
+            .catch(err => {
+                message.error(err.response?.data?.message);
+            })
     }
 }
 export const getUser = {

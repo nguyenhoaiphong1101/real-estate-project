@@ -13,15 +13,24 @@ export const loadProvince = () => {
 }
 
 export const loadDistrict = (id) => {
-    return (dispatch) => {
-        district.GET(id).then(res => {
-            dispatch({
-                type: 'LOAD_DISTRICT',
-                payload: id ? res : []
+    if (id) {
+        return (dispatch) => {
+            district.GET(id).then(res => {
+                dispatch({
+                    type: 'LOAD_DISTRICT',
+                    payload: res
+                })
             })
-        })
+        }
+    } else {
+        return {
+            type: 'RESET_DISTRICT',
+            payload: []
+        }
     }
+
 }
+
 
 export const loadCountry = () => {
     return (dispatch) => {
