@@ -13,7 +13,7 @@ import SectionTopList from './components/SectionTopList';
 function Home(props) {
     const listRecommend = useSelector(state => state.recommend.listRecommend);
     const checkArrRecommend = () => {
-        if (listRecommend.length > 0)
+        if (listRecommend.length > 3)
             return <ListRecomend />
     }
 

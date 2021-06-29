@@ -14,8 +14,7 @@ function SectionFunction() {
                             <i className="flaticon-sales-agent item--blue"></i>
                             <div className="content">
                                 <h4>Mua nhà?</h4>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's</p>
+                                <p>Bạn muốn tìm một căn nhà để định cư lâu dài? Đây sẽ là sự lựa chọn phù hợp dành cho bạn</p>
                                 <a onClick={()=>{history.push('/nha-dat-ban')}} className="btn-link item--blue">
                                     Tìm hiểu thêm
                                     <i className="fas fa-arrow-right item--blue">
@@ -29,8 +28,7 @@ function SectionFunction() {
                             <i className="flaticon-sold item--green"></i>
                             <div className="content">
                                 <h4>Thuê nhà</h4>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                Lorem Ipsum has been the industry's</p>
+                                <p>Bạn muốn thay đổi không gian sống? Nhiều sự lựa chọn hấp dẫn đang chờ đợi bạn. Hãy Thuê Ngay</p>
                                 <a onClick={()=>{history.push('/nha-dat-thue')}} className="btn-link item--green">
                                     Tìm hiểu thêm
                                     <i className="fas fa-arrow-right item--green">

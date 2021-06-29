@@ -110,7 +110,7 @@ function ThumbnailPrimary(props) {
             <div className="listing__body">
                 <div className="author">
                     <div onClick={() => toDetailHome()}>
-                        <a >
+                        <a className="listing__body--img">
                             <img src={props.listLatestNew?.author?.avatar?.name ? getPhotosImgAvatar(props.listLatestNew?.author?.avatar?.name) : Img} alt="agent" />
                         </a>
                     </div>

@@ -27,7 +27,7 @@ function ThumbnailSecondary(props) {
             <div class="listing-body">
                 <h6 class="listing-title">
                     <a title="Iris Watson, Frederick Nebraska 20620">
-                        {props.listLatestNew?.address} </a>
+                        {props.listLatestNew?.address}</a>
                 </h6>
                 <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}
                 </span>

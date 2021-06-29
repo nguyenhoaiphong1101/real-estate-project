@@ -27,7 +27,10 @@ function SectionTopList() {
         slidesToShow: 1,
         slidesToScroll: 1
     };
+  
     return (
+        listHighlight.length <=0 ? '' 
+        :
         <div className="section-top-list">
             <div className="container">
                 <div className="title-wrapper">

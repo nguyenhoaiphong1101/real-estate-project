@@ -14,7 +14,7 @@ function NeedMore(props) {
                             <h3>Muốn biết thêm thông tin về bất động sản?</h3>
                         </Col>
                         <Col span={16}>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quibusdam consectetur, nulla tempore quas iste, aliquid esse animi, delectus sed libero ad aspernatur magni hic nemo modi blanditiis quod corporis!</p>
+                            <p>Hàng ngàn ngôi nhà với đầy đủ mẫu mã, kiểu dáng ở khắp mọi nơi đang chờ bạn lựa chọn. Hãy đến ngay với chúng tôi để có một sửa lựa chọn hoàn hảo dành cho bạn!</p>
                             <a className="needmore-content-btn" href="#">Tìm hiểu thêm</a>
                         </Col>
                     </Row>

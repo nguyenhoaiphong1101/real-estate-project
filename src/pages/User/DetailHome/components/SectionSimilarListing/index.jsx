@@ -20,6 +20,8 @@ function SectionSimilarListing(props) {
     }, [user])
 
     return (
+        listSimilar.length <= 1 ? ''
+        :
         <div className="section-similar-listing">
             <h4 className="title">Danh sách tương tự</h4>
             <div className="container-fluid wrapper">

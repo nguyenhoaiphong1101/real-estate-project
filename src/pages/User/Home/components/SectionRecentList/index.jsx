@@ -22,6 +22,8 @@ function SectionRecentList() {
         }));
     }, [])
     return (
+        listLatestNew.length <= 3 ? ''
+        :
         <div className="section-recent-list">
             <div className="container">
                 <div className="title-wrapper">

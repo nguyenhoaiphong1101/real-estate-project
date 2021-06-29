@@ -27,13 +27,7 @@ function ListRecomend(props) {
         slide.current.slickPrev();
     }
 
-
     const listRecommend = useSelector(state => state.recommend.listRecommend);
-
-
-
-
-
     return (
         <div>
             <div className="container">

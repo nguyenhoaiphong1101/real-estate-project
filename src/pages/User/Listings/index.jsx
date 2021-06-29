@@ -45,7 +45,6 @@ function Listings(props) {
                         <Col span={9} className="sidebar-left">
                             <FilterListings typeListing={props.title} />
                             <RecentListings />
-                            <MortgageCalculator />
                         </Col>
                         <Col span={15} className="sidebar-right">
                             <div className="tab-wrapper">
