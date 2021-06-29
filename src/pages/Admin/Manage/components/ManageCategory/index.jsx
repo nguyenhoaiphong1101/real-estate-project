@@ -172,6 +172,19 @@ function ManageCategory(props) {
         setIsModalVisible(false);
     };
 
+    const handleEnter = (e) => {
+        if (e.charCode === 13) {
+            dispatch(getListCategory({
+                ...params,
+                search: search.getFieldValue().search ? search.getFieldValue().search : undefined,
+            }))
+            setParams({
+                ...params,
+                search: search.getFieldValue().search ? search.getFieldValue().search : undefined,
+            });
+        }
+    }
+
     return (
         <div className="admin-manage-category">
             <Modal className="modal-category" title={typeButton === "ADD" ? "Thêm thể loại" : "Chỉnh sửa thể loại"} visible={isModalVisible} onOk={typeButton === "ADD" ? addCate : changeCate} onCancel={handleCancel} okText={typeButton === "ADD" ? "Thêm" : "Chỉnh sửa"}>
@@ -210,7 +223,7 @@ function ManageCategory(props) {
                                     style={{ marginBottom: "0px" }}
                                     name="search"
                                 >
-                                    <Input className="input" placeholder="Tìm kiếm..." />
+                                    <Input onKeyPress={handleEnter} className="input" placeholder="Tìm kiếm..." />
                                 </Form.Item>
                             </Form>
                         </Col>
