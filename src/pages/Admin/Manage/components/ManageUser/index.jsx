@@ -188,6 +188,19 @@ function ManageUser(props) {
         });
     }
 
+    function handleEnter(e) {
+        if (e.charCode === 13) {
+            dispatch(getListUser({
+                ...params,
+                search: search.getFieldValue().search ? search.getFieldValue().search : undefined,
+            }))
+            setParams({
+                ...params,
+                search: search.getFieldValue().search ? search.getFieldValue().search : undefined,
+            });
+        }
+    }
+
     return (
         <div className="admin-manage-user">
             <Modal width={1400} className="modal-user" title="Thông tin người dùng" visible={isModalVisible} okText="Xác nhận" cancelText="Quay lại" onOk={handleOk} onCancel={handleCancel}>
@@ -261,7 +274,7 @@ function ManageUser(props) {
                                     style={{ marginBottom: "0px" }}
                                     name="search"
                                 >
-                                    <Input className="input" placeholder="Tìm kiếm..." />
+                                    <Input onKeyPress={handleEnter} className="input" placeholder="Tìm kiếm..." />
                                 </Form.Item>
                             </Form>
                         </Col>
