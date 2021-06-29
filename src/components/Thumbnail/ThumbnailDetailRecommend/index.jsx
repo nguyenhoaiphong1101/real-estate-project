@@ -24,7 +24,9 @@ function ThumbnailDetailRecommend(props) {
     return (
         <div className="detail-recomend-item" >
             {/* <a><img  src="http://androthemes.com/themes/react/acres/assets/img/categories/3.jpg" alt="#" /></a> */}
-            <div className="recomend-img" style={{ backgroundImage: `url(${image?.url})` }} onClick={() => toDetailHome()}></div>
+            <div className="recomend-img-wrapper" onClick={() => toDetailHome()}>
+                <div className="recomend-img" style= {{ backgroundImage: `url(${image?.url})` }}></div>
+            </div>
             <div className="recomend-item-body">
                 <h5 className="recommend-title" onClick={() => toDetailHome()}>{props.list?.title}</h5>
                 <span>{props.list?.address}</span>

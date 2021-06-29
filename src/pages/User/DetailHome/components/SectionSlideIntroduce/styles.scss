@@ -8,6 +8,9 @@
     }
     & > .ant-image {
         width: 100%;
+        .img-large{
+            max-height: 500px;
+        }
     }
     .slider {
         button::before {

@@ -94,7 +94,7 @@ function ThumbnailPrimary(props) {
 
             <div className="listing__thumbnail" >
                 <a onClick={() => toDetailHome()}>
-                    <img src={image !== {} ? image?.url : "http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg"} alt="listing" />
+                    <img className={`${props.classNameImg}`} src={image !== {} ? image?.url : "http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg"} alt="listing" />
                 </a>
                 <div class="listing-badges">
                     <span className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`}>

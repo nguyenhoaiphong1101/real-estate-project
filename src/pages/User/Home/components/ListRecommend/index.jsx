@@ -1,16 +1,15 @@
-import React, { useEffect } from 'react';
-import "./styles.scss"
-import Slider from "react-slick";
-import { useRef } from 'react';
-import ThumbnailRecomend from '../../../../../components/Thumbnail/ThumbnailRecommend';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadListRecommend } from '../../../../../actions/recommend';
-import jwtDecode from 'jwt-decode';
+import React, { useRef } from 'react';
+import { useSelector } from 'react-redux';
+import Slider from "react-slick";
+import ThumbnailRecomend from '../../../../../components/Thumbnail/ThumbnailRecommend';
+import "./styles.scss";
 
 function ListRecomend(props) {
 
     const slide = useRef(null);
+    const listRecommend = useSelector(state => state.recommend.listRecommend);
+
 
     const settings = {
         dots: true,
@@ -27,7 +26,6 @@ function ListRecomend(props) {
         slide.current.slickPrev();
     }
 
-    const listRecommend = useSelector(state => state.recommend.listRecommend);
     return (
         <div>
             <div className="container">
@@ -40,7 +38,7 @@ function ListRecomend(props) {
                         <div>
                             <Slider ref={slide} {...settings}>
                                 {listRecommend.map((item, index) => {
-                                    if (index < 10) return (<div key={item?.id}>
+                                    if (index < 10) return (<div key={index}>
                                         <ThumbnailRecomend list={item} />
                                     </div>);
                                 })}

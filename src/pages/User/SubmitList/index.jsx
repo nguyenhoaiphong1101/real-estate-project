@@ -310,11 +310,13 @@ function SubmitList(props) {
         // }
     }
 
+    const user = useSelector(state => state.user.user)
+
     const history = useHistory();
 
     useEffect(() => {
         if (history.location.pathname === `/chinh-sua/${history?.location?.state?.id}`)
-            dispatch(loadDetailHome(history?.location?.state?.id))
+            dispatch(loadDetailHome(history?.location?.state?.id, user?.id))
     }, []);
 
 

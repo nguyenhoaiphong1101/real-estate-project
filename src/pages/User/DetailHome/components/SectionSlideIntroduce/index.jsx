@@ -53,21 +53,6 @@ function SectionSlideIntroduce() {
                                 return <Image width={242} height={180} src={item?.url}
                                 />
                         })}
-                        {/* <Image width={242} height={180}
-                            src="http://androthemes.com/themes/react/acres/assets/img/listing-single/1.jpg"
-                        />
-                        <Image width={242} height={180}
-                            src="http://androthemes.com/themes/react/acres/assets/img/listing-single/2.jpg"
-                        />
-                        <Image width={242} height={180}
-                            src="http://androthemes.com/themes/react/acres/assets/img/listing-single/3.jpg"
-                        />
-                        <Image width={242} height={180}
-                            src="http://androthemes.com/themes/react/acres/assets/img/listing-single/4.jpg"
-                        />
-                        <Image width={242} height={180}
-                            src="http://androthemes.com/themes/react/acres/assets/img/listing-single/5.jpg"
-                        /> */}
                     </Slider>
                 </div>
 

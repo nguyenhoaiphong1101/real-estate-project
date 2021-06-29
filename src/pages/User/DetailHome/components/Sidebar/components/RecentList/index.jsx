@@ -12,7 +12,7 @@ function RecentList() {
     }, [])
 
     return (
-        <div className="recent-listing">
+        <div className="recent-listing" style={{marginTop: '20px'}}>
             <h4 className="title">Danh sách gần đây</h4>
             <div className="container-fluid wrapper">
                 {listLatestNew.map((item, index) => {

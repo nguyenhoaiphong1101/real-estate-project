@@ -37,7 +37,7 @@ function SectionRecentList() {
                             />
                         </div>
                         <div className="item" style={{ height: "70%" }}>
-                            <ThumbnailPrimary listLatestNew={listLatestNew[1]} />
+                            <ThumbnailPrimary listLatestNew={listLatestNew[1]} classNameImg="img-height-large" />
                         </div>
                     </Col>
                     <Col span={8}>

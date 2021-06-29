@@ -3,12 +3,22 @@
     transition: 0.3s;
     padding: 10px;
 
-    .recomend-img {
+    .recomend-img-wrapper {
         cursor: pointer;
         border-radius: 4px;
-        max-width: 100%;
+        width: 100%;
         height: 180px;
-        background-size: cover;
+        overflow: hidden;
+        transition: all 0.3s;
+        .recomend-img{
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            transition: all 0.3s;
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
     }
 
     .recomend-item-body {
