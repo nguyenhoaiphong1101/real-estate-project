@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import Button from '../../../../../../../components/Button';
 import { Popover } from 'antd';
-import { Col, Row } from 'antd';
-import './styles.scss';
 import moment from 'moment';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
+import Button from '../../../../../../../components/Button';
 import { API_URL } from '../../../../../../../constants/Config';
+import Img from '../../../../../../../assets/images/noavatar.png';
+import './styles.scss';
 
 function ItemSlider(props) {
 
@@ -46,7 +46,7 @@ function ItemSlider(props) {
                             </h5>
                             <div className="author">
                                 <a>
-                                    <img src={props.listHighlight?.author?.avatar?.name ? getPhotosImgAvatar(props.listHighlight?.author?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/-leE7hK7HNnHvhUaXXj3XCxJpaqc2gVCm7U2m4-iA4UyQwocXrfHEVBqujHobCMqnG_3XDgMKmB3r9RozmQrZP7U1cjGcXc"} alt="agent" />
+                                    <img src={props.listHighlight?.author?.avatar?.name ? getPhotosImgAvatar(props.listHighlight?.author?.avatar?.name) : Img} alt="agent" />
                                 </a>
                                 <div className="media-body">
                                     <h6>
