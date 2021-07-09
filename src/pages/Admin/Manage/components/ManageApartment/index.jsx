@@ -258,6 +258,7 @@ function ManageApartment(props) {
         const bodyFormData = new FormData();
         let imgFiles = [];
         let result = [];
+
         fileList.forEach((file) => {
             if (!file.file) {
                 result.push({
@@ -272,6 +273,7 @@ function ManageApartment(props) {
                 imgFiles.push(file.file);
             }
         });
+
 
         if (imgFiles.length !== 0 && isChange === true) {
             setIsChange(false);
@@ -304,7 +306,6 @@ function ManageApartment(props) {
 
                 })
         }
-
         return result;
     }
 
@@ -592,7 +593,7 @@ function ManageApartment(props) {
         setFileList([
             ...fileList,
             {
-                file: file, // thấy ant nó set cái file vào trường file k?
+                file: file,
                 uid: file.uid,
                 name: file.name,
             }])
@@ -617,6 +618,7 @@ function ManageApartment(props) {
                 setFileList(newList)
             });
         }
+        setIsChange(true);
         setFileList(newList)
     };
     //
