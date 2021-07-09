@@ -19,6 +19,10 @@ import { loadDetailHome, resetDetail } from '../../../../../actions/detailhome';
 
 
 function ManageApartment(props) {
+
+
+    const [isFil, setIsFil] = useState(false);
+
     const columns = [
         {
             title: 'STT',
@@ -554,10 +558,15 @@ function ManageApartment(props) {
             area_to: dataArea[0]?.to === -1 ? undefined : dataArea[0]?.to,
             area_from: dataArea[0]?.from === -1 ? undefined : dataArea[0]?.from,
         })
+        setIsFil(true);
         setIsModalVisibleFilter(false);
     };
 
     const handleCancelFilter = () => {
+        if (isFil === false) {
+            formFilter.resetFields();
+            dispatch(loadDistrict())
+        }
         setIsModalVisibleFilter(false);
     };
 
@@ -659,6 +668,7 @@ function ManageApartment(props) {
             area_from: undefined,
         })
         dispatch(loadDistrict())
+        setIsFil(false)
     }
 
     const onSort = (value) => {
