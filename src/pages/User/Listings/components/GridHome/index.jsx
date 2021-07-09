@@ -33,6 +33,7 @@ function GridHome(props) {
                 province_id: filter?.valueProvince?.id && filter?.valueProvince?.id !== "-1" ? filter?.valueProvince?.id : undefined,
                 user_id: token ? jwtDecode(token).id : null,
                 sort_by: props.sortBy,
+                search: filter.inputSearch,
                 sort_direction: props.sortDirection,
             }))
             setParams({

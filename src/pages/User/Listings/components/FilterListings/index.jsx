@@ -203,7 +203,6 @@ function FilterListings(props) {
         }
         else {
             searchFilter(filter.valueCategory, filter.valueProvince, filter.valueDistrict, filter.valuePrice, filter.valueArea, filter.inputSearch)
-            console.log(filter.valuePrice);
         }
 
     }, [props.typeListing])
@@ -251,7 +250,7 @@ function FilterListings(props) {
         }))
 
 
-        dispatch(loadListFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea));
+        dispatch(loadListFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea, undefined));
         // (page, size, area_from, area_to, category_id, district_id, price_from, price_to, province_id)
     }
 

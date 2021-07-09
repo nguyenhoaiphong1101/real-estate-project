@@ -33,6 +33,7 @@ function ListHome(props) {
                 price_to: filter?.valuePrice?.to && filter?.valuePrice?.id !== "-1" && filter?.valuePrice?.to !== -1 ? filter?.valuePrice?.to : undefined,
                 province_id: filter?.valueProvince?.id && filter?.valueProvince?.id !== "-1" ? filter?.valueProvince?.id : undefined,
                 user_id: token ? jwtDecode(token).id : null,
+                search: filter.inputSearch,
                 sort_by: props.sortBy,
                 sort_direction: props.sortDirection,
             }))
