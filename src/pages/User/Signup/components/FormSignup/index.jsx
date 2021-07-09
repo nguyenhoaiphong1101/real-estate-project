@@ -60,8 +60,6 @@ function Signup() {
                     OR
                 </span>
             </div>
-            <button type="button" className="form-signup-btn-facebook "><IconFont type="icon-facebook" className="mr-10" />Tiếp tục với Facebook</button>
-            <button type="button" className="form-signup-btn-google"><GoogleOutlined className="mr-10" />Tiếp tục với Google</button>
             <p className="text-end">
                 Bạn đã có tài khoản?
                 <a href="/dang-nhap"> Đăng nhập</a>
