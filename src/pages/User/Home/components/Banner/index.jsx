@@ -170,7 +170,7 @@ function Banner() {
         setInputSearch(e.target.value);
     };
 
-    const [active, setActive] = useState(false);
+    const [active, setActive] = useState(true);
     const handleToggle = () => {
         setActive(!active);
     }
@@ -249,7 +249,7 @@ function Banner() {
                         <div className="banner-text">
                             <h1 className="title text-white">Find Your Ideal Home Today</h1>
                             <p className="subtitle text-white">
-                            Tìm kiếm nơi ở phù hợp cho bạn ngay hôm nay. Hàng nghìn sự lựa chọn hoàn hảo đang chờ đợi </p>
+                                Tìm kiếm nơi ở phù hợp cho bạn ngay hôm nay. Hàng nghìn sự lựa chọn hoàn hảo đang chờ đợi </p>
                         </div>
                         <div className="acr-filter-form">
                             <Tabs defaultActiveKey="1" className="pl-12" onChange={(e) => onChangeType(e)}>
@@ -274,31 +274,53 @@ function Banner() {
                             <form>
                                 <Row>
 
-                                    <Col span={12} className="item-form">
+                                    <Col span={6} className="item-form">
                                         <div className="form-group acr-custom-select">
                                             <SelectCustom title="Thành phố" onHandleChange={changeValueProvince} options={listProvince} />
                                         </div>
                                     </Col>
-                                    <Col span={12} className="item-form">
+                                    <Col span={6} className="item-form">
                                         <div className="acr-custom-select form-group">
                                             <SelectCustom title="Quận huyện" value={valueDistrict} onHandleChange={changeValueDistrict} options={listDistrict} />
+                                        </div>
+                                    </Col>
+                                    <Col span={6} className="item-form">
+                                        <div className="acr-custom-select form-group">
+                                            <SelectCustom title="Mức giá" onHandleChange={changeValuePrice} options={price} />
+                                        </div>
+                                    </Col>
+
+                                    <Col span={6} className="item-form">
+                                        <div className="acr-custom-select form-group">
+                                            <SelectCustom title="Diện tích" onHandleChange={changeValueArea} options={acreage} />
                                         </div>
                                     </Col>
                                 </Row>
                                 <div className={`advanced-search d-block ${active == true ? 'active' : ''}`}>
                                     <Row >
 
-                                        <Col span={12} className="item-form">
+
+                                        <Col span={6} className="item-form">
                                             <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Mức giá" onHandleChange={changeValuePrice} options={price} />
+                                                <SelectCustom title="Phường/ Xã" options={[]} />
+                                            </div>
+                                        </Col>
+                                        <Col span={6} className="item-form">
+                                            <div className="acr-custom-select form-group">
+                                                <SelectCustom title="Đường/ Phố" options={[]} />
+                                            </div>
+                                        </Col>
+                                        <Col span={6} className="item-form">
+                                            <div className="acr-custom-select form-group">
+                                                <SelectCustom title="Phòng ngủ" options={[]} />
+                                            </div>
+                                        </Col>
+                                        <Col span={6} className="item-form">
+                                            <div className="acr-custom-select form-group">
+                                                <SelectCustom title="Hướng nhà" options={[]} />
                                             </div>
                                         </Col>
 
-                                        <Col span={12} className="item-form">
-                                            <div className="acr-custom-select form-group">
-                                                <SelectCustom title="Diện tích" onHandleChange={changeValueArea} options={acreage} />
-                                            </div>
-                                        </Col>
                                     </Row>
                                 </div>
                             </form>
