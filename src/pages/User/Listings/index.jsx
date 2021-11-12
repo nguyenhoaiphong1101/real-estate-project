@@ -2,6 +2,7 @@ import { Col, Row, Tabs, Select } from "antd";
 import React, { useState } from 'react';
 import FilterListings from "./components/FilterListings";
 import GridHome from './components/GridHome';
+import ListCompare from "./components/ListCompare";
 import ListHome from "./components/ListHome";
 import MortgageCalculator from "./components/MortgageCalculator";
 import RecentListings from './components/RecentListings';
@@ -24,6 +25,9 @@ function Listings(props) {
 
     return (
         <div className="section-listhome">
+            <div className="compare">
+                <ListCompare />
+            </div>
             <div className="sub-header">
                 <div className="container">
                     <div className="subheader-inner">

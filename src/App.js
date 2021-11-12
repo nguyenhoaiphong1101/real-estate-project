@@ -7,6 +7,7 @@ import Header from './components/Header';
 import { doAxiosRequestIntercept } from "./config/interceptor";
 import AdminWrapper from './pages/Admin/Manage';
 import UserWrapper from './pages/User';
+import Compare from "./pages/User/Compare";
 import DetailHome from "./pages/User/DetailHome";
 import Home from "./pages/User/Home";
 import Listings from "./pages/User/Listings";
@@ -99,6 +100,10 @@ function App() {
                             </Route>
                             <Route path="/dang-ky" exact>
                                 <Signup />
+                                <Footer />
+                            </Route>
+                            <Route path="/so-sanh" exact>
+                                <Compare title="So sánh bất động sản" />
                                 <Footer />
                             </Route>
                             <Route path="/dang-sach-phu-hop" exact>
