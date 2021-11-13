@@ -94,11 +94,15 @@ function ThumbnailPrimary(props) {
 
             <div className="listing__thumbnail" >
                 <a onClick={() => toDetailHome()}>
-                    <img className={`${props.classNameImg}`} src={image !== {} ? image?.url : "http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg"} alt="listing" />
+                    {/* <img className={`${props.classNameImg}`} src={image !== {} ? image?.url : ""} alt="listing" /> */}
+                    <img className={`${props.classNameImg}`} src="https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg" alt="listing" />
                 </a>
                 <div class="listing-badges">
-                    <span className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`}>
+                    <span style={{ cursor: "default" }} className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`}>
                         {props.listLatestNew?.type_apartment}
+                    </span>
+                    <span className={`listing-badge sale`} style={{ cursor: "default" }} title="Mức độ phù hợp 80%">
+                        80%
                     </span>
                 </div>
                 <div class="listing-controls" onClick={() => setFavorite()}>
@@ -136,6 +140,7 @@ function ThumbnailPrimary(props) {
                 </h5>
                 <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
                 <p class="listing-text">{props.listLatestNew?.title}</p>
+                <p class="listing-text">Mức độ phù hợp: 60%</p>
                 <div class="acr-listing-icons">
                     <div class="acr-listing-icon">
                         <i class="flaticon-pillow"></i>
@@ -152,6 +157,7 @@ function ThumbnailPrimary(props) {
                 </div>
                 <div class="listing-gallery-wrapper">
                     <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
+                    <span style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
                 </div>
             </div>
         </div>

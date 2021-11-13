@@ -15,6 +15,24 @@ function GridHome(props) {
 
     const dispatch = useDispatch();
 
+    const listDemo = [
+        {
+            id: 1,
+            status: "OPEN",
+            type_apartment: "Bán",
+            author: {
+                full_name: "Nguyễn Hoài Phong"
+            },
+            created_at: "11/01/2000",
+            address: "Quận 7 Thành phố Hồ Chí Minh",
+            total_price: 4000000000,
+            title: "Biệt thự đầy đủ tiện nghi cần bán gấp",
+            bedroom_quantity: 4,
+            bathroom_quantity: 3,
+            area: 500,
+        }
+    ]
+
     const filter = useSelector(state => state.listfilter)
     const token = localStorage.getItem('access_token');
     const [params, setParams] = useState({ sort_by: undefined, sort_direction: undefined, page: 1 });
@@ -76,7 +94,7 @@ function GridHome(props) {
                 pageSize: 10,
                 total: totalItem,
             }}
-            dataSource={listSearch}
+            dataSource={listDemo}
             renderItem={item => (
                 <List.Item className="item"
                     key={item.id}

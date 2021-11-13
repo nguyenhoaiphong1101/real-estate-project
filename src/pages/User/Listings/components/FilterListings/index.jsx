@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import "./styles.scss"
 import SelectCustom from '../../../../../components/Select/index';
 import ButtonSubmit from '../../../../../components/Button';
-import { Collapse } from 'antd';
+import { Collapse, Input } from 'antd';
 import { loadCountry, loadDistrict, loadProvince } from '../../../../../actions/search';
 import { connectAdvanced, useDispatch, useSelector } from 'react-redux';
 import { loadListCategory } from '../../../../../actions/category';
@@ -260,6 +260,9 @@ function FilterListings(props) {
                 <Panel header={<h5 className="title">Lọc theo danh sách</h5>} key="1">
                     <div className="filter-listings">
                         <form className="filter-listings-form">
+                            <div className="form-group acr-custom-select">
+                                <Input style={{ height: "58px", borderRadius: "8px", border: "0", boxShadow: "0 2px 9px 0 rgba(34,12,43,0.1)" }} className="input" placeholder="Tìm kiếm theo tên..." />
+                            </div>
                             <div className="form-group acr-custom-select">
                                 <SelectCustom title="Thể loại" value={valueCategory} onHandleChange={changeValueCategory} options={listCategory} />
                             </div>

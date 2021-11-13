@@ -11,8 +11,8 @@
         border-radius: 8px;
         margin-bottom: 20px;
         overflow: hidden;
-        .img-height-large{
-            height: 550px!important;
+        .img-height-large {
+            height: 550px !important;
         }
         img {
             border-radius: 8px;
@@ -54,7 +54,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            .un-favorite{
+            .un-favorite {
                 background-color: #fff;
                 color: #515151;
                 // background-color: #ff0f59;
@@ -78,9 +78,9 @@
                 //     color: #fff !important;
                 // }
             }
-            .favorite{
+            .favorite {
                 background-color: #ff0f59;
-                color: #fff ;
+                color: #fff;
                 // background-color: #ff0f59;
                 // color: #fff ;
                 border-radius: 8px;
@@ -96,8 +96,7 @@
                 opacity: 0;
                 transform: translateX(10px);
                 // &:hover {
-                    
-                    
+
                 // }
                 // &:hover {
                 //     background-color: #fff;
@@ -217,7 +216,7 @@
             justify-content: space-between;
             .view-detail {
                 font-size: 13px;
-                background-color: #01bbbc;
+                background-color: #0088a9;
                 margin: 0;
             }
         }

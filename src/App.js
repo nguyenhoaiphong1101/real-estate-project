@@ -4,6 +4,7 @@ import ReactLoading from 'react-loading';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import ListCompare from "./components/ListCompare";
 import { doAxiosRequestIntercept } from "./config/interceptor";
 import AdminWrapper from './pages/Admin/Manage';
 import UserWrapper from './pages/User';
@@ -17,6 +18,7 @@ import Profile from "./pages/User/Profile";
 import Recommend from "./pages/User/Recommend";
 import Signup from './pages/User/Signup';
 import SubmitList from "./pages/User/SubmitList";
+import "./styles.scss"
 
 function App() {
 
@@ -62,6 +64,9 @@ function App() {
                     :
                     <div className="app" >
                         <Header setEnableFooter={setEnableFooter} path={path} setLoading={setLoading} role={returnRole()} />
+                        <div className="compare">
+                            <ListCompare />
+                        </div>
                         <Switch>
                             {returnRole() === 'ADMIN' &&
                                 <AdminWrapper />

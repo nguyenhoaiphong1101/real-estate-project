@@ -166,7 +166,7 @@ function ListingTarget(props) {
                 </Row>
             </Modal>
 
-            <Modal title="Thêm mục tiêu" visible={isDetail} onCancel={() => { setIsDetail(false); }}
+            <Modal title="Chi tiết mục tiêu" visible={isDetail} onCancel={() => { setIsDetail(false); }}
                 footer={[
                     <Button key="submit" type="primary" onClick={() => { setIsDetail(false); }}>
                         Xác nhận

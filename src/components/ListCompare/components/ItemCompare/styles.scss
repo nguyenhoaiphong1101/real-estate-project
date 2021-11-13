@@ -18,6 +18,21 @@
         width: 60px;
         height: 60px;
     }
-    .title {
+
+    .icon-add {
+        cursor: pointer;
+        margin-top: 35px;
+        color: rgba($color: #0088a9, $alpha: 0.7);
+        font-size: 35px;
+        &:hover {
+            color: rgba($color: #0088a9, $alpha: 0.5);
+        }
     }
+    .title-add {
+        color: rgba($color: #0088a9, $alpha: 0.7);
+    }
+}
+
+.modal-search {
+    height: 300px;
 }
