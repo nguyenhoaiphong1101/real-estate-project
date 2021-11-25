@@ -1,0 +1,151 @@
+.main-statis {
+    .sub-header {
+        background-image: url("http://androthemes.com/themes/react/acres/assets/img/subheader.jpg");
+        padding: 290px 0 30px;
+        background-position: 50%;
+        background-size: cover;
+        position: relative;
+        z-index: 1;
+        .title {
+            color: #fff !important;
+            font-size: 42px;
+            line-height: 50px;
+        }
+        .breadcrumb {
+            background-color: transparent;
+            padding: 0;
+            margin: 0;
+            color: #fff !important;
+            display: inline-flex;
+            flex-wrap: wrap;
+            list-style: none;
+            border-radius: 0.25rem;
+            li {
+                display: flex;
+                align-items: center;
+                font-size: 14px;
+                margin: 0;
+                a {
+                    font-weight: 500;
+                    color: #fff;
+                }
+            }
+            .breadcrumb-item + .breadcrumb-item:before {
+                color: #fff;
+                display: inline-block;
+                padding-right: 0.5rem;
+                padding-left: 0.5rem;
+                content: "/";
+            }
+        }
+        & > :before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+            transition: background-color 0.3s;
+        }
+    }
+    .content-statis {
+        width: 75%;
+        margin: 0 auto;
+        margin-top: 60px;
+        .title {
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 2.2rem;
+        }
+
+        .left-chart {
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+            border-radius: 8px;
+            padding: 20px;
+            margin-right: 20px;
+        }
+
+        .rating {
+            margin-top: 60px;
+            padding: 20px;
+            .title-rating {
+                margin-bottom: 40px;
+                text-align: center;
+                font-weight: 600;
+                font-size: 2.2rem;
+            }
+            .group-rating {
+                box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+                border-radius: 8px;
+                margin: 0 20px;
+                padding: 20px;
+                text-align: center;
+
+                label {
+                    font-weight: 700;
+                    font-size: 20px;
+                    text-align: center;
+                    display: block;
+                }
+                p {
+                    margin: 0;
+                    margin-top: 15px;
+                    color: #848486;
+                    span {
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
+        .right-chart {
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+            border-radius: 8px;
+            height: 540px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            .group-item {
+                margin-left: 30px;
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                i {
+                    width: 50px;
+                    text-align: center;
+                    font-size: 35px;
+                    margin-right: 20px;
+                }
+                label {
+                    font-size: 16px;
+                }
+                p {
+                    margin: 0;
+                    color: #848486;
+                }
+            }
+        }
+
+        .list-search {
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .group-search {
+                padding: 20px 10px;
+                .select {
+                    border: 1px solid #a9a9a9;
+                    border-radius: 4px;
+                    margin-left: 10px;
+                    text-align: right;
+                    color: #848486;
+                }
+            }
+        }
+    }
+}

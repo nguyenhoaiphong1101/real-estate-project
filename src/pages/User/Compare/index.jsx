@@ -17,7 +17,7 @@ const item1 = {
     huongbancong: "Đông",
 }
 const item2 = {
-    src: "https://lh3.googleusercontent.com/proxy/c2MP7ZnVUl5d7_93AW9Vvl1hZsafc-fKbWkaxLoMV99nv8Hehwaab20j_KxlUSl-xn4Zcmu_2uZF5kfsL-vXSomzxtYk9m5MvWF1ZIG8_94rgKKYnCXpTmZLLdiZ",
+    src: "https://legoland.com.vn/wp-content/uploads/2020/08/Bi%E1%BB%87t-th%E1%BB%B1-min.jpg",
     phongngu: 5,
     phongtam: 6,
     sotang: 3,

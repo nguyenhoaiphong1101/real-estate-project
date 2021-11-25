@@ -17,6 +17,7 @@ import NotFound from './pages/User/NotFound';
 import Profile from "./pages/User/Profile";
 import Recommend from "./pages/User/Recommend";
 import Signup from './pages/User/Signup';
+import Statistical from "./pages/User/Statistical";
 import SubmitList from "./pages/User/SubmitList";
 import "./styles.scss"
 
@@ -109,6 +110,10 @@ function App() {
                             </Route>
                             <Route path="/so-sanh" exact>
                                 <Compare title="So sánh bất động sản" />
+                                <Footer />
+                            </Route>
+                            <Route path="/thong-ke" exact>
+                                <Statistical title="Thống kê bất động sản" />
                                 <Footer />
                             </Route>
                             <Route path="/dang-sach-phu-hop" exact>

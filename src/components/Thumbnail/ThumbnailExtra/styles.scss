@@ -72,7 +72,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            .un-favorite{
+            .un-favorite {
                 background-color: #fff;
                 color: #515151;
                 // background-color: #ff0f59;
@@ -90,17 +90,16 @@
                 opacity: 0;
                 transform: translateX(10px);
                 // &:hover {
-                    
-                    
+
                 // }
                 // &:hover {
                 //     background-color: #ff0f59 !important;
                 //     color: #fff !important;
                 // }
             }
-            .favorite{
+            .favorite {
                 background-color: #ff0f59;
-                color: #fff ;
+                color: #fff;
                 // background-color: #ff0f59;
                 // color: #fff ;
                 border-radius: 8px;
@@ -116,14 +115,13 @@
                 opacity: 0;
                 transform: translateX(10px);
                 // &:hover {
-                    
-                    
+
                 // }
-            //     &:hover {
-            //         background-color: #fff;
-            //         color: #515151;
-            //     }
-             }
+                //     &:hover {
+                //         background-color: #fff;
+                //         color: #515151;
+                //     }
+            }
         }
     }
     &:hover .listing__thumbnail .listing-controls a {
@@ -235,10 +233,10 @@
         .listing-gallery-wrapper {
             display: flex;
             align-items: center;
-            justify-content:flex-start;
+            justify-content: flex-start;
             .view-detail {
                 font-size: 13px;
-                background-color: #01bbbc;
+                background-color: #0088a9;
                 margin: 0;
             }
             .view-detail-delete {
@@ -274,16 +272,15 @@
     }
 }
 
-
-.popup{
+.popup {
     .ant-modal-content {
         padding: 2px !important;
         border-radius: 8px;
-        .ant-modal-title{
+        .ant-modal-title {
             font-weight: bold;
             color: #1890ff;
         }
-        .ant-btn{
+        .ant-btn {
             border-radius: 15px;
         }
     }
