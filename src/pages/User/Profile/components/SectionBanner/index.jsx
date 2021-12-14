@@ -18,7 +18,6 @@ function SectionBanner() {
     const user = useSelector(state => state.user.user)
     // Ở đây cần có 1 api để load avatar có sẵn, ok cụ thể api detail user ấy m trả về photos cho user đúng k
     const getPhotosImg = (name) => `${API_URL}/public/image/avatar/${name}`; // api này tí t sẽ đưa cho m
-    console.log(user?.avatar?.name);
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState(user?.avatar?.name ? getPhotosImg(user?.avatar?.name) : "https://lh3.googleusercontent.com/proxy/stQT4Uk85iJrYfMcA1eZjpy-Mli-xMmuWDRcuO53eE1sOLRtuq0Taf_B1w5xxzgMD6sE_tDKO0bsrgCvAi8mhFR_zSHbDGM");
     const token = localStorage.getItem('access_token');

@@ -112,6 +112,11 @@ function ThumbnailExtra(props) {
                     <span className="listing-badge sale" >
                         {props.listLatestNew?.type_apartment}
                     </span>
+                    <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
+                        props.listLatestNew?.percent_suitable >= 30 && props.listLatestNew?.percent_suitable < 80 ? "medium" : "short"
+                        }`} style={{ cursor: "default" }} title={`Mức độ phù hợp ${props.listLatestNew?.percent_suitable}%`}>
+                        {props.listLatestNew?.percent_suitable}%
+                    </span>
                     <br />
                     {history.location.pathname === '/trang-ca-nhan' ?
                         <span style={{ marginTop: "15px", display: "inline-block" }} className={`listing-status  ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`} >

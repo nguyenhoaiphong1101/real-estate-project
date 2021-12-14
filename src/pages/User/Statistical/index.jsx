@@ -1,44 +1,93 @@
 import React, { useState } from 'react';
 import { Select, Row, Col, Tooltip } from 'antd';
-import { Bar, Doughnut, Line } from "react-chartjs-2"
+import { Bar, Doughnut, Line, Radar } from "react-chartjs-2"
 import { Chart } from "chart.js/auto"
 import "./styles.scss"
 import ThumbnailPrimary from '../../../components/Thumbnail/ThumbnailPrimary';
 import ThumbnailExtra from '../../../components/Thumbnail/ThumbnailExtra';
 
 function Statistical(props) {
-
+    const [targetChart, setTargetChart] = useState([
+        {
+            id: "1",
+            title: "Giá trị"
+        },
+        {
+            id: "2",
+            title: "Diện tích"
+        }
+    ])
     const [typeChart, setTypeChart] = useState("1")
+    const [categoryChart, setCategoryChart] = useState("1")
+    const [target, setTarget] = useState("1")
+    const [from, setFrom] = useState("100000000")
+    const [to, setTo] = useState("100000000")
+
+
+    const changeTarger = (e) => {
+        setTarget("");
+        if (e === "1") {
+            setTargetChart([
+                {
+                    id: "1",
+                    title: "Giá trị (tỷ)"
+                },
+                {
+                    id: "2",
+                    title: "Diện tích (nghìn m2)"
+                }
+            ])
+        }
+        if (e === "2") {
+            setTargetChart([
+                {
+                    id: "3",
+                    title: "Thành phố"
+                },
+                {
+                    id: "1",
+                    title: "Giá trị (tỷ)"
+                }
+            ])
+        }
+        if (e === "3") {
+            setTargetChart([
+                {
+                    id: "3",
+                    title: "Thành phố"
+                },
+                {
+                    id: "2",
+                    title: "Diện tích (nghìn m2)"
+                }
+            ])
+        }
+    }
 
     const [dataChart, setDataChart] = useState({
-        label: 'Số lượng bất động sản ( BĐS )',
-        color: 'rgba(149,125,173,0.5)',
-        colorBorder: 'rgba(149,125,173,1)',
-        data: [35, 67, 48, 92, 100, 56, 22, 60, 78, 200, 265, 195],
+        label: 'Số lượng bất động sản theo giá trị ở Hồ Chí Minh',
+        labelColumn: ["0,1 tỷ", "0,2 tỷ", "0,3 tỷ", "0,4 tỷ", "0,5 tỷ", "0,6 tỷ", "0,7 tỷ", "0,8 tỷ", "0,9 tỷ", "1 tỷ"],
+        color: 'rgb(255, 214, 115,0.5)',
+        colorBorder: 'rgba(255, 214, 115,1)',
+        data: [35, 67, 48, 92, 100, 56, 22, 60, 78, 200],
     })
 
-    const changeAmount = () => {
-        setDataChart({
-            label: 'Số lượng bất động sản ( BĐS )',
-            color: 'rgba(149,125,173,0.5)',
-            colorBorder: 'rgba(149,125,173,1)',
-            data: [35, 67, 48, 92, 100, 56, 22, 60, 78, 200, 265, 195],
-        })
-    }
     const changeMoney = () => {
         setDataChart({
-            label: 'Giá trị bất động sản ( tỷ VNĐ )',
-            color: 'rgba(97,199,199,0.5)',
-            colorBorder: 'rgba(97,199,199,1)',
-            data: [11, 23, 48, 33, 100, 67, 57, 12, 98, 110, 57, 150],
+            label: 'Số lượng bất động sản theo giá trị ở Hồ Chí Minh',
+            labelColumn: ["0,1 tỷ", "0,2 tỷ", "0,3 tỷ", "0,4 tỷ", "0,5 tỷ", "0,6 tỷ", "0,7 tỷ", "0,8 tỷ", "0,9 tỷ", "1 tỷ"],
+            color: 'rgba(149,125,173,0.5)',
+            colorBorder: 'rgba(149,125,173,1)',
+            data: [35, 67, 48, 92, 100, 56, 22, 60, 78, 200],
         })
     }
     const changeArea = () => {
         setDataChart({
-            label: 'Diện tích bất động sản ( nghìn m2 )',
-            color: 'rgba(166,87,10,0.5)',
-            colorBorder: 'rgba(166,87,10,1)',
-            data: [23, 11, 90, 50, 60, 34, 67, 82, 47, 68, 121, 90],
+            label: 'Số lượng bất động sản theo diện tích ở Hồ Chí Minh',
+            labelColumn: ["0,1 nghìn m2", "0,2 nghìn m2", "0,3 nghìn m2", "0,4 nghìn m2", "0,5 nghìn m2", "0,6 nghìn m2", "0,7 nghìn m2", "0,8 nghìn m2", "0,9 nghìn m2", "1 nghìn m2"],
+            color: 'rgba(149,125,173,0.5)',
+            colorBorder: 'rgba(149,125,173,1)',
+            data: [45, 27, 78, 42, 60, 46, 12, 90, 34, 67],
         })
     }
 
@@ -116,56 +165,125 @@ function Statistical(props) {
             <div className="content-statis">
                 <h1 className="title">Biểu đồ thống kê</h1>
                 <div className="list-search">
-                    <div className="group-search">
-                        <label>Thành phố:</label>
-                        <Select className="select" defaultValue="1" style={{ width: 200 }} >
-                            <Select.Option value="1">Hồ Chí Minh</Select.Option>
-                            <Select.Option value="2">Vũng Tàu</Select.Option>
-                            <Select.Option value="3">Hà Nội</Select.Option>
-                        </Select>
-                    </div>
-                    <div className="group-search">
-                        <label>Thống kê theo:</label>
-                        <Select className="select" defaultValue="1" onChange={(e) => {
-                            if (e === "1") {
-                                changeAmount();
-                            } else if (e === "2") {
-                                changeMoney();
-                            } else if (e === "3") {
-                                changeArea();
-                            }
-                        }} style={{ width: 200 }} >
-                            <Select.Option value="1">Số lượng bất động sản</Select.Option>
-                            <Select.Option value="2">Giá trị</Select.Option>
-                            <Select.Option value="3">Diện tích</Select.Option>
-                        </Select>
-                    </div>
-                    <div className="group-search">
-                        <label>Năm:</label>
-                        <Select className="select" defaultValue="2" style={{ width: 150 }} >
-                            <Select.Option value="1">2020</Select.Option>
-                            <Select.Option value="2">2021</Select.Option>
-                            <Select.Option value="3">2022</Select.Option>
-                        </Select>
-                    </div>
-                    <div className="group-search">
-                        <label>Biểu đồ:</label>
-                        <Select className="select" defaultValue="1" onChange={(e) => { setTypeChart(e) }} style={{ width: 150 }} >
-                            <Select.Option value="1">Cột</Select.Option>
-                            <Select.Option value="2">Đường</Select.Option>
-                        </Select>
-                    </div>
+                    <Row>
+                        <Col span={18}>
+                            <Row>
+                                <Col span={8}>
+                                    <div className="group-search">
+                                        <div className="label-item">
+                                            <label>Thống kê : </label>
+                                        </div>
+                                        <Select className="select" defaultValue="1" onChange={(e) => { setCategoryChart(e); changeTarger(e); }} style={{ width: 160 }} >
+                                            <Select.Option value="1">Theo thành phố</Select.Option>
+                                            <Select.Option value="2">Theo diện tích</Select.Option>
+                                            <Select.Option value="3">Theo giá cả</Select.Option>
+                                        </Select>
+                                    </div>
+                                </Col>
+                                {categoryChart === "1" ?
+                                    <Col span={8}>
+                                        <div className="group-search">
+                                            <div className="label-item">
+                                                <label>Thành phố : </label>
+                                            </div>
+                                            <Select className="select" defaultValue="1" style={{ width: 160 }}  >
+                                                <Select.Option value="1">Hồ Chí Minh</Select.Option>
+                                            </Select>
+                                        </div>
+                                    </Col>
+                                    :
+                                    null
+                                }
+                                {categoryChart === "1" ?
+                                    null
+                                    :
+                                    <Col span={8}>
+                                        <div className="group-search">
+                                            <div className="label-item">
+                                                <label>Bắt đầu :</label>
+                                            </div>
+                                            <input type="text" className="input" />
+                                        </div>
+                                    </Col>
+                                }
 
+                                {categoryChart === "1" ?
+                                    null
+                                    :
+                                    <Col span={8}>
+                                        <div className="group-search">
+                                            <div className="label-item">
+                                                <label>Kết thúc:</label>
+                                            </div>
+                                            <input type="text" className="input" />
+                                        </div>
+                                    </Col>
+                                }
+
+                            </Row>
+                            <Row>
+                                <Col span={8}>
+                                    <div className="group-search">
+                                        <div className="label-item">
+                                            <label>Tiêu chí :</label>
+                                        </div>
+                                        <Select className="select" onChange={(e) => { setTarget(e); setTo(""); setFrom(""); }} value={target} style={{ width: 160 }} >
+                                            {
+                                                targetChart.map(item => {
+                                                    return <Select.Option key={item.id} value={item.id}>{item.title}</Select.Option>
+                                                })
+                                            }
+                                        </Select>
+                                    </div>
+                                </Col>
+                                {target === "3" || target === "" ?
+                                    null
+                                    :
+                                    <Col span={8}>
+                                        <div className="group-search">
+                                            <div className="label-item">
+                                                <label>Bắt đầu :</label>
+                                            </div>
+                                            <input type="text" value={from} onChange={(e) => { setFrom(e.target.value) }} className="input" />
+                                        </div>
+                                    </Col>
+                                }
+                                {target === "3" || target === "" ?
+                                    null
+                                    :
+                                    <Col span={8}>
+                                        <div className="group-search">
+                                            <div className="label-item">
+                                                <label>Kết thúc:</label>
+                                            </div>
+                                            <input type="text" value={to} onChange={(e) => { setTo(e.target.value) }} className="input" />
+                                        </div>
+                                    </Col>
+                                }
+                            </Row>
+                        </Col>
+                        <Col className="column-btn" span={6}>
+                            <button type="submit" className="btn-submit" onClick={changeArea}>Thống kê</button>
+                        </Col>
+                    </Row>
                 </div>
                 <Row className="main-chart">
-                    <Col span={18}>
-                        <div className="left-chart">
+                    <Col className="left-chart" span={18}>
+                        <div className="group-search">
+                            <label>Biểu đồ:</label>
+                            <Select className="select" defaultValue="1" onChange={(e) => { setTypeChart(e) }} style={{ width: 150 }} >
+                                <Select.Option value="1">Cột</Select.Option>
+                                <Select.Option value="2">Đường</Select.Option>
+                                <Select.Option value="3">Radar</Select.Option>
+                            </Select>
+                        </div>
+                        <div>
                             {typeChart === "1" ?
                                 <Bar
                                     className="chart"
                                     height={500}
                                     data={{
-                                        labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                                        labels: dataChart.labelColumn,
                                         datasets: [{
                                             label: dataChart.label,
                                             data: dataChart.data,
@@ -179,28 +297,47 @@ function Statistical(props) {
                                         maintainAspectRatio: false,
                                     }}
                                 />
-                                :
-                                <Line
-                                    className="chart"
-                                    height={500}
-                                    data={{
-                                        labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
-                                        datasets: [{
-                                            label: dataChart.label,
-                                            data: dataChart.data,
-                                            fill: true,
-                                            pointBorderWidth: 5,
-                                            tension: .2,
-                                            backgroundColor: dataChart.color,
-                                            borderColor: dataChart.colorBorder,
-                                            hoverBackgroundColor: dataChart.colorBorder,
-                                            borderWidth: 1
-                                        }]
-                                    }}
-                                    options={{
-                                        maintainAspectRatio: false,
-                                    }}
-                                />
+                                : typeChart === "2" ?
+                                    <Line
+                                        className="chart"
+                                        height={500}
+                                        data={{
+                                            labels: dataChart.labelColumn,
+                                            datasets: [{
+                                                label: dataChart.label,
+                                                data: dataChart.data,
+                                                fill: true,
+                                                pointBorderWidth: 5,
+                                                tension: .2,
+                                                backgroundColor: dataChart.color,
+                                                borderColor: dataChart.colorBorder,
+                                                hoverBackgroundColor: dataChart.colorBorder,
+                                                borderWidth: 1
+                                            }]
+                                        }}
+                                        options={{
+                                            maintainAspectRatio: false,
+                                        }}
+                                    />
+                                    :
+                                    <Radar
+                                        className="chart"
+                                        height={500}
+                                        data={{
+                                            labels: dataChart.labelColumn,
+                                            datasets: [{
+                                                label: dataChart.label,
+                                                data: dataChart.data,
+                                                backgroundColor: dataChart.color,
+                                                borderColor: dataChart.colorBorder,
+                                                hoverBackgroundColor: dataChart.colorBorder,
+                                                borderWidth: 1
+                                            }]
+                                        }}
+                                        options={{
+                                            maintainAspectRatio: false,
+                                        }}
+                                    />
                             }
                         </div>
                     </Col>
@@ -290,7 +427,7 @@ function Statistical(props) {
                     </Col>
                 </Row>
             </div>
-        </div>
+        </div >
     );
 }
 

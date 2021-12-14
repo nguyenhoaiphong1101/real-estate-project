@@ -101,8 +101,10 @@ function ThumbnailPrimary(props) {
                     <span style={{ cursor: "default" }} className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`}>
                         {props.listLatestNew?.type_apartment}
                     </span>
-                    <span className={`listing-badge sale`} style={{ cursor: "default" }} title="Mức độ phù hợp 80%">
-                        80%
+                    <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
+                        props.listLatestNew?.percent_suitable >= 30 && props.listLatestNew?.percent_suitable < 80 ? "medium" : "short"
+                        }`} style={{ cursor: "default" }} title={`Mức độ phù hợp ${props.listLatestNew?.percent_suitable}%`}>
+                        {props.listLatestNew?.percent_suitable}%
                     </span>
                 </div>
                 <div class="listing-controls" onClick={() => setFavorite()}>

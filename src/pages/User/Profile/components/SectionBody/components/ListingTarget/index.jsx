@@ -1,167 +1,197 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./styles.scss"
-import { Col, List, Modal, Row, Form, Input, Button } from 'antd';
+import { Col, List, Modal, Select, Row, Form, Input, Button, Alert, message } from 'antd';
 import ItemTarget from './components/ItemTarget';
+import { createTarget, getTarget, updateTarget } from '../../../../../../../api/userApi'
+import { province, district } from '../../../../../../../api/searchApi';
+import { listCategoryApi } from '../../../../../../../api/category';
 
 function ListingTarget(props) {
 
-    var list = [
-        {
-            id: 1,
-            title: "Test",
-            city: "Hồ chí minh",
-            province: "Quận 3",
-            area: 200,
-            mattien: "Đông Nam",
-            form: 200000,
-            to: 5000000,
-            sotang: 5,
-            bedroom: 4,
-            huongnha: "Đông",
-        },
-        {
-            id: 2,
-            title: "Test 2",
-            city: "Hồ chí minh",
-            province: "Quận 7",
-            area: 300,
-            mattien: "Đông Nam",
-            form: 250000,
-            to: 8000000,
-            sotang: 2,
-            bedroom: 3,
-            huongnha: "Đông",
-        },
-    ]
 
-    const resetData = () => {
-        setTitle("");
-        setCity("");
-        setProvince("");
-        setArea("");
-        setMattien("");
-        setFrom("");
-        setTo("");
-        setSotang("");
-        setBedroom("");
-        setHuongnha("");
-    }
-
-
+    const [listProvince, setListProvince] = useState([])
+    const [listDistrict, setListDistrict] = useState([])
+    const [listCategory, setListCategory] = useState([])
+    const [update, setUpdate] = useState()
+    const [listTarget, setListTarget] = useState([])
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isDetail, setIsDetail] = useState(false);
     const [detail, setDetail] = useState();
-    const [title, setTitle] = useState();
     const [city, setCity] = useState();
-    const [province, setProvince] = useState();
+    const [distr, setDistr] = useState();
     const [area, setArea] = useState();
-    const [mattien, setMattien] = useState();
-    const [from, setFrom] = useState();
-    const [to, setTo] = useState();
-    const [sotang, setSotang] = useState();
+    const [category, setCategory] = useState();
+    const [price, setPrice] = useState();
+    const [bathroom, setBathroom] = useState();
+    const [floor, setFloor] = useState();
     const [bedroom, setBedroom] = useState();
-    const [huongnha, setHuongnha] = useState();
-    const [listTarget, setListTarget] = useState([
-        {
-            id: 1,
-            title: "Test",
-            city: "Hồ chí minh",
-            province: "Quận 3",
-            area: 200,
-            mattien: "Đông Nam",
-            form: 200000,
-            to: 5000000,
-            sotang: 5,
-            bedroom: 4,
-            huongnha: "Đông",
-        },
-        {
-            id: 2,
-            title: "Test 2",
-            city: "Hồ chí minh",
-            province: "Quận 7",
-            area: 300,
-            mattien: "Đông Nam",
-            form: 250000,
-            to: 8000000,
-            sotang: 2,
-            bedroom: 3,
-            huongnha: "Đông",
-        },
-    ]);
 
+
+    useEffect(() => {
+        province.GET().then(res => {
+            setListProvince(res)
+        })
+        listCategoryApi.GET().then(res => {
+            setListCategory(res);
+        })
+        getTarget.GET().then((res) => {
+            setListTarget(res);
+        })
+    }, [])
+
+    const changeCity = (e) => {
+        setCity(e);
+        district.GET(e).then(res => {
+            setListDistrict(res);
+        })
+        setDistr();
+    }
+
+    const changeDistrict = (e) => {
+        setDistr(e);
+    }
+
+    const changeCategory = (e) => {
+        setCategory(e);
+    }
+
+    const updateItem = (item) => {
+        district.GET(Number(item.province)).then(res => {
+            setListDistrict(res);
+            setDistr(Number(item.district));
+        })
+        setUpdate(item.id);
+        setCity(Number(item.province));
+        setArea(Number(item.area));
+        setCategory(Number(item.category));
+        setPrice(Number(item.price));
+        setBathroom(item.bathroom_quantity);
+        setFloor(item.floor_quantity);
+        setBedroom(item.bedroom_quantity);
+        setIsModalVisible(true);
+    }
 
 
 
     const handleOk = () => {
-        var item = {
-            id: 3,
-            title,
-            city,
-            province,
-            area,
-            mattien,
-            from,
-            to,
-            sotang,
-            bedroom,
-            huongnha,
+        if (update) {
+            updateTarget.PUT({
+                id: update,
+                area,
+                bathroom_quantity: bathroom,
+                bedroom_quantity: bedroom,
+                category,
+                district_id: distr,
+                floor_quantity: floor,
+                price,
+                province_id: city,
+            }).then(res => {
+                getTarget.GET().then((res) => {
+                    setListTarget(res);
+                })
+                setCity();
+                setDistr();
+                setArea();
+                setCategory();
+                setPrice();
+                setBathroom();
+                setFloor();
+                setBedroom();
+                setIsModalVisible(false);
+            })
+        } else {
+            createTarget.POST({
+                area,
+                bathroom_quantity: bathroom,
+                bedroom_quantity: bedroom,
+                category,
+                district_id: distr,
+                floor_quantity: floor,
+                price,
+                province_id: city,
+            }).then(res => {
+                getTarget.GET().then((res) => {
+                    setListTarget(res);
+                })
+                setCity();
+                setDistr();
+                setArea();
+                setCategory();
+                setPrice();
+                setBathroom();
+                setFloor();
+                setBedroom();
+                setIsModalVisible(false);
+            })
         }
-
-        list.push(item);
-        setListTarget(list);
-        resetData();
-        setIsModalVisible(false);
     };
 
     const handleCancel = () => {
-        resetData();
+        setCity();
+        setDistr();
+        setArea();
+        setCategory();
+        setPrice();
+        setBathroom();
+        setFloor();
+        setBedroom();
         setIsModalVisible(false);
     };
 
     return (
         <div className="listing-target" >
-            <Modal title="Thêm mục tiêu" visible={isModalVisible} okText="Thêm" cancelText="Hủy" onOk={handleOk} onCancel={handleCancel}>
+            <Modal title={update ? "Cập nhật mục tiêu" : "Thêm mục tiêu"} visible={isModalVisible} okText="Thêm" cancelText="Hủy" onOk={handleOk} onCancel={handleCancel}>
                 <Row>
                     <Col className="form-group" span={11}>
-                        <label>Nội dung mục tiêu</label>
-                        <Input value={title} onChange={(e) => { setTitle(e.target.value) }} />
-                    </Col>
-                    <Col className="form-group" offset={1} span={11}>
                         <label>Thành phố</label>
-                        <Input value={city} onChange={(e) => { setCity(e.target.value) }} />
+                        <Select value={city} className="select-target" onChange={changeCity}>
+                            {listProvince.length > 0 ?
+                                listProvince.map(item => {
+                                    return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                                })
+                                : null}
+                        </Select>
+                    </Col>
+
+                    <Col className="form-group" offset={1} span={11}>
+                        <label>Quận huyện</label>
+                        <Select value={distr} className="select-target" onChange={changeDistrict}>
+                            {listDistrict.length > 0 ?
+                                listDistrict.map(item => {
+                                    return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                                })
+                                : null}
+                        </Select>
                     </Col>
                     <Col className="form-group" span={11}>
+                        <label>Thể loại</label>
+                        <Select value={category} className="select-target" onChange={changeCategory}>
+                            {listCategory.length > 0 ?
+                                listCategory.map(item => {
+                                    return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                                })
+                                : null}
+                        </Select>
+                    </Col>
+                    <Col className="form-group" offset={1} span={11}>
                         <label>Diện tích</label>
-                        <Input value={area} onChange={(e) => { setArea(e.target.value) }} />
-                    </Col>
-                    <Col className="form-group" offset={1} span={11}>
-                        <label >Quận huyện</label>
-                        <Input value={province} onChange={(e) => { setProvince(e.target.value) }} />
+                        <Input value={area} type='number' onChange={(e) => { setArea(e.target.value) }} />
                     </Col>
                     <Col className="form-group" span={11}>
-                        <label>Giá bắt đầu</label>
-                        <Input value={from} onChange={(e) => { setFrom(e.target.value) }} />
+                        <label>Giá tiền</label>
+                        <Input value={price} type='number' onChange={(e) => { setPrice(e.target.value) }} />
                     </Col>
                     <Col className="form-group" offset={1} span={11}>
-                        <label >Giá kết thúc</label>
-                        <Input value={to} onChange={(e) => { setTo(e.target.value) }} />
-                    </Col>
-                    <Col className="form-group" span={11}>
                         <label>Số tầng</label>
-                        <Input value={sotang} onChange={(e) => { setSotang(e.target.value) }} />
-                    </Col>
-                    <Col className="form-group" offset={1} span={11}>
-                        <label >Số phòng ngủ</label>
-                        <Input value={bedroom} onChange={(e) => { setBedroom(e.target.value) }} />
+                        <Input value={floor} type='number' onChange={(e) => { setFloor(e.target.value) }} />
                     </Col>
                     <Col className="form-group" span={11}>
-                        <label>Mặt tiền</label>
-                        <Input value={mattien} onChange={(e) => { setMattien(e.target.value) }} />
+                        <label>Số phòng tắm</label>
+                        <Input value={bathroom} type='number' onChange={(e) => { setBathroom(e.target.value) }} />
                     </Col>
                     <Col className="form-group" offset={1} span={11}>
-                        <label >Hướng nhà</label>
-                        <Input value={huongnha} onChange={(e) => { setHuongnha(e.target.value) }} />
+                        <label>Số phòng ngủ</label>
+                        <Input value={bedroom} type='number' onChange={(e) => { setBedroom(e.target.value) }} />
                     </Col>
                 </Row>
             </Modal>
@@ -174,59 +204,48 @@ function ListingTarget(props) {
                 ]}>
                 <Row>
                     <Col className="form-group-detail" span={11}>
-                        <label>Nội dung mục tiêu</label>
-                        <p>{detail?.title}</p>
-                    </Col>
-                    <Col className="form-group-detail" offset={1} span={11}>
                         <label>Thành phố</label>
-                        <p>{detail?.city}</p>
-                    </Col>
-                    <Col className="form-group-detail" span={11}>
-                        <label>Diện tích</label>
-                        <p>{detail?.area}</p>
+                        <p>{detail?.province_name}</p>
                     </Col>
                     <Col className="form-group-detail" offset={1} span={11}>
-                        <label >Quận huyện</label>
-                        <p>{detail?.province}</p>
+                        <label>Quận/huyện</label>
+                        <p>{detail?.district_name}</p>
                     </Col>
                     <Col className="form-group-detail" span={11}>
-                        <label>Giá bắt đầu</label>
-                        <p>{detail?.form}</p>
+                        <label>Thể loại</label>
+                        <p>{detail?.category_name}</p>
                     </Col>
                     <Col className="form-group-detail" offset={1} span={11}>
-                        <label >Giá kết thúc</label>
-                        <p>{detail?.to}</p>
+                        <label >Diện tích</label>
+                        <p>{Number(detail?.area).toLocaleString('vi-VN')}m2</p>
                     </Col>
                     <Col className="form-group-detail" span={11}>
+                        <label>Giá tiền</label>
+                        <p>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(detail?.price)}</p>
+                    </Col>
+                    <Col className="form-group-detail" offset={1} span={11}>
                         <label>Số tầng</label>
-                        <p>{detail?.sotang}</p>
+                        <p>{detail?.floor_quantity}</p>
+                    </Col>
+                    <Col className="form-group-detail" span={11}>
+                        <label>Số phòng tắm</label>
+                        <p>{detail?.bathroom_quantity}</p>
                     </Col>
                     <Col className="form-group-detail" offset={1} span={11}>
                         <label >Số phòng ngủ</label>
-                        <p>{detail?.bedroom}</p>
-                    </Col>
-                    <Col className="form-group-detail" span={11}>
-                        <label>Mặt tiền</label>
-                        <p>{detail?.mattien}</p>
-                    </Col>
-                    <Col className="form-group-detail" offset={1} span={11}>
-                        <label >Hướng nhà</label>
-                        <p>{detail?.huongnha}</p>
+                        <p>{detail?.bedroom_quantity}</p>
                     </Col>
                 </Row>
             </Modal>
 
 
             <p className="title">Danh sách mục tiêu quan tâm</p>
-            <p className="button-add" onClick={() => { setIsModalVisible(true) }}><i class="far fa-plus-square"></i> Thêm mục tiêu</p>
+            <p className="button-add" onClick={() => { setIsModalVisible(true) }}><i className="far fa-plus-square"></i> Thêm mục tiêu</p>
             <List className="listing-post-profile"
                 itemLayout="vertical"
                 size="small"
                 dataSource={listTarget}
                 pagination={{
-                    onChange: page => {
-
-                    },
                     pageSize: 10,
                 }}
                 renderItem={item => (
@@ -236,7 +255,10 @@ function ListingTarget(props) {
                         <ItemTarget detail={(detail) => {
                             setDetail(detail);
                             setIsDetail(true);
-                        }} item={item} />
+                        }}
+                            updateItem={updateItem}
+                            item={item}
+                        />
                     </List.Item>
                 )}
             >

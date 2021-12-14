@@ -49,10 +49,6 @@ function App() {
 
     useEffect(() => {
         setToken(localToken);
-
-        console.log("====", returnRole());
-
-
     }, [localToken])
     doAxiosRequestIntercept();
     return (

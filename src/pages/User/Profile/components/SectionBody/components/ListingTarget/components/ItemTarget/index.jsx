@@ -10,7 +10,7 @@ function ItemTarget(props) {
                 <p style={{ padding: "0px 10px", marginBottom: "0", textAlign: "center" }} onClick={() => { props.detail(props.item) }}>Chi tiết</p>
             </Menu.Item>
             <Menu.Item>
-                <p style={{ padding: "0px 10px", marginBottom: "0", color: "#519fff" }}>Thay đổi</p>
+                <p style={{ padding: "0px 10px", marginBottom: "0", color: "#519fff" }} onClick={() => { props.updateItem(props.item) }}>Thay đổi</p>
             </Menu.Item>
             <Menu.Item>
                 <p style={{ color: "#dc4a38", textAlign: "center", marginBottom: "0" }}>Xóa</p>
@@ -21,13 +21,14 @@ function ItemTarget(props) {
         <div className="item-target">
             <Row>
                 <Dropdown overlay={menu} placement="bottomCenter" arrow>
-                    <Col style={{ textAlign: 'center', color: "#C0C0C0", cursor: "pointer" }} span={2}>
-                        <i style={{ marginTop: "6px" }} className="fas fa-list-ul" ></i>
+                    <Col style={{ display: "flex", justifyContent: "center", alignItems: "center", textAlign: 'center', color: "#C0C0C0", cursor: "pointer" }} span={2}>
+                        <i className="fas fa-list-ul" ></i>
                     </Col>
                 </Dropdown>
-
-                <Col span={22}>
-                    <p className="title-target">{props.item.title}</p>
+                <Col span={22} className="content">
+                    <p className="title-target">{props.item.province_name} ( {props.item.district_name} )</p>
+                    <p className="title-target-small">Diện tích: {Number(props.item.area).toLocaleString('vi-VN')}m2</p>
+                    <p className="title-target-small">Giá tiền: {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.item.price)}</p>
                 </Col>
             </Row>
         </div>
