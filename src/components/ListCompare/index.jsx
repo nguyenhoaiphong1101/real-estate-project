@@ -1,5 +1,6 @@
 import { Button, Col, Row } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import ItemCompare from './components/ItemCompare';
 import "./styles.scss"
@@ -11,6 +12,12 @@ function ListCompare(props) {
     const [collapse, setCollapse] = useState(true);
     const [isItem, setIsItem] = useState();
     const [isAll, setIsAll] = useState();
+
+    const listCompare = useSelector(state => state.user.listCompare)
+
+    useEffect(() => {
+        console.log(listCompare);
+    }, [listCompare]);
 
     const isCollapse = () => {
         setCollapse(!collapse);
@@ -48,7 +55,7 @@ function ListCompare(props) {
         <div>
             {collapse ?
                 <div className="list-mini">
-                    <p className="title" onClick={isCollapse}>So sánh (3) <i class="fas fa-angle-right"></i></p>
+                    <p className="title" onClick={isCollapse}>So sánh ({listCompare.length}) <i class="fas fa-angle-right"></i></p>
                 </div>
                 :
                 <div className="list-compare">

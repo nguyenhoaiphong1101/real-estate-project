@@ -159,8 +159,13 @@ export const deleteTarget = {
             // headers: {
             //     Authorization: `Bearer ${token}`
             // },
-            data: null,
+            // data: null,
+            params: { id },
             url: API_URL + `/user/token/target`,
+        }).then(res => {
+            message.success("Xóa mục tiêu thành công !");
+        }).catch(err => {
+            message.error(err.response?.data?.message);
         })
     }
 }

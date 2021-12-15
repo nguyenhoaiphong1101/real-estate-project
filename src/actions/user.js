@@ -54,3 +54,11 @@ export const resetUser = () => {
         }
     }
 }
+export const changeCompare = (listCompare) => {
+    return {
+        type: 'CHANGE_COMPARE',
+        payload: {
+            listCompare,
+        }
+    }
+}

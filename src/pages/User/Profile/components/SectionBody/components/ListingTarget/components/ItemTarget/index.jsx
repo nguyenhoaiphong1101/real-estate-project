@@ -13,7 +13,7 @@ function ItemTarget(props) {
                 <p style={{ padding: "0px 10px", marginBottom: "0", color: "#519fff" }} onClick={() => { props.updateItem(props.item) }}>Thay đổi</p>
             </Menu.Item>
             <Menu.Item>
-                <p style={{ color: "#dc4a38", textAlign: "center", marginBottom: "0" }}>Xóa</p>
+                <p style={{ color: "#dc4a38", textAlign: "center", marginBottom: "0" }} onClick={() => { props.deleteItem(props.item.id) }}>Xóa</p>
             </Menu.Item>
         </Menu>
     );

@@ -1,5 +1,6 @@
 import { Col, Row } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import CardCompare from './components/CardCompare';
 import "./styles.scss"
 
@@ -45,6 +46,9 @@ const item3 = {
 
 
 function Compare(props) {
+
+
+
     return (
         <div className="main-compare">
             <div className="sub-header">

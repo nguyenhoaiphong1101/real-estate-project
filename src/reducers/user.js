@@ -10,6 +10,7 @@ const initialState = {
         total_page: null,
         totalItem: null,
     },
+    listCompare: [],
 }
 
 
@@ -24,7 +25,7 @@ const userReducer = (state = initialState, action) => {
         case 'GET_POSTUSER': {
             return {
                 ...state,
-                postUser:{
+                postUser: {
                     post: action.payload,
                     total_page: action.total_page,
                     totalItem: action.totalItem
@@ -34,7 +35,7 @@ const userReducer = (state = initialState, action) => {
         case 'GET_FAVORITEUSER': {
             return {
                 ...state,
-                postFavorite:{
+                postFavorite: {
                     post: action.payload,
                     total_page: action.total_page,
                     totalItem: action.totalItem
@@ -45,8 +46,14 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload.user,
-                postUser:action.payload.postUser,
-                postFavorite:action.payload.postFavorite,
+                postUser: action.payload.postUser,
+                postFavorite: action.payload.postFavorite,
+            };
+        }
+        case 'CHANGE_COMPARE': {
+            return {
+                ...state,
+                listCompare: action.payload.listCompare,
             };
         }
         default:

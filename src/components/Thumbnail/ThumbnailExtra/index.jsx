@@ -1,18 +1,16 @@
 import { Popover } from 'antd';
 import Modal from 'antd/lib/modal/Modal';
-import jwtDecode from 'jwt-decode';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { loadDetailHome } from '../../../actions/detailhome';
 import { postFavorite } from '../../../api/favorite';
 import { API_URL } from '../../../constants/Config';
 import Button from '../../Button';
 import './styles.scss';
 import Img from '../../../assets/images/noavatar.png'
 import { deletePost } from '../../../api/userApi';
-import { getPostUser } from '../../../actions/user';
+import { changeCompare, getPostUser } from '../../../actions/user';
 
 function ThumbnailExtra(props) {
 
@@ -33,8 +31,20 @@ function ThumbnailExtra(props) {
     }
 
 
+
+
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const listCompare = useSelector(state => state.user.listCompare)
+
+    const addCompare = () => {
+        var temp = listCompare;
+        if (listCompare.filter(item => item === props.listLatestNew?.id).length === 0 && listCompare.length < 3) {
+            temp.push(props.listLatestNew?.id)
+            dispatch(changeCompare(temp));
+        }
+    }
 
     const token = localStorage.getItem('access_token');
 
@@ -185,6 +195,7 @@ function ThumbnailExtra(props) {
                     :
                     <div className="listing-gallery-wrapper">
                         <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
+                        <span onClick={addCompare} style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
                     </div>
                 }
                 {/* {history.location.pathname === '/trang-ca-nhan' ?

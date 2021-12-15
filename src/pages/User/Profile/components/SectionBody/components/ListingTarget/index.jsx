@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./styles.scss"
 import { Col, List, Modal, Select, Row, Form, Input, Button, Alert, message } from 'antd';
 import ItemTarget from './components/ItemTarget';
-import { createTarget, getTarget, updateTarget } from '../../../../../../../api/userApi'
+import { createTarget, deleteTarget, getTarget, updateTarget } from '../../../../../../../api/userApi'
 import { province, district } from '../../../../../../../api/searchApi';
 import { listCategoryApi } from '../../../../../../../api/category';
 
@@ -125,6 +125,14 @@ function ListingTarget(props) {
             })
         }
     };
+
+    const deleteItem = (id) => {
+        deleteTarget.DELETE(id).then(res => {
+            getTarget.GET().then((res) => {
+                setListTarget(res);
+            });
+        })
+    }
 
     const handleCancel = () => {
         setCity();
@@ -257,6 +265,7 @@ function ListingTarget(props) {
                             setIsDetail(true);
                         }}
                             updateItem={updateItem}
+                            deleteItem={deleteItem}
                             item={item}
                         />
                     </List.Item>

@@ -3,15 +3,13 @@ import React, { useEffect, useState } from 'react';
 import Button from '../../Button';
 import moment from 'moment';
 import './styles.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { loadDetailHome } from '../../../actions/detailhome';
-import jwtDecode from 'jwt-decode';
 import { postFavorite } from '../../../api/favorite';
 import Modal from 'antd/lib/modal/Modal';
 import { API_URL } from '../../../constants/Config';
 import Img from '../../../assets/images/noavatar.png'
-import { isBuffer } from 'lodash';
+import { changeCompare } from '../../../actions/user';
 
 function ThumbnailPrimary(props) {
     const [image, setImage] = useState({});
@@ -42,6 +40,16 @@ function ThumbnailPrimary(props) {
         } else {
             console.log("=====");
             setIsVisible(true);
+        }
+    }
+
+    const listCompare = useSelector(state => state.user.listCompare)
+
+    const addCompare = () => {
+        var temp = listCompare;
+        if (listCompare.filter(item => item === props.listLatestNew?.id).length === 0 && listCompare.length < 3) {
+            temp.push(props.listLatestNew?.id)
+            dispatch(changeCompare(temp));
         }
     }
 
@@ -159,7 +167,7 @@ function ThumbnailPrimary(props) {
                 </div>
                 <div class="listing-gallery-wrapper">
                     <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
-                    <span style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
+                    <span onClick={addCompare} style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
                 </div>
             </div>
         </div>
