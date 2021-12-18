@@ -11,6 +11,7 @@ const initialState = {
         totalItem: null,
     },
     listCompare: [],
+    listDetailCompare: [],
 }
 
 
@@ -54,6 +55,12 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 listCompare: action.payload.listCompare,
+            };
+        }
+        case 'CHANGE_COMPARE_DETAIL': {
+            return {
+                ...state,
+                listDetailCompare: action.payload.listDetailCompare,
             };
         }
         default:

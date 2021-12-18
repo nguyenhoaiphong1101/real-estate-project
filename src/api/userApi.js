@@ -2,9 +2,11 @@ import axios from "axios"
 import { API_URL } from "../constants/Config";
 import { message } from 'antd';
 import { AXIOS_INSTANCE } from "../config/interceptor";
+import { useHistory } from "react-router-dom";
 
 
 export const infoUser = {
+
 
     GET: () => {
         return AXIOS_INSTANCE({
@@ -171,4 +173,21 @@ export const deleteTarget = {
 }
 
 
+export const getListCompare = {
+
+    GET: (params) => {
+        return axios({
+            method: 'get',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: null,
+            params: params,
+            url: API_URL + '/public/apartment/compare',
+        }).then(res => res.data.data).catch(err => {
+            message.error(err.response?.data?.message);
+            window.location.replace("/404");
+        })
+    }
+}
 

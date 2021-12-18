@@ -6,15 +6,17 @@ function ItemCompare(props) {
     const [visible, setVisible] = useState(false)
 
     const detele = () => {
-        props?.isDelete(props.item.id);
+        props?.deleteItem(props.item.id);
     }
+
+
 
     return (
         <>
             {props.item ?
                 <div className="item-compare">
                     <i class="icon fas fa-times" onClick={detele}></i>
-                    <img className="img" src={props.item.src}></img>
+                    <img className="img" src="https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg"></img>
                     <p className="title">{props.item.title}</p>
                 </div>
                 :

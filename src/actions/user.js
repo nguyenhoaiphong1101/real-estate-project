@@ -62,3 +62,11 @@ export const changeCompare = (listCompare) => {
         }
     }
 }
+export const changeCompareDetail = (listDetailCompare) => {
+    return {
+        type: 'CHANGE_COMPARE_DETAIL',
+        payload: {
+            listDetailCompare,
+        }
+    }
+}

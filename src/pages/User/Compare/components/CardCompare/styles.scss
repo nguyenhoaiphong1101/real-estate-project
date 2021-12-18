@@ -40,6 +40,9 @@
       font-size: 20px;
       color: #fff;
       background: #1d2228;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
     &__price {
       color: #0088a9;
@@ -103,6 +106,9 @@
       li {
         padding: 15px;
         border-bottom: 1px solid #c8c8c8;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
         &:last-child {
           border: none;

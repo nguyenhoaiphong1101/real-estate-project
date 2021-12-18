@@ -53,6 +53,8 @@ function ThumbnailPrimary(props) {
         }
     }
 
+
+
     useEffect(() => {
         setIsFavorite(props?.listLatestNew?.favourite);
     }, [props?.listLatestNew?.favourite]);

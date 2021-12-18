@@ -1,51 +1,36 @@
 import { Col, Row } from 'antd';
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import CardCompare from './components/CardCompare';
+import jwt_decode from "jwt-decode";
 import "./styles.scss"
+import { changeCompare } from '../../../actions/user';
 
-const item1 = {
-    src: "https://neohouse.vn/wp-content/uploads/2020/06/biet-thu-dep-nhat-viet-nam-1.jpg",
-    phongngu: 3,
-    phongtam: 3,
-    sotang: 2,
-    nvs: 4,
-    noithat: "Đầy đủ",
-    kichthuoc: 250,
-    tinhtrang: 1,
-    mattien: "Đường quốc lộ",
-    huongnha: "Đông Nam",
-    huongbancong: "Đông",
-}
-const item2 = {
-    src: "https://legoland.com.vn/wp-content/uploads/2020/08/Bi%E1%BB%87t-th%E1%BB%B1-min.jpg",
-    phongngu: 5,
-    phongtam: 6,
-    sotang: 3,
-    nvs: 6,
-    noithat: "Đầy đủ",
-    kichthuoc: 350,
-    tinhtrang: 1,
-    mattien: "Đường quốc lộ",
-    huongnha: "Đông Nam",
-    huongbancong: "Đông",
-}
-const item3 = {
-    src: "https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg",
-    phongngu: 4,
-    phongtam: 7,
-    sotang: 5,
-    nvs: 4,
-    noithat: "Đầy đủ",
-    kichthuoc: 450,
-    tinhtrang: 1,
-    mattien: "Đường quốc lộ",
-    huongnha: "Đông Nam",
-    huongbancong: "Đông",
-}
 
 
 function Compare(props) {
+
+    const [list, setList] = useState([])
+    const history = useHistory()
+    const [token, setToken] = useState(localStorage.getItem('access_token'));
+    const dispatch = useDispatch()
+    const listDetailCompare = useSelector(state => ([...state.user.listDetailCompare]))
+
+    useEffect(() => {
+        var params = history.location.pathname.slice(9).split(",").map(Number);
+        if (params.length >= 2) {
+            dispatch(changeCompare(params));
+        } else {
+            history.push("/404")
+        }
+    }, [])
+
+    useEffect(() => {
+        if (listDetailCompare.length >= 2 && list.length === 0) {
+            setList(listDetailCompare);
+        }
+    }, [listDetailCompare])
 
 
 
@@ -74,18 +59,30 @@ function Compare(props) {
                 <div className="title">
                     Tổng quan các bất động sản
                 </div>
-                <Row>
-                    <Col span={8}>
-                        <CardCompare title="Nhà quận 9 - TPHCM" price="4.000.000.000 VNĐ" keyIndex={1} item={item1} />
-                    </Col>
-                    <Col span={8}>
-                        <CardCompare title="Nhà quận Bình Thạnh - TPHCM" price="7.000.000.000 VNĐ" keyIndex={2} item={item2} />
-                    </Col>
-                    <Col span={8}>
-                        <CardCompare title="Nhà quận 7 - TPHCM" price="10.000.000.000 VNĐ" keyIndex={3} item={item3} />
-                    </Col>
-                </Row>
+                {list.length === 3 ?
+                    <Row>
+                        <Col span={8}>
+                            <CardCompare item={list[0]} />
+                        </Col>
+                        <Col span={8}>
+                            <CardCompare item={list[1]} />
+                        </Col>
+                        <Col span={8}>
+                            <CardCompare item={list[2]} />
+                        </Col>
+                    </Row>
+                    : list.length === 2 ?
+                        <Row>
+                            <Col span={12}>
+                                <CardCompare item={list[0]} />
+                            </Col>
+                            <Col span={12}>
+                                <CardCompare item={list[1]} />
+                            </Col>
 
+                        </Row>
+                        : null
+                }
             </div>
         </div>
     );

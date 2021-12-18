@@ -104,7 +104,7 @@ function App() {
                                 <Signup />
                                 <Footer />
                             </Route>
-                            <Route path="/so-sanh" exact>
+                            <Route path="/so-sanh/:id" exact>
                                 <Compare title="So sánh bất động sản" />
                                 <Footer />
                             </Route>
