@@ -31,6 +31,11 @@
     .title-add {
         color: rgba($color: #0088a9, $alpha: 0.7);
     }
+    p {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }
 
 .modal-search {

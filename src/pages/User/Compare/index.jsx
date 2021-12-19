@@ -73,10 +73,10 @@ function Compare(props) {
                     </Row>
                     : list.length === 2 ?
                         <Row>
-                            <Col span={12}>
+                            <Col offset={1} span={10}>
                                 <CardCompare item={list[0]} />
                             </Col>
-                            <Col span={12}>
+                            <Col offset={2} span={10}>
                                 <CardCompare item={list[1]} />
                             </Col>
 

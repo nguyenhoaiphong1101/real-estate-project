@@ -1,5 +1,6 @@
 import { Button, Input, Modal } from 'antd';
 import React, { useState } from 'react';
+import { API_URL } from '../../../../constants/Config';
 import "./styles.scss"
 
 function ItemCompare(props) {
@@ -9,6 +10,8 @@ function ItemCompare(props) {
         props?.deleteItem(props.item.id);
     }
 
+    const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
+
 
 
     return (
@@ -16,7 +19,7 @@ function ItemCompare(props) {
             {props.item ?
                 <div className="item-compare">
                     <i class="icon fas fa-times" onClick={detele}></i>
-                    <img className="img" src="https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg"></img>
+                    <img className="img" alt='hình' src="https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg"></img>
                     <p className="title">{props.item.title}</p>
                 </div>
                 :

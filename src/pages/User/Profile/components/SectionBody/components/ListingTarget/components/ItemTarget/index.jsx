@@ -26,9 +26,9 @@ function ItemTarget(props) {
                     </Col>
                 </Dropdown>
                 <Col span={22} className="content">
-                    <p className="title-target">{props.item.province_name} ( {props.item.district_name} )</p>
-                    <p className="title-target-small">Diện tích: {Number(props.item.area).toLocaleString('vi-VN')}m2</p>
-                    <p className="title-target-small">Giá tiền: {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.item.price)}</p>
+                    <p className="title-target">{props.item.province_name} {props.item.district_name ? `( ${props.item.district_name} )` : null}</p>
+                    <p className="title-target-small">Diện tích: {props.item.area ? `${Number(props.item.area).toLocaleString('vi-VN')}m2` : "Không có"}</p>
+                    <p className="title-target-small">Giá tiền: {props.item.price ? `${new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.item.price)}` : "Không có"}</p>
                 </Col>
             </Row>
         </div>

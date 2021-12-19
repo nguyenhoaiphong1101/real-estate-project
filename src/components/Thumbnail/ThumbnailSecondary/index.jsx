@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { changeCompare } from '../../../actions/user';
 import { API_URL } from '../../../constants/Config';
 import './styles.scss';
 function ThumbnailSecondary(props) {
@@ -17,6 +20,17 @@ function ThumbnailSecondary(props) {
         }
     }
 
+    const listCompare = useSelector(state => state.user.listCompare)
+    const dispatch = useDispatch();
+
+    const addCompare = () => {
+        var temp = listCompare;
+        if (listCompare.filter(item => item === props.list?.id).length === 0 && listCompare.length < 3) {
+            temp.push(props.listLatestNew?.id)
+            dispatch(changeCompare(temp));
+        }
+    }
+
     useEffect(() => {
         let imgs = [];
         props?.listLatestNew?.photos?.forEach((item, index) => {
@@ -29,7 +43,7 @@ function ThumbnailSecondary(props) {
         <div class="listing listing-secondary">
             <div class="listing-thumbnail">
                 <a>
-                    <img src={image[0]?.url} alt="listing" onClick={() => toDetailHome()}/>
+                    <img src={image[0]?.url} alt="listing" onClick={() => toDetailHome()} />
                 </a>
             </div>
             <div class="listing-body">
@@ -37,8 +51,10 @@ function ThumbnailSecondary(props) {
                     <a title="Iris Watson, Frederick Nebraska 20620" onClick={() => toDetailHome()}>
                         {props.listLatestNew?.address}</a>
                 </h6>
-                <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}
-                </span>
+                <div className='flex-compare'>
+                    <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
+                    <span onClick={addCompare} style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
+                </div>
             </div>
         </div>
     );

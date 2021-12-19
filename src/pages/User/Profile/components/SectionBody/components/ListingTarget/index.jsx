@@ -58,12 +58,12 @@ function ListingTarget(props) {
     const updateItem = (item) => {
         district.GET(Number(item.province)).then(res => {
             setListDistrict(res);
-            setDistr(Number(item.district));
+            setDistr(item.district ? Number(item.district) : null);
         })
         setUpdate(item.id);
-        setCity(Number(item.province));
-        setArea(Number(item.area));
-        setCategory(Number(item.category));
+        setCity(item.province ? Number(item.province) : null);
+        setArea(item.area ? Number(item.area) : null);
+        setCategory(item.category ? Number(item.category) : null);
         setPrice(Number(item.price));
         setBathroom(item.bathroom_quantity);
         setFloor(item.floor_quantity);
@@ -75,54 +75,78 @@ function ListingTarget(props) {
 
     const handleOk = () => {
         if (update) {
-            updateTarget.PUT({
-                id: update,
-                area,
-                bathroom_quantity: bathroom,
-                bedroom_quantity: bedroom,
-                category,
-                district_id: distr,
-                floor_quantity: floor,
-                price,
-                province_id: city,
-            }).then(res => {
-                getTarget.GET().then((res) => {
-                    setListTarget(res);
+            if (!city &&
+                !distr &&
+                !area &&
+                !category &&
+                !price &&
+                !bathroom &&
+                !floor &&
+                !bedroom
+            ) {
+                message.error("Vui lòng nhập ít nhất 1 thông tin !");
+            } else {
+                updateTarget.PUT({
+                    id: update,
+                    area,
+                    bathroom_quantity: bathroom,
+                    bedroom_quantity: bedroom,
+                    category,
+                    district_id: distr,
+                    floor_quantity: floor,
+                    price,
+                    province_id: city,
+                }).then(res => {
+                    getTarget.GET().then((res) => {
+                        setListTarget(res);
+                    })
+                    setCity();
+                    setDistr();
+                    setArea();
+                    setCategory();
+                    setPrice();
+                    setBathroom();
+                    setFloor();
+                    setBedroom();
+                    setIsModalVisible(false);
                 })
-                setCity();
-                setDistr();
-                setArea();
-                setCategory();
-                setPrice();
-                setBathroom();
-                setFloor();
-                setBedroom();
-                setIsModalVisible(false);
-            })
+            }
         } else {
-            createTarget.POST({
-                area,
-                bathroom_quantity: bathroom,
-                bedroom_quantity: bedroom,
-                category,
-                district_id: distr,
-                floor_quantity: floor,
-                price,
-                province_id: city,
-            }).then(res => {
-                getTarget.GET().then((res) => {
-                    setListTarget(res);
+            if (!city &&
+                !distr &&
+                !area &&
+                !category &&
+                !price &&
+                !bathroom &&
+                !floor &&
+                !bedroom
+            ) {
+                message.error("Vui lòng nhập ít nhất 1 thông tin !");
+            } else {
+                createTarget.POST({
+                    area,
+                    bathroom_quantity: bathroom,
+                    bedroom_quantity: bedroom,
+                    category,
+                    district_id: distr,
+                    floor_quantity: floor,
+                    price,
+                    province_id: city,
+                }).then(res => {
+                    getTarget.GET().then((res) => {
+                        setListTarget(res);
+                    })
+                    setCity();
+                    setDistr();
+                    setArea();
+                    setCategory();
+                    setPrice();
+                    setBathroom();
+                    setFloor();
+                    setBedroom();
+                    setIsModalVisible(false);
                 })
-                setCity();
-                setDistr();
-                setArea();
-                setCategory();
-                setPrice();
-                setBathroom();
-                setFloor();
-                setBedroom();
-                setIsModalVisible(false);
-            })
+            }
         }
     };
 

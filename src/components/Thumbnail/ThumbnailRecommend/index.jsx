@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { changeCompare } from '../../../actions/user';
 import { API_URL } from '../../../constants/Config';
 import './styles.scss'
 
@@ -11,6 +12,16 @@ function ThumbnailRecomend(props) {
     const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const listCompare = useSelector(state => state.user.listCompare)
+
+    const addCompare = () => {
+        var temp = listCompare;
+        if (listCompare.filter(item => item === props.list?.id).length === 0 && listCompare.length < 3) {
+            temp.push(props.list?.id)
+            dispatch(changeCompare(temp));
+        }
+    }
     useEffect(() => {
         let imgs = [];
         props?.list?.photos?.forEach((item, index) => {
@@ -30,6 +41,8 @@ function ThumbnailRecomend(props) {
                 <span>{props.list?.address}</span>
                 <br />
                 <span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.list?.total_price)}</span>
+                <br />
+                <span onClick={addCompare} className='hoverCompare' style={{ color: "#fff", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
             </div>
         </div>
 

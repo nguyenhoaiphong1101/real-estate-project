@@ -6,6 +6,8 @@ import Button from '../../../../../../../components/Button';
 import { API_URL } from '../../../../../../../constants/Config';
 import Img from '../../../../../../../assets/images/noavatar.png';
 import './styles.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeCompare } from '../../../../../../../actions/user';
 
 function ItemSlider(props) {
 
@@ -14,6 +16,16 @@ function ItemSlider(props) {
             return moment(seconds).format('DD-MM-YYYY');
     }
     const history = useHistory();
+    const listCompare = useSelector(state => state.user.listCompare)
+    const dispatch = useDispatch();
+
+    const addCompare = () => {
+        var temp = listCompare;
+        if (listCompare.filter(item => item === props.listHighlight?.id).length === 0 && listCompare.length < 3) {
+            temp.push(props.listHighlight?.id)
+            dispatch(changeCompare(temp));
+        }
+    }
     const toDetailHome = () => {
         // if (token) {
         //     dispatch(loadDetailHome(props?.listLatestNew?.id, jwtDecode(token).id))
@@ -81,6 +93,7 @@ function ItemSlider(props) {
                             </div>
                             <div class="listing-gallery-wrapper">
                                 <Button value="Xem chi tiết" onClick={() => toDetailHome()} className="view-detail"></Button>
+                                <span onClick={addCompare} style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
                             </div>
                         </div>
                     </div>

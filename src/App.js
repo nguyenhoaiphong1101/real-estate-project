@@ -19,6 +19,7 @@ import Recommend from "./pages/User/Recommend";
 import Signup from './pages/User/Signup';
 import Statistical from "./pages/User/Statistical";
 import SubmitList from "./pages/User/SubmitList";
+import { useHistory } from 'react-router-dom';
 import "./styles.scss"
 
 function App() {
@@ -29,6 +30,8 @@ function App() {
     const [path, setPath] = useState('');
     const [loading, setLoading] = useState(false);
     const [token, setToken] = useState(localStorage.getItem('access_token'));
+    const history = useHistory();
+
 
     const localToken = localStorage.getItem('access_token')
 
@@ -61,9 +64,11 @@ function App() {
                     :
                     <div className="app" >
                         <Header setEnableFooter={setEnableFooter} path={path} setLoading={setLoading} role={returnRole()} />
-                        <div className="compare">
-                            <ListCompare />
-                        </div>
+                        {returnRole() !== 'ADMIN' ?
+                            <div className="compare">
+                                <ListCompare />
+                            </div>
+                            : null}
                         <Switch>
                             {returnRole() === 'ADMIN' &&
                                 <AdminWrapper />

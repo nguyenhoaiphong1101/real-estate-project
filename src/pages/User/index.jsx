@@ -7,13 +7,14 @@ import Listings from "./Listings";
 import Profile from "./Profile";
 import SubmitList from "./SubmitList";
 import "./styles.scss"
+import ListCompare from '../../components/ListCompare';
 
 function UserWrapper(props) {
     const [enableFooter, setEnableFooter] = useState(true);
     return (
         <div className="user">
-            <Switch>
 
+            <Switch>
                 <Route path="/home" exact>
                     <Home />
                 </Route>

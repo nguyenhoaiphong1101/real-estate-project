@@ -7,7 +7,7 @@ function CardCompare(props) {
             <div class="pricing-table">
                 <h2 class="pricing-table__header">{props.item.title}</h2>
                 <div className="card-img">
-                    <img className="img" src={props?.item?.src} />
+                    <img className="img" src="http://nhadep.org.vn/uploads/weblink/products47033.png" />
                 </div>
 
                 <h3 class="pricing-table__price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.item.total_price)}</h3>
