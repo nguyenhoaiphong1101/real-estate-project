@@ -23,34 +23,34 @@ function SectionRecentList() {
     }, [])
     return (
         listLatestNew.length <= 3 ? ''
-        :
-        <div className="section-recent-list">
-            <div className="container">
-                <div className="title-wrapper">
-                    <h5 className="sub-title">Tìm nhà của bạn</h5>
-                    <h2 className="title">Danh sách gần nhất</h2>
+            :
+            <div className="section-recent-list">
+                <div className="container">
+                    <div className="title-wrapper">
+                        <h5 className="sub-title">Tìm nhà của bạn</h5>
+                        <h2 className="title">Danh sách gần nhất</h2>
+                    </div>
+                    <Row>
+                        <Col span={16} className="col-left">
+                            <div className="item"  >
+                                <ThumbnailExtra listLatestNew={listLatestNew[0]}
+                                />
+                            </div>
+                            <div className="item" >
+                                <ThumbnailPrimary listLatestNew={listLatestNew[1]} classNameImg="img-height-large" />
+                            </div>
+                        </Col>
+                        <Col span={8}>
+                            <div className="item">
+                                <ThumbnailPrimary listLatestNew={listLatestNew[2]} className="pb-10" />
+                            </div>
+                            <div className="item">
+                                <ThumbnailPrimary listLatestNew={listLatestNew[3]} className="pb-10" />
+                            </div>
+                        </Col>
+                    </Row>
                 </div>
-                <Row>
-                    <Col span={16} className="col-left">
-                        <div className="item" style={{ height: "25.3%" }} >
-                            <ThumbnailExtra listLatestNew={listLatestNew[0]}
-                            />
-                        </div>
-                        <div className="item" style={{ height: "70%" }}>
-                            <ThumbnailPrimary listLatestNew={listLatestNew[1]} classNameImg="img-height-large" />
-                        </div>
-                    </Col>
-                    <Col span={8}>
-                        <div className="item">
-                            <ThumbnailPrimary listLatestNew={listLatestNew[2]} className="pb-10" />
-                        </div>
-                        <div className="item">
-                            <ThumbnailPrimary listLatestNew={listLatestNew[3]} className="pb-10" />
-                        </div>
-                    </Col>
-                </Row>
-            </div>
-        </div >
+            </div >
     );
 }
 

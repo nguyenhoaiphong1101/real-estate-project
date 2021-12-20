@@ -20,12 +20,22 @@ function ThumbnailSecondary(props) {
         }
     }
 
-    const listCompare = useSelector(state => state.user.listCompare)
+    const [isCompare, setIsCompare] = useState(false)
+
+    const listCompare = useSelector(state => ([...state.user.listCompare]))
+
+    useEffect(() => {
+        if (listCompare.filter(item => item === props?.listLatestNew?.id).length === 0) {
+            setIsCompare(false)
+        } else {
+            setIsCompare(true)
+        }
+    }, [listCompare])
     const dispatch = useDispatch();
 
     const addCompare = () => {
         var temp = listCompare;
-        if (listCompare.filter(item => item === props.list?.id).length === 0 && listCompare.length < 3) {
+        if (listCompare.filter(item => item === props.listLatestNew?.id).length === 0 && listCompare.length < 3) {
             temp.push(props.listLatestNew?.id)
             dispatch(changeCompare(temp));
         }
@@ -53,7 +63,7 @@ function ThumbnailSecondary(props) {
                 </h6>
                 <div className='flex-compare'>
                     <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
-                    <span onClick={addCompare} style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
+                    <span onClick={addCompare} style={isCompare ? { color: "#ccc", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
                 </div>
             </div>
         </div>

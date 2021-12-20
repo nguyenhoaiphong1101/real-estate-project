@@ -1,6 +1,6 @@
 import { Popover } from 'antd';
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../../../../../../../components/Button';
 import { API_URL } from '../../../../../../../constants/Config';
@@ -15,8 +15,17 @@ function ItemSlider(props) {
         if (seconds)
             return moment(seconds).format('DD-MM-YYYY');
     }
+    const [isCompare, setIsCompare] = useState(false)
     const history = useHistory();
-    const listCompare = useSelector(state => state.user.listCompare)
+    const listCompare = useSelector(state => ([...state.user.listCompare]))
+
+    useEffect(() => {
+        if (listCompare.filter(item => item === props?.listHighlight?.id).length === 0) {
+            setIsCompare(false)
+        } else {
+            setIsCompare(true)
+        }
+    }, [listCompare])
     const dispatch = useDispatch();
 
     const addCompare = () => {
@@ -93,7 +102,7 @@ function ItemSlider(props) {
                             </div>
                             <div class="listing-gallery-wrapper">
                                 <Button value="Xem chi tiết" onClick={() => toDetailHome()} className="view-detail"></Button>
-                                <span onClick={addCompare} style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
+                                <span onClick={addCompare} style={isCompare ? { color: "#ccc", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
                             </div>
                         </div>
                     </div>

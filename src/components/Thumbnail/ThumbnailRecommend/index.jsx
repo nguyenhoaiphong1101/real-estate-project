@@ -8,12 +8,22 @@ import './styles.scss'
 function ThumbnailRecomend(props) {
 
     const user = useSelector(state => state.user.user);
+    const [isCompare, setIsCompare] = useState(false)
     const [image, setImage] = useState({});
     const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const listCompare = useSelector(state => state.user.listCompare)
+
+    const listCompare = useSelector(state => ([...state.user.listCompare]))
+
+    useEffect(() => {
+        if (listCompare.filter(item => item === props?.list?.id).length === 0) {
+            setIsCompare(false)
+        } else {
+            setIsCompare(true)
+        }
+    }, [listCompare])
 
     const addCompare = () => {
         var temp = listCompare;
@@ -42,7 +52,7 @@ function ThumbnailRecomend(props) {
                 <br />
                 <span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.list?.total_price)}</span>
                 <br />
-                <span onClick={addCompare} className='hoverCompare' style={{ color: "#fff", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
+                <span onClick={addCompare} className='hoverCompare' style={isCompare ? { color: "#fff ", cursor: "default" } : { color: "#fff", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
             </div>
         </div>
 

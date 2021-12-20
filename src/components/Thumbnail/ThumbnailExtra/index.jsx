@@ -16,6 +16,7 @@ function ThumbnailExtra(props) {
 
     const [isVisible, setIsVisible] = useState(false);
     const [image, setImage] = useState({});
+    const [isCompare, setIsCompare] = useState(false)
 
     const handleOk = () => {
         history.push('/dang-nhap')
@@ -30,13 +31,22 @@ function ThumbnailExtra(props) {
             return moment(seconds).format('DD-MM-YYYY');
     }
 
+    const listCompare = useSelector(state => ([...state.user.listCompare]))
+
+    useEffect(() => {
+        if (listCompare.filter(item => item === props?.listLatestNew?.id).length === 0) {
+            setIsCompare(false)
+        } else {
+            setIsCompare(true)
+        }
+    }, [listCompare])
+
 
 
 
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const listCompare = useSelector(state => state.user.listCompare)
 
     const addCompare = () => {
         var temp = listCompare;
@@ -122,11 +132,17 @@ function ThumbnailExtra(props) {
                     <span className="listing-badge sale" >
                         {props.listLatestNew?.type_apartment}
                     </span>
-                    <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
-                        props.listLatestNew?.percent_suitable >= 30 && props.listLatestNew?.percent_suitable < 80 ? "medium" : "short"
-                        }`} style={{ cursor: "default" }} title={`Mức độ phù hợp ${props.listLatestNew?.percent_suitable}%`}>
-                        {props.listLatestNew?.percent_suitable}%
-                    </span>
+                    {token ?
+                        <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
+                            props.listLatestNew?.percent_suitable >= 30 && props.listLatestNew?.percent_suitable < 80 ? "medium" : "short"
+                            }`} style={{ cursor: "default" }} title={`Mức độ phù hợp ${props.listLatestNew?.percent_suitable < 20 ? "< 20" : props.listLatestNew?.percent_suitable}%`}>
+                            {props.listLatestNew?.percent_suitable < 20 ? "< 20" : props.listLatestNew?.percent_suitable}%
+                        </span>
+                        :
+                        <span className={`listing-badge short`} style={{ cursor: "default" }} title="Vui lòng đăng nhập để xem mức độ phù hợp">
+                            <i class="fas fa-question"></i>
+                        </span>
+                    }
                     <br />
                     {history.location.pathname === '/trang-ca-nhan' ?
                         <span style={{ marginTop: "15px", display: "inline-block" }} className={`listing-status  ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`} >
@@ -188,14 +204,14 @@ function ThumbnailExtra(props) {
                     </div>
                 </div>
                 {props?.type ?
-                    <div className="listing-gallery-wrapper" >
+                    <div className="listing-gallery-wrapper" style={{ justifyContent: "left" }} >
                         <Button value="Chỉnh sửa" className="view-detail" onClick={() => toUpdatePost()}></Button>
                         <Button value="Xóa bài" className="view-detail-delete" onClick={() => toDeletePost()}></Button>
                     </div>
                     :
                     <div className="listing-gallery-wrapper">
                         <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
-                        <span onClick={addCompare} style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
+                        <span onClick={addCompare} style={isCompare ? { color: "#ccc", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
                     </div>
                 }
                 {/* {history.location.pathname === '/trang-ca-nhan' ?

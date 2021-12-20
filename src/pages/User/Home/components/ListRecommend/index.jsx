@@ -30,7 +30,7 @@ function ListRecomend(props) {
         <div>
             <div className="container">
                 <div className="title-recomend">
-                    <h2>Danh sách phù hợp với bạn</h2>
+                    <h2>Có thể bạn sẽ quan tâm</h2>
                     <div className="slick-slider">
                         <button className="button-prev" onClick={previous}>
                             <LeftOutlined style={{ color: "black", fontSize: "16px" }} />

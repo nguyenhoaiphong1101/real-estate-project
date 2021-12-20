@@ -9,13 +9,23 @@ function ThumbnailDetailRecommend(props) {
 
     const [image, setImage] = useState({});
     const history = useHistory()
+
     const toDetailHome = () => {
         history.push(`/chi-tiet/${props?.list?.id}`, props?.list)
     }
 
     const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
+    const [isCompare, setIsCompare] = useState(false)
 
-    const listCompare = useSelector(state => state.user.listCompare)
+    const listCompare = useSelector(state => ([...state.user.listCompare]))
+
+    useEffect(() => {
+        if (listCompare.filter(item => item === props?.list?.id).length === 0) {
+            setIsCompare(false)
+        } else {
+            setIsCompare(true)
+        }
+    }, [listCompare])
     const dispatch = useDispatch();
 
     const addCompare = () => {
@@ -45,7 +55,7 @@ function ThumbnailDetailRecommend(props) {
                 <br />
                 <span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.list?.total_price)}</span>
                 <br />
-                <span onClick={addCompare} style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
+                <span onClick={addCompare} style={isCompare ? { color: "#ccc", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
             </div>
         </div>
 

@@ -13,6 +13,17 @@ import { changeCompare } from '../../../actions/user';
 
 function ThumbnailPrimary(props) {
     const [image, setImage] = useState({});
+    const [isCompare, setIsCompare] = useState(false)
+
+    const listCompare = useSelector(state => ([...state.user.listCompare]))
+
+    useEffect(() => {
+        if (listCompare.filter(item => item === props?.listLatestNew?.id).length === 0) {
+            setIsCompare(false)
+        } else {
+            setIsCompare(true)
+        }
+    }, [listCompare])
 
 
     const toTimeString = (seconds) => {
@@ -43,7 +54,6 @@ function ThumbnailPrimary(props) {
         }
     }
 
-    const listCompare = useSelector(state => state.user.listCompare)
 
     const addCompare = () => {
         var temp = listCompare;
@@ -111,11 +121,18 @@ function ThumbnailPrimary(props) {
                     <span style={{ cursor: "default" }} className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`}>
                         {props.listLatestNew?.type_apartment}
                     </span>
-                    <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
-                        props.listLatestNew?.percent_suitable >= 30 && props.listLatestNew?.percent_suitable < 80 ? "medium" : "short"
-                        }`} style={{ cursor: "default" }} title={`Mức độ phù hợp ${props.listLatestNew?.percent_suitable}%`}>
-                        {props.listLatestNew?.percent_suitable}%
-                    </span>
+                    {token ?
+                        <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
+                            props.listLatestNew?.percent_suitable >= 30 && props.listLatestNew?.percent_suitable < 80 ? "medium" : "short"
+                            }`} style={{ cursor: "default" }} title={`Mức độ phù hợp ${props.listLatestNew?.percent_suitable < 20 ? "< 20" : props.listLatestNew?.percent_suitable}%`}>
+                            {props.listLatestNew?.percent_suitable < 20 ? "< 20" : props.listLatestNew?.percent_suitable}%
+                        </span>
+                        :
+                        <span className={`listing-badge short`} style={{ cursor: "default" }} title="Vui lòng đăng nhập để xem mức độ phù hợp">
+                            <i class="fas fa-question"></i>
+                        </span>
+                    }
+
                 </div>
                 <div class="listing-controls" onClick={() => setFavorite()}>
                     <a class={isFavorite ? "favorite" : "un-favorite"}>
@@ -169,7 +186,7 @@ function ThumbnailPrimary(props) {
                 </div>
                 <div class="listing-gallery-wrapper">
                     <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
-                    <span onClick={addCompare} style={{ color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> So sánh</span>
+                    <span onClick={addCompare} style={isCompare ? { color: "#ccc ", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
                 </div>
             </div>
         </div>
