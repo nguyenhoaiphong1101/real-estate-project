@@ -10,7 +10,7 @@ function CardCompare(props) {
                     <img className="img" src="http://nhadep.org.vn/uploads/weblink/products47033.png" />
                 </div>
 
-                <h3 className={`pricing-table__price ${props.rank.price === 2 ? "high" : props.rank.price === 0 ? "low" : ""}`}>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.item.total_price)}</h3>
+                <h3 className={`pricing-table__price ${props.rank.price === 2 ? "low" : props.rank.price === 0 ? "high" : ""}`}>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.item.total_price)}</h3>
                 <a target="_blank" class="pricing-table__button" href="http://www.digimadmedia.com">
                     Xem chi tiết
                 </a>
