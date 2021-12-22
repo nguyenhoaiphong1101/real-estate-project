@@ -191,3 +191,33 @@ export const getListCompare = {
     }
 }
 
+
+export const getStatistic = {
+
+    GET: (params) => {
+        return axios({
+            method: 'get',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: null,
+            params: params,
+            url: API_URL + '/public/statistic',
+        }).then(res => res.data.data
+        )
+    }
+}
+export const getStatisticRank = {
+
+    GET: () => {
+        return axios({
+            method: 'get',
+            // headers: {
+            //     Authorization: `Bearer ${token}`
+            // },
+            data: null,
+            url: API_URL + '/public/statistic/rank',
+        }).then(res => res.data.data
+        )
+    }
+}

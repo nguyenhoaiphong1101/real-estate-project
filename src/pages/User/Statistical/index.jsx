@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { Select, Row, Col, Tooltip } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Select, Row, Col, Tooltip, message } from 'antd';
 import { Bar, Doughnut, Line, Radar } from "react-chartjs-2"
 import { Chart } from "chart.js/auto"
 import "./styles.scss"
+import jwt_decode from "jwt-decode";
 import ThumbnailPrimary from '../../../components/Thumbnail/ThumbnailPrimary';
 import ThumbnailExtra from '../../../components/Thumbnail/ThumbnailExtra';
+import { selectAreaFrom, selectAreaTo, selectPriceFrom, selectPriceTo } from '../../../constants/DataConfig';
+import { province } from '../../../api/searchApi';
+import { getStatistic, getStatisticRank } from '../../../api/userApi';
 
 function Statistical(props) {
     const [targetChart, setTargetChart] = useState([
@@ -18,10 +22,46 @@ function Statistical(props) {
         }
     ])
     const [typeChart, setTypeChart] = useState("1")
+    const [city, setCity] = useState("");
+    const [priceFromCate, setPriceFromCate] = useState("");
+    const [priceToCate, setPriceToCate] = useState("");
+    const [areaFromCate, setAreaFromCate] = useState("");
+    const [areaToCate, setAreaToCate] = useState("");
+    const [priceFromTar, setPriceFromTar] = useState("");
+    const [priceToTar, setPriceToTar] = useState("");
+    const [areaFromTar, setAreaFromTar] = useState("");
+    const [areaToTar, setAreaToTar] = useState("");
+    const [listCity, setListCity] = useState([])
+    const [listHot, setListHot] = useState([])
+    const [listInfo, setListInfo] = useState([])
+    const [listRank, setListRank] = useState([])
     const [categoryChart, setCategoryChart] = useState("1")
     const [target, setTarget] = useState("1")
     const [from, setFrom] = useState("100000000")
     const [to, setTo] = useState("100000000")
+    const [token, setToken] = useState(localStorage.getItem('access_token'));
+    const [dataChart, setDataChart] = useState({
+        label: '',
+        labelColumn: [],
+        color: 'rgb(255, 214, 115,0.5)',
+        colorBorder: 'rgba(255, 214, 115,1)',
+        data: [],
+    })
+
+
+    useEffect(() => {
+        province.GET().then(res => {
+            setListCity(res);
+        })
+
+        getStatisticRank.GET().then(res => {
+            setListRank(res);
+        })
+
+        return () => {
+            setListCity([]);
+        };
+    }, [])
 
 
     const changeTarger = (e) => {
@@ -30,11 +70,11 @@ function Statistical(props) {
             setTargetChart([
                 {
                     id: "1",
-                    title: "Giá trị (tỷ)"
+                    title: "Giá trị"
                 },
                 {
                     id: "2",
-                    title: "Diện tích (nghìn m2)"
+                    title: "Diện tích"
                 }
             ])
         }
@@ -46,7 +86,7 @@ function Statistical(props) {
                 },
                 {
                     id: "1",
-                    title: "Giá trị (tỷ)"
+                    title: "Giá trị"
                 }
             ])
         }
@@ -58,87 +98,163 @@ function Statistical(props) {
                 },
                 {
                     id: "2",
-                    title: "Diện tích (nghìn m2)"
+                    title: "Diện tích"
                 }
             ])
         }
     }
 
-    const [dataChart, setDataChart] = useState({
-        label: 'Số lượng bất động sản theo giá trị ở Hồ Chí Minh',
-        labelColumn: ["0,1 tỷ", "0,2 tỷ", "0,3 tỷ", "0,4 tỷ", "0,5 tỷ", "0,6 tỷ", "0,7 tỷ", "0,8 tỷ", "0,9 tỷ", "1 tỷ"],
-        color: 'rgb(255, 214, 115,0.5)',
-        colorBorder: 'rgba(255, 214, 115,1)',
-        data: [35, 67, 48, 92, 100, 56, 22, 60, 78, 200],
-    })
+    const onCompare = () => {
+        var params = {
+        };
+        if (categoryChart && target) {
+            if (categoryChart === "1") {
+                if (target === "2" && (areaToTar || areaToTar === 0) && (areaFromTar || areaFromTar === 0) && city) {
+                    if (areaFromTar >= (areaToTar === -1 ? 1100 : areaToTar)) {
+                        message.error("Giá trị bắt đầu phải nhỏ hơn giá trị kết thúc !")
+                        return;
+                    } else {
+                        params = {
+                            statistic: "CITY",
+                            criteria: "AREA",
+                            statistic_city_id: city,
+                            criteria_from: areaFromTar,
+                            criteria_to: areaToTar,
+                        }
+                    }
+                } else {
+                    if (target === "1" && (priceToTar || priceToTar === 0) && (priceFromTar || priceFromTar === 0) && city) {
+                        if (priceFromTar >= (priceToTar === -1 ? 11000000000 : priceToTar)) {
+                            message.error("Giá trị bắt đầu phải nhỏ hơn giá trị kết thúc !")
+                            return;
+                        } else {
+                            params = {
+                                statistic: "CITY",
+                                criteria: "PRICE",
+                                statistic_city_id: city,
+                                criteria_from: priceFromTar,
+                                criteria_to: priceToTar,
+                            }
+                        }
+                    } else {
+                        message.error("Bạn vui lòng chọn đủ thông tin!")
+                        return;
+                    }
+                }
+            }
+            if (categoryChart === "2") {
+                if (target === "3" && (areaToCate || areaToCate === 0) && (areaFromCate || areaFromCate === 0)) {
+                    if (areaFromCate >= (areaToCate === -1 ? 1100 : areaToCate)) {
+                        message.error("Giá trị bắt đầu phải nhỏ hơn kết thúc !")
+                        return;
+                    } else {
+                        params = {
+                            statistic: "AREA",
+                            criteria: "CITY",
+                            statistic_from: areaFromCate,
+                            statistic_to: areaToCate,
+                        }
+                    }
+                } else {
+                    if (target === "1" && (priceToTar || priceToTar === 0) && (priceFromTar || priceFromTar === 0) && (areaToCate || areaToCate === 0) && (areaFromCate || areaFromCate === 0)) {
+                        if (priceFromTar >= (priceToTar === -1 ? 11000000000 : priceToTar) || areaFromCate >= (areaToCate === -1 ? 1100 : areaToCate)) {
+                            message.error("Giá trị bắt đầu phải nhỏ hơn giá trị kết thúc !")
+                            return;
+                        } else {
+                            params = {
+                                statistic: "AREA",
+                                criteria: "PRICE",
+                                statistic_from: areaFromCate,
+                                statistic_to: areaToCate,
+                                criteria_from: priceFromTar,
+                                criteria_to: priceToTar,
+                            }
+                        }
+                    } else {
+                        message.error("Bạn vui lòng chọn đủ thông tin !")
+                        return;
+                    }
+                }
+            }
+            if (categoryChart === "3") {
+                if (target === "3" && (priceToCate || priceToCate === 0) && (priceFromCate || priceFromCate === 0)) {
+                    if (priceToCate <= (priceFromCate === -1 ? 1100 : priceFromCate)) {
+                        message.error("Giá trị bắt đầu phải nhỏ hơn giá trị kết thúc !")
+                        return;
+                    } else {
+                        params = {
+                            statistic: "PRICE",
+                            criteria: "CITY",
+                            statistic_from: priceFromCate,
+                            statistic_to: priceToCate,
+                        }
+                    }
+                } else {
+                    if (target === "2" && (priceToCate || priceToCate === 0) && (priceFromCate || priceFromCate === 0) && (areaToTar || areaToTar === 0) && (areaFromTar || areaFromTar === 0)) {
+                        if (priceFromCate >= (priceToCate === -1 ? 11000000000 : priceToCate) || areaFromTar >= (areaToTar === -1 ? 1100 : areaToTar)) {
+                            message.error("Giá trị bắt đầu phải nhỏ hơn giá trị kết thúc !")
+                            return;
+                        } else {
+                            params = {
+                                statistic: "PRICE",
+                                criteria: "AREA",
+                                statistic_from: priceFromCate,
+                                statistic_to: priceToCate,
+                                criteria_from: areaFromTar,
+                                criteria_to: areaToTar,
+                            }
+                        }
+                    } else {
+                        message.error("Bạn vui lòng chọn đủ thông tin !")
+                        return;
+                    }
+                }
 
-    const changeMoney = () => {
-        setDataChart({
-            label: 'Số lượng bất động sản theo giá trị ở Hồ Chí Minh',
-            labelColumn: ["0,1 tỷ", "0,2 tỷ", "0,3 tỷ", "0,4 tỷ", "0,5 tỷ", "0,6 tỷ", "0,7 tỷ", "0,8 tỷ", "0,9 tỷ", "1 tỷ"],
-            color: 'rgba(149,125,173,0.5)',
-            colorBorder: 'rgba(149,125,173,1)',
-            data: [35, 67, 48, 92, 100, 56, 22, 60, 78, 200],
+            }
+        } else {
+            message.error("Bạn vui lòng chọn đủ thông tin !")
+            return;
+        }
+
+        if (token !== null) {
+            params.user_id = jwt_decode(token).id;
+        }
+        getStatistic.GET(params).then(res => {
+            if (categoryChart === "1") {
+                setDataChart({
+                    label: `Thống kê theo thành phố ( tiêu chí dựa trên : ${target === "1" ? "giá trị" : "diện tích"} )`,
+                    labelColumn: res.labels,
+                    color: 'rgb(255, 214, 115,0.5)',
+                    colorBorder: 'rgba(255, 214, 115,1)',
+                    data: res.data,
+                })
+            }
+            if (categoryChart === "2") {
+                setDataChart({
+                    label: `Thống kê theo diện tích ( tiêu chí dựa trên : ${target === "1" ? "giá trị" : "thành phố"} )`,
+                    labelColumn: res.labels,
+                    color: 'rgba(149,125,173,0.5)',
+                    colorBorder: 'rgba(149,125,173,1)',
+                    data: res.data,
+                })
+            }
+            if (categoryChart === "3") {
+                setDataChart({
+                    label: `Thống kê theo giá trị ( tiêu chí dựa trên : ${target === "2" ? "diện tích" : "thành phố"} )`,
+                    labelColumn: res.labels,
+                    color: 'rgba(149,125,173,0.5)',
+                    colorBorder: 'rgba(149,125,173,1)',
+                    data: res.data,
+                })
+            }
+            setListHot(res.highLightApartments);
+            setListInfo(res.totalStatisticDto);
         })
-    }
-    const changeArea = () => {
-        setDataChart({
-            label: 'Số lượng bất động sản theo diện tích ở Hồ Chí Minh',
-            labelColumn: ["0,1 nghìn m2", "0,2 nghìn m2", "0,3 nghìn m2", "0,4 nghìn m2", "0,5 nghìn m2", "0,6 nghìn m2", "0,7 nghìn m2", "0,8 nghìn m2", "0,9 nghìn m2", "1 nghìn m2"],
-            color: 'rgba(149,125,173,0.5)',
-            colorBorder: 'rgba(149,125,173,1)',
-            data: [45, 27, 78, 42, 60, 46, 12, 90, 34, 67],
-        })
+
     }
 
-    const listDemo1 =
-    {
-        id: 1,
-        status: "OPEN",
-        type_apartment: "Bán",
-        author: {
-            full_name: "Nguyễn Hoài Phong"
-        },
-        created_at: "11/01/2000",
-        address: "Quận 7 Thành phố Hồ Chí Minh",
-        total_price: 4000000000,
-        title: "Biệt thự đầy đủ tiện nghi cần bán gấp",
-        bedroom_quantity: 4,
-        bathroom_quantity: 3,
-        area: 500,
-    }
-    const listDemo2 =
-    {
-        id: 2,
-        status: "OPEN",
-        type_apartment: "Bán",
-        author: {
-            full_name: "Nguyễn Hoài Phong"
-        },
-        created_at: "11/01/2000",
-        address: "Quận 7 Thành phố Hồ Chí Minh",
-        total_price: 4000000000,
-        title: "Biệt thự đầy đủ tiện nghi cần bán gấp",
-        bedroom_quantity: 4,
-        bathroom_quantity: 3,
-        area: 500,
-    }
-    const listDemo3 =
-    {
-        id: 3,
-        status: "OPEN",
-        type_apartment: "Bán",
-        author: {
-            full_name: "Nguyễn Hoài Phong"
-        },
-        created_at: "11/01/2000",
-        address: "Quận 7 Thành phố Hồ Chí Minh",
-        total_price: 4000000000,
-        title: "Biệt thự đầy đủ tiện nghi cần bán gấp",
-        bedroom_quantity: 4,
-        bathroom_quantity: 3,
-        area: 500,
-    }
+
+
 
 
     return (
@@ -173,10 +289,22 @@ function Statistical(props) {
                                         <div className="label-item">
                                             <label>Thống kê : </label>
                                         </div>
-                                        <Select className="select" defaultValue="1" onChange={(e) => { setCategoryChart(e); changeTarger(e); }} style={{ width: 160 }} >
+                                        <Select className="select" value={categoryChart} onChange={(e) => {
+                                            setCategoryChart(e);
+                                            changeTarger(e);
+                                            setCity("");
+                                            setAreaFromCate("");
+                                            setAreaToCate("");
+                                            setAreaFromTar("");
+                                            setAreaToTar("");
+                                            setPriceFromCate("");
+                                            setPriceFromTar("");
+                                            setPriceToCate("");
+                                            setPriceToTar("");
+                                        }} style={{ width: 160 }} >
                                             <Select.Option value="1">Theo thành phố</Select.Option>
                                             <Select.Option value="2">Theo diện tích</Select.Option>
-                                            <Select.Option value="3">Theo giá cả</Select.Option>
+                                            <Select.Option value="3">Theo giá trị</Select.Option>
                                         </Select>
                                     </div>
                                 </Col>
@@ -186,8 +314,17 @@ function Statistical(props) {
                                             <div className="label-item">
                                                 <label>Thành phố : </label>
                                             </div>
-                                            <Select className="select" defaultValue="1" style={{ width: 160 }}  >
-                                                <Select.Option value="1">Hồ Chí Minh</Select.Option>
+                                            <Select className="select" value={city ? city : ""} onChange={(e) => {
+                                                setCity(e);
+                                            }} style={{ width: 160 }}  >
+                                                {listCity ?
+                                                    listCity.map(item => {
+                                                        return <Select.Option key={item.id} value={item.id}>{item.name}</Select.Option>
+                                                    })
+                                                    :
+                                                    null
+                                                }
+
                                             </Select>
                                         </div>
                                     </Col>
@@ -196,28 +333,70 @@ function Statistical(props) {
                                 }
                                 {categoryChart === "1" ?
                                     null
-                                    :
-                                    <Col span={8}>
-                                        <div className="group-search">
-                                            <div className="label-item">
-                                                <label>Bắt đầu :</label>
+                                    : categoryChart === "2" ?
+                                        <Col span={8}>
+                                            <div className="group-search">
+                                                <div className="label-item">
+                                                    <label>Bắt đầu :</label>
+                                                </div>
+                                                <Select className="select" value={areaFromCate} onChange={(e) => {
+                                                    setAreaFromCate(e);
+                                                }} style={{ width: 160 }}  >
+                                                    {selectAreaFrom.map(item => {
+                                                        return <Select.Option key={item.id} value={item.value}>{item.label}</Select.Option>
+                                                    })}
+                                                </Select>
                                             </div>
-                                            <input type="text" className="input" />
-                                        </div>
-                                    </Col>
+                                        </Col>
+                                        :
+                                        <Col span={8}>
+                                            <div className="group-search">
+                                                <div className="label-item">
+                                                    <label>Bắt đầu :</label>
+                                                </div>
+                                                <Select className="select" value={priceFromCate} onChange={(e) => {
+                                                    setPriceFromCate(e);
+                                                }} style={{ width: 160 }}  >
+                                                    {selectPriceFrom.map(item => {
+                                                        return <Select.Option key={item.id} value={item.value}>{item.label}</Select.Option>
+                                                    })}
+                                                </Select>
+                                            </div>
+                                        </Col>
                                 }
 
                                 {categoryChart === "1" ?
                                     null
-                                    :
-                                    <Col span={8}>
-                                        <div className="group-search">
-                                            <div className="label-item">
-                                                <label>Kết thúc:</label>
+                                    : categoryChart === "2" ?
+                                        <Col span={8}>
+                                            <div className="group-search">
+                                                <div className="label-item">
+                                                    <label>Kết thúc:</label>
+                                                </div>
+                                                <Select className="select" value={areaToCate} onChange={(e) => {
+                                                    setAreaToCate(e);
+                                                }} style={{ width: 160 }}  >
+                                                    {selectAreaTo.map(item => {
+                                                        return <Select.Option key={item.id} value={item.value}>{item.label}</Select.Option>
+                                                    })}
+                                                </Select>
                                             </div>
-                                            <input type="text" className="input" />
-                                        </div>
-                                    </Col>
+                                        </Col>
+                                        :
+                                        <Col span={8}>
+                                            <div className="group-search">
+                                                <div className="label-item">
+                                                    <label>Kết thúc:</label>
+                                                </div>
+                                                <Select className="select" value={priceToCate} onChange={(e) => {
+                                                    setPriceToCate(e);
+                                                }} style={{ width: 160 }}  >
+                                                    {selectPriceTo.map(item => {
+                                                        return <Select.Option key={item.id} value={item.value}>{item.label}</Select.Option>
+                                                    })}
+                                                </Select>
+                                            </div>
+                                        </Col>
                                 }
 
                             </Row>
@@ -227,7 +406,13 @@ function Statistical(props) {
                                         <div className="label-item">
                                             <label>Tiêu chí :</label>
                                         </div>
-                                        <Select className="select" onChange={(e) => { setTarget(e); setTo(""); setFrom(""); }} value={target} style={{ width: 160 }} >
+                                        <Select className="select" onChange={(e) => {
+                                            setTarget(e);
+                                            setAreaFromTar("");
+                                            setAreaToTar("");
+                                            setPriceToTar("");
+                                            setPriceFromTar("");
+                                        }} value={target} style={{ width: 160 }} >
                                             {
                                                 targetChart.map(item => {
                                                     return <Select.Option key={item.id} value={item.id}>{item.title}</Select.Option>
@@ -238,32 +423,74 @@ function Statistical(props) {
                                 </Col>
                                 {target === "3" || target === "" ?
                                     null
-                                    :
-                                    <Col span={8}>
-                                        <div className="group-search">
-                                            <div className="label-item">
-                                                <label>Bắt đầu :</label>
+                                    : target === "2" ?
+                                        <Col span={8}>
+                                            <div className="group-search">
+                                                <div className="label-item">
+                                                    <label>Bắt đầu :</label>
+                                                </div>
+                                                <Select className="select" value={areaFromTar} onChange={(e) => {
+                                                    setAreaFromTar(e);
+                                                }} style={{ width: 160 }}  >
+                                                    {selectAreaFrom.map(item => {
+                                                        return <Select.Option key={item.id} value={item.value}>{item.label}</Select.Option>
+                                                    })}
+                                                </Select>
                                             </div>
-                                            <input type="text" value={from} onChange={(e) => { setFrom(e.target.value) }} className="input" />
-                                        </div>
-                                    </Col>
+                                        </Col>
+                                        :
+                                        <Col span={8}>
+                                            <div className="group-search">
+                                                <div className="label-item">
+                                                    <label>Bắt đầu :</label>
+                                                </div>
+                                                <Select className="select" value={priceFromTar} onChange={(e) => {
+                                                    setPriceFromTar(e);
+                                                }} style={{ width: 160 }}  >
+                                                    {selectPriceFrom.map(item => {
+                                                        return <Select.Option key={item.id} value={item.value}>{item.label}</Select.Option>
+                                                    })}
+                                                </Select>
+                                            </div>
+                                        </Col>
                                 }
                                 {target === "3" || target === "" ?
                                     null
-                                    :
-                                    <Col span={8}>
-                                        <div className="group-search">
-                                            <div className="label-item">
-                                                <label>Kết thúc:</label>
+                                    : target === "2" ?
+                                        <Col span={8}>
+                                            <div className="group-search">
+                                                <div className="label-item">
+                                                    <label>Kết thúc:</label>
+                                                </div>
+                                                <Select className="select" value={areaToTar} onChange={(e) => {
+                                                    setAreaToTar(e);
+                                                }} style={{ width: 160 }}  >
+                                                    {selectAreaTo.map(item => {
+                                                        return <Select.Option key={item.id} value={item.value}>{item.label}</Select.Option>
+                                                    })}
+                                                </Select>
                                             </div>
-                                            <input type="text" value={to} onChange={(e) => { setTo(e.target.value) }} className="input" />
-                                        </div>
-                                    </Col>
+                                        </Col>
+                                        :
+                                        <Col span={8}>
+                                            <div className="group-search">
+                                                <div className="label-item">
+                                                    <label>Kết thúc:</label>
+                                                </div>
+                                                <Select className="select" value={priceToTar} onChange={(e) => {
+                                                    setPriceToTar(e);
+                                                }} style={{ width: 160 }}  >
+                                                    {selectPriceTo.map(item => {
+                                                        return <Select.Option key={item.id} value={item.value}>{item.label}</Select.Option>
+                                                    })}
+                                                </Select>
+                                            </div>
+                                        </Col>
                                 }
                             </Row>
                         </Col>
                         <Col className="column-btn" span={6}>
-                            <button type="submit" className="btn-submit" onClick={changeArea}>Thống kê</button>
+                            <button type="submit" className="btn-submit" onClick={onCompare}>Thống kê</button>
                         </Col>
                     </Row>
                 </div>
@@ -347,35 +574,35 @@ function Statistical(props) {
                                 <i class="far fa-clipboard" style={{ color: "rgb(149,125,173)" }}></i>
                                 <div>
                                     <label>Số lượng bất động sản</label>
-                                    <p>12.000 BĐS</p>
+                                    <p>{listInfo.total_apartment ? listInfo.total_apartment : "Chưa cập nhật"}</p>
                                 </div>
                             </div>
                             <div className="group-item">
                                 <i class="far fa-money-bill-alt" style={{ color: "#61c7c7" }}></i>
                                 <div>
                                     <label>Tổng giá trị khu vực</label>
-                                    <p>279,125 tỷ VNĐ</p>
+                                    <p>{listInfo.total_price ? listInfo.total_price : "Chưa cập nhật"}</p>
                                 </div>
                             </div>
                             <div className="group-item">
                                 <i class="fas fa-coins" style={{ color: "#ffd673" }}></i>
                                 <div>
                                     <label>Giá trị trung bình</label>
-                                    <p>4,5 tỷ VNĐ</p>
+                                    <p>{listInfo.average_price ? listInfo.average_price : "Chưa cập nhật"}</p>
                                 </div>
                             </div>
                             <div className="group-item">
                                 <i class="fas fa-chart-area" style={{ color: "#ffa852" }}></i>
                                 <div>
                                     <label>Tổng diện tích khu vưc</label>
-                                    <p>657 nghìn m2</p>
+                                    <p>{listInfo.total_square ? listInfo.total_square : "Chưa cập nhật"}</p>
                                 </div>
                             </div>
                             <div className="group-item">
                                 <i class="fas fa-mountain" style={{ color: "#a6570a" }}></i>
                                 <div>
                                     <label>Diện tích trung bình</label>
-                                    <p>0,49 nghìn m2</p>
+                                    <p>{listInfo.average_square ? listInfo.average_square : "Chưa cập nhật"}</p>
                                 </div>
                             </div>
                         </div>
@@ -388,44 +615,63 @@ function Statistical(props) {
                     <Col span={8}>
                         <div className="group-rating">
                             <label >Bài đăng</label>
-                            <p ><span style={{ color: "#ffda81" }}>1st.</span> Vũng Tàu ( 15.000 BĐS )</p>
-                            <p ><span style={{ color: "#c1c3c4" }}>2nd.</span> Hồ Chí Minh ( 7.000 BĐS )</p>
-                            <p ><span style={{ color: "#754821" }}>3rd.</span> Hà Nội ( 5.500 BĐS )</p>
+                            <p ><span style={{ color: "#ffda81" }}>1st.</span> {listRank?.total_posts ? listRank?.total_posts[0] : "Chưa cập nhật"}</p>
+                            <p ><span style={{ color: "#c1c3c4" }}>2nd.</span> {listRank?.total_posts ? listRank?.total_posts[1] : "Chưa cập nhật"}</p>
+                            <p ><span style={{ color: "#754821" }}>3rd.</span>  {listRank?.total_posts ? listRank?.total_posts[2] : "Chưa cập nhật"}</p>
                         </div>
                     </Col>
                     <Col span={8}>
                         <div className="group-rating">
                             <label style={{ color: "#61c7c7" }}>Tổng giá trị</label>
-                            <p ><span style={{ color: "#ffda81" }}>1st.</span> Hồ Chí Minh ( 320 tỷ )</p>
-                            <p ><span style={{ color: "#c1c3c4" }}>2nd.</span> Vũng Tàu ( 400 tỷ )</p>
-                            <p ><span style={{ color: "#754821" }}>3rd.</span> Hà Nội ( 100 tỷ )</p>
+                            <p ><span style={{ color: "#ffda81" }}>1st.</span>  {listRank?.total_prices ? listRank?.total_prices[0] : "Chưa cập nhật"}</p>
+                            <p ><span style={{ color: "#c1c3c4" }}>2nd.</span>  {listRank?.total_prices ? listRank?.total_prices[1] : "Chưa cập nhật"}</p>
+                            <p ><span style={{ color: "#754821" }}>3rd.</span>  {listRank?.total_prices ? listRank?.total_prices[2] : "Chưa cập nhật"}</p>
                         </div>
                     </Col>
                     <Col span={8}>
                         <div className="group-rating">
                             <label style={{ color: "#ffa852" }}>Tổng diện tích</label>
-                            <p ><span style={{ color: "#ffda81" }}>1st.</span> Vũng Tàu ( 215.000 m2 )</p>
-                            <p ><span style={{ color: "#c1c3c4" }}>2nd.</span> Hồ Chí Minh ( 120.000 m2 )</p>
-                            <p ><span style={{ color: "#754821" }}>3rd.</span> Hà Nội ( 95.500 m2 )</p>
+                            <p ><span style={{ color: "#ffda81" }}>1st.</span> {listRank?.total_areas ? listRank?.total_areas[0] : "Chưa cập nhật"}</p>
+                            <p ><span style={{ color: "#c1c3c4" }}>2nd.</span> {listRank?.total_areas ? listRank?.total_areas[1] : "Chưa cập nhật"}</p>
+                            <p ><span style={{ color: "#754821" }}>3rd.</span> {listRank?.total_areas ? listRank?.total_areas[2] : "Chưa cập nhật"}</p>
                         </div>
                     </Col>
-                </Row>
-                <Row>
-                    <Col span={24}>
-                        <h1 style={{ textAlign: "center", fontWeight: "600", fontSize: "2.2rem", marginTop: "60px", marginBottom: "40px" }}>Một số bất động sản nổi bật</h1>
-                    </Col>
-                    <Col span={16}>
-                        <Col style={{ paddingBottom: "10px" }} span={24}>
-                            <ThumbnailExtra listLatestNew={listDemo2} />
-                        </Col>
-                        <Col span={24}>
-                            <ThumbnailExtra listLatestNew={listDemo3} />
-                        </Col>
-                    </Col>
-                    <Col span={8}>
-                        <ThumbnailPrimary listLatestNew={listDemo1} />
-                    </Col>
-                </Row>
+                </Row>\
+                {
+                    listHot.length >= 2 && listHot.length <= 3 ?
+                        listHot.length === 3 ?
+                            <Row>
+                                <Col span={24}>
+                                    <h1 style={{ textAlign: "center", fontWeight: "600", fontSize: "2.2rem", marginTop: "60px", marginBottom: "40px" }}>Một số bất động sản nổi bật liên quan đến thống kê</h1>
+                                </Col>
+                                <Col span={16}>
+                                    <Col style={{ paddingBottom: "10px" }} span={24}>
+                                        <ThumbnailExtra listLatestNew={listHot[0]} />
+                                    </Col>
+                                    <Col span={24}>
+                                        <ThumbnailExtra listLatestNew={listHot[1]} />
+                                    </Col>
+                                </Col>
+                                <Col span={8}>
+                                    <ThumbnailPrimary listLatestNew={listHot[2]} />
+                                </Col>
+                            </Row>
+                            :
+                            <Row>
+                                <Col span={24}>
+                                    <h1 style={{ textAlign: "center", fontWeight: "600", fontSize: "2.2rem", marginTop: "60px", marginBottom: "40px" }}>Một số bất động sản nổi bật liên quan đến thống kê</h1>
+                                </Col>
+                                <Col span={12}>
+                                    <ThumbnailPrimary listLatestNew={listHot[0]} />
+                                </Col>
+                                <Col span={12}>
+                                    <ThumbnailPrimary listLatestNew={listHot[1]} />
+                                </Col>
+                            </Row>
+                        :
+                        null
+                }
+
             </div>
         </div >
     );
