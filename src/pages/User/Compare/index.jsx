@@ -12,6 +12,9 @@ import { changeCompare } from '../../../actions/user';
 function Compare(props) {
 
     const [list, setList] = useState([])
+    const [rankFirst, setRankFirst] = useState({})
+    const [rankSecond, setRankSecond] = useState({})
+    const [rankThird, setRankThird] = useState({})
     const history = useHistory()
     const [token, setToken] = useState(localStorage.getItem('access_token'));
     const dispatch = useDispatch()
@@ -26,8 +29,81 @@ function Compare(props) {
         }
     }, [])
 
+    const calRank = (a, b) => {
+        var maxInNumbers = Math.max.apply(Math, a);
+        var minInNumbers = Math.min.apply(Math, a);
+        if (a.length === 2) {
+            if (b === maxInNumbers) {
+                if (b === minInNumbers)
+                    return 1;
+                else return 2;
+            } else return 0;
+        } else if (a.length === 3) {
+            if (a.filter(item => item === b).length === 3) {
+                return 1;
+            } else if (a.filter(item => item === b).length === 2) {
+                if (b === maxInNumbers) {
+                    return 2;
+                } else {
+                    return 0;
+                }
+            } else {
+                if (b === maxInNumbers) {
+                    return 2;
+                } else if (b === minInNumbers) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            }
+        }
+    }
+
     useEffect(() => {
         if (listDetailCompare.length >= 2 && list.length === 0) {
+            if (listDetailCompare.length === 2) {
+                setRankFirst({
+                    price: calRank([listDetailCompare[0].total_price, listDetailCompare[1].total_price], listDetailCompare[0].total_price),
+                    bath: calRank([listDetailCompare[0].bathroom_quantity, listDetailCompare[1].bathroom_quantity], listDetailCompare[0].bathroom_quantity),
+                    bed: calRank([listDetailCompare[0].bedroom_quantity, listDetailCompare[1].bedroom_quantity], listDetailCompare[0].bedroom_quantity),
+                    floor: calRank([listDetailCompare[0].floor_quantity, listDetailCompare[1].floor_quantity], listDetailCompare[0].floor_quantity),
+                    toilet: calRank([listDetailCompare[0].toilet_quantity, listDetailCompare[1].toilet_quantity], listDetailCompare[0].toilet_quantity),
+                    area: calRank([listDetailCompare[0].area, listDetailCompare[1].area], listDetailCompare[0].area),
+                });
+                setRankSecond({
+                    price: calRank([listDetailCompare[0].total_price, listDetailCompare[1].total_price], listDetailCompare[1].total_price),
+                    bath: calRank([listDetailCompare[0].bathroom_quantity, listDetailCompare[1].bathroom_quantity], listDetailCompare[1].bathroom_quantity),
+                    bed: calRank([listDetailCompare[0].bedroom_quantity, listDetailCompare[1].bedroom_quantity], listDetailCompare[1].bedroom_quantity),
+                    floor: calRank([listDetailCompare[0].floor_quantity, listDetailCompare[1].floor_quantity], listDetailCompare[1].floor_quantity),
+                    toilet: calRank([listDetailCompare[0].toilet_quantity, listDetailCompare[1].toilet_quantity], listDetailCompare[1].toilet_quantity),
+                    area: calRank([listDetailCompare[0].area, listDetailCompare[1].area], listDetailCompare[1].area),
+                });
+            } else if (listDetailCompare.length === 3) {
+                setRankFirst({
+                    price: calRank([listDetailCompare[0].total_price, listDetailCompare[1].total_price, listDetailCompare[2].total_price], listDetailCompare[0].total_price),
+                    bath: calRank([listDetailCompare[0].bathroom_quantity, listDetailCompare[1].bathroom_quantity, listDetailCompare[2].bathroom_quantity], listDetailCompare[0].bathroom_quantity),
+                    bed: calRank([listDetailCompare[0].bedroom_quantity, listDetailCompare[1].bedroom_quantity, listDetailCompare[2].bedroom_quantity], listDetailCompare[0].bedroom_quantity),
+                    floor: calRank([listDetailCompare[0].floor_quantity, listDetailCompare[1].floor_quantity, listDetailCompare[2].floor_quantity], listDetailCompare[0].floor_quantity),
+                    toilet: calRank([listDetailCompare[0].toilet_quantity, listDetailCompare[1].toilet_quantity, listDetailCompare[2].toilet_quantity], listDetailCompare[0].toilet_quantity),
+                    area: calRank([listDetailCompare[0].area, listDetailCompare[1].area, listDetailCompare[2].area], listDetailCompare[0].area),
+                });
+                setRankSecond({
+                    price: calRank([listDetailCompare[0].total_price, listDetailCompare[1].total_price, listDetailCompare[2].total_price], listDetailCompare[1].total_price),
+                    bath: calRank([listDetailCompare[0].bathroom_quantity, listDetailCompare[1].bathroom_quantity, listDetailCompare[2].bathroom_quantity], listDetailCompare[1].bathroom_quantity),
+                    bed: calRank([listDetailCompare[0].bedroom_quantity, listDetailCompare[1].bedroom_quantity, listDetailCompare[2].bedroom_quantity], listDetailCompare[1].bedroom_quantity),
+                    floor: calRank([listDetailCompare[0].floor_quantity, listDetailCompare[1].floor_quantity, listDetailCompare[2].floor_quantity], listDetailCompare[1].floor_quantity),
+                    toilet: calRank([listDetailCompare[0].toilet_quantity, listDetailCompare[1].toilet_quantity, listDetailCompare[2].toilet_quantity], listDetailCompare[1].toilet_quantity),
+                    area: calRank([listDetailCompare[0].area, listDetailCompare[1].area, listDetailCompare[2].area], listDetailCompare[1].area),
+                });
+                setRankThird({
+                    price: calRank([listDetailCompare[0].total_price, listDetailCompare[1].total_price, listDetailCompare[2].total_price], listDetailCompare[2].total_price),
+                    bath: calRank([listDetailCompare[0].bathroom_quantity, listDetailCompare[1].bathroom_quantity, listDetailCompare[2].bathroom_quantity], listDetailCompare[2].bathroom_quantity),
+                    bed: calRank([listDetailCompare[0].bedroom_quantity, listDetailCompare[1].bedroom_quantity, listDetailCompare[2].bedroom_quantity], listDetailCompare[2].bedroom_quantity),
+                    floor: calRank([listDetailCompare[0].floor_quantity, listDetailCompare[1].floor_quantity, listDetailCompare[2].floor_quantity], listDetailCompare[2].floor_quantity),
+                    toilet: calRank([listDetailCompare[0].toilet_quantity, listDetailCompare[1].toilet_quantity, listDetailCompare[2].toilet_quantity], listDetailCompare[2].toilet_quantity),
+                    area: calRank([listDetailCompare[0].area, listDetailCompare[1].area, listDetailCompare[2].area], listDetailCompare[2].area),
+                });
+            }
             setList(listDetailCompare);
         }
     }, [listDetailCompare])
@@ -62,22 +138,22 @@ function Compare(props) {
                 {list.length === 3 ?
                     <Row>
                         <Col span={8}>
-                            <CardCompare item={list[0]} />
+                            <CardCompare rank={rankFirst} item={list[0]} />
                         </Col>
                         <Col span={8}>
-                            <CardCompare item={list[1]} />
+                            <CardCompare rank={rankSecond} item={list[1]} />
                         </Col>
                         <Col span={8}>
-                            <CardCompare item={list[2]} />
+                            <CardCompare rank={rankThird} item={list[2]} />
                         </Col>
                     </Row>
                     : list.length === 2 ?
                         <Row>
                             <Col offset={1} span={10}>
-                                <CardCompare item={list[0]} />
+                                <CardCompare rank={rankFirst} item={list[0]} />
                             </Col>
                             <Col offset={2} span={10}>
-                                <CardCompare item={list[1]} />
+                                <CardCompare rank={rankSecond} item={list[1]} />
                             </Col>
 
                         </Row>
