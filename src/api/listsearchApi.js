@@ -17,3 +17,15 @@ export const listSearch = {
             )
     }
 }
+export const listSearchCompare = {
+
+    GET: () => {
+        return axios({
+            method: 'get',
+            data: null,
+            url: API_URL + '/public/apartment/search/all',
+        })
+            .then(res => res.data.data
+            )
+    }
+}

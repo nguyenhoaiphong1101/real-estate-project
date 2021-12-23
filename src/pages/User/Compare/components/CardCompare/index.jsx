@@ -1,17 +1,24 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { API_URL } from '../../../../../constants/Config';
 import "./styles.scss"
 
 function CardCompare(props) {
+    const history = useHistory();
+
+    const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
     return (
         <div className="card-compare">
             <div className="pricing-table">
                 <h2 className="pricing-table__header">{props.item.title}</h2>
                 <div className="card-img">
-                    <img className="img" src="http://nhadep.org.vn/uploads/weblink/products47033.png" />
+                    <img className="img" src={props.item.photos.length > 0 ? getPhotosImg(props.item.photos[0].name) : "http://nhadep.org.vn/uploads/weblink/products47033.png"} />
                 </div>
 
                 <h3 className={`pricing-table__price ${props.rank.price === 2 ? "low" : props.rank.price === 0 ? "high" : ""}`}>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.item.total_price)}</h3>
-                <a target="_blank" class="pricing-table__button" href="http://www.digimadmedia.com">
+                <a target="_blank" class="pricing-table__button" onClick={() => {
+                    history.push(`/chi-tiet/${props?.item?.id}`, props?.item)
+                }}>
                     Xem chi tiết
                 </a>
                 <ul class="pricing-table__list">

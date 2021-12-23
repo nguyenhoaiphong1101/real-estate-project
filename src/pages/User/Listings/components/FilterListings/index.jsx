@@ -233,6 +233,16 @@ function FilterListings(props) {
     }
     const token = localStorage.getItem('access_token');
 
+    const clearSearch = () => {
+        setValueCategory(null);
+        setValueDistrict(null);
+        setValueProvince(null);
+        setValuePrice(null);
+        setValueArea(null);
+        dispatch(loadProvince(0))
+        searchFilter(undefined, undefined, undefined, undefined, undefined, undefined)
+    }
+
     const searchFilter = async (valueCategory, valueProvince, valueDistrict, valuePrice, valueArea, inputSearch) => {
 
 
@@ -281,13 +291,12 @@ function FilterListings(props) {
                             </div>
                         </form>
                         <form className={`filter-listings-form ${filterHigh ? "show" : "none"}`}>
-
-                            <div className="form-group acr-custom-select">
+                            {/* <div className="form-group acr-custom-select">
                                 <SelectCustom title="Phường/ Xã" options={[]} />
                             </div>
                             <div className="form-group acr-custom-select">
                                 <SelectCustom title="Đường/ Phố" options={[]} />
-                            </div>
+                            </div> */}
 
                             <div className="form-group acr-custom-select">
                                 <SelectCustom title="Phòng ngủ" options={[]} />
@@ -296,14 +305,13 @@ function FilterListings(props) {
                                 <SelectCustom title="Hướng nhà" options={[]} />
                             </div>
                         </form>
-
                     </div>
                     <div className="filter-high">
                         <span onClick={() => { setFilterHigh(!filterHigh) }}>{filterHigh ? "Thu gọn tìm kiếm" : "Tìm kiếm nâng cao"} <i class={`fas ${filterHigh ? "fa-sort-up" : "fa-sort-down"}`}></i></span>
                     </div>
                     <div className="filter">
                         <ButtonSubmit value="Tìm kiếm" onClick={() => searchFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea)} icon="fas fa-filter" className="btn-submit" />
-                        <i class="fas fa-sync-alt icon"></i>
+                        <i onClick={clearSearch} class="fas fa-sync-alt icon"></i>
                     </div>
                 </Panel>
             </Collapse>

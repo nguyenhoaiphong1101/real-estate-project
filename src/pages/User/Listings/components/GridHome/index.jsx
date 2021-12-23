@@ -94,7 +94,7 @@ function GridHome(props) {
                 pageSize: 10,
                 total: totalItem,
             }}
-            dataSource={listDemo}
+            dataSource={listSearch}
             renderItem={item => (
                 <List.Item className="item"
                     key={item.id}

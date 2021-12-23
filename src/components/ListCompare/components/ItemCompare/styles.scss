@@ -40,4 +40,35 @@
 
 .modal-search {
     height: 300px;
+    .list {
+        border: 1px solid #d9d9d9;
+        margin-top: 5px;
+        height: 290px;
+        overflow-y: scroll;
+        .card-item {
+            padding: 10px;
+            margin-left: 5px;
+            margin-right: 5px;
+            border-bottom: 1px solid #d9d9d9;
+            p {
+                margin: 0;
+                color: #aaaaaa;
+                font-size: 14px;
+            }
+            .fl-center {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .title {
+                width: 100%;
+                font-size: 16px;
+                font-weight: 600px;
+                color: black;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+        }
+    }
 }
