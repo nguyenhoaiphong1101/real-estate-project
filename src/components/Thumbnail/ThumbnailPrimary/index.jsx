@@ -122,17 +122,21 @@ function ThumbnailPrimary(props) {
                         {props.listLatestNew?.type_apartment}
                     </span>
                     {token ?
-                        <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
+                        props.listLatestNew?.percent_suitable === undefined 
+                        ? 
+                        <span className={`listing-badge short-grey`} style={{ cursor: "default" }} title="Vui lòng cập nhật mục tiêu để xem độ phù hợp">
+                            <i class="fas fa-question"></i>
+                        </span>
+                        : <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
                             props.listLatestNew?.percent_suitable >= 30 && props.listLatestNew?.percent_suitable < 80 ? "medium" : "short"
                             }`} style={{ cursor: "default" }} title={`Mức độ phù hợp ${props.listLatestNew?.percent_suitable < 20 ? "< 20" : props.listLatestNew?.percent_suitable}%`}>
                             {props.listLatestNew?.percent_suitable < 20 ? "< 20" : props.listLatestNew?.percent_suitable}%
                         </span>
                         :
-                        <span className={`listing-badge short`} style={{ cursor: "default" }} title="Vui lòng đăng nhập để xem mức độ phù hợp">
+                        <span className={`listing-badge short-grey`} style={{ cursor: "default" }} title="Vui lòng đăng nhập để xem mức độ phù hợp">
                             <i class="fas fa-question"></i>
                         </span>
                     }
-
                 </div>
                 <div class="listing-controls" onClick={() => setFavorite()}>
                     <a class={isFavorite ? "favorite" : "un-favorite"}>
@@ -169,7 +173,6 @@ function ThumbnailPrimary(props) {
                 </h5>
                 <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
                 <p class="listing-text">{props.listLatestNew?.title}</p>
-                <p class="listing-text">Mức độ phù hợp: 60%</p>
                 <div class="acr-listing-icons">
                     <div class="acr-listing-icon">
                         <i class="flaticon-pillow"></i>

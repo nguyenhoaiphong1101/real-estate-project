@@ -178,8 +178,8 @@ function Statistical(props) {
             }
             if (categoryChart === "3") {
                 if (target === "3" && (priceToCate || priceToCate === 0) && (priceFromCate || priceFromCate === 0)) {
-                    if (priceToCate <= (priceFromCate === -1 ? 1100 : priceFromCate)) {
-                        message.error("Giá trị bắt đầu phải nhỏ hơn giá trị kết thúc !")
+                    if (priceFromCate >= (priceToCate === -1 ? 11000000000 : priceToCate)) {
+                        message.error("Giá trị bắt đầu phải nhỏ hơn giá trị kết thúc !" )
                         return;
                     } else {
                         params = {
