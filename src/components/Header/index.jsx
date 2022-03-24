@@ -145,7 +145,7 @@ function Header(props) {
                     //     </div>
                     // </div>
                     :
-                    <div className={`nav-wrapper ${shouldLogin !== '' ? shouldLogin : shouldScrollHeader ? `${topStyle}` : `${animation} ${topStyle}`}  ${topStyle}`}
+                    <div className={`nav-wrapper ${shouldLogin !== '' ? shouldLogin : shouldScrollHeader ? `${topStyle}` : `${animation} ${topStyle}`}  `}
                         //<div className={`nav-wrapper ${shouldScrollHeader ? '' : `${animation}`}  ${topStyle}`}
                         onMouseEnter={() => setAnimation('animation-header-appear')}
                         onMouseLeave={() => setAnimation('animation-header-disappear')}

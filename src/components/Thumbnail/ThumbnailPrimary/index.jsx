@@ -114,8 +114,8 @@ function ThumbnailPrimary(props) {
 
             <div className="listing__thumbnail" >
                 <a onClick={() => toDetailHome()}>
-                    <img className={`${props.classNameImg}`} src={image !== {} ? image?.url : ""} alt="listing" />
-                    {/* <img className={`${props.classNameImg}`} src="https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg" alt="listing" /> */}
+                    {/* <img className={`${props.classNameImg}`} src={image !== {} ? image?.url : ""} alt="listing" /> */}
+                    <img className={`${props.classNameImg}`} src="https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg" alt="listing" />
                 </a>
                 <div class="listing-badges">
                     <span style={{ cursor: "default" }} className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`}>

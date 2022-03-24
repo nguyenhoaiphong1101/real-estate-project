@@ -55,7 +55,7 @@ function Listings(props) {
                                 <Row style={{ marginBottom: "20px" }}>
                                     <Col offset={15} span={6} >
                                         <span >Sort by  </span>
-                                        <Select style={{ paddingRight: "5px" }} className="select" style={{ width: 120 }} defaultValue="ID" onChange={handleChange}>
+                                        <Select style={{ paddingRight: "5px", width: 120 }} className="select"  defaultValue="ID" onChange={handleChange}>
                                             <Option value="ID">Mặc định</Option>
                                             <Option value="AREA">Diện tích</Option>
                                             <Option value="TOTAL_PRICE">Giá tiền</Option>
