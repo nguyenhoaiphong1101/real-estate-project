@@ -21,7 +21,7 @@ import Statistical from "./pages/User/Statistical";
 import SubmitList from "./pages/User/SubmitList";
 import { useHistory } from 'react-router-dom';
 import "./styles.scss"
-import Chat from "./chat";
+import Chat from "./Chat";
 
 function App() {
 
