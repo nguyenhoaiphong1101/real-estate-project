@@ -1,29 +1,18 @@
 import React, { useEffect } from 'react';
 
 function Chat() {
-
-    // useEffect(() => {
-    //     (function(d, m){
-    //         var kommunicateSettings = 
-    //             {"appId":"2e3c57e246e8700b41b0fd9c5080864ce","popupWidget":true,"automaticChatOpenOnNavigation":true};
-    //         var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
-    //         s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-    //         var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
-    //         window.kommunicate = m; m._globals = kommunicateSettings;
-    //     })(document, window.kommunicate || {});
-    // }, [])
-
     return (
        <div>
             <div class="text-center">
                 <h1>Chatbot Integration</h1>
             </div>
             <df-messenger
-  intent="WELCOME"
-  chat-title="ChatBot"
-  agent-id="2bf67365-63ed-41d5-baba-281029162464"
-  language-code="vi"
-></df-messenger>
+                intent="WELCOME"
+                chat-title="Auto Smart Bot"
+                agent-id="2bf67365-63ed-41d5-baba-281029162464"
+                language-code="vi"
+                chat-icon="https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png"
+             ></df-messenger>
        </div>
     );
 }
