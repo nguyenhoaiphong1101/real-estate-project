@@ -16,12 +16,12 @@ function CardCompare(props) {
                 </div>
 
                 <h3 className={`pricing-table__price ${props.rank.price === 2 ? "low" : props.rank.price === 0 ? "high" : ""}`}>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.item.total_price)}</h3>
-                <a target="_blank" class="pricing-table__button" onClick={() => {
+                <a target="_blank" className="pricing-table__button" onClick={() => {
                     history.push(`/chi-tiet/${props?.item?.id}`, props?.item)
                 }}>
                     Xem chi tiết
                 </a>
-                <ul class="pricing-table__list">
+                <ul className="pricing-table__list">
                     <li>Địa chỉ: {props.item?.address}</li>
                     <li>Thể loại: {props.item?.category_name}</li>
                     <li className={props.rank.bed === 2 ? "high" : props.rank.bed === 0 ? "low" : ""}>Phòng ngủ: {props.item?.bedroom_quantity}</li>

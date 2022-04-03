@@ -34,8 +34,8 @@ function SectionTopList() {
         <div className="section-top-list">
             <div className="container">
                 <div className="title-wrapper">
-                    <h5 class="sub-title">Nổi bật</h5>
-                    <h2 class="title">Danh sách nổi bật của chúng tôi</h2>
+                    <h5 className="sub-title">Nổi bật</h5>
+                    <h2 className="title">Danh sách nổi bật của chúng tôi</h2>
                 </div>
                 <div className="slider">
                     <div className="arrows">

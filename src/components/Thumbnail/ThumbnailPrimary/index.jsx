@@ -117,7 +117,7 @@ function ThumbnailPrimary(props) {
                     {/* <img className={`${props.classNameImg}`} src={image !== {} ? image?.url : ""} alt="listing" /> */}
                     <img className={`${props.classNameImg}`} src="https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg" alt="listing" />
                 </a>
-                <div class="listing-badges">
+                <div className="listing-badges">
                     <span style={{ cursor: "default" }} className={`listing-badge ${props.listLatestNew?.status === "OPEN" ? "sale" : props.listLatestNew?.status === "PENDING" ? "sale-pending" : "sale-close"}`}>
                         {props.listLatestNew?.type_apartment}
                     </span>
@@ -125,7 +125,7 @@ function ThumbnailPrimary(props) {
                         props.listLatestNew?.percent_suitable === undefined 
                         ? 
                         <span className={`listing-badge short-grey`} style={{ cursor: "default" }} title="Vui lòng cập nhật mục tiêu để xem độ phù hợp">
-                            <i class="fas fa-question"></i>
+                            <i className="fas fa-question"></i>
                         </span>
                         : <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
                             props.listLatestNew?.percent_suitable >= 30 && props.listLatestNew?.percent_suitable < 80 ? "medium" : "short"
@@ -134,13 +134,13 @@ function ThumbnailPrimary(props) {
                         </span>
                         :
                         <span className={`listing-badge short-grey`} style={{ cursor: "default" }} title="Vui lòng đăng nhập để xem mức độ phù hợp">
-                            <i class="fas fa-question"></i>
+                            <i className="fas fa-question"></i>
                         </span>
                     }
                 </div>
-                <div class="listing-controls" onClick={() => setFavorite()}>
-                    <a class={isFavorite ? "favorite" : "un-favorite"}>
-                        <i class="far fa-heart"></i>
+                <div className="listing-controls" onClick={() => setFavorite()}>
+                    <a className={isFavorite ? "favorite" : "un-favorite"}>
+                        <i className="far fa-heart"></i>
                     </a>
                 </div>
             </div>
@@ -166,30 +166,30 @@ function ThumbnailPrimary(props) {
                         </Popover>
                     </div>
                 </div>
-                <h5 class="listing-title" onClick={() => toDetailHome()}>
+                <h5 className="listing-title" onClick={() => toDetailHome()}>
                     <p title="Iris Watson, Frederick Nebraska 20620">
                         {props.listLatestNew?.address}
                     </p>
                 </h5>
-                <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
-                <p class="listing-text">{props.listLatestNew?.title}</p>
-                <div class="acr-listing-icons">
-                    <div class="acr-listing-icon">
-                        <i class="flaticon-pillow"></i>
-                        <span class="acr-listing-icon-value">{props.listLatestNew?.bedroom_quantity}</span>
+                <span className="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
+                <p className="listing-text">{props.listLatestNew?.title}</p>
+                <div className="acr-listing-icons">
+                    <div className="acr-listing-icon">
+                        <i className="flaticon-pillow"></i>
+                        <span className="acr-listing-icon-value">{props.listLatestNew?.bedroom_quantity}</span>
                     </div>
-                    <div class="acr-listing-icon">
-                        <i class="flaticon-bathtub"></i>
-                        <span class="acr-listing-icon-value">{props.listLatestNew?.bathroom_quantity}</span>
+                    <div className="acr-listing-icon">
+                        <i className="flaticon-bathtub"></i>
+                        <span className="acr-listing-icon-value">{props.listLatestNew?.bathroom_quantity}</span>
                     </div>
-                    <div class="acr-listing-icon">
-                        <i class="flaticon-ruler"></i>
-                        <span class="acr-listing-icon-value">{props.listLatestNew?.area}</span>
+                    <div className="acr-listing-icon">
+                        <i className="flaticon-ruler"></i>
+                        <span className="acr-listing-icon-value">{props.listLatestNew?.area}</span>
                     </div>
                 </div>
-                <div class="listing-gallery-wrapper">
+                <div className="listing-gallery-wrapper">
                     <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
-                    <span onClick={addCompare} style={isCompare ? { color: "#ccc ", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
+                    <span onClick={addCompare} style={isCompare ? { color: "#ccc ", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} className="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
                 </div>
             </div>
         </div>

@@ -2,10 +2,7 @@ import { Select, Input } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { loadProvince } from '../../actions/search';
 
-import { searchCity } from '../../api/searchApi';
-import Button from '../Button';
 import './styles.scss';
 const { Option } = Select;
 const DisplayContainer = ({ title, value }) => {
@@ -33,7 +30,6 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
     const [currentValue, setCurrentValue] = useState();
     const [valueSearch, setValueSearch] = useState('');
 
-    const [isReset, setIsReset] = useState(false)
 
     const [items, setItems] = useState([]);
     const inputRef = useRef(null);
@@ -118,10 +114,10 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
                 {items.map((item, index) => {
                     return (<Option value={item.name} key={item.id}>
                         {item.name}
-                        {/* <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} /> */}
+                        <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} />
                     </Option>)
                 })}
-                {/* <Option className="input-wrapper" key=''>
+                <Option className="input-wrapper" key=''>
                     <Input placeholder="Search"
                         value={valueSearch}
                         ref={inputRef}
@@ -135,7 +131,7 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
                             <DisplayItem value={item.name} lastchild={index == items.length - 1 ? 'last-child' : ''} />
                         </Option>
                     );
-                })} */}
+                })}
             </Select>
         </div >
     );

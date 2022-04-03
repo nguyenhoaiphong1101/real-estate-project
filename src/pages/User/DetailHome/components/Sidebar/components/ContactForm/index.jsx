@@ -11,9 +11,9 @@ function ContactForm() {
     const content = (
         <div className="popup-content-wrapper">
             <ul className="popup-content">
-                <li><i class="fas fa-phone"></i>Call Agent</li>
-                <li><i class="fas fa-th-list"></i>Send Message</li>
-                <li><i class="fas fa-star"></i>Book Tour</li>
+                <li><i className="fas fa-phone"></i>Call Agent</li>
+                <li><i className="fas fa-th-list"></i>Send Message</li>
+                <li><i className="fas fa-star"></i>Book Tour</li>
             </ul>
         </div>
 

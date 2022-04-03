@@ -50,20 +50,20 @@ function ThumbnailSecondary(props) {
     }, [props?.listLatestNew]);
 
     return (
-        <div class="listing listing-secondary">
-            <div class="listing-thumbnail">
+        <div className="listing listing-secondary">
+            <div className="listing-thumbnail">
                 <a>
                     <img src={image[0]?.url} alt="listing" onClick={() => toDetailHome()} />
                 </a>
             </div>
-            <div class="listing-body">
-                <h6 class="listing-title">
+            <div className="listing-body">
+                <h6 className="listing-title">
                     <a title="Iris Watson, Frederick Nebraska 20620" onClick={() => toDetailHome()}>
                         {props.listLatestNew?.address}</a>
                 </h6>
                 <div className='flex-compare'>
-                    <span class="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
-                    <span onClick={addCompare} style={isCompare ? { color: "#ccc", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
+                    <span className="listing-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)}</span>
+                    <span onClick={addCompare} style={isCompare ? { color: "#ccc", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} className="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
                 </div>
             </div>
         </div>

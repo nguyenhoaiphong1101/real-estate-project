@@ -571,35 +571,35 @@ function Statistical(props) {
                     <Col span={6}>
                         <div className="right-chart">
                             <div className="group-item">
-                                <i class="far fa-clipboard" style={{ color: "rgb(149,125,173)" }}></i>
+                                <i className="far fa-clipboard" style={{ color: "rgb(149,125,173)" }}></i>
                                 <div>
                                     <label>Số lượng bất động sản</label>
                                     <p>{listInfo.total_apartment ? listInfo.total_apartment : "Chưa cập nhật"}</p>
                                 </div>
                             </div>
                             <div className="group-item">
-                                <i class="far fa-money-bill-alt" style={{ color: "#61c7c7" }}></i>
+                                <i className="far fa-money-bill-alt" style={{ color: "#61c7c7" }}></i>
                                 <div>
                                     <label>Tổng giá trị khu vực</label>
                                     <p>{listInfo.total_price ? listInfo.total_price : "Chưa cập nhật"}</p>
                                 </div>
                             </div>
                             <div className="group-item">
-                                <i class="fas fa-coins" style={{ color: "#ffd673" }}></i>
+                                <i className="fas fa-coins" style={{ color: "#ffd673" }}></i>
                                 <div>
                                     <label>Giá trị trung bình</label>
                                     <p>{listInfo.average_price ? listInfo.average_price : "Chưa cập nhật"}</p>
                                 </div>
                             </div>
                             <div className="group-item">
-                                <i class="fas fa-chart-area" style={{ color: "#ffa852" }}></i>
+                                <i className="fas fa-chart-area" style={{ color: "#ffa852" }}></i>
                                 <div>
                                     <label>Tổng diện tích khu vưc</label>
                                     <p>{listInfo.total_square ? listInfo.total_square : "Chưa cập nhật"}</p>
                                 </div>
                             </div>
                             <div className="group-item">
-                                <i class="fas fa-mountain" style={{ color: "#a6570a" }}></i>
+                                <i className="fas fa-mountain" style={{ color: "#a6570a" }}></i>
                                 <div>
                                     <label>Diện tích trung bình</label>
                                     <p>{listInfo.average_square ? listInfo.average_square : "Chưa cập nhật"}</p>

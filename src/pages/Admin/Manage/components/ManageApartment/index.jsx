@@ -64,7 +64,7 @@ function ManageApartment(props) {
             dataIndex: 'is_highlight',
             key: 'id',
             width: 78,
-            render: (text, record) => record?.is_highlight ? <i style={{ color: 'yellow', cursor: "pointer" }} onClick={() => changeHighlight(record)} class="fas fa-star"></i> : <i onClick={() => changeHighlight(record)} style={{ color: 'yellow', cursor: "pointer" }} class="far fa-star"></i>
+            render: (text, record) => record?.is_highlight ? <i style={{ color: 'yellow', cursor: "pointer" }} onClick={() => changeHighlight(record)} className="fas fa-star"></i> : <i onClick={() => changeHighlight(record)} style={{ color: 'yellow', cursor: "pointer" }} className="far fa-star"></i>
         },
         {
             title: 'Trạng thái',

@@ -75,7 +75,7 @@ function Listings(props) {
                                         <ListHome typeListing={props.title} sortBy={sortBy} sortDirection={sortDirection} />
                                     </TabPane>
                                     <TabPane tab={
-                                        <i class="fas fa-th-large"></i>
+                                        <i className="fas fa-th-large"></i>
                                     } key="2">
                                         <GridHome typeListing={props.title} sortBy={sortBy} sortDirection={sortDirection} />
                                     </TabPane>

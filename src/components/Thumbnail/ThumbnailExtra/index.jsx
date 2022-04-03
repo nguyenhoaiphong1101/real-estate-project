@@ -136,7 +136,7 @@ function ThumbnailExtra(props) {
                         props.listLatestNew?.percent_suitable === undefined 
                         ? 
                         <span className={`listing-badge short-grey`} style={{ cursor: "default" }} title="Vui lòng cập nhật mục tiêu để xem độ phù hợp">
-                            <i class="fas fa-question"></i>
+                            <i className="fas fa-question"></i>
                         </span>
                         : <span className={`listing-badge ${props.listLatestNew?.percent_suitable >= 80 ? "sale" :
                             props.listLatestNew?.percent_suitable >= 30 && props.listLatestNew?.percent_suitable < 80 ? "medium" : "short"
@@ -145,7 +145,7 @@ function ThumbnailExtra(props) {
                         </span>
                         :
                         <span className={`listing-badge short-grey`} style={{ cursor: "default" }} title="Vui lòng đăng nhập để xem mức độ phù hợp">
-                            <i class="fas fa-question"></i>
+                            <i className="fas fa-question"></i>
                         </span>
                     }
                     <br />
@@ -160,9 +160,9 @@ function ThumbnailExtra(props) {
                         {props.listLatestNew?.status}
                     </span> */}
                 </div>
-                <div class="listing-controls" onClick={() => setFavorite()}>
-                    <a class={isFavorite ? "favorite" : "un-favorite"}>
-                        <i class="far fa-heart"></i>
+                <div className="listing-controls" onClick={() => setFavorite()}>
+                    <a className={isFavorite ? "favorite" : "un-favorite"}>
+                        <i className="far fa-heart"></i>
                     </a>
                 </div>
             </div>
@@ -216,7 +216,7 @@ function ThumbnailExtra(props) {
                     :
                     <div className="listing-gallery-wrapper">
                         <Button value="Xem chi tiết" className="view-detail" onClick={() => toDetailHome()}></Button>
-                        <span onClick={addCompare} style={isCompare ? { color: "#ccc", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
+                        <span onClick={addCompare} style={isCompare ? { color: "#ccc", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} className="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
                     </div>
                 }
                 {/* {history.location.pathname === '/trang-ca-nhan' ?

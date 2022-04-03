@@ -49,7 +49,7 @@ function AdminMenu(props) {
                         Quản lý thể loại
                     </Link>
                 </Menu.Item>
-                <div class="separator-custom"></div>
+                <div className="separator-custom"></div>
                 {/* <SubMenu key="sub1" icon={<ContainerOutlined />} title="Cài Đặt">
                     <Menu.Item key="5">
                         <Link to="/admin">

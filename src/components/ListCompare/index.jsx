@@ -68,12 +68,12 @@ function ListCompare(props) {
         <div>
             {collapse ?
                 <div className="list-mini">
-                    <p className="title" onClick={isCollapse}>So sánh ({listCompare.length}) <i class="fas fa-angle-right"></i></p>
+                    <p className="title" onClick={isCollapse}>So sánh ({listCompare.length}) <i className="fas fa-angle-right"></i></p>
                 </div>
                 :
                 <div className="list-compare">
                     <div className="button-collapse" onClick={isCollapse}>
-                        Thu gọn <i class="fas fa-angle-down"></i>
+                        Thu gọn <i className="fas fa-angle-down"></i>
                     </div>
                     <Row className="cart">
                         <Col span={6}>

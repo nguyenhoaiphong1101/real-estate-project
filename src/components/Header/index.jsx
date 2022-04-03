@@ -4,7 +4,6 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import './styles.scss';
 
 import useDocumentScroll from './../../hooks/useDocumentScroll'
-import jwtDecode from 'jwt-decode';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInfoUser, resetUser } from '../../actions/user';
 import { resetDetail } from '../../actions/detailhome';
@@ -42,11 +41,6 @@ function Header(props) {
             dispatch(getInfoUser())
         }
     }, [token]);
-
-
-
-
-
 
     const checkLogin = () => {
         if (token == null) {

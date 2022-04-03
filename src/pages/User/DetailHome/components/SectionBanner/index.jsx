@@ -13,7 +13,7 @@ function SectionBanner() {
                         <span className={`listing-badge-status ${detailHome?.status === "OPEN" ? 'open' : detailHome?.status === "PENDING" ? 'pending' : 'close'}`}>{detailHome?.status}</span>
                         <h1 className="title">{detailHome?.title}</h1>
                         <span className="address">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i className="fas fa-map-marker-alt"></i>
                             {detailHome?.address}
                         </span>
                     </div>

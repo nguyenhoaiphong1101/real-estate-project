@@ -33,13 +33,13 @@ function ItemCompare(props) {
         <>
             {props.item ?
                 <div className="item-compare">
-                    <i class="icon fas fa-times" onClick={detele}></i>
+                    <i className="icon fas fa-times" onClick={detele}></i>
                     <img className="img" alt='hình' src={props.item.photos.length > 0 ? getPhotosImg(props.item.photos[0].name) : "https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg"}></img>
                     <p className="title">{props.item.title}</p>
                 </div>
                 :
                 <div className="item-compare">
-                    <i class="icon-add far fa-plus-square" onClick={() => { setVisible(true) }}></i>
+                    <i className="icon-add far fa-plus-square" onClick={() => { setVisible(true) }}></i>
                     <p className="title-add">Thêm sản phẩm</p>
                 </div>
             }
@@ -101,7 +101,7 @@ function ItemModal({ item }) {
                 <p>Giá: {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(item.total_price)} ({item.area}m2)</p>
             </Col>
             <Col className='fl-center' span={6}>
-                <span onClick={addCompare} style={isCompare ? { color: "#ccc ", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
+                <span onClick={addCompare} style={isCompare ? { color: "#ccc ", cursor: "default" } : { color: "#0088a9", cursor: "pointer" }}><i style={{ fontSize: "12px" }} className="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
             </Col>
         </Row>
     );

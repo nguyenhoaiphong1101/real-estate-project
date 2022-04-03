@@ -1,0 +1,101 @@
+.filter {
+  background-color: #fff;
+  padding: 10px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+
+  .input-search {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: 0.2s;
+    padding: 10px;
+    margin-left: 8px;
+
+    i {
+      margin: auto;
+      color: #726e75;
+    }
+    .text-input {
+      border: 0;
+      background-color: transparent;
+    }
+
+    .text-input:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  .col-filter {
+    padding: 0 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-filter {
+    border-radius: 24px;
+    width: 100%;
+    padding: 10px 16px;
+    height: auto;
+    border: 0;
+    box-shadow: none;
+    i {
+      margin-right: 5px;
+      font-size: 12px;
+    }
+  }
+
+  .btn-filter:hover {
+    color: rgba(0, 0, 0, 0.85);
+    background-color: #f6f5f7;
+  }
+
+  .btn-filter:focus {
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  .btn-search {
+    border-radius: 24px;
+    width: 100%;
+    padding: 10px 16px;
+    height: auto;
+    border: 0;
+    background-color: #01bbbc;
+    color: #fff;
+  }
+
+  .btn-search:hover,
+  .btn-search:focus {
+    background-color: #01bbbc;
+    color: #fff;
+  }
+
+  .input-search:hover {
+    background-color: #f6f5f7;
+  }
+
+  .ant-tabs-nav {
+    width: 100% !important;
+  }
+
+  .ant-tabs-tab:hover {
+    color: #01bbbc;
+  }
+
+  .ant-tabs-tab {
+    display: block;
+    flex: 1;
+    text-align: center;
+    margin: 0;
+  }
+
+  .filter-tab {
+    margin: 0;
+  }
+
+  .ant-tabs-nav > div:nth-of-type(1) {
+    display: unset !important;
+    width: 100% !important;
+  }
+}

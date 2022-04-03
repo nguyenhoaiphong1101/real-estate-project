@@ -11,7 +11,7 @@ function SectionPriceRange() {
             <div className="section-price">
                 <span style={{left:`${detailHome?.total_price/100000000000*100}%`}} className="current-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(detailHome?.total_price)}</span>
                 <div className="progress">
-                    <div class="progress-bar"></div>
+                    <div className="progress-bar"></div>
                 </div>
                 <div className="area-price">
                     <div className="price-min">

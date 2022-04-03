@@ -52,7 +52,7 @@ function ThumbnailRecomend(props) {
                 <br />
                 <span>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.list?.total_price)}</span>
                 <br />
-                <span onClick={addCompare} className='hoverCompare' style={isCompare ? { color: "#fff ", cursor: "default" } : { color: "#fff", cursor: "pointer" }}><i style={{ fontSize: "12px" }} class="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
+                <span onClick={addCompare} className='hoverCompare' style={isCompare ? { color: "#fff ", cursor: "default" } : { color: "#fff", cursor: "pointer" }}><i style={{ fontSize: "12px" }} className="fas fa-plus"></i> {isCompare ? 'Đã so sánh' : 'So sánh'}</span>
             </div>
         </div>
 

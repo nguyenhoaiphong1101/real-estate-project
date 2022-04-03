@@ -307,11 +307,11 @@ function FilterListings(props) {
                         </form>
                     </div>
                     <div className="filter-high">
-                        <span onClick={() => { setFilterHigh(!filterHigh) }}>{filterHigh ? "Thu gọn tìm kiếm" : "Tìm kiếm nâng cao"} <i class={`fas ${filterHigh ? "fa-sort-up" : "fa-sort-down"}`}></i></span>
+                        <span onClick={() => { setFilterHigh(!filterHigh) }}>{filterHigh ? "Thu gọn tìm kiếm" : "Tìm kiếm nâng cao"} <i className={`fas ${filterHigh ? "fa-sort-up" : "fa-sort-down"}`}></i></span>
                     </div>
                     <div className="filter">
                         <ButtonSubmit value="Tìm kiếm" onClick={() => searchFilter(valueCategory, valueProvince, valueDistrict, valuePrice, valueArea)} icon="fas fa-filter" className="btn-submit" />
-                        <i onClick={clearSearch} class="fas fa-sync-alt icon"></i>
+                        <i onClick={clearSearch} className="fas fa-sync-alt icon"></i>
                     </div>
                 </Panel>
             </Collapse>
