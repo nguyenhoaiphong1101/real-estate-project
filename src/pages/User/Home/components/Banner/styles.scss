@@ -1,7 +1,7 @@
 .banner-home {
   background-image: url("http://androthemes.com/themes/react/acres/assets/img/banner/3.jpg");
   position: relative;
-  padding: 130px 0 100px;
+  padding: 130px 0 50px;
   background-position: 50%;
   background-size: cover;
   z-index: 1;
@@ -16,6 +16,7 @@
     }
     .card-filter {
       margin-top: 30px;
+      padding: 0 40px;
     }
   }
 
@@ -30,7 +31,6 @@
     max-width: 1140px;
     margin: auto;
     margin-top: 85px;
-    padding-bottom: 85px;
   }
   .banner-item {
     position: relative;

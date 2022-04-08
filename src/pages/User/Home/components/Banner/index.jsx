@@ -263,8 +263,9 @@ function Banner() {
         </div>
         <div className="banner-filter">
           <div className="title-search">Tìm kiếm thông tin sản phẩm</div>
-          <div className="card-filter"></div>
-          <Filter />
+          <div className="card-filter">
+            <Filter />
+          </div>
         </div>
       </div>
     </div>

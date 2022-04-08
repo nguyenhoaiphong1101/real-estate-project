@@ -8,7 +8,8 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
 * {
@@ -30,10 +31,16 @@ body {
   max-width: 100%;
   overflow-x: hidden;
 }
-.loading{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    padding-bottom: 7%;
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding-bottom: 7%;
+}
+
+.select-custom > .ant-select-selector {
+  padding: 10px !important;
+  height: auto !important;
+  border-radius: 8px !important;
 }

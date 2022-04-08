@@ -1,108 +1,82 @@
-.container {
-    max-width: 1140px;
-    margin: auto;
-}
+.category {
+  .title {
+    font-size: 1.5em;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    font-weight: 800;
+  }
+  .list-project-fe {
+    position: relative;
+    width: 100%;
+    height: 700px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+  }
 
+  .list-project-fe .column {
+    position: relative;
+    width: 20vw;
+    height: 100%;
+    border-left: 1px solid #fff;
+    transition: all 0.4s;
+  }
 
-.title-category {
-    h5 {
-        color: #519fff;
-        font-weight: bold;
-        font-size: 18px;
-    }
-    h2 {
-        font-size: 42px;
-        line-height: 50px;
-        font-weight: bold;
-    }
-}
-.category-section {
-    margin-top: 20px;
-    .category {
-        margin-top: 30px;
-        transition: 0.3s;
+  .list-project-fe .column img {
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+  }
 
-        .category-item {
-            position: relative;
-            transition: 0.3s;
+  .list-project-fe .column a {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
 
-            .recomend-img {
-                cursor: pointer;
-                // background-image: url('../../../../../assets/images/Category/1.jpg');
-                border-radius: 4px;
-                max-width: 100%;
-                height: 250px;
-                background-size: cover;
-                &-0 {
-                    background-image: url('../../../../../assets/images/Category/1.jpg');
-                }
-                &-1 {
-                    background-image: url('../../../../../assets/images/Category/2.jpg');
-                }
-                &-2 {
-                    background-image: url('../../../../../assets/images/Category/3.jpg');
-                }
-                &-3 {
-                    background-image: url('../../../../../assets/images/Category/4.jpg');
-                }
-                &-4 {
-                    background-image: url('../../../../../assets/images/Category/5.jpg');
-                }
-                &-5 {
-                    background-image: url('../../../../../assets/images/Category/6.jpg');
-                }
-                &-6 {
-                    background-image: url('../../../../../assets/images/Category/7.jpg');
-                }
-                &-7 {
-                    background-image: url('../../../../../assets/images/Category/8.jpg');
-                }
-                &-8 {
-                    background-image: url('../../../../../assets/images/Category/9.jpg');
-                }
-                
-            }
+  .list-project-fe .column a:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0.8;
+    z-index: 9;
+    left: 0;
+  }
 
-            // img {
-            //     border-radius: 8px;
-            //     max-width: 100%;
-            //     height: auto;
-            // }
+  .list-project-fe .column span {
+    position: absolute;
+    bottom: 50px;
+    left: 40px;
+    z-index: 99;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 200;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    transform-origin: left;
+    transition: all 0.4s;
+    width: max-content;
+    word-break: keep-all;
+  }
 
-            .category-item-body {
-                position: absolute;
-                background-color: hsla(0, 0%, 100%, 0.9);
-                transition: 0.3s;
-                bottom: 0;
-                left: 0;
-                padding: 20px;
-                border-radius: 8px;
-                width: calc(100% - 20px);
-                margin: 10px;
+  .list-project-fe .column:hover {
+    width: 60vw;
+  }
 
-                h5 {
-                    font-size: 18px;
-                    font-weight: bold;
-                    background-color: hsla(0, 0%, 100%, 0);
-                    margin-bottom: 0;
-                    a {
-                        color: black;
-                        transition: 0.3s;
-                    }
-                    a:hover {
-                        color: #519fff;
-                    }
-                }
-
-                span {
-                    font-weight: bold;
-                    background-color: hsla(0, 0%, 100%, 0);
-                    color: #848486;
-                }
-            }
-        }
-        .category-item:hover {
-            margin-top: -10px;
-        }
-    }
+  .list-project-fe .column:hover span {
+    left: 80px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
 }
