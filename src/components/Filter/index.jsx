@@ -11,6 +11,7 @@ import {
   Radio,
   Select,
 } from "antd";
+import { acreage, price, quantity } from "../../constants/Config";
 
 const { TabPane } = Tabs;
 
@@ -130,46 +131,26 @@ function Filter(props) {
               </Row>
             </div>
             <div className="group-filter">
-              <div className="label">Diện tích</div>
               <Row>
                 <Col span={11}>
+                  <div className="label">Diện tích</div>
+
                   <Form.Item name="min-area">
                     <Select
                       className="select-custom"
                       placeholder="Từ"
-                      options={[]}
+                      options={acreage}
                     />
                   </Form.Item>
                 </Col>
                 <Col offset={2} span={11}>
+                  <div className="label">Giá tiền</div>
+
                   <Form.Item name="max-area">
                     <Select
                       className="select-custom"
                       placeholder="Đến"
-                      options={[]}
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
-            </div>
-            <div className="group-filter">
-              <div className="label">Giá tiền</div>
-              <Row>
-                <Col span={11}>
-                  <Form.Item name="min-price">
-                    <Select
-                      className="select-custom"
-                      placeholder="Từ"
-                      options={[]}
-                    />
-                  </Form.Item>
-                </Col>
-                <Col offset={2} span={11}>
-                  <Form.Item name="max-price">
-                    <Select
-                      className="select-custom"
-                      placeholder="Đến"
-                      options={[]}
+                      options={price}
                     />
                   </Form.Item>
                 </Col>
@@ -181,32 +162,36 @@ function Filter(props) {
                 <Col span={11}>
                   <Form.Item name="bedroom">
                     <Select
+                      allowClear
                       placeholder="Số lượng phòng ngủ"
                       className="select-custom"
-                      options={[]}
+                      options={quantity}
                     />
                   </Form.Item>
                   <Form.Item name="toilet">
                     <Select
+                      allowClear
                       placeholder="Số lượng nhà vệ sinh"
                       className="select-custom"
-                      options={[]}
+                      options={quantity}
                     />
                   </Form.Item>
                 </Col>
                 <Col offset={2} span={11}>
                   <Form.Item name="bathroom">
                     <Select
+                      allowClear
                       placeholder="Số lượng phòng tắm"
                       className="select-custom"
-                      options={[]}
+                      options={quantity}
                     />
                   </Form.Item>
                   <Form.Item name="floor">
                     <Select
+                      allowClear
                       placeholder="Số lượng tầng"
                       className="select-custom"
-                      options={[]}
+                      options={quantity}
                     />
                   </Form.Item>
                 </Col>

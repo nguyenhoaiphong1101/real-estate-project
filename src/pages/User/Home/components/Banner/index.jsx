@@ -14,138 +14,6 @@ import Filter from "../../../../../components/Filter";
 
 const { TabPane } = Tabs;
 
-const price = [
-  {
-    id: 2,
-    name: "< 500 triệu",
-    from: 0,
-    to: 500000000,
-  },
-  {
-    id: 3,
-    name: "500 - 800 triệu",
-    from: 500000000,
-    to: 800000000,
-  },
-  {
-    id: 4,
-    name: "800 triệu - 1 tỷ",
-    from: 800000000,
-    to: 1000000000,
-  },
-  {
-    id: 5,
-    name: "1 - 2 tỷ",
-    from: 1000000000,
-    to: 2000000000,
-  },
-  {
-    id: 6,
-    name: "2 - 3 tỷ",
-    from: 2000000000,
-    to: 3000000000,
-  },
-  {
-    id: 7,
-    name: "3 - 5 tỷ",
-    from: 3000000000,
-    to: 5000000000,
-  },
-  {
-    id: 8,
-    name: "5 - 7 tỷ",
-    from: 5000000000,
-    to: 7000000000,
-  },
-  {
-    id: 9,
-    name: "7 - 10 tỷ",
-    from: 7000000000,
-    to: 10000000000,
-  },
-  {
-    id: 10,
-    name: "10 - 20 tỷ",
-    from: 10000000000,
-    to: 20000000000,
-  },
-  {
-    id: 11,
-    name: "20 - 30 tỷ",
-    from: 20000000000,
-    to: 30000000000,
-  },
-  {
-    id: 12,
-    name: "> 30 tỷ",
-    from: 3000000000,
-    to: -1,
-  },
-];
-
-const acreage = [
-  {
-    id: 2,
-    name: "<= 30 m2",
-    from: 0,
-    to: 30,
-  },
-  {
-    id: 3,
-    name: "30 - 50 m2",
-    from: 30,
-    to: 50,
-  },
-  {
-    id: 4,
-    name: "50 - 80 m2",
-    from: 50,
-    to: 80,
-  },
-  {
-    id: 5,
-    name: "80 - 100 m2",
-    from: 80,
-    to: 100,
-  },
-  {
-    id: 6,
-    name: "100 - 150 m2",
-    from: 100,
-    to: 150,
-  },
-  {
-    id: 7,
-    name: "150 - 200 m2",
-    from: 150,
-    to: 200,
-  },
-  {
-    id: 8,
-    name: "200 - 250 m2",
-    from: 200,
-    to: 250,
-  },
-  {
-    id: 9,
-    name: "250 - 300 m2",
-    from: 250,
-    to: 300,
-  },
-  {
-    id: 10,
-    name: "300 - 500 m2",
-    from: 300,
-    to: 500,
-  },
-  {
-    id: 11,
-    name: ">= 500 m2",
-    from: 500,
-    to: -1,
-  },
-];
-
 const diameters = [];
 
 function Banner() {
@@ -189,29 +57,29 @@ function Banner() {
   const changeValueDistrict = (value, id) => {
     setValueDistrict({ id: id.key, name: value });
   };
-  const changeValuePrice = (value, id) => {
-    let data = price.filter((el) => el.id == id.key);
-    console.log(data);
-    setValuePrice({
-      id: id.key,
-      name: value,
-      from: data[0]?.from,
-      to: data[0]?.to,
-    });
-  };
-  const changeValueProvince = (value, id) => {
-    setValueProvince({ id: id.key, name: value });
-  };
-  const changeValueArea = (value, id) => {
-    let data = acreage.filter((el) => el.id == id.key);
+  // const changeValuePrice = (value, id) => {
+  //   let data = price.filter((el) => el.id == id.key);
+  //   console.log(data);
+  //   setValuePrice({
+  //     id: id.key,
+  //     name: value,
+  //     from: data[0]?.from,
+  //     to: data[0]?.to,
+  //   });
+  // };
+  // const changeValueProvince = (value, id) => {
+  //   setValueProvince({ id: id.key, name: value });
+  // };
+  // const changeValueArea = (value, id) => {
+  //   let data = acreage.filter((el) => el.id == id.key);
 
-    setValueArea({
-      id: id.key,
-      name: value,
-      from: data[0]?.from,
-      to: data[0]?.to,
-    });
-  };
+  //   setValueArea({
+  //     id: id.key,
+  //     name: value,
+  //     from: data[0]?.from,
+  //     to: data[0]?.to,
+  //   });
+  // };
 
   const listDistrict = useSelector((state) => state.search.district);
   const listProvince = useSelector((state) => state.search.province);
@@ -262,7 +130,7 @@ function Banner() {
           </div>
         </div>
         <div className="banner-filter">
-          <div className="title-search">Tìm kiếm thông tin sản phẩm</div>
+          <div className="title-search">Tìm kiếm bất động sản</div>
           <div className="card-filter">
             <Filter />
           </div>

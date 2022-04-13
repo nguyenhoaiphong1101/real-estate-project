@@ -40,7 +40,7 @@ body {
 }
 
 .select-custom > .ant-select-selector {
-  padding: 10px !important;
+  padding: 10px 15px 10px !important;
   height: auto !important;
   border-radius: 8px !important;
 }
