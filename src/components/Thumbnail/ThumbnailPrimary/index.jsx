@@ -185,7 +185,8 @@ function ThumbnailPrimary(props) {
           )}
         </div>
         <div className="address">
-          <i class="fas fa-map-marker-alt"></i> {props.listLatestNew?.address}
+          <i className="fas fa-map-marker-alt"></i>{" "}
+          {props.listLatestNew?.address}
         </div>
       </div>
       <div className="listing__body">

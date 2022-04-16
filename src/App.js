@@ -21,6 +21,9 @@ import SubmitList from "./pages/User/SubmitList";
 import "./styles.scss";
 import Chat from "./chat";
 import "./App.less";
+import { loadProvince } from "./actions/search";
+import { useDispatch } from "react-redux";
+import { loadListCategory } from "./actions/category";
 
 function App() {
   const location = window.location;
@@ -31,6 +34,7 @@ function App() {
   const [token, setToken] = useState(localStorage.getItem("access_token"));
 
   const localToken = localStorage.getItem("access_token");
+  const dispatch = useDispatch();
 
   const returnRole = () => {
     if (
@@ -50,6 +54,10 @@ function App() {
       setLoading(false);
     }, 1000);
   }, [token]);
+  useEffect(() => {
+    dispatch(loadProvince());
+    dispatch(loadListCategory());
+  }, []);
 
   useEffect(() => {
     setToken(localToken);

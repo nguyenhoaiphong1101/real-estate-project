@@ -209,7 +209,8 @@ function ThumbnailExtra(props) {
                     </span> */}
         </div>
         <div className="address">
-          <i class="fas fa-map-marker-alt"></i> {props.listLatestNew?.address}
+          <i className="fas fa-map-marker-alt"></i>{" "}
+          {props.listLatestNew?.address}
         </div>
         {/* <div className="listing-controls" onClick={() => setFavorite()}>
           <a className={isFavorite ? "favorite" : "un-favorite"}>

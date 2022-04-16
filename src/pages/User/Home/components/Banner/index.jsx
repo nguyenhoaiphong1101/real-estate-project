@@ -84,11 +84,6 @@ function Banner() {
     setTypeAparment(value);
   };
 
-  useEffect(() => {
-    dispatch(loadProvince());
-    dispatch(loadListCategory());
-  }, []);
-
   const valueSearch = () => {
     dispatch(
       loadListFilter(

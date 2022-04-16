@@ -22,11 +22,11 @@ function Home(props) {
 
   const token = localStorage.getItem("access_token");
   useEffect(() => {
-    dispatch(
-      loadListRecommend({
-        user_id: token ? jwtDecode(token).id : null,
-      })
-    );
+    // dispatch(
+    //   loadListRecommend({
+    //     user_id: token ? jwtDecode(token).id : null,
+    //   })
+    // );
   }, []);
 
   return (

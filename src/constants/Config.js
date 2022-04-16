@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:3000/api";
+export const API_URL = "http://3d15-118-69-231-9.ngrok.io/api";
 
 export const price = [
   {

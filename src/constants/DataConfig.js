@@ -32,11 +32,6 @@ export const selectPriceFrom = [
 ];
 export const selectPriceTo = [
   {
-    id: 1,
-    label: "0",
-    value: 0,
-  },
-  {
     id: 2,
     label: "1 triệu",
     value: 1000000,

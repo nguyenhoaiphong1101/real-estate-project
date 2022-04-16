@@ -46,36 +46,27 @@ function Listings(props) {
       <div className="content">
         <div className="container">
           <Row>
-            <div style={{ width: "100%" }}>
-              <Filter />
+            <div style={{ width: "100%", padding: "0 200px" }}>
+              <div className="title-filter">
+                Tìm kiếm thông tin bất động sản
+              </div>
+              <Filter type="BUY" />
             </div>
             <div className="tab-wrapper" style={{ width: "100%" }}>
-              <Row style={{ marginBottom: "20px" }}>
-                <Col offset={15} span={6}>
-                  <span>Sort by </span>
-                  <Select
-                    style={{ paddingRight: "5px", width: 120 }}
-                    className="select"
-                    defaultValue="ID"
-                    onChange={handleChange}
-                  >
-                    <Option value="ID">Mặc định</Option>
-                    <Option value="AREA">Diện tích</Option>
-                    <Option value="TOTAL_PRICE">Giá tiền</Option>
-                  </Select>
-                </Col>
-                <Col span={2}>
-                  <Select
-                    className="select"
-                    style={{ width: 120 }}
-                    defaultValue="ASC"
-                    onChange={handleChangeDirection}
-                  >
-                    <Option value="ASC">Tăng dần</Option>
-                    <Option value="DESC">Giảm dần</Option>
-                  </Select>
-                </Col>
-              </Row>
+              <div className="fil-sort">
+                <span className="title">Sort by </span>
+                <Select
+                  className="select"
+                  defaultValue="ID"
+                  onChange={handleChange}
+                >
+                  <Option value="ID">Mặc định</Option>
+                  <Option value="AREA_ASC">Diện tích - Tăng dần</Option>
+                  <Option value="AREA_DESC">Diện tích - Giảm dần</Option>
+                  <Option value="TOTAL_PRICE_ASC">Giá tiền - Tăng dần</Option>
+                  <Option value="TOTAL_PRICE_DESC">Giá tiền - Giảm dần</Option>
+                </Select>
+              </div>
               <Tabs
                 className="tab-custom"
                 defaultActiveKey="2"
