@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadListRecommend } from "../../../actions/recommend";
 import Banner from "./components/Banner";
 import Category from "./components/Category";
+import ListAboutProduct from "./components/ListAboutProvince";
 import ListRecomend from "./components/ListRecommend";
 import NeedMore from "./components/NeedMore";
 import SectionFunction from "./components/SectionFunction";
@@ -32,12 +33,11 @@ function Home(props) {
     <div>
       <Banner />
       {checkArrRecommend()}
+      <SectionRecentList />
+      <ListAboutProduct />
       <Category />
       <SectionFunction />
       <NeedMore />
-      <SectionRecentList />
-      <SectionTopList />
-      {/* <Testimonials /> */}
     </div>
   );
 }

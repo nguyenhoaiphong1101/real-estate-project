@@ -1,5 +1,6 @@
 import { Col, Row, Tabs, Select } from "antd";
 import React, { useState } from "react";
+import Filter from "../../../components/Filter";
 import FilterListings from "./components/FilterListings";
 import GridHome from "./components/GridHome";
 import ListHome from "./components/ListHome";
@@ -44,12 +45,10 @@ function Listings(props) {
       </div>
       <div className="content">
         <div className="container">
-          <Row style={{ width: "100%" }}>
-            {/* <Col span={9} className="sidebar-left">
-                            <FilterListings typeListing={props.title} />
-                            <RecentListings />
-                        </Col>
-                        <Col span={15} className="sidebar-right"> */}
+          <Row>
+            <div style={{ width: "100%" }}>
+              <Filter />
+            </div>
             <div className="tab-wrapper" style={{ width: "100%" }}>
               <Row style={{ marginBottom: "20px" }}>
                 <Col offset={15} span={6}>

@@ -29,11 +29,6 @@ function Banner() {
     setInputSearch(e.target.value);
   };
 
-  const [active, setActive] = useState(true);
-  const handleToggle = () => {
-    setActive(!active);
-  };
-
   const getDistrict = (id) => {
     dispatch(loadDistrict(id));
   };
@@ -113,10 +108,7 @@ function Banner() {
   };
 
   return (
-    <div
-      className="banner-home"
-      style={active ? { marginBottom: "70px" } : { marginBottom: "150px" }}
-    >
+    <div className="banner-home" style={{ marginBottom: "20px" }}>
       <div className="container">
         <div className="banner-item">
           <div className="banner-inner">

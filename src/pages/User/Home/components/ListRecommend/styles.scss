@@ -1,61 +1,63 @@
-.title-recomend{
-    h2 {
-        font-size: 42px;
-        line-height: 50px;
-        font-weight: bold;
-        padding-bottom: 20px;
+.title-recomend {
+  h2 {
+    font-size: 42px;
+    line-height: 50px;
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+  .slick-slider-product {
+    position: relative;
+    display: block;
+    user-select: none;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    .slick-slide {
+      padding-right: 5px !important;
     }
-    .slick-slider{
-        position: relative;
-        display: block;
-        user-select: none;
-        touch-action: pan-y;
-        -webkit-tap-highlight-color: transparent;
-        box-sizing: border-box;
-
-        .button-prev{
-            background: #fff;
-            border: none;
-            left: -32px;
-            position: absolute;
-            display: block;
-            line-height: 0;
-            font-size: 2;
-            cursor: pointer;
-            color: transparent; 
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 0;
-            outline: none;
-            border: 1px solid #e6e6e6;
-            box-shadow: 0 0 7px -4px #000;
-            width: 56px;
-            height: 56px;
-            border-radius: 56px;
-            transition: all .3s ease-in-out;
-            z-index: 1;
-        }
-        .button-next{
-            background: #fff;
-            border: none;
-            right: -32px;
-            position: absolute;
-            display: block;
-            line-height: 0;
-            font-size: 0;
-            cursor: pointer;
-            color: transparent;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 0;
-            outline: none;
-            border: 1px solid #e6e6e6;
-            box-shadow: 0 0 7px -4px #000;
-            width: 56px;
-            height: 56px;
-            border-radius: 56px;
-            transition: all .3s ease-in-out;
-            z-index: 1;
-        }
+    .button-prev {
+      background: #fff;
+      border: none;
+      left: -32px;
+      position: absolute;
+      display: block;
+      line-height: 0;
+      font-size: 2;
+      cursor: pointer;
+      color: transparent;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0;
+      outline: none;
+      border: 1px solid #e6e6e6;
+      box-shadow: 0 0 7px -4px #000;
+      width: 56px;
+      height: 56px;
+      border-radius: 56px;
+      transition: all 0.3s ease-in-out;
+      z-index: 1;
     }
+    .button-next {
+      background: #fff;
+      border: none;
+      right: -32px;
+      position: absolute;
+      display: block;
+      line-height: 0;
+      font-size: 0;
+      cursor: pointer;
+      color: transparent;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0;
+      outline: none;
+      border: 1px solid #e6e6e6;
+      box-shadow: 0 0 7px -4px #000;
+      width: 56px;
+      height: 56px;
+      border-radius: 56px;
+      transition: all 0.3s ease-in-out;
+      z-index: 1;
+    }
+  }
 }

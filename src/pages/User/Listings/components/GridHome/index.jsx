@@ -130,7 +130,7 @@ function GridHome(props) {
   return (
     <List
       className="grid-home"
-      grid={{ gutter: 16, column: 4 }}
+      grid={{ column: 4 }}
       pagination={{
         onChange: (page) => {
           dispatch(

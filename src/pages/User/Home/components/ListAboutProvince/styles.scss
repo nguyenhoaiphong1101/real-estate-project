@@ -1,0 +1,116 @@
+.list-about-product {
+  background-color: #f1f1f1;
+  margin-bottom: 20px;
+  .card {
+    padding: 50px 0;
+    .card-province {
+      background-color: #fff;
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 40px 20px 20px;
+      border-radius: 8px;
+      .title {
+        font-size: 1.5em;
+        font-weight: 800;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+      .title-quality {
+        color: rgb(146, 145, 145);
+      }
+      .select-province {
+        color: #01bbbc;
+        margin-left: -11px;
+        margin-bottom: 10px;
+        .ant-select-selector {
+          .ant-select-selection-item,
+          .ant-select-selection-search {
+            font-size: 1.5em;
+            font-weight: 800 !important;
+          }
+        }
+        .ant-select-arrow {
+          color: #01bbbc;
+          font-weight: 800;
+        }
+      }
+      .btn-more {
+        width: fit-content;
+        height: auto;
+        border-radius: 8px;
+        padding: 10px 20px;
+        background-color: #01bbbc;
+        color: white;
+        &:hover {
+          background-color: #01bbbc;
+          color: white;
+        }
+        &:focus {
+          background-color: #01bbbc;
+          color: white;
+        }
+      }
+    }
+    .slick-slider-product {
+      position: relative;
+      display: block;
+      user-select: none;
+      touch-action: pan-y;
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+      padding: 0px 5px;
+      .listing-primary {
+        box-shadow: none;
+      }
+      .slick-slide {
+        padding-right: 5px;
+      }
+      .button-prev {
+        background: #fff;
+        border: none;
+        left: -20px;
+        position: absolute;
+        display: block;
+        line-height: 0;
+        font-size: 2;
+        cursor: pointer;
+        color: transparent;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0;
+        outline: none;
+        border: 1px solid #e6e6e6;
+        box-shadow: 0 0 7px -4px #000;
+        width: 56px;
+        height: 56px;
+        border-radius: 56px;
+        transition: all 0.3s ease-in-out;
+        z-index: 1;
+      }
+      .button-next {
+        background: #fff;
+        border: none;
+        right: -20px;
+        position: absolute;
+        display: block;
+        line-height: 0;
+        font-size: 0;
+        cursor: pointer;
+        color: transparent;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 0;
+        outline: none;
+        border: 1px solid #e6e6e6;
+        box-shadow: 0 0 7px -4px #000;
+        width: 56px;
+        height: 56px;
+        border-radius: 56px;
+        transition: all 0.3s ease-in-out;
+        z-index: 1;
+      }
+    }
+  }
+}
