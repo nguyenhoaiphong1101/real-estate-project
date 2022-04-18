@@ -1,66 +1,72 @@
 .contact-form-wrapper {
-    padding: 20px;
-    background-color: #f7f9fc;
-    border-radius: 10px;
-    h5 {
-        font-size: 22px;
-        line-height: 30px;
-        font-weight: 900;
-        letter-spacing: 1.2px;
-        margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f7f9fc;
+  border-radius: 10px;
+  h5 {
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    margin-bottom: 30px;
+  }
+  .media {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      width: 90px;
+      height: 90px;
+      border-radius: 10px;
+      margin-right: 10px;
+      flex-grow: 1;
     }
-    .media {
-        display: flex;
-        margin-bottom: 30px;
-        align-items: center;
-        justify-content: space-between;
-        img {
-            width: 90px;
-            height: 90px;
-            border-radius: 10px;
-            margin-right: 10px;
-            flex-grow: 1;
-        }
-        .media-body {
-            flex-grow: 9;
-            padding: 8px 4px;
+    .media-body {
+      flex-grow: 9;
+      padding: 8px 4px;
 
-            h6 {
-                font-size: 16px;
-                font-weight: 700;
-            }
-            span {
-                color: #848486;
-            }
-        }
-        .popup {
-            cursor: pointer;
-            flex-grow: 1;
-            background-color: white;
-            padding: 8px 6px 8px 12px;
-            border-radius: 5px;
-            color: #848486;
-            transition: 0.3s;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            &:hover {
-                background-color: #f5f5f5 !important;
-            }
-        }
+      h6 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0;
+      }
+      span {
+        color: #848486;
+        display: block;
+      }
+      .phone {
+        color: #01bbbc;
+        margin-top: 4px;
+      }
     }
-    .form {
-        input {
-            border-radius: 10px;
-            padding: 14px 12px;
-        }
-        TextArea {
-            border-radius: 10px;
-            padding: 14px 12px;
-        }
-        .submit {
-            font-size: 18px;
-            background-color: #0088a9;
-            margin: 0;
-            width: 100%;
-        }
+    .popup {
+      cursor: pointer;
+      flex-grow: 1;
+      background-color: white;
+      padding: 8px 6px 8px 12px;
+      border-radius: 5px;
+      color: #848486;
+      transition: 0.3s;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      &:hover {
+        background-color: #f5f5f5 !important;
+      }
     }
+  }
+  .form {
+    input {
+      border-radius: 10px;
+      padding: 14px 12px;
+    }
+    TextArea {
+      border-radius: 10px;
+      padding: 14px 12px;
+    }
+    .submit {
+      font-size: 18px;
+      background-color: #0088a9;
+      margin: 0;
+      width: 100%;
+    }
+  }
 }

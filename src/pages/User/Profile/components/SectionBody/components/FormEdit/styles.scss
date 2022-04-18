@@ -1,29 +1,42 @@
 .form-edit {
-    padding-bottom: 150px;
-    .ant-input-disabled{
-        background: transparent!important;
+  .ant-input-disabled {
+    background: transparent !important;
+  }
+  .ant-input {
+    font-size: 16px;
+    border-radius: 8px;
+    height: 58px;
+    font-weight: 500;
+  }
+  .ant-select-selector {
+    height: auto !important;
+    border-radius: 8px !important;
+    padding: 13px 10px !important;
+    font-size: 16px !important;
+    span {
+      font-weight: 500;
     }
-    .ant-input{
-        font-size: 16px;
-        border-radius: 8px;
-        height: 58px;
-    }
-    label {
-        font-size: 16px;
-        margin: 0 5px;
-    }
-    .pl-auto{
-        padding-left: 15px;
-    }
-    .pt-auto{
-        padding-top: 20px;
-    }
-    .form-item {
-        margin: 5px 10px;
-    }
-    .submit {
-        margin-top: 10px;
-        font-size: 16px;
-        background-color: #519fff;
-    }
+  }
+  label {
+    font-size: 16px !important;
+    font-weight: 800;
+    margin: 0 5px;
+  }
+  .mt-10 {
+    margin-top: 15px;
+  }
+  .pl-auto {
+    padding-left: 15px;
+  }
+  .pt-auto {
+    padding-top: 20px;
+  }
+  .form-item {
+    margin: 5px 10px;
+  }
+  .submit {
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #01bbbc;
+  }
 }

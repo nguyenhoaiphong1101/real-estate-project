@@ -30,7 +30,7 @@ function Home(props) {
   }, []);
 
   return (
-    <div>
+    <div style={{ paddingBottom: "20px" }}>
       <Banner />
       {checkArrRecommend()}
       <SectionRecentList />

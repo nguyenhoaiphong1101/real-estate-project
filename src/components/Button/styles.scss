@@ -1,93 +1,99 @@
 .square-side {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    border: 120px solid transparent;
-    border-top-width: 0;
-    border-bottom-width: 0;
-    height: 100%;
-    width: 0;
-    z-index: -1;
-    transition: all 0.1s ease-out;
-    -webkit-transition: all 0.1s ease-out;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: 120px solid transparent;
+  border-top-width: 0;
+  border-bottom-width: 0;
+  height: 100%;
+  width: 0;
+  z-index: -1;
+  transition: all 0.1s ease-out;
+  -webkit-transition: all 0.1s ease-out;
 }
 
 .trapezoid-side {
-    border-top-width: 10px;
-    border-bottom-width: 10px;
-    border-radius: 0.2em;
-    top: -10px;
+  border-top-width: 10px;
+  border-bottom-width: 10px;
+  border-radius: 0.2em;
+  top: -10px;
 }
 
 .button {
-    font-size: 2em;
-    border-radius: 8px;
-    color: white;
-    display: block;
-    padding: 8px 16px;
-    margin: 2em auto;
-    border: none;
-    position: relative;
-    transition: all 0.2s ease-out;
-    -webkit-transition: all 0.2s ease-out;
-    box-shadow: 0 0 0.25em rgba($color: #333, $alpha: 0.5);
-    cursor: pointer;
-    outline: none;
-    user-select: none;
-    z-index: 10;
+  border-radius: 8px !important;
+  color: white !important;
+  display: block !important;
+  padding: 8px 16px !important;
+  border: 0 !important;
+  margin: 0 auto !important;
+  height: auto !important;
+  border: none;
+  position: relative;
+  transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  box-shadow: 0 0 0.25em rgba($color: #333, $alpha: 0.5);
+  cursor: pointer;
+  outline: none !important;
+  user-select: none;
+  z-index: 10;
+
+  &:hover {
+    background-color: #01bbbc !important;
+  }
+
+  &::before {
+    .square-side {
+    }
+  }
+
+  &::after {
+    content: "";
+    border-radius: 8px !important;
+    position: absolute;
+    transition: inherit;
+    z-index: -1;
+    top: 0;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    transition: all 500ms cubic-bezier(0.77, 0, 0.175, 1);
+    .square-side {
+    }
+  }
+  &:hover::after {
+    animation-name: gradient;
+    animation-duration: 0.5s;
+    right: 0;
+    width: 0%;
+    animation-fill-mode: backwards;
+  }
+  /* mashed state */
+  &:active {
+    -webkit-transform: scale(1.2, 0.8);
 
     &::before {
-        .square-side {
-        }
+      .trapezoid-side {
+      }
     }
 
     &::after {
-        content: "";
-        position: absolute;
-        transition: inherit;
-        z-index: -1;
-        top: 0;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.3);
-        transition: all 500ms cubic-bezier(0.77, 0, 0.175, 1);
-        .square-side {
-        }
+      .trapezoid-side {
+      }
     }
-    &:hover::after {
-        animation-name: gradient;
-        animation-duration: 0.5s;
-        right: 0;
-        width: 0%;
-        animation-fill-mode: backwards;
-    }
-    /* mashed state */
-    &:active {
-        -webkit-transform: scale(1.2, 0.8);
+  }
 
-        &::before {
-            .trapezoid-side {
-            }
-        }
-
-        &::after {
-            .trapezoid-side {
-            }
-        }
-    }
-
-    i {
-        background-color: transparent;
-        margin-left: 10px;
-    }
+  i {
+    background-color: transparent;
+    margin-left: 10px;
+  }
 }
 @keyframes gradient {
-    0% {
-        right: 0;
-        width: 100%;
-    }
-    100% {
-        right: 100%;
-        width: 0%;
-    }
+  0% {
+    right: 0;
+    width: 100%;
+  }
+  100% {
+    right: 100%;
+    width: 0%;
+  }
 }

@@ -223,7 +223,7 @@ function ThumbnailExtra(props) {
           <div>
             <p className="listing-text">{props.listLatestNew?.title}</p>
             <span className="listing-price">
-              {props.listLatestNew?.total_price / 1000000000} tỷ
+              {props.listLatestNew?.total_price}
             </span>
             <div className="acr-listing-icons">
               <div className="acr-listing-icon">
@@ -287,13 +287,15 @@ function ThumbnailExtra(props) {
             </div>
           </div>
         </div>
-        {/* {history.location.pathname === '/trang-ca-nhan' ?
-                    <div className="listing-gallery-wrapper">
-                        <Button value="Xóa bài" className="view-detail" onClick={() => toUpdatePost()}></Button>
-                    </div>
-                    :
-                    null
-                } */}
+        {/* {history.location.pathname === "/trang-ca-nhan" ? (
+          <div className="listing-gallery-wrapper">
+            <Button
+              value="Xóa bài"
+              className="view-detail"
+              onClick={() => toUpdatePost()}
+            ></Button>
+          </div>
+        ) : null} */}
       </div>
     </div>
   );

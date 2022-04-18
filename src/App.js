@@ -21,9 +21,10 @@ import SubmitList from "./pages/User/SubmitList";
 import "./styles.scss";
 import Chat from "./chat";
 import "./App.less";
-import { loadProvince } from "./actions/search";
+import { loadCountry, loadProvince } from "./actions/search";
 import { useDispatch } from "react-redux";
 import { loadListCategory } from "./actions/category";
+import { getInfoUser } from "./actions/user";
 
 function App() {
   const location = window.location;
@@ -57,6 +58,10 @@ function App() {
   useEffect(() => {
     dispatch(loadProvince());
     dispatch(loadListCategory());
+    dispatch(loadCountry());
+    if (token) {
+      dispatch(getInfoUser());
+    }
   }, []);
 
   useEffect(() => {

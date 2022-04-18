@@ -1,83 +1,82 @@
 .footer-container {
-    margin: auto;
-    background-color: #1d2228;
-    color: #cecece;
-    margin-top: 50px;
-    padding: 50px 0;
-    .footer-top {
-        .col-1 {
-            padding-right: 200px;
-        }
-        ul {
-            list-style: none;
-        }
-        .col-2 {
-            margin-top: 50px;
-        }
-        .footer-col {
-            h2 {
-                font-size: 18px;
-                color: #cecece;
-                text-transform: capitalize;
-                margin-bottom: 30px;
-                font-weight: 700;
-                position: relative;
-                &::before {
-                    content: "";
-                    position: absolute;
-                    left: 0;
-                    bottom: -5px;
-                    height: 2px;
-                    background-color: #fff;
-                    box-sizing: border-box;
-                    width: 50px;
-                }
-            }
-            ul {
-                li {
-                    &:not(:last-child) {
-                        margin-bottom: 10px;
-                    }
-                    a {
-                        font-size: 14px;
-                        text-transform: capitalize;
-                        color: #cecece;
-                        text-decoration: none;
-                        display: block;
-                        transition: all 0.3 ease 0s;
-                        font-weight: 600;
-                        &:hover {
-                            color: #0088a9;
-                        }
-                    }
-                }
-            }
-        }
+  margin: auto;
+  background-color: #1d2228;
+  color: #cecece;
+  padding: 50px 0;
+  .footer-top {
+    .col-1 {
+      padding-right: 200px;
     }
+    ul {
+      list-style: none;
+    }
+    .col-2 {
+      margin-top: 50px;
+    }
+    .footer-col {
+      h2 {
+        font-size: 18px;
+        color: #cecece;
+        text-transform: capitalize;
+        margin-bottom: 30px;
+        font-weight: 700;
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -5px;
+          height: 2px;
+          background-color: #fff;
+          box-sizing: border-box;
+          width: 50px;
+        }
+      }
+      ul {
+        li {
+          &:not(:last-child) {
+            margin-bottom: 10px;
+          }
+          a {
+            font-size: 14px;
+            text-transform: capitalize;
+            color: #cecece;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3 ease 0s;
+            font-weight: 600;
+            &:hover {
+              color: #0088a9;
+            }
+          }
+        }
+      }
+    }
+  }
 
-    .footer-bottom {
-        padding-top: 50px;
-        ul {
-            list-style: none;
-            display: flex;
-            justify-content: flex-end;
-            margin-right: 32px;
-            li {
-                margin: 0 12px;
-                a {
-                    font-size: 14px;
-                    text-transform: capitalize;
-                    color: #cecece;
-                    text-decoration: none;
-                    display: block;
-                    transition: all 0.3 ease 0s;
-                    font-weight: 500;
-                    &:hover {
-                        color: #0088a9;
-                    }
-                }
-            }
+  .footer-bottom {
+    padding-top: 50px;
+    ul {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 32px;
+      li {
+        margin: 0 12px;
+        a {
+          font-size: 14px;
+          text-transform: capitalize;
+          color: #cecece;
+          text-decoration: none;
+          display: block;
+          transition: all 0.3 ease 0s;
+          font-weight: 500;
+          &:hover {
+            color: #0088a9;
+          }
         }
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
     }
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
 }

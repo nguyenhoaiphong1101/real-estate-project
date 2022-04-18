@@ -1,20 +1,23 @@
 .slide-introduce {
-    background-color: transparent;
-    margin-right: 25px;
-    margin-bottom: 50px;
-    .ant-image-img,
-    .ant-image-mask {
-        border-radius: 10px;
+  background-color: transparent;
+  margin-right: 25px;
+  margin-bottom: 50px;
+  width: 100%;
+  .ant-image-img,
+  .ant-image-mask {
+    border-radius: 10px;
+  }
+  & > .ant-image {
+    width: 100%;
+    .img-large {
+      max-height: 500px;
     }
-    & > .ant-image {
-        width: 100%;
-        .img-large{
-            max-height: 500px;
-        }
+  }
+  .slider {
+    margin-top: 20px;
+    text-align: center;
+    button::before {
+      color: #1d2228;
     }
-    .slider {
-        button::before {
-            color: #1d2228;
-        }
-    }
+  }
 }
