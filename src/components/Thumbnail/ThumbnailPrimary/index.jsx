@@ -251,11 +251,11 @@ function ThumbnailPrimary(props) {
                   ></i>
                 </div>
               </Popover>
-              <Popover className="popup" content={content} trigger="click">
+              {/* <Popover className="popup" content={content} trigger="click">
                 <div className="icon">
                   <i className="fas fa-ellipsis-h"></i>
                 </div>
-              </Popover>
+              </Popover> */}
             </div>
           </div>
         </div>

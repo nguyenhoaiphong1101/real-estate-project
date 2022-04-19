@@ -66,14 +66,11 @@ function ThumbnailExtra(props) {
     // else {
     //     dispatch(loadDetailHome(props?.listLatestNew?.id))
     // }
-    history.push(`/chi-tiet/${props?.listLatestNew?.id}`, props?.listLatestNew);
+    history.replace(`/chi-tiet/${props?.listLatestNew?.id}`);
   };
 
   const toUpdatePost = () => {
-    history.push(
-      `/chinh-sua/${props?.listLatestNew?.id}`,
-      props?.listLatestNew
-    );
+    history.replace(`/chinh-sua/${props?.listLatestNew?.id}`);
   };
 
   const [isFavorite, setIsFavorite] = useState();
@@ -109,14 +106,11 @@ function ThumbnailExtra(props) {
   const content = (
     <div className="popup-content-wrapper">
       <ul className="popup-content">
-        <li>
-          <i className="fas fa-phone"></i>Gọi chúng tôi
+        <li style={{ textAlign: "center" }} onClick={toUpdatePost}>
+          <i className="fas fa-pen"></i>Chỉnh sửa
         </li>
-        <li>
-          <i className="fas fa-th-list"></i>Nhắn tin
-        </li>
-        <li>
-          <i className="fas fa-star"></i>Đặt lịch
+        <li style={{ textAlign: "center" }} onClick={toDeletePost}>
+          <i className="fas fa-trash"></i>Xoá bài
         </li>
       </ul>
     </div>
@@ -279,11 +273,13 @@ function ThumbnailExtra(props) {
                   ></i>
                 </div>
               </Popover>
-              <Popover className="popup" content={content} trigger="click">
-                <div className="icon">
-                  <i className="fas fa-ellipsis-h"></i>
-                </div>
-              </Popover>
+              {props.edit ? (
+                <Popover className="popup" content={content} trigger="click">
+                  <div className="icon">
+                    <i className="fas fa-ellipsis-h"></i>
+                  </div>
+                </Popover>
+              ) : null}
             </div>
           </div>
         </div>

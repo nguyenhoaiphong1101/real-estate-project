@@ -13,7 +13,7 @@ const { TabPane } = Tabs;
 function SectionBody() {
   return (
     <div className="profile-section-body-wrapper">
-      <Tabs defaultActiveKey="1" tabPosition="left" className="tab-wrapper">
+      <Tabs defaultActiveKey="1" tabPosition="top" className="tab-wrapper">
         <TabPane
           tab={
             <div className="tab-item-wrapper">

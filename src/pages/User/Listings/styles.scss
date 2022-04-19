@@ -1,4 +1,5 @@
 .section-listhome {
+  padding-bottom: 20px;
   .sub-header {
     background-image: url("http://androthemes.com/themes/react/acres/assets/img/subheader.jpg");
     padding: 290px 0 30px;
@@ -63,7 +64,7 @@
     .tab-wrapper {
       position: relative;
       .ant-list-item {
-        padding: 0px;
+        padding: 0px !important;
       }
       .fil-sort {
         top: 22.5px;

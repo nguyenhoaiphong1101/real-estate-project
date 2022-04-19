@@ -19,6 +19,8 @@ function ListingPost() {
       className="listing-favorite-profile"
       itemLayout="vertical"
       size="small"
+      style={{ marginTop: "5px", padding: "0 25px" }}
+      grid={{ column: 2 }}
       pagination={{
         onChange: (page) => {
           dispatch(
@@ -32,8 +34,12 @@ function ListingPost() {
       }}
       dataSource={listPost}
       renderItem={(item) => (
-        <List.Item className="item" style={{ borderBottom: "0" }} key={item.id}>
-          <ThumbnailExtra listLatestNew={item} type="update" />
+        <List.Item
+          className="item"
+          style={{ borderBottom: "0", padding: "0 5px" }}
+          key={item.id}
+        >
+          <ThumbnailExtra listLatestNew={item} edit={true} />
         </List.Item>
       )}
     ></List>

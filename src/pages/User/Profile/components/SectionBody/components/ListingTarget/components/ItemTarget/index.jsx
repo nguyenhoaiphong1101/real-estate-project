@@ -22,7 +22,12 @@ function ItemTarget(props) {
       </Menu.Item>
       <Menu.Item>
         <p
-          style={{ padding: "0px 10px", marginBottom: "0", color: "#01bbbc" }}
+          style={{
+            padding: "0px 10px",
+            textAlign: "center",
+            marginBottom: "0",
+            color: "#01bbbc",
+          }}
           onClick={() => {
             props.updateItem(props.item);
           }}

@@ -1,4 +1,4 @@
-export const API_URL = "http://c7c3-118-69-231-9.ngrok.io/api";
+export const API_URL = "http://4590-118-69-231-9.ngrok.io/api";
 
 export const price = [
   {

@@ -46,7 +46,7 @@
 
     &__header {
       padding: 20px;
-      font-size: 20px;
+      font-size: 1rem;
       color: #fff;
       background: #1d2228;
       overflow: hidden;
@@ -54,19 +54,19 @@
       text-overflow: ellipsis;
     }
     &__price {
-      color: #0088a9;
+      color: #01bbbc;
       padding: 20px;
       margin: auto;
-      font-size: 25px;
+      font-size: 1.3rem;
       font-weight: 700;
     }
     &__button {
       display: block;
-      background: #0088a9;
+      background: #01bbbc;
       text-decoration: none;
       padding: 20px;
       color: white;
-      font-size: 18px;
+      font-size: 1rem;
       position: relative;
       overflow: hidden;
       transition: all 0.3s ease-in-out;
@@ -104,6 +104,7 @@
     &__list {
       padding: 20px;
       color: #757171;
+      margin: 0;
 
       .high {
         color: #32cd32;
@@ -117,6 +118,7 @@
         border-bottom: 1px solid #c8c8c8;
         overflow: hidden;
         white-space: nowrap;
+        font-size: 1rem;
         text-overflow: ellipsis;
 
         &:last-child {
