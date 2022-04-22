@@ -10,7 +10,7 @@ import { Input, Space } from "antd";
 import { loadListCategory } from "../../../../../actions/category";
 import { loadListFilter } from "../../../../../actions/listfilter";
 import { useHistory } from "react-router";
-import Filter from "../../../../../components/Filter";
+import Filter from "../../../../../components/FilterHome";
 
 const { TabPane } = Tabs;
 

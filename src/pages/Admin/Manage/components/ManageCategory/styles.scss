@@ -1,98 +1,97 @@
 @import "./../../../../../variables/variable_admin.scss";
 
 .modal-category {
-    .ant-btn-primary{
-        border-radius: 15px !important;
-        // background-color: #cee6e4;
-        background-color: #fff;
-        color: black;
-        border-color: #d9d9d9;
-    }
-    .ant-btn-primary:hover{
-        background-color: #cee6e4 !important;
-    }
-    .ant-btn{
-        color: black !important;
-        border-radius: 15px !important;
-    }
-    .ant-btn:hover{
-        color: black;
-        border-color: #d9d9d9;
-        background-color: rgb(245, 116, 116);
-    }
+  .ant-btn-primary {
+    border-radius: 15px !important;
+    // background-color: #cee6e4;
+    background-color: #fff;
+    color: black;
+    border-color: #d9d9d9;
+  }
+  .ant-btn-primary:hover {
+    background-color: #cee6e4 !important;
+  }
+  .ant-btn {
+    color: black !important;
+    border-radius: 15px !important;
+  }
+  .ant-btn:hover {
+    color: black;
+    border-color: #d9d9d9;
+    background-color: rgb(245, 116, 116);
+  }
 }
 
 .admin-manage-category {
-    width: 94%;
-    margin: 0 auto;
-    
-        
-        
-    .title-wrapper {
-        margin: 25px 0;
-        .title {
-            font-size: 25px;
-            font-weight: 700;
-            margin: 5px 0;
-        }
-        .sub-title {
-            padding-left: 4px;
-            font-size: 13px;
-            font-weight: 500;
-        }
+  width: 94%;
+  margin: 0 auto;
+
+  .title-wrapper {
+    margin: 25px 0;
+    .title {
+      font-size: 25px;
+      font-weight: 700;
+      margin: 5px 0;
     }
-    .table-wrapper {
-        background-color: $color-white;
-        padding: 25px;
+    .sub-title {
+      padding-left: 4px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+  }
+  .table-wrapper {
+    background-color: $color-white;
+    padding: 25px;
+    width: 100%;
+    border-radius: 10px;
+    .separator {
+      margin: 20px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .table-tool {
+      .admin-btn-add-category {
+        background-color: #cee6e4;
+      }
+      .input {
+        background-color: $color-white-purple-light;
+        box-shadow: none !important;
+      }
+      .input-search {
         width: 100%;
+        margin-right: 10px;
+        margin-bottom: 0;
+      }
+      .ant-btn,
+      .ant-input {
+        height: 58px;
+        border-radius: 8px;
+        box-shadow: 0 2px 9px 0 rgba(34, 12, 43, 0.1);
+        border: 0;
+      }
+      .ant-input {
+        margin-left: 3px;
+      }
+      .select {
+        width: 100%;
+        height: 100%;
+        background-color: $color-white-purple-light;
         border-radius: 10px;
-        .separator {
-            margin: 20px 0;
-            border-bottom: 1px solid #eee;
+        .ant-select-selector {
+          height: 100%;
+          border-radius: 8px;
+          .ant-select-selection-item {
+            display: flex;
+            align-items: center;
+          }
         }
-        .table-tool {
-            .admin-btn-add-category{
-                background-color: #cee6e4;
-            }
-            .input {
-                background-color: $color-white-purple-light;
-                box-shadow: none !important;
-            }
-            .input-search {
-                width: 100%;
-                margin-right: 10px;
-                margin-bottom: 0;
-            }
-            .ant-btn,
-            .ant-input {
-                height: 58px;
-                border-radius: 8px;
-                box-shadow: 0 2px 9px 0 rgba(34, 12, 43, 0.1);
-                border: 0;
-            }
-            .ant-input {
-                margin-left: 3px;
-            }
-            .select {
-                width: 100%;
-                height: 100%;
-                background-color: $color-white-purple-light;
-                border-radius: 10px;
-                .ant-select-selector {
-                    height: 100%;
-                    .ant-select-selection-item {
-                        display: flex;
-                        align-items: center;
-                    }
-                }
-            }
-        }
+      }
     }
-    // .ant-spin-container {
-    //     padding: 0 40px 0 40px;
-    //     .ant-table {
-    //         padding: 1px;
-    //         border-radius: 7px;
-    //     }
-    // }
+  }
+  // .ant-spin-container {
+  //     padding: 0 40px 0 40px;
+  //     .ant-table {
+  //         padding: 1px;
+  //         border-radius: 7px;
+  //     }
+  // }
 }

@@ -9,20 +9,20 @@ import {
   Row,
   Upload,
   InputNumber,
+  Select,
 } from "antd";
 import axios from "axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { loadListCategory } from "../../../actions/category";
 import { loadDetailHome } from "../../../actions/detailhome";
 import { loadDistrict, loadProvince } from "../../../actions/search";
 import { createPost, updatePost } from "../../../api/createPostApartment";
 import Button from "../../../components/Button";
 import HTMLEditor from "../../../components/HTMLEditor";
-import SelectCustom from "../../../components/Select";
 import SubHeader from "../../../components/SubHeader";
 import { API_URL } from "../../../constants/Config";
 import Feature from "./components/Feature";
@@ -61,77 +61,18 @@ function SubmitList(props) {
   const listProvince = useSelector((state) => state.search.province);
   const listCategory = useSelector((state) => state.category.listCategory);
   const detailHome = useSelector((state) => state.detailhome.detailHome);
-  const [valueDistrict, setValueDistrict] = useState({ id: null, name: "" });
-  const [valueProvince, setValueProvince] = useState({ id: null, name: "" });
-  const [valueTypeApartment, setValueTypeApartment] = useState({
-    id: null,
-    name: "",
-  });
-  const [valueCategory, setValueCategory] = useState({ id: null, name: "" });
-  const [descriptionEditor, setDescriptionEditor] = useState("");
-  const [photos, setPhotos] = useState([]);
+  const { id } = useParams();
   const token = localStorage.getItem("access_token");
-
-  useEffect(() => {
-    if (valueProvince.id) getDistrict(valueProvince.id);
-  }, [valueProvince]);
 
   const getDistrict = (id) => {
     dispatch(loadDistrict(id));
   };
-  const handleChangeOverview = (e) => {
-    setDescriptionEditor(e);
-  };
-  const changeValueProvince = (value, id) => {
-    setValueProvince({ id: id.key, name: value });
-    form.setFieldsValue({
-      province: {
-        id: id.key,
-        name: value,
-      },
-    });
-    form.setFieldsValue({
-      district: {
-        id: null,
-        name: "",
-      },
-    });
+
+  const changeValueProvince = (value) => {
+    getDistrict(value);
+    form.resetFields(["district"]);
   };
 
-  const changeValueDistrict = (value, id) => {
-    setValueDistrict({ id: id.key, name: value });
-    form.setFieldsValue({
-      district: {
-        id: id.key,
-        name: value,
-      },
-    });
-  };
-  const changeValueTypeApartment = (value, id) => {
-    setValueTypeApartment({ id: id.key, name: value });
-    form.setFieldsValue({
-      type_apartment: {
-        id: id.key,
-        name: value,
-      },
-    });
-  };
-  const changeValueCategory = (value, id) => {
-    setValueCategory({ id: id.key, name: value });
-    form.setFieldsValue({
-      category: {
-        id: id.key,
-        name: value,
-      },
-    });
-  };
-
-  useEffect(() => {
-    if (form.getFieldValue().district?.id === null)
-      form.setFieldsValue({
-        district: null,
-      });
-  }, [form.getFieldValue().district]);
   const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
 
   useEffect(() => {
@@ -263,45 +204,44 @@ function SubmitList(props) {
     return result;
   }
 
-  async function submitData() {
+  async function submitData(values) {
+    console.log(values);
     // await callApiImage().forEach((item) => {
-    //     listphoto.push(item);
+    //   listphoto.push(item);
     // });
 
     let listphoto = await callApiImage();
-
-    const dataForm = form.getFieldValue();
 
     if (listphoto.length === 0) {
       message.error("Vui lòng chọn hình ảnh !");
     } else {
       const dataPost = {
         apartment_address: {
-          address: dataForm.address,
+          address: values.address,
           country_code: "VN",
-          district_id: valueDistrict.id,
-          province_id: valueProvince.id,
+          district_id: values.district,
+          province_id: values.province,
         },
         apartment_detail: {
-          balcony_direction: dataForm.balcony_direction,
-          bathroom_quantity: dataForm.bathroom_quantity,
-          bedroom_quantity: dataForm.bedroom_quantity,
-          description: descriptionEditor,
-          entrance_building: dataForm.entrance_building,
-          floor_quantity: dataForm.floor_quantity,
-          front_building: dataForm.front_building,
-          furniture: dataForm.furniture,
-          house_direction: dataForm.house_direction,
-          toilet_quantity: dataForm.toilet_quantity,
+          balcony_direction: values.balcony_direction,
+          bathroom_quantity: values.bathroom_quantity,
+          bedroom_quantity: values.bedroom_quantity,
+          description: values.description,
+          entrance_building: values.entrance_building,
+          floor_quantity: values.floor_quantity,
+          front_building: values.front_building,
+          furniture: values.furniture,
+          house_direction: values.house_direction,
+          toilet_quantity: values.toilet_quantity,
         },
-        area: dataForm.area,
-        category_id: valueCategory.id,
+        area: values.area,
+        category_id: values.category,
         expired_date:
-          moment(dataForm.expired_date).format("YYYY-MM-DDTHH:mm:ss") + "Z",
-        overview: dataForm.overview,
-        title: dataForm.title,
-        total_price: dataForm.total_price,
-        type_apartment: valueTypeApartment.id,
+          moment(values.expired_date).format("YYYY-MM-DDTHH:mm:ss") + "Z",
+        overview: values.overview,
+        title: values.title,
+        total_price: values.total_price,
+        type_apartment: values.type_apartment,
         photos: listphoto,
       };
 
@@ -313,7 +253,6 @@ function SubmitList(props) {
         updatePost.PUT(dataPost, detailHome.id);
       }
     }
-    // }
   }
 
   const user = useSelector((state) => state.user.user);
@@ -321,13 +260,11 @@ function SubmitList(props) {
   const history = useHistory();
 
   useEffect(() => {
-    if (
-      history.location.pathname === `/chinh-sua/${history?.location?.state?.id}`
-    )
-      dispatch(loadDetailHome(history?.location?.state?.id, user?.id));
+    if (id) dispatch(loadDetailHome(id));
   }, []);
 
   useEffect(() => {
+    console.log(detailHome);
     form.setFieldsValue({
       address: detailHome?.addressDetail?.address,
       balcony_direction: detailHome?.apartment_detail?.balcony_direction,
@@ -345,48 +282,13 @@ function SubmitList(props) {
       overview: detailHome?.overview,
       title: detailHome?.title,
       total_price: detailHome?.total_price,
-      district: !!detailHome?.addressDetail?.district_id
-        ? {
-            id: detailHome?.addressDetail?.district_id,
-            name: detailHome?.addressDetail?.district_name,
-          }
-        : null,
-      province: !!detailHome?.addressDetail?.province_id
-        ? {
-            id: detailHome?.addressDetail?.province_id,
-            name: detailHome?.addressDetail?.province_name,
-          }
-        : null,
-      category: !!detailHome?.category_id
-        ? {
-            id: detailHome?.category_id,
-            name: detailHome?.category_name,
-          }
-        : null,
-      type_apartment: !!detailHome?.type_apartment
-        ? {
-            id: detailHome?.type_apartment === "Bán" ? "BUY" : "RENT",
-            name: detailHome?.type_apartment,
-          }
-        : null,
+      district: detailHome?.addressDetail?.district_id,
+      province: detailHome?.addressDetail?.province_id,
+      category: detailHome?.category_id,
+      type_apartment: detailHome?.type_apartment,
     });
-    setValueCategory({
-      id: detailHome?.category_id,
-      name: detailHome?.category_name,
-    });
-    setValueDistrict({
-      id: detailHome?.addressDetail?.district_id,
-      name: detailHome?.addressDetail?.district_name,
-    });
-    setValueProvince({
-      id: detailHome?.addressDetail?.province_id,
-      name: detailHome?.addressDetail?.province_name,
-    });
-    setValueTypeApartment({
-      id: detailHome?.type_apartment === "Bán" ? "BUY" : "RENT",
-      name: detailHome?.type_apartment,
-    });
-    setDescriptionEditor(detailHome?.apartment_detail?.description);
+    // setDescriptionEditor(detailHome?.apartment_detail?.description);
+    getDistrict(detailHome?.addressDetail?.province_id);
     let imgs = [];
     detailHome.photos?.forEach((item, index) => {
       imgs.push({ ...item, uid: index, url: getPhotosImg(item.name) });
@@ -442,6 +344,7 @@ function SubmitList(props) {
       <Form
         onValuesChange={valueFormChange}
         form={form}
+        onFinish={submitData}
         className="container form-submit-listing"
       >
         <Row className="row">
@@ -460,16 +363,20 @@ function SubmitList(props) {
                 ></Input>
               </Form.Item>
               <Form.Item
+                label="Thể loại"
                 name="category"
-                className="form-control"
+                className="form-control  pl-auto label"
                 rules={[
                   { required: true, message: "Vui lòng chọn thể loại !" },
                 ]}
               >
-                <SelectCustom
-                  title="Thể loại"
-                  onHandleChange={changeValueCategory}
-                  options={listCategory}
+                <Select
+                  options={listCategory.map((item) => {
+                    return {
+                      value: item.id,
+                      label: item.name,
+                    };
+                  })}
                 />
               </Form.Item>
               <Form.Item
@@ -498,43 +405,55 @@ function SubmitList(props) {
               >
                 Địa chỉ
               </h1>
-              <Row>
-                <Col span={12} className="pr-20">
-                  <Form.Item
-                    name="province"
-                    rules={[
-                      { required: true, message: "Vui lòng chọn thành phố !" },
-                    ]}
-                  >
-                    <SelectCustom
-                      title="Thành phố"
-                      onHandleChange={changeValueProvince}
-                      options={listProvince}
-                    />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item
-                    name="district"
-                    rules={[
-                      { required: true, message: "Vui lòng chọn quận/huyện !" },
-                    ]}
-                  >
-                    <SelectCustom
-                      title="Quận/huyện"
-                      value={valueDistrict}
-                      onHandleChange={changeValueDistrict}
-                      options={listDistrict}
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
               <Form.Item
                 name="address"
                 rules={[{ required: true, message: "Vui lòng nhập địa chỉ !" }]}
               >
                 <Input className="input" placeholder="Địa chỉ cụ thể"></Input>
               </Form.Item>
+              <Row>
+                <Col span={24}>
+                  <Form.Item
+                    label="Thành phố"
+                    name="province"
+                    className="form-control  pl-auto label"
+                    rules={[
+                      { required: true, message: "Vui lòng chọn thành phố !" },
+                    ]}
+                  >
+                    <Select
+                      title="Thành phố"
+                      onChange={changeValueProvince}
+                      options={listProvince.map((item) => {
+                        return {
+                          value: item.id,
+                          label: item.name,
+                        };
+                      })}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={24}>
+                  <Form.Item
+                    label="Quận huyện"
+                    name="district"
+                    className="form-control  pl-auto label"
+                    rules={[
+                      { required: true, message: "Vui lòng chọn quận/huyện !" },
+                    ]}
+                  >
+                    <Select
+                      title="Quận/huyện"
+                      options={listDistrict.map((item) => {
+                        return {
+                          value: item.id,
+                          label: item.name,
+                        };
+                      })}
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
             </div>
           </Col>
         </Row>
@@ -545,10 +464,6 @@ function SubmitList(props) {
                 Hình ảnh
               </h1>
               <Upload
-                // m phải tìm thuộc tính để truyền cái image vào trong này, image truyền vào không phải image mà người ta chọn
-                // khi cái file m đã thay đổi thì file truyền vào đây cũng sẽ thay đổi, nên việc hiển thị ảnh ở
-                // đây là do server của mình, mà k phải do server của ant, nên mới quản lý được
-                // Chứ giờ m tìm hiểu cái này, thì tí tìm hiểu xong dùng api call thì cũng xóa đi thôi à
                 listType="picture-card"
                 fileList={fileList}
                 beforeUpload={beforeUpload}
@@ -581,14 +496,6 @@ function SubmitList(props) {
                   wrapperClassName="wrapper-editor"
                   editorClassName="editor"
                   toolbarClassName="toolbar"
-                  onChange={handleChangeOverview}
-                  value={
-                    descriptionEditor === undefined ||
-                    descriptionEditor === null ||
-                    descriptionEditor === "<p></p>\n"
-                      ? ""
-                      : descriptionEditor
-                  }
                 />
               </Form.Item>
             </div>
@@ -623,7 +530,6 @@ function SubmitList(props) {
                             return (
                               <Feature
                                 key={index}
-                                onchange={changeValueTypeApartment}
                                 name={item.name}
                                 icon={item.icon}
                                 label={item.label}
@@ -648,13 +554,17 @@ function SubmitList(props) {
             </div>
           </Col>
         </Row>
-        <Button
-          className="btn-custom"
-          value={
-            history.location.pathname === "/dang-bai" ? "Đăng bài" : "Chỉnh sửa"
-          }
-          onClick={() => submitData()}
-        ></Button>
+        <Form.Item>
+          <Button
+            className="btn-custom"
+            value={
+              history.location.pathname === "/dang-bai"
+                ? "Đăng bài"
+                : "Chỉnh sửa"
+            }
+            htmlType="submit"
+          ></Button>
+        </Form.Item>
       </Form>
     </div>
   );

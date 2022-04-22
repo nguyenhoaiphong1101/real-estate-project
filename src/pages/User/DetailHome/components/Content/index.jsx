@@ -19,7 +19,6 @@ function Content(props) {
           content={detailHome?.apartment_detail?.description}
         />
       </div>
-      <SectionPriceRange />
       <SectionFeatures />
       <SectionSimilarListing isRender={props.isRender} />
     </div>

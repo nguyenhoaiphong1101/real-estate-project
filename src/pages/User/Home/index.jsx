@@ -14,25 +14,22 @@ import "./styles.scss";
 
 function Home(props) {
   const listRecommend = useSelector((state) => state.recommend.listRecommend);
-  const checkArrRecommend = () => {
-    if (listRecommend.length > 3) return <ListRecomend />;
-  };
 
   const dispatch = useDispatch();
 
   const token = localStorage.getItem("access_token");
   useEffect(() => {
-    // dispatch(
-    //   loadListRecommend({
-    //     user_id: token ? jwtDecode(token).id : null,
-    //   })
-    // );
+    dispatch(
+      loadListRecommend({
+        user_id: token ? jwtDecode(token).id : null,
+      })
+    );
   }, []);
 
   return (
     <div style={{ paddingBottom: "20px" }}>
       <Banner />
-      {checkArrRecommend()}
+      <ListRecomend />
       <SectionRecentList />
       <ListAboutProduct />
       <Category />

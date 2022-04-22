@@ -196,6 +196,8 @@ function ThumbnailPrimary(props) {
             <span className="listing-price">
               {props.listLatestNew?.total_price / 1000000000} tỷ
             </span>
+          </div>
+          <div>
             <div className="acr-listing-icons">
               <div className="acr-listing-icon">
                 <i className="flaticon-pillow"></i>
@@ -216,46 +218,45 @@ function ThumbnailPrimary(props) {
                 </span>
               </div>
             </div>
-          </div>
-
-          <div className="author">
-            <div onClick={() => toDetailHome()}>
-              <a className="listing__body--img">
-                <img
-                  src={
-                    props.listLatestNew?.author?.avatar?.name
-                      ? getPhotosImgAvatar(
-                          props.listLatestNew?.author?.avatar?.name
-                        )
-                      : Img
-                  }
-                  alt="agent"
-                />
-              </a>
-            </div>
-            <div className="media-body">
-              <h6>{props.listLatestNew?.author?.full_name}</h6>
-              <span>{toTimeString(props.listLatestNew?.created_at)}</span>
-            </div>
-            <div className="icon-wrapper">
-              <Popover trigger="click" onClick={addCompare}>
-                <div className="icon" style={{ marginRight: "5px" }}>
-                  <i className="fas fa-plus"></i>
-                </div>
-              </Popover>
-              <Popover trigger="click" onClick={setFavorite}>
-                <div className="icon" style={{ marginRight: "5px" }}>
-                  <i
-                    style={{ color: isFavorite ? "#ff0f59" : "" }}
-                    className="far fa-heart"
-                  ></i>
-                </div>
-              </Popover>
-              {/* <Popover className="popup" content={content} trigger="click">
+            <div className="author">
+              <div onClick={() => toDetailHome()}>
+                <a className="listing__body--img">
+                  <img
+                    src={
+                      props.listLatestNew?.author?.avatar?.name
+                        ? getPhotosImgAvatar(
+                            props.listLatestNew?.author?.avatar?.name
+                          )
+                        : Img
+                    }
+                    alt="agent"
+                  />
+                </a>
+              </div>
+              <div className="media-body">
+                <h6>{props.listLatestNew?.author?.full_name}</h6>
+                <span>{toTimeString(props.listLatestNew?.created_at)}</span>
+              </div>
+              <div className="icon-wrapper">
+                <Popover trigger="click" onClick={addCompare}>
+                  <div className="icon" style={{ marginRight: "5px" }}>
+                    <i className="fas fa-plus"></i>
+                  </div>
+                </Popover>
+                <Popover trigger="click" onClick={setFavorite}>
+                  <div className="icon" style={{ marginRight: "5px" }}>
+                    <i
+                      style={{ color: isFavorite ? "#ff0f59" : "" }}
+                      className="far fa-heart"
+                    ></i>
+                  </div>
+                </Popover>
+                {/* <Popover className="popup" content={content} trigger="click">
                 <div className="icon">
                   <i className="fas fa-ellipsis-h"></i>
                 </div>
               </Popover> */}
+              </div>
             </div>
           </div>
         </div>

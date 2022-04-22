@@ -1,7 +1,6 @@
 import { Col, Row, Tabs, Select } from "antd";
 import React, { useState } from "react";
-import Filter from "../../../components/Filter";
-import FilterListings from "./components/FilterListings";
+// import FilterListings from "./components/FilterListings";
 import GridHome from "./components/GridHome";
 import ListHome from "./components/ListHome";
 import MortgageCalculator from "./components/MortgageCalculator";
@@ -50,7 +49,7 @@ function Listings(props) {
               <div className="title-filter">
                 Tìm kiếm thông tin bất động sản
               </div>
-              <Filter type="BUY" />
+              {/* <Filter type="BUY" /> */}
             </div>
             <div className="tab-wrapper" style={{ width: "100%" }}>
               <div className="fil-sort">

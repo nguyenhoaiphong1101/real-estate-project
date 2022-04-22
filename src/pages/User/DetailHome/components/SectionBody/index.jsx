@@ -4,6 +4,7 @@ import "./styles.scss";
 import Content from "../Content";
 import SideBar from "../Sidebar";
 import SectionSlideIntroduce from "../SectionSlideIntroduce";
+import SectionPriceRange from "../SectionPriceRange";
 
 function SectionBody(props) {
   return (
@@ -11,6 +12,9 @@ function SectionBody(props) {
       <div className="container">
         <Row>
           <SectionSlideIntroduce />
+        </Row>
+        <Row>
+          <SectionPriceRange />
         </Row>
         <Row>
           <Col span={16}>

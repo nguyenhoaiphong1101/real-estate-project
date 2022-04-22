@@ -10,7 +10,7 @@ function ThumbnailDetailRecommend(props) {
   const history = useHistory();
 
   const toDetailHome = () => {
-    history.push(`/chi-tiet/${props?.list?.id}`, props?.list);
+    history.push(`/chi-tiet/${props?.list?.id}`);
   };
 
   const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
@@ -26,7 +26,6 @@ function ThumbnailDetailRecommend(props) {
     }
   }, [listCompare]);
   const dispatch = useDispatch();
-
   const addCompare = () => {
     var temp = listCompare;
     if (
@@ -60,12 +59,7 @@ function ThumbnailDetailRecommend(props) {
         </h5>
         <span>{props.list?.address}</span>
         <br />
-        <span>
-          {new Intl.NumberFormat("de-DE", {
-            style: "currency",
-            currency: "VND",
-          }).format(props.list?.total_price)}
-        </span>
+        <span>{props.list?.total_price}</span>
         <br />
         <span
           onClick={addCompare}

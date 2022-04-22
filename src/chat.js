@@ -3,9 +3,6 @@ import React from "react";
 function Chat() {
   return (
     <div>
-      <div className="text-center">
-        <h1>Chatbot Integration</h1>
-      </div>
       <df-messenger
         intent="WELCOME"
         chat-title="Auto Smart Bot"

@@ -1,32 +1,36 @@
-import { useSelector } from 'react-redux';
-import './styles.scss';
+import { Popover } from "antd";
+import { useSelector } from "react-redux";
+import "./styles.scss";
 
 function SectionPriceRange() {
-    const detailHome = useSelector(state => state.detailhome.detailHome)
+  const detailHome = useSelector((state) => state.detailhome.detailHome);
+  console.log(detailHome);
 
+  //new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)
+  return (
+    <div className="section-price-wrapper">
+      <div className="section-price">
+        <div className="area-price">
+          <div className="price-min">
+            <span>Giá cả</span>
 
-    //new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(props.listLatestNew?.total_price)
-    return (
-        <div className="section-price-wrapper">
-            <div className="section-price">
-                <span style={{left:`${detailHome?.total_price/100000000000*100}%`}} className="current-price">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(detailHome?.total_price)}</span>
-                <div className="progress">
-                    <div className="progress-bar"></div>
-                </div>
-                <div className="area-price">
-                    <div className="price-min">
-                        <h5>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(1000000)}</h5>
-                        <span>Thấp nhất</span>
-                    </div>
-                    <h5>Khoảng giá trong khu vực</h5>
-                    <div className="price-max">
-                        <h5>{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'VND' }).format(100000000000)}</h5>
-                        <span>Cao nhất</span>
-                    </div>
-                </div>
-            </div>
+            <h5>{detailHome.total_price}</h5>
+          </div>
+          <div className="price-min">
+            <span>Diện tích</span>
+
+            <h5>{detailHome.area} m2</h5>
+          </div>
+          <div className="btn-favorite">
+            <h5>
+              {" "}
+              <i className="far fa-heart"></i> Yêu thích
+            </h5>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default SectionPriceRange;

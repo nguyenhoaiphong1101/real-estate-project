@@ -1,0 +1,65 @@
+.form-filter {
+  .ant-modal-body {
+    padding: 0 !important;
+    .modal-filter {
+      .group-filter-scroll {
+        padding: 0 40px;
+        height: 500px;
+        overflow-y: scroll;
+        .group-filter {
+          margin-top: 24px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #e5e3e8;
+          .label {
+            margin-bottom: 16px;
+            font-size: 1.1em;
+          }
+        }
+      }
+    }
+    .footer-modal-filter {
+      border-top: 1px solid #e5e3e8;
+      padding: 10px 10px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      .btn-filter {
+        border-radius: 24px;
+        width: fit-content;
+        padding: 10px 16px;
+        height: auto;
+        border: 0;
+        box-shadow: none;
+        i {
+          margin-right: 5px;
+          font-size: 12px;
+        }
+      }
+
+      .btn-filter:hover {
+        color: rgba(0, 0, 0, 0.85);
+        background-color: #f6f5f7;
+      }
+
+      .btn-filter:focus {
+        color: rgba(0, 0, 0, 0.85);
+      }
+
+      .btn-search {
+        border-radius: 24px;
+        width: fit-content;
+        padding: 10px 16px;
+        height: auto;
+        border: 0;
+        background-color: #01bbbc;
+        color: #fff;
+      }
+
+      .btn-search:hover,
+      .btn-search:focus {
+        background-color: #01bbbc;
+        color: #fff;
+      }
+    }
+  }
+}
