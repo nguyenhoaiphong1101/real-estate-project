@@ -1,4 +1,3 @@
-import { Popover } from "antd";
 import { useSelector } from "react-redux";
 import "./styles.scss";
 

@@ -231,6 +231,7 @@ function ManageCategory(props) {
         visible={isModalVisible}
         onOk={typeButton === "ADD" ? addCate : changeCate}
         onCancel={handleCancel}
+        getContainer={false}
         okText={typeButton === "ADD" ? "Thêm" : "Chỉnh sửa"}
       >
         <Form form={form} name="basic">

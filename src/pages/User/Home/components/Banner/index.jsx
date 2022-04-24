@@ -1,13 +1,8 @@
-import { Col, Row } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
-import ButtonCustom from "../../../../../components/Button";
-import SelectCustom from "../../../../../components/Select/index";
 import "./styles.scss";
 import { Tabs } from "antd";
-import { loadDistrict, loadProvince } from "../../../../../actions/search";
-import { Input, Space } from "antd";
-import { loadListCategory } from "../../../../../actions/category";
+import { loadDistrict } from "../../../../../actions/search";
 import { loadListFilter } from "../../../../../actions/listfilter";
 import { useHistory } from "react-router";
 import Filter from "../../../../../components/FilterHome";
@@ -95,7 +90,7 @@ function Banner() {
         inputSearch
       )
     );
-    if (typeAparment == "1") {
+    if (typeAparment === "1") {
       history.push("/nha-dat-ban", { from: "/" });
     } else {
       history.push("/nha-dat-thue", { from: "/" });

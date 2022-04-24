@@ -1,6 +1,5 @@
 import { Popover } from "antd";
 import React, { useEffect, useState } from "react";
-import Button from "../../Button";
 import moment from "moment";
 import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,7 +48,6 @@ function ThumbnailPrimary(props) {
       setIsFavorite(!isFavorite);
       postFavorite.POST(props.listLatestNew?.id);
     } else {
-      console.log("=====");
       setIsVisible(true);
     }
   };
@@ -65,10 +63,6 @@ function ThumbnailPrimary(props) {
       dispatch(changeCompare(temp));
     }
   };
-
-  useEffect(() => {
-    setIsFavorite(props?.listLatestNew?.favourite);
-  }, [props?.listLatestNew?.favourite]);
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -125,7 +119,11 @@ function ThumbnailPrimary(props) {
           {/* <img className={`${props.classNameImg}`} src={image !== {} ? image?.url : ""} alt="listing" /> */}
           <img
             className={`${props.classNameImg}`}
-            src="https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg"
+            src={
+              image?.url
+                ? image?.url
+                : "https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg"
+            }
             alt="listing"
           />
         </a>
@@ -194,7 +192,7 @@ function ThumbnailPrimary(props) {
           <div>
             <p className="listing-text">{props.listLatestNew?.title}</p>
             <span className="listing-price">
-              {props.listLatestNew?.total_price / 1000000000} tỷ
+              {props.listLatestNew?.total_price}
             </span>
           </div>
           <div>

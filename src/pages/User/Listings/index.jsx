@@ -1,10 +1,8 @@
-import { Col, Row, Tabs, Select } from "antd";
+import { Row, Tabs, Select } from "antd";
 import React, { useState } from "react";
-// import FilterListings from "./components/FilterListings";
+import FilterListing from "../../../components/FilterListing";
 import GridHome from "./components/GridHome";
 import ListHome from "./components/ListHome";
-import MortgageCalculator from "./components/MortgageCalculator";
-import RecentListings from "./components/RecentListings";
 import "./styles.scss";
 const { TabPane } = Tabs;
 
@@ -16,9 +14,6 @@ function Listings(props) {
 
   const handleChange = (value) => {
     setSortBy(value);
-  };
-  const handleChangeDirection = (value) => {
-    setSortDirection(value);
   };
 
   return (
@@ -43,14 +38,12 @@ function Listings(props) {
         </div>
       </div>
       <div className="content">
+        <div style={{ width: "100%" }}>
+          <div className="title-filter">Tìm kiếm thông tin bất động sản</div>
+          <FilterListing />
+        </div>
         <div className="container">
           <Row>
-            <div style={{ width: "100%", padding: "0 200px" }}>
-              <div className="title-filter">
-                Tìm kiếm thông tin bất động sản
-              </div>
-              {/* <Filter type="BUY" /> */}
-            </div>
             <div className="tab-wrapper" style={{ width: "100%" }}>
               <div className="fil-sort">
                 <span className="title">Sort by </span>

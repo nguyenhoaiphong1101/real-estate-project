@@ -1,20 +1,38 @@
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import jwtDecode from "jwt-decode";
+import React, { useRef, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
+import { loadListRecommend } from "../../../../../actions/recommend";
 import ThumbnailRecomend from "../../../../../components/Thumbnail/ThumbnailRecommend";
 import "./styles.scss";
 
 function ListRecomend(props) {
   const slide = useRef(null);
+  const [isIndex, setIsIndex] = useState(0);
   const listRecommend = useSelector((state) => state.recommend.listRecommend);
 
+  const dispatch = useDispatch();
+
+  const token = localStorage.getItem("access_token");
+  useEffect(() => {
+    if (!listRecommend.length)
+      dispatch(
+        loadListRecommend({
+          user_id: token ? jwtDecode(token).id : null,
+        })
+      );
+  }, []);
+
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
+    beforeChange: (prev, next) => {
+      setIsIndex(next);
+    },
   };
 
   const next = () => {
@@ -30,7 +48,11 @@ function ListRecomend(props) {
         <div className="title-recomend">
           <h2>Có thể bạn sẽ quan tâm</h2>
           <div className="slick-slider-product">
-            <button className="button-prev" onClick={previous}>
+            <button
+              className={`button-prev ${isIndex === 0 ? "disable-btn" : ""}`}
+              disabled={isIndex === 0}
+              onClick={previous}
+            >
               <LeftOutlined style={{ color: "black", fontSize: "16px" }} />
             </button>
             <div>
@@ -45,7 +67,13 @@ function ListRecomend(props) {
                 })}
               </Slider>
             </div>
-            <button className="button-next" onClick={next}>
+            <button
+              className={`button-next ${
+                isIndex === listRecommend.length - 4 ? "disable-btn" : ""
+              }`}
+              disabled={isIndex === listRecommend.length - 4}
+              onClick={next}
+            >
               <RightOutlined style={{ color: "black", fontSize: "16px" }} />
             </button>
           </div>

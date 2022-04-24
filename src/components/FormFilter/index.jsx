@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { loadDistrict } from "../../actions/search";
 import { quantity } from "../../constants/Config";
 import { useDispatch, useSelector } from "react-redux";

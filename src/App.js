@@ -1,6 +1,5 @@
 import jwt_decode from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import ReactLoading from "react-loading";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
@@ -29,9 +28,6 @@ import { getInfoUser } from "./actions/user";
 function App() {
   const location = window.location;
 
-  const [enableFooter, setEnableFooter] = useState(true);
-  const [path, setPath] = useState("");
-  const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("access_token"));
 
   const localToken = localStorage.getItem("access_token");
@@ -50,12 +46,6 @@ function App() {
   };
 
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [token]);
-  useEffect(() => {
     dispatch(loadProvince());
     dispatch(loadListCategory());
     dispatch(loadCountry());
@@ -70,88 +60,73 @@ function App() {
   doAxiosRequestIntercept();
   return (
     <BrowserRouter>
-      {loading ? (
-        <div className="loading">
-          <ReactLoading
-            color={"#000"}
-            type={"spinningBubbles"}
-            height={"5%"}
-            width={"5%"}
-          />
-        </div>
-      ) : (
-        <div className="app">
-          <Header
-            setEnableFooter={setEnableFooter}
-            path={path}
-            setLoading={setLoading}
-            role={returnRole()}
-          />
-          {returnRole() !== "ADMIN" ? (
-            <div className="compare">
-              <ListCompare />
-            </div>
-          ) : null}
-          <Switch>
-            {returnRole() === "ADMIN" && <AdminWrapper />}
-            <Route path="/" exact>
-              <Home />
-              <Footer />
-            </Route>
-            <Route path="/chi-tiet/:id">
-              <DetailHome />
-              <Footer />
-            </Route>
-            <Route path="/trang-ca-nhan">
-              <Profile />
-              <Footer />
-            </Route>
-            <Route path="/chinh-sua/:id">
-              <SubmitList />
-              <Footer />
-            </Route>
-            <Route path="/dang-bai">
-              <SubmitList />
-              <Footer />
-            </Route>
+      <div className="app">
+        <Header role={returnRole()} />
+        {returnRole() !== "ADMIN" ? (
+          <div className="compare">
+            <ListCompare />
+          </div>
+        ) : null}
+        <Switch>
+          {returnRole() === "ADMIN" && <AdminWrapper />}
+          <Route path="/" exact>
+            <Home />
+            <Footer />
+          </Route>
+          <Route path="/chi-tiet/:id">
+            <DetailHome />
+            <Footer />
+          </Route>
+          <Route path="/trang-ca-nhan">
+            <Profile />
+            <Footer />
+          </Route>
+          <Route path="/chinh-sua/:id">
+            <SubmitList />
+            <Footer />
+          </Route>
+          <Route path="/dang-bai">
+            <SubmitList />
+            <Footer />
+          </Route>
+          <Route path="/nha-dat-ban">
+            <Listings title="Nhà đất bán" />
+            <Footer />
+          </Route>
+          <Route path="/nha-dat-thue">
+            <Listings title="Nhà đất thuê" />
+            <Footer />
+          </Route>
+          <Route path="/dang-nhap" exact>
+            <Login />
+            <Footer />
+          </Route>
+          <Route path="/dang-ky" exact>
+            <Signup />
+            <Footer />
+          </Route>
+          <Route path="/so-sanh/:id" exact>
+            <Compare title="So sánh bất động sản" />
+            <Footer />
+          </Route>
+          <Route path="/thong-ke" exact>
+            <Statistical title="Thống kê bất động sản" />
+            <Footer />
+          </Route>
+          <Route path="/danh-sach-phu-hop" exact>
+            <Recommend />
+            <Footer />
+          </Route>
+          <Route>
+            <Header />
+            <NotFound />
+            <Footer />
+          </Route>
+        </Switch>
+        <Chat />
+      </div>
 
-            <Route path="/nha-dat-ban">
-              <Listings title="Nhà đất bán" />
-              <Footer />
-            </Route>
-            <Route path="/nha-dat-thue">
-              <Listings title="Nhà đất thuê" />
-              <Footer />
-            </Route>
-            <Route path="/dang-nhap" exact>
-              <Login />
-              <Footer />
-            </Route>
-            <Route path="/dang-ky" exact>
-              <Signup />
-              <Footer />
-            </Route>
-            <Route path="/so-sanh/:id" exact>
-              <Compare title="So sánh bất động sản" />
-              <Footer />
-            </Route>
-            <Route path="/thong-ke" exact>
-              <Statistical title="Thống kê bất động sản" />
-              <Footer />
-            </Route>
-            <Route path="/dang-sach-phu-hop" exact>
-              <Recommend />
-              <Footer />
-            </Route>
-            <Route>
-              <Header setEnableFooter={setEnableFooter} />
-              <NotFound />
-              <Footer />
-            </Route>
-          </Switch>
-          <Chat />
-        </div>
-      )}
+      {/* )} */}
     </BrowserRouter>
     // <Home />
   );

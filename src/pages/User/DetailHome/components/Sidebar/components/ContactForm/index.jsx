@@ -1,7 +1,5 @@
-import { Form, Input, Popover } from "antd";
 import React from "react";
 import { useSelector } from "react-redux";
-import ButtonSubmit from "../../../../../../../components/Button";
 import { API_URL } from "../../../../../../../constants/Config";
 import "./styles.scss";
 import Img from "../../../../../../../assets/images/noavatar.png";

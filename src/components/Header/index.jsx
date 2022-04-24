@@ -5,7 +5,7 @@ import "./styles.scss";
 
 import useDocumentScroll from "./../../hooks/useDocumentScroll";
 import { useDispatch, useSelector } from "react-redux";
-import { getInfoUser, resetUser } from "../../actions/user";
+import { resetUser } from "../../actions/user";
 import { resetDetail } from "../../actions/detailhome";
 
 function Header(props) {
@@ -18,17 +18,6 @@ function Header(props) {
     window.scrollTo(0, 0);
   }, [location]);
 
-  useEffect(() => {
-    if (
-      location.pathname === "/dang-ky" ||
-      location.pathname === "/dang-nhap"
-    ) {
-      props.setEnableFooter(false);
-    } else {
-      props.setEnableFooter(true);
-    }
-  }, [location.pathname]);
-
   const removeLocal = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("role");
@@ -39,17 +28,17 @@ function Header(props) {
   const dispatch = useDispatch();
 
   const checkLogin = () => {
-    if (token == null) {
+    if (token === null) {
       return (
         <ul className="nav-link">
           <React.Fragment>
-            <li className={path === "/dang-nhap" ? "active" : ""}>
-              <Link to="/dang-nhap"> Đăng nhập </Link>
+            <li>
+              <Link to="/dang-nhap">Đăng nhập</Link>
             </li>
           </React.Fragment>
           <React.Fragment>
-            <li className={path === "/dang-ky" ? "active" : ""}>
-              <Link to="/dang-ky"> Đăng ký </Link>
+            <li>
+              <Link to="/dang-ky">Đăng ký</Link>
             </li>
           </React.Fragment>
         </ul>
@@ -58,7 +47,7 @@ function Header(props) {
       return (
         <ul className="nav-link">
           <React.Fragment>
-            <li className={path === "/dang-nhap" ? "active" : ""}>
+            <li>
               {localStorage.getItem("role") === "ADMIN" ? (
                 <Link
                   className="mr-10"
@@ -83,7 +72,6 @@ function Header(props) {
                 onClick={() => {
                   removeLocal();
                   dispatch(resetUser());
-                  props.setLoading(true);
                 }}
               >
                 {" "}
@@ -190,27 +178,43 @@ function Header(props) {
               />
               <ul className="nav-link">
                 <React.Fragment>
-                  <li className={path === "/" ? "active" : ""}>
+                  <li className={location.pathname === "/" ? "active" : ""}>
                     <Link to="/"> Trang chủ </Link>
                   </li>
                 </React.Fragment>
                 <React.Fragment>
-                  <li className={path === "/nha-dat-ban" ? "active" : ""}>
+                  <li
+                    className={
+                      location.pathname === "/nha-dat-ban" ? "active" : ""
+                    }
+                  >
                     <Link to="/nha-dat-ban"> Nhà đất bán </Link>
                   </li>
                 </React.Fragment>
                 <React.Fragment>
-                  <li className={path === "/nha-dat-thue" ? "active" : ""}>
+                  <li
+                    className={
+                      location.pathname === "/nha-dat-thue" ? "active" : ""
+                    }
+                  >
                     <Link to="/nha-dat-thue"> Nhà đất thuê </Link>
                   </li>
                 </React.Fragment>
                 <React.Fragment>
-                  <li className={path === "/danh-sach-phu-hop" ? "active" : ""}>
-                    <Link to="/dang-sach-phu-hop"> Danh sách phù hợp </Link>
+                  <li
+                    className={
+                      location.pathname === "/danh-sach-phu-hop" ? "active" : ""
+                    }
+                  >
+                    <Link to="/danh-sach-phu-hop"> Danh sách phù hợp </Link>
                   </li>
                 </React.Fragment>
                 <React.Fragment>
-                  <li className={path === "/thong-ke" ? "active" : ""}>
+                  <li
+                    className={
+                      location.pathname === "/thong-ke" ? "active" : ""
+                    }
+                  >
                     <Link to="/thong-ke"> Thống kê bất động sản </Link>
                   </li>
                 </React.Fragment>
@@ -230,76 +234,3 @@ function Header(props) {
 }
 
 export default Header;
-
-/**
- * Render a nested hierarchy of route configs with unknown depth/breadth
- */
-function displayRouteMenu(routes, path) {
-  /**
-   * Render a single route as a list item link to the config's pathname
-   */
-  function singleRoute(route) {
-    var active = route.path === path ? "active" : "";
-    return (
-      <li key={route.key} className={active}>
-        <Link to={route.path}> {route.display} </Link>
-      </li>
-    );
-  }
-
-  // loop through the array of routes and generate an unordered list
-  return (
-    <ul className="nav-link">
-      {routes.map((route) => {
-        // if this route has sub-routes, then show the ROOT as a list item and recursively render a nested list of route links
-        if (route.routes) {
-          return (
-            <React.Fragment key={route.key}>
-              {singleRoute(route)}
-              {displayRouteMenu(route.routes)}
-            </React.Fragment>
-          );
-        }
-
-        // no nested routes, so just render a single route
-        return singleRoute(route);
-      })}
-    </ul>
-  );
-}
-/**
- * Render a nested hierarchy of route configs with unknown depth/breadth
- */
-function displayRouteLogin(routes, path) {
-  /**
-   * Render a single route as a list item link to the config's pathname
-   */
-  function singleRouteLogin(route) {
-    var active = route.path === path ? "active" : "";
-    return (
-      <li key={route.key} className={active}>
-        <Link to={route.path}> {route.display} </Link>
-      </li>
-    );
-  }
-
-  // loop through the array of routes and generate an unordered list
-  return (
-    <ul className="nav-link">
-      {routes.map((route) => {
-        // if this route has sub-routes, then show the ROOT as a list item and recursively render a nested list of route links
-        if (route.routes) {
-          return (
-            <React.Fragment key={route.key}>
-              {singleRouteLogin(route)}
-              {displayRouteLogin(route.routes)}
-            </React.Fragment>
-          );
-        }
-
-        // no nested routes, so just render a single route
-        return singleRouteLogin(route);
-      })}
-    </ul>
-  );
-}

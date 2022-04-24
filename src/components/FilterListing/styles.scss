@@ -1,0 +1,114 @@
+.section-filter-listing {
+  .filter-listing {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 50px;
+    border-bottom: 1px solid #e5e3e8;
+    border-top: 1px solid #e5e3e8;
+    justify-content: space-between;
+    .input-search {
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: 0.2s;
+      padding: 10px;
+      margin: 0 20px;
+      flex: 1;
+      i {
+        margin: auto;
+        color: #726e75;
+      }
+      .text-input {
+        border: 0;
+        background-color: transparent;
+      }
+
+      .text-input:focus {
+        box-shadow: none !important;
+      }
+    }
+    .btn-filter {
+      border-radius: 24px;
+      width: fit-content;
+      padding: 10px 16px;
+      height: auto;
+      border: 0;
+      box-shadow: none;
+      i {
+        margin-right: 5px;
+        font-size: 12px;
+      }
+    }
+
+    .btn-filter:hover {
+      color: rgba(0, 0, 0, 0.85);
+      background-color: #f6f5f7;
+    }
+
+    .btn-filter:focus {
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    .btn-search {
+      border-radius: 24px;
+      width: 100%;
+      padding: 10px 16px;
+      height: auto;
+      border: 0;
+      background-color: #01bbbc;
+      color: #fff;
+    }
+
+    .btn-search:hover,
+    .btn-search:focus {
+      background-color: #01bbbc;
+      color: #fff;
+    }
+
+    .input-search:hover {
+      background-color: #f6f5f7;
+    }
+    .select-category {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      .title {
+        margin-right: 8px;
+      }
+      .select {
+        width: 200px;
+        .ant-select-selector {
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+  .tag-params {
+    display: flex;
+    padding: 15px 50px;
+    border-bottom: 1px solid #e5e3e8;
+    .tag {
+      display: inline;
+      padding: 10px 20px;
+      width: fit-content;
+      border: 1px solid #e5e3e8;
+      border-radius: 32px;
+      margin-right: 10px;
+      //   &:hover {
+      //     border: 1px solid #000;
+      //   }
+      i {
+        margin-left: 5px;
+        color: #e5e3e8;
+        &:hover {
+          color: #000;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

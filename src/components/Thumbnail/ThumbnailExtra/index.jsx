@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { postFavorite } from "../../../api/favorite";
 import { API_URL } from "../../../constants/Config";
-import Button from "../../Button";
 import "./styles.scss";
 import Img from "../../../assets/images/noavatar.png";
 import { deletePost } from "../../../api/userApi";

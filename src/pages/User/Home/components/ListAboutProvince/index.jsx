@@ -1,20 +1,33 @@
 import { Button, Col, Row, Select, Carousel } from "antd";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
-import { listDemoProduct } from "../../../../../constants/Config";
-import { listProvinceDemo } from "../../../../../constants/DataConfig";
 import "./styles.scss";
 import ThumbnailPrimary from "../../../../../components/Thumbnail/ThumbnailPrimary";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { loadListHighlight } from "../../../../../actions/highlight";
+import { useDispatch, useSelector } from "react-redux";
 
 function ListAboutProduct(props) {
+  const [isIndex, setIsIndex] = useState(0);
+
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
+    arrows: true,
     slidesToShow: 3,
     slidesToScroll: 1,
+    beforeChange: (prev, next) => {
+      setIsIndex(next);
+    },
   };
+
+  const listHighlight = useSelector((state) => state.highlight.listHighlight);
+  const listProvince = useSelector((state) => state.search.province);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadListHighlight());
+  }, []);
 
   const slide = useRef(null);
 
@@ -33,16 +46,16 @@ function ListAboutProduct(props) {
             <div>
               <p className="title">Bất động sản nổi bật theo khu vực</p>
               <Select
-                showSearch
                 className="select-province"
                 style={{ minWidth: "fit-content" }}
                 bordered={false}
                 defaultValue={1}
-                optionFilterProp="children"
-                filterOption={(input, option) =>
-                  option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
-                options={listProvinceDemo}
+                options={listProvince.map((item) => {
+                  return {
+                    value: item.id,
+                    label: item.name,
+                  };
+                })}
               />
               <p className="title-quality">Tìm thấy 40 tin đăng</p>
             </div>
@@ -50,12 +63,16 @@ function ListAboutProduct(props) {
           </div>
         </Col>
         <Col span={18} className="slick-slider-product">
-          <button className="button-prev" onClick={previous}>
+          <button
+            className={`button-prev ${isIndex === 0 ? "disable-btn" : ""}`}
+            disabled={isIndex === 0}
+            onClick={previous}
+          >
             <LeftOutlined style={{ color: "black", fontSize: "16px" }} />
           </button>
           <div>
             <Slider ref={slide} {...settings}>
-              {listDemoProduct.map((item, index) => {
+              {listHighlight.map((item, index) => {
                 if (index < 10)
                   return (
                     <div key={index} style={{ paddingRight: "5px !important" }}>
@@ -65,7 +82,13 @@ function ListAboutProduct(props) {
               })}
             </Slider>
           </div>
-          <button className="button-next" onClick={next}>
+          <button
+            className={`button-next ${
+              isIndex === listHighlight.length - 3 ? "disable-btn" : ""
+            }`}
+            disabled={isIndex === listHighlight.length - 3}
+            onClick={next}
+          >
             <RightOutlined style={{ color: "black", fontSize: "16px" }} />
           </button>
         </Col>

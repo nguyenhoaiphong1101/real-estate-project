@@ -68,7 +68,7 @@
         padding-right: 5px;
       }
       .button-prev {
-        background: #fff;
+        background: #01bbbc;
         border: none;
         left: -20px;
         position: absolute;
@@ -81,16 +81,18 @@
         transform: translateY(-50%);
         padding: 0;
         outline: none;
-        border: 1px solid #e6e6e6;
         box-shadow: 0 0 7px -4px #000;
         width: 56px;
         height: 56px;
         border-radius: 56px;
         transition: all 0.3s ease-in-out;
         z-index: 1;
+        span {
+          color: #fff !important;
+        }
       }
       .button-next {
-        background: #fff;
+        background: #01bbbc;
         border: none;
         right: -20px;
         position: absolute;
@@ -103,13 +105,21 @@
         transform: translateY(-50%);
         padding: 0;
         outline: none;
-        border: 1px solid #e6e6e6;
         box-shadow: 0 0 7px -4px #000;
         width: 56px;
         height: 56px;
         border-radius: 56px;
         transition: all 0.3s ease-in-out;
         z-index: 1;
+        span {
+          color: #fff !important;
+        }
+      }
+      .disable-btn {
+        background: #fff !important;
+        span {
+          color: #000 !important;
+        }
       }
     }
   }

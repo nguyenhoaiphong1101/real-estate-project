@@ -50,7 +50,13 @@ function ThumbnailRecomend(props) {
 
       <div
         className="recomend-img"
-        style={{ backgroundImage: `url(${image?.url})` }}
+        style={{
+          backgroundImage: `url(${
+            image?.url
+              ? image?.url
+              : "https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg"
+          })`,
+        }}
         onClick={() => toDetailHome()}
       ></div>
       <div className="recomend-item-body">

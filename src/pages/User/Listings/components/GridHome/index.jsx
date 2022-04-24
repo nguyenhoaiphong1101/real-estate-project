@@ -7,7 +7,7 @@ import { loadListSearch } from "../../../../../actions/listsearch";
 import jwtDecode from "jwt-decode";
 
 function GridHome(props) {
-  const listSearch = useSelector((state) => state.listsearch.listSearch);
+  // const listSearch = useSelector((state) => state.listsearch.listSearch);
   const totalItem = useSelector((state) => state.listsearch.totalItem);
 
   const dispatch = useDispatch();

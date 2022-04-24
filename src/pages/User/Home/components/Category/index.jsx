@@ -1,11 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./styles.scss";
-import { Row, Col } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { loadListCategory } from "../../../../../actions/category";
-import { useHistory } from "react-router";
-import { loadListFilter } from "../../../../../actions/listfilter";
-import background from "../../../../../assets/images/Category/1.jpg";
 
 const items = [
   {

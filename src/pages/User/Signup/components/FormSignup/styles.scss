@@ -1,163 +1,163 @@
 .form-signup {
-    max-width: 500px;
-    margin: 0 auto;
-    margin-top: 80px;
-    margin-bottom: 80px;
+  max-width: 500px;
+  margin: 0 auto !important;
+  margin-top: 80px !important;
+  margin-bottom: 80px !important;
 
-    .text-end {
-        text-align: center;
-        margin-top: 30px;
+  .text-end {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .form-signup-text {
+    h3 {
+      font-size: 32px;
+      line-height: 40px;
+      margin: 0 0 20px;
+      font-weight: bold;
+      color: #101737;
     }
-
-    .form-signup-text {
-        h3 {
-            font-size: 32px;
-            line-height: 40px;
-            margin: 0 0 20px;
-            font-weight: bold;
-            color: #101737;
-        }
-        p {
-            margin-bottom: 30px;
-            line-height: 28px;
-            font-size: 14px;
-            color: #515151;
-        }
+    p {
+      margin-bottom: 30px;
+      line-height: 28px;
+      font-size: 14px;
+      color: #515151;
     }
+  }
 
-    .form-signup-group {
-        margin-bottom: 20px;
+  .form-signup-group {
+    margin-bottom: 20px;
 
-        label {
-            margin-bottom: 10px;
-            font-weight: bold;
-            display: block;
-        }
-
-        .form-signup-group-control {
-            display: block;
-            font-weight: bold;
-            line-height: 1.5;
-            background-clip: padding-box;
-            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-            height: 50px;
-            padding: 8px 15px;
-            border-radius: 8px;
-            width: 100%;
-            color: #6e6e6e;
-            border: 1px solid #e5e1dc;
-            background-color: #fff;
-            letter-spacing: 0.1px;
-            font-size: 14px;
-        }
-
-        .form-signup-group-forgot-password {
-            display: inline-block;
-            color: #101737;
-            text-decoration: underline;
-        }
+    label {
+      margin-bottom: 10px;
+      font-weight: bold;
+      display: block;
     }
 
-    .form-signup-btn-submit {
-        margin-top: 10px;
-        background-color: #01bbbc;
-        cursor: pointer;
-        transition: 0.3s;
-        display: inline-block;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        position: relative;
-        line-height: 24px;
-        border: 0;
-        color: #fff;
-        font-size: 14px;
-        font-weight: bold;
-        padding: 12px 20px;
-        border-radius: 8px;
-        overflow: hidden;
-        width: 100%;
-    }
-    .form-signup-btn-submit:hover {
-        background-color: #00a0a1;
+    .form-signup-group-control {
+      display: block;
+      font-weight: bold;
+      line-height: 1.5;
+      background-clip: padding-box;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      height: 50px;
+      padding: 8px 15px;
+      border-radius: 8px;
+      width: 100%;
+      color: #6e6e6e;
+      border: 1px solid #e5e1dc;
+      background-color: #fff;
+      letter-spacing: 0.1px;
+      font-size: 14px;
     }
 
-    .auth-seperator {
-        margin: 30px 0;
-        text-align: center;
-        span {
-            position: relative;
-            display: flex;
-            align-items: center;
-            color: #848486;
-            font-size: 13px;
-            font-weight: 500;
-        }
-        span::after {
-            content: "";
-            flex: 1 1;
-            background-color: rgba(0, 0, 0, 0.1);
-            height: 1px;
-            margin-left: 20px;
-        }
-        span::before {
-            content: "";
-            flex: 1 1;
-            background-color: rgba(0, 0, 0, 0.1);
-            height: 1px;
-            margin-right: 20px;
-        }
+    .form-signup-group-forgot-password {
+      display: inline-block;
+      color: #101737;
+      text-decoration: underline;
     }
-    .form-signup-btn-facebook {
-        cursor: pointer;
-        transition: 0.3s;
-        display: inline-block;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        position: relative;
-        line-height: 24px;
-        border: 0;
-        font-size: 14px;
-        font-weight: bold;
-        padding: 12px 20px;
-        border-radius: 8px;
-        overflow: hidden;
-        width: 100%;
-        background-color: rgba(59, 87, 157, 0.4);
-        color: #3b579d;
-    }
-    .form-signup-btn-facebook:hover {
-        background-color: #4427c5;
-        color: #fff;
-    }
+  }
 
-    .form-signup-btn-google {
-        margin-top: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-        display: inline-block;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        position: relative;
-        line-height: 24px;
-        border: 0;
-        font-size: 14px;
-        font-weight: bold;
-        padding: 12px 20px;
-        border-radius: 8px;
-        overflow: hidden;
-        width: 100%;
-        background-color: rgba(220, 74, 56, 0.4);
-        color: #dc4a38;
+  .form-signup-btn-submit {
+    margin-top: 10px;
+    background-color: #01bbbc;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    position: relative;
+    line-height: 24px;
+    border: 0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+  }
+  .form-signup-btn-submit:hover {
+    background-color: #00a0a1;
+  }
+
+  .auth-seperator {
+    margin: 30px 0;
+    text-align: center;
+    span {
+      position: relative;
+      display: flex;
+      align-items: center;
+      color: #848486;
+      font-size: 13px;
+      font-weight: 500;
     }
-    .form-signup-btn-google:hover {
-        background-color: #d81919;
-        color: #fff;
+    span::after {
+      content: "";
+      flex: 1 1;
+      background-color: rgba(0, 0, 0, 0.1);
+      height: 1px;
+      margin-left: 20px;
     }
+    span::before {
+      content: "";
+      flex: 1 1;
+      background-color: rgba(0, 0, 0, 0.1);
+      height: 1px;
+      margin-right: 20px;
+    }
+  }
+  .form-signup-btn-facebook {
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    position: relative;
+    line-height: 24px;
+    border: 0;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    background-color: rgba(59, 87, 157, 0.4);
+    color: #3b579d;
+  }
+  .form-signup-btn-facebook:hover {
+    background-color: #4427c5;
+    color: #fff;
+  }
+
+  .form-signup-btn-google {
+    margin-top: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    position: relative;
+    line-height: 24px;
+    border: 0;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    background-color: rgba(220, 74, 56, 0.4);
+    color: #dc4a38;
+  }
+  .form-signup-btn-google:hover {
+    background-color: #d81919;
+    color: #fff;
+  }
 }
 
 .mr-10 {
-    margin-right: 10px;
+  margin-right: 10px;
 }

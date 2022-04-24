@@ -76,10 +76,7 @@ function ThumbnailSecondary(props) {
         </h6>
         <div className="flex-compare">
           <span className="listing-price">
-            {new Intl.NumberFormat("de-DE", {
-              style: "currency",
-              currency: "VND",
-            }).format(props.listLatestNew?.total_price)}
+            {props.listLatestNew?.total_price}
           </span>
           <span
             onClick={addCompare}
