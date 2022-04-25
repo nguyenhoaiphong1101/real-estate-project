@@ -54,26 +54,29 @@ function FormFilter(props) {
       <Form form={form} onFinish={onFilter} layout="vertical">
         <div className="modal-filter">
           <div className="group-filter-scroll">
-            <div className="group-filter">
-              <div className="label">Thể loại</div>
-              <Row>
-                <Col span={11}>
-                  <Form.Item name="category">
-                    <Select
-                      className="select-custom"
-                      placeholder="Thể loại bất động sản"
-                      allowClear
-                      options={listCategory.map((item) => {
-                        return {
-                          value: item.id,
-                          label: item.name,
-                        };
-                      })}
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
-            </div>
+            {props.listing ? null : (
+              <div className="group-filter">
+                <div className="label">Thể loại</div>
+                <Row>
+                  <Col span={11}>
+                    <Form.Item name="category">
+                      <Select
+                        className="select-custom"
+                        placeholder="Thể loại bất động sản"
+                        allowClear
+                        options={listCategory.map((item) => {
+                          return {
+                            value: item.id,
+                            label: item.name,
+                          };
+                        })}
+                      />
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </div>
+            )}
+
             <div className="group-filter">
               <div className="label">Địa chỉ</div>
               <Row>

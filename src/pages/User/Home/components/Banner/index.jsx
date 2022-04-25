@@ -11,7 +11,7 @@ const { TabPane } = Tabs;
 
 const diameters = [];
 
-function Banner() {
+function Banner(props) {
   const listCategory = useSelector((state) => state.category.listCategory);
 
   const [valueSearchType, setValueSearchType] = useState(0);
@@ -114,7 +114,7 @@ function Banner() {
         <div className="banner-filter">
           <div className="title-search">Tìm kiếm bất động sản</div>
           <div className="card-filter">
-            <Filter />
+            <Filter type={props.type} setType={props.setType} />
           </div>
         </div>
       </div>

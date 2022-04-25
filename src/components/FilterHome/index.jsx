@@ -8,6 +8,7 @@ const { TabPane } = Tabs;
 function Filter(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [params, setParams] = useState({});
+  console.log(props.type);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -23,17 +24,21 @@ function Filter(props) {
   };
   return (
     <div className="filter">
-      {props.type ? null : (
-        <Tabs
-          defaultActiveKey="1"
-          onChange={(e) => {
-            console.log(e);
-          }}
-        >
-          <TabPane tab={<p className="filter-tab">Mua</p>} key="1"></TabPane>
-          <TabPane tab={<p className="filter-tab">Thuê</p>} key="2"></TabPane>
-        </Tabs>
-      )}
+      <Tabs
+        defaultActiveKey={props.type}
+        onChange={(e) => {
+          props.setType(e);
+        }}
+      >
+        <TabPane
+          tab={<p className="filter-tab">Mua</p>}
+          key="nha-dat-ban"
+        ></TabPane>
+        <TabPane
+          tab={<p className="filter-tab">Thuê</p>}
+          key="nha-dat-thue"
+        ></TabPane>
+      </Tabs>
 
       <Row style={{ marginTop: "10px" }}>
         <Col span={18} style={{ paddingRight: "8px" }}>

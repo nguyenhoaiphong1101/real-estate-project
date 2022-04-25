@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Banner from "./components/Banner";
 import Category from "./components/Category";
@@ -10,13 +10,14 @@ import SectionRecentList from "./components/SectionRecentList";
 import "./styles.scss";
 
 function Home(props) {
+  const [typeApartment, setTypeApartment] = useState("nha-dat-ban");
   return (
     <div style={{ paddingBottom: "20px" }}>
-      <Banner />
+      <Banner type={typeApartment} setType={setTypeApartment} />
       <ListRecomend />
       <SectionRecentList />
       <ListAboutProduct />
-      <Category />
+      <Category type={typeApartment} />
       <SectionFunction />
       <NeedMore />
     </div>
