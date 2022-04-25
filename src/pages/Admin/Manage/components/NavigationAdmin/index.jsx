@@ -10,6 +10,7 @@ function NavigationAdmin(props) {
     const removeLocal = () => {
         localStorage.removeItem('access_token')
         localStorage.removeItem('role')
+        localStorage.removeItem("user");
         window.location.pathname = "/";
     }
 

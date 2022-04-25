@@ -21,6 +21,7 @@ function Header(props) {
   const removeLocal = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("role");
+    localStorage.removeItem("user");
     history.push("/");
   };
   const token = localStorage.getItem("access_token");
