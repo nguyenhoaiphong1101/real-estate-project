@@ -215,6 +215,15 @@ export function objectToQueryString(obj) {
   return queryString;
 }
 
+export function clearObject(obj) {
+  Object.keys(obj).forEach((key) => {
+    if (obj[key] === undefined || obj[key] === "" || obj[key] === null) {
+      delete obj[key];
+    }
+  });
+  return obj;
+}
+
 export const listDemoProduct = [
   {
     id: 1,

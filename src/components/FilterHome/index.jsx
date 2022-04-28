@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import "./styles.scss";
 import { Col, Row, Tabs, Input, Button } from "antd";
 import FormFilter from "../FormFilter";
+import { clearObject, objectToQueryString } from "../../constants/Config";
+import { useHistory } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
 function Filter(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [params, setParams] = useState({});
-  console.log(props.type);
+  const [search, setSearch] = useState();
+  const history = useHistory();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -19,8 +22,14 @@ function Filter(props) {
     setParams(values);
   };
 
-  const onFilter = (values) => {
-    console.log(values);
+  const onFilter = () => {
+    var paramsSearch = { ...params };
+    paramsSearch.search = search;
+    history.push(
+      `/${props.type}?${objectToQueryString(
+        clearObject(paramsSearch)
+      ).toString()}`
+    );
   };
   return (
     <div className="filter">
@@ -45,6 +54,10 @@ function Filter(props) {
           <div className="input-search">
             <i className="fas fa-search"></i>
             <Input
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
               className="text-input"
               placeholder="Search name department"
             />
@@ -56,21 +69,17 @@ function Filter(props) {
           </Button>
         </Col>
         <Col span={3} className="col-filter">
-          <Button
-            className="btn-search"
-            onClick={() => {
-              console.log(params);
-            }}
-          >
+          <Button className="btn-search" onClick={onFilter}>
             Tìm kiếm
           </Button>
         </Col>
       </Row>
       <FormFilter
+        typeHome={props.type}
         isModalVisible={isModalVisible}
-        onFilter={onFilter}
         handleCancel={handleCancel}
         setParams={setParams}
+        search={search}
       />
     </div>
   );

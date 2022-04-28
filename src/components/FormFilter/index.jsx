@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { loadDistrict } from "../../actions/search";
-import { quantity } from "../../constants/Config";
+import {
+  clearObject,
+  objectToQueryString,
+  quantity,
+} from "../../constants/Config";
 import { useDispatch, useSelector } from "react-redux";
 import { Col, Row, Button, Modal, Form, Select } from "antd";
 import "./styles.scss";
@@ -10,12 +14,17 @@ import {
   selectPriceFrom,
   selectPriceTo,
 } from "../../constants/DataConfig";
+import { useHistory, useLocation } from "react-router-dom";
+import qs from "query-string";
 
 function FormFilter(props) {
   const [priceTo, setPriceTo] = useState(selectPriceTo);
   const [priceFrom, setPriceFrom] = useState(selectPriceFrom);
   const [areaTo, setAreaTo] = useState(selectAreaTo);
   const [areaFrom, setAreaFrom] = useState(selectAreaFrom);
+  const paramsQuery = qs.parse(window.location.search);
+  const history = useHistory();
+  const location = useLocation();
 
   const listDistrict = useSelector((state) => state.search.district);
   const listProvince = useSelector((state) => state.search.province);
@@ -23,10 +32,64 @@ function FormFilter(props) {
 
   const [form] = Form.useForm();
 
+  useEffect(() => {
+    if (Object.keys(paramsQuery).length) {
+      form.setFieldsValue({
+        ...paramsQuery,
+        province_id: paramsQuery.province_id
+          ? parseInt(paramsQuery.province_id)
+          : undefined,
+        district_id: paramsQuery.district_id
+          ? parseInt(paramsQuery.district_id)
+          : undefined,
+        area_from: paramsQuery.area_from
+          ? parseInt(paramsQuery.area_from)
+          : undefined,
+        area_to: paramsQuery.area_to
+          ? parseInt(paramsQuery.area_to)
+          : undefined,
+        price_to: paramsQuery.price_to
+          ? parseInt(paramsQuery.price_to)
+          : undefined,
+        price_from: paramsQuery.price_from
+          ? parseInt(paramsQuery.price_from)
+          : undefined,
+        toilet_quantity: paramsQuery.toilet_quantity
+          ? parseInt(paramsQuery.toilet_quantity)
+          : undefined,
+        bedroom_quantity: paramsQuery.bedroom_quantity
+          ? parseInt(paramsQuery.bedroom_quantity)
+          : undefined,
+        floor_quantity: paramsQuery.floor_quantity
+          ? parseInt(paramsQuery.floor_quantity)
+          : undefined,
+        bathroom_quantity: paramsQuery.bathroom_quantity
+          ? parseInt(paramsQuery.bathroom_quantity)
+          : undefined,
+      });
+      if (paramsQuery.district_id) {
+        dispatch(loadDistrict(parseInt(paramsQuery.province_id)));
+      }
+    }
+  }, [location.search]);
+
   const dispatch = useDispatch();
 
   const onFilter = (values) => {
-    props.onFilter(values);
+    if (props.listing) {
+      var paramsSearch = { ...values };
+      paramsSearch.search = props.search;
+      paramsSearch.category_id = props.category_id;
+      history.push(
+        `?${objectToQueryString(clearObject(paramsSearch)).toString()}`
+      );
+    } else {
+      var paramsSearch = { ...values };
+      paramsSearch.search = props.search;
+      history.push(
+        `?${objectToQueryString(clearObject(paramsSearch)).toString()}`
+      );
+    }
   };
 
   const selectProvince = (e) => {
@@ -49,6 +112,7 @@ function FormFilter(props) {
       width={700}
       visible={props.isModalVisible}
       footer={false}
+      forceRender
       onCancel={() => props.handleCancel(form.getFieldsValue())}
     >
       <Form form={form} onFinish={onFilter} layout="vertical">
@@ -59,7 +123,7 @@ function FormFilter(props) {
                 <div className="label">Thể loại</div>
                 <Row>
                   <Col span={11}>
-                    <Form.Item name="category">
+                    <Form.Item name="category_id">
                       <Select
                         className="select-custom"
                         placeholder="Thể loại bất động sản"
@@ -81,7 +145,7 @@ function FormFilter(props) {
               <div className="label">Địa chỉ</div>
               <Row>
                 <Col span={11}>
-                  <Form.Item name="province">
+                  <Form.Item name="province_id">
                     <Select
                       className="select-custom"
                       placeholder="Thành phố"
@@ -96,7 +160,7 @@ function FormFilter(props) {
                   </Form.Item>
                 </Col>
                 <Col offset={2} span={11}>
-                  <Form.Item name="district">
+                  <Form.Item name="district_id">
                     <Select
                       className="select-custom"
                       placeholder="Quận/Huyện"
@@ -190,7 +254,7 @@ function FormFilter(props) {
               <div className="label">Khác</div>
               <Row>
                 <Col span={11}>
-                  <Form.Item name="bedroom">
+                  <Form.Item name="bedroom_quantity">
                     <Select
                       allowClear
                       placeholder="Số lượng phòng ngủ"
@@ -198,7 +262,7 @@ function FormFilter(props) {
                       options={quantity}
                     />
                   </Form.Item>
-                  <Form.Item name="toilet">
+                  <Form.Item name="toilet_quantity">
                     <Select
                       allowClear
                       placeholder="Số lượng nhà vệ sinh"
@@ -208,7 +272,7 @@ function FormFilter(props) {
                   </Form.Item>
                 </Col>
                 <Col offset={2} span={11}>
-                  <Form.Item name="bathroom">
+                  <Form.Item name="bathroom_quantity">
                     <Select
                       allowClear
                       placeholder="Số lượng phòng tắm"
@@ -216,7 +280,7 @@ function FormFilter(props) {
                       options={quantity}
                     />
                   </Form.Item>
-                  <Form.Item name="floor">
+                  <Form.Item name="floor_quantity">
                     <Select
                       allowClear
                       placeholder="Số lượng tầng"

@@ -12,90 +12,11 @@ const { TabPane } = Tabs;
 const diameters = [];
 
 function Banner(props) {
-  const listCategory = useSelector((state) => state.category.listCategory);
-
-  const [valueSearchType, setValueSearchType] = useState(0);
-
   const dispatch = useDispatch();
 
-  const history = useHistory();
-
-  const onSearch = (e) => {
-    setInputSearch(e.target.value);
-  };
-
-  const getDistrict = (id) => {
-    dispatch(loadDistrict(id));
-  };
-
-  const [valueCategory, setValueCategory] = useState({ id: null, name: "" });
-  const [valueDistrict, setValueDistrict] = useState({ id: null, name: "" });
-  const [valueProvince, setValueProvince] = useState({ id: null, name: "" });
-  const [valuePrice, setValuePrice] = useState({ id: null, name: "" });
-  const [valueArea, setValueArea] = useState({ id: null, name: "" });
-  const [inputSearch, setInputSearch] = useState("");
-
   useEffect(() => {
-    if (valueProvince.id) getDistrict(valueProvince.id);
-
-    setValueDistrict({});
-  }, [valueProvince]);
-
-  const changeValueCategory = (value, id) => {
-    setValueCategory({ id: id.key, name: value });
-  };
-  const changeValueDistrict = (value, id) => {
-    setValueDistrict({ id: id.key, name: value });
-  };
-  // const changeValuePrice = (value, id) => {
-  //   let data = price.filter((el) => el.id == id.key);
-  //   console.log(data);
-  //   setValuePrice({
-  //     id: id.key,
-  //     name: value,
-  //     from: data[0]?.from,
-  //     to: data[0]?.to,
-  //   });
-  // };
-  // const changeValueProvince = (value, id) => {
-  //   setValueProvince({ id: id.key, name: value });
-  // };
-  // const changeValueArea = (value, id) => {
-  //   let data = acreage.filter((el) => el.id == id.key);
-
-  //   setValueArea({
-  //     id: id.key,
-  //     name: value,
-  //     from: data[0]?.from,
-  //     to: data[0]?.to,
-  //   });
-  // };
-
-  const listDistrict = useSelector((state) => state.search.district);
-  const listProvince = useSelector((state) => state.search.province);
-  const [typeAparment, setTypeAparment] = useState("1");
-
-  const onChangeType = (value) => {
-    setTypeAparment(value);
-  };
-
-  const valueSearch = () => {
-    dispatch(
-      loadListFilter(
-        valueCategory,
-        valueProvince,
-        valueDistrict,
-        valuePrice,
-        valueArea,
-        inputSearch
-      )
-    );
-    if (typeAparment === "1") {
-      history.push("/nha-dat-ban", { from: "/" });
-    } else {
-      history.push("/nha-dat-thue", { from: "/" });
-    }
-  };
+    dispatch(loadDistrict());
+  }, []);
 
   return (
     <div className="banner-home" style={{ marginBottom: "20px" }}>

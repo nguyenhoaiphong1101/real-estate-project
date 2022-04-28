@@ -143,11 +143,11 @@ function ThumbnailPrimary(props) {
           {token ? (
             props.listLatestNew?.percent_suitable === undefined ? (
               <span
-                className={`listing-badge short-grey`}
+                className={`listing-badge short `}
                 style={{ cursor: "default" }}
                 title="Vui lòng cập nhật mục tiêu để xem độ phù hợp"
               >
-                <i className="fas fa-question"></i>
+                0%
               </span>
             ) : (
               <span
