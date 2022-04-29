@@ -6,7 +6,10 @@ export const listSearch = {
     return axios({
       method: "get",
       data: null,
-      params: params,
+      params: {
+        ...params,
+        size: 12,
+      },
       url: API_URL + "/public/apartment/search",
     }).then((res) => res.data.data);
   },

@@ -212,7 +212,7 @@ function ThumbnailPrimary(props) {
               <div className="acr-listing-icon">
                 <i className="flaticon-ruler"></i>
                 <span className="acr-listing-icon-value">
-                  {props.listLatestNew?.area}
+                  {props.listLatestNew?.area} m2
                 </span>
               </div>
             </div>

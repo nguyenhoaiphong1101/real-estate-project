@@ -132,7 +132,11 @@ function ThumbnailExtra(props) {
           {/* <img src={image !== {} ? image?.url : "http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg"} alt="listing" /> */}
           <img
             className={`${props.classNameImg}`}
-            src="https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg"
+            src={
+              image?.url
+                ? image?.url
+                : "https://thietkenoithat.com/Portals/0/xNews/uploads/2017/9/1/mau-thiet-ke-biet-thu-kinh-sang-trong-cao-cap3.jpg"
+            }
             alt="listing"
           />
         </a>
@@ -236,7 +240,7 @@ function ThumbnailExtra(props) {
               <div className="acr-listing-icon">
                 <i className="flaticon-ruler"></i>
                 <span className="acr-listing-icon-value">
-                  {props.listLatestNew?.area}
+                  {props.listLatestNew?.area} m2
                 </span>
               </div>
             </div>

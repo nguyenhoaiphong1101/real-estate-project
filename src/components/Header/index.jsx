@@ -201,7 +201,7 @@ function Header(props) {
                     <Link to="/nha-dat-thue"> Nhà đất thuê </Link>
                   </li>
                 </React.Fragment>
-                <React.Fragment>
+                {/* <React.Fragment>
                   <li
                     className={
                       location.pathname === "/danh-sach-phu-hop" ? "active" : ""
@@ -209,7 +209,7 @@ function Header(props) {
                   >
                     <Link to="/danh-sach-phu-hop"> Danh sách phù hợp </Link>
                   </li>
-                </React.Fragment>
+                </React.Fragment> */}
                 <React.Fragment>
                   <li
                     className={
