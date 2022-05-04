@@ -22,20 +22,31 @@ function ListHome(props) {
 
   const paramsQuery = qs.parse(window.location.search);
   const page = Object.keys(paramsQuery).length ? paramsQuery.page - 1 : 0;
-  const type_apartment = location.pathname === "/nha-dat-ban" ? "BUY" : "RENT";
 
   useEffect(() => {
+    console.log(location);
     if (Object.keys(paramsQuery).length) {
       dispatch(
         loadListSearch(
           clearObject({
             ...paramsQuery,
-            type_apartment,
+            type_apartment:
+              location.pathname === "/nha-dat-ban" ? "BUY" : "RENT",
+          })
+        )
+      );
+    } else {
+      dispatch(
+        loadListSearch(
+          clearObject({
+            type_apartment:
+              location.pathname === "/nha-dat-ban" ? "BUY" : "RENT",
+            page: 1,
           })
         )
       );
     }
-  }, [location.search]);
+  }, [location]);
 
   return (
     <List

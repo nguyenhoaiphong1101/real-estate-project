@@ -41,6 +41,9 @@ function FilterListing(props) {
     if (Object.keys(paramsQuery).length) {
       setListTag([...getListTag()]);
       setIsModalVisible(false);
+      setCategory_id(
+        paramsQuery.category_id ? parseInt(paramsQuery.category_id) : undefined
+      );
     }
   }, [location.search]);
 
@@ -274,11 +277,16 @@ function FilterListing(props) {
                   } else if (item.key === "price") {
                     delete listParamsTag.price_from;
                     delete listParamsTag.price_to;
+                  } else if (item.key === "province_id") {
+                    delete listParamsTag.province_id;
+                    delete listParamsTag.district_id;
                   } else {
                     delete listParamsTag[item.key];
                   }
                   history.push(
-                    `?${objectToQueryString(clearObject(listParamsTag))}&page=1`
+                    `?${objectToQueryString(
+                      clearObject({ ...listParamsTag, page: 1 })
+                    )}`
                   );
                 }}
                 className="fas fa-times"

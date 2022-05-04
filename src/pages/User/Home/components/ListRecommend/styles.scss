@@ -5,6 +5,30 @@
     font-weight: 800;
     margin: 0;
   }
+  .skeleton-container {
+    display: flex;
+    .wrapper-item {
+      width: 25%;
+      padding: 10px 15px 10px 10px;
+      .skeleton-item {
+        padding: 20px;
+        display: flex;
+        justify-content: end;
+        flex-direction: column;
+        height: 330px;
+        border: 0;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        .item-input {
+          margin-top: 5px;
+          span {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
   .slick-slider-product {
     position: relative;
     display: block;

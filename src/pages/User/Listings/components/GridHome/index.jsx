@@ -34,6 +34,15 @@ function GridHome(props) {
           })
         )
       );
+    } else {
+      dispatch(
+        loadListSearch(
+          clearObject({
+            type_apartment,
+            page: 1,
+          })
+        )
+      );
     }
   }, [location.search]);
 
