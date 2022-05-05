@@ -1,4 +1,4 @@
-import { Popover } from "antd";
+import { Popover, Tooltip } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -53,6 +53,10 @@ function ThumbnailExtra(props) {
     ) {
       temp.push(props.listLatestNew?.id);
       dispatch(changeCompare(temp));
+    } else {
+      dispatch(
+        changeCompare(temp.filter((item) => item !== props.listLatestNew?.id))
+      );
     }
   };
 
@@ -264,25 +268,39 @@ function ThumbnailExtra(props) {
                 <span>{toTimeString(props.listLatestNew?.created_at)}</span>
               </div>
               <div className="icon-wrapper">
-                <Popover trigger="click" onClick={addCompare}>
-                  <div className="icon" style={{ marginRight: "5px" }}>
-                    <i className="fas fa-plus"></i>
-                  </div>
-                </Popover>
-                <Popover trigger="click" onClick={setFavorite}>
-                  <div className="icon" style={{ marginRight: "5px" }}>
-                    <i
-                      style={{ color: isFavorite ? "#ff0f59" : "" }}
-                      className="far fa-heart"
-                    ></i>
-                  </div>
-                </Popover>
-                {props.edit ? (
-                  <Popover className="popup" content={content} trigger="click">
-                    <div className="icon">
-                      <i className="fas fa-ellipsis-h"></i>
+                <Tooltip title="So sánh">
+                  <Popover trigger="click" onClick={addCompare}>
+                    <div className="icon" style={{ marginRight: "5px" }}>
+                      <i
+                        style={{ color: isCompare ? "#01bbbc" : "" }}
+                        className="fas fa-plus"
+                      ></i>
                     </div>
                   </Popover>
+                </Tooltip>
+                <Tooltip title="Yêu thích">
+                  <Popover trigger="click" onClick={setFavorite}>
+                    <div className="icon" style={{ marginRight: "5px" }}>
+                      <i
+                        style={{ color: isFavorite ? "#ff0f59" : "" }}
+                        className="far fa-heart"
+                      ></i>
+                    </div>
+                  </Popover>
+                </Tooltip>
+
+                {props.edit ? (
+                  <Tooltip title="Chỉnh sửa">
+                    <Popover
+                      className="popup"
+                      content={content}
+                      trigger="click"
+                    >
+                      <div className="icon">
+                        <i className="fas fa-ellipsis-h"></i>
+                      </div>
+                    </Popover>
+                  </Tooltip>
                 ) : null}
               </div>
             </div>

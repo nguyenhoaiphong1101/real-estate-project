@@ -22,7 +22,6 @@
       flex-grow: 1;
     }
     .media-body {
-      flex-grow: 9;
       padding: 8px 4px;
 
       h6 {
@@ -30,9 +29,15 @@
         font-weight: 700;
         margin: 0;
       }
-      span {
+      p {
         color: #848486;
-        display: block;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
+        text-overflow: ellipsis;
+        margin: 0;
       }
       .phone {
         color: #01bbbc;

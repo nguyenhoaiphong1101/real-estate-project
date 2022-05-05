@@ -6,7 +6,6 @@ import Img from "../../../../../../../assets/images/noavatar.png";
 
 function ContactForm() {
   const detailHome = useSelector((state) => state.detailhome.detailHome);
-  console.log(detailHome);
   const content = (
     <div className="popup-content-wrapper">
       <ul className="popup-content">
@@ -39,7 +38,7 @@ function ContactForm() {
         </a>
         <div className="media-body">
           <h6>{detailHome?.author?.full_name}</h6>
-          <span>{detailHome?.author?.email}</span>
+          <p>{detailHome?.author?.email}</p>
           <span className="phone">0968836182{detailHome?.author?.phone}</span>
         </div>
         {/* <Popover className="popup" content={content} trigger="click">

@@ -16,13 +16,14 @@ function RecentList(props) {
       <h4 className="title">Danh sách gần đây</h4>
       <div className="container-fluid wrapper">
         {listLatestNew.map((item, index) => {
-          return (
-            <ThumbnailSecondary
-              key={index}
-              listLatestNew={item}
-              isRender={props.isRender}
-            />
-          );
+          if (index < 4)
+            return (
+              <ThumbnailSecondary
+                key={index}
+                listLatestNew={item}
+                isRender={props.isRender}
+              />
+            );
         })}
       </div>
     </div>

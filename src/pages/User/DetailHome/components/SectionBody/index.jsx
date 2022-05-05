@@ -5,6 +5,7 @@ import Content from "../Content";
 import SideBar from "../Sidebar";
 import SectionSlideIntroduce from "../SectionSlideIntroduce";
 import SectionPriceRange from "../SectionPriceRange";
+import { useSelector } from "react-redux";
 
 function SectionBody(props) {
   return (

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import Banner from "./components/Banner";
 import Category from "./components/Category";
 import ListAboutProduct from "./components/ListAboutProvince";

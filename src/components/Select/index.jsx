@@ -30,7 +30,6 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
 
   const [items, setItems] = useState([]);
   const inputRef = useRef(null);
-  const dispatch = useDispatch();
   // const area_from = useSelector(state => state.listsearch.area.area_from)
   // const area_to = useSelector(state => state.listsearch.area.area_to)
   // const category_id = useSelector(state => state.listsearch.category_id)

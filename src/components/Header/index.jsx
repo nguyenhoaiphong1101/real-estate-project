@@ -9,7 +9,6 @@ import { resetUser } from "../../actions/user";
 import { resetDetail } from "../../actions/detailhome";
 
 function Header(props) {
-  const [path, setPath] = useState(props.path);
   const user = useSelector((state) => state.user.user);
   // const [topStyle, setTopStyle] = useState('');
   const location = useLocation();
@@ -109,7 +108,7 @@ function Header(props) {
 
   const MINIMUM_SCROLL = 10;
   useDocumentScroll((callbackData) => {
-    const { previousScrollTop, currentScrollTop } = callbackData;
+    const { currentScrollTop } = callbackData;
     if (currentScrollTop > MINIMUM_SCROLL) {
       setShouldScrollHeader(true);
     } else {

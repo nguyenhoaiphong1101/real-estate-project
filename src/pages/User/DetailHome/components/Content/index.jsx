@@ -9,13 +9,15 @@ function Content(props) {
   const detailHome = useSelector((state) => state.detailhome.detailHome);
   return (
     <div>
-      <div className="section-overview">
-        <h1 className="title">Tổng quan</h1>
-        <Markup
-          className="content-body"
-          content={detailHome?.apartment_detail?.description}
-        />
-      </div>
+      {detailHome.description ? (
+        <div className="section-overview">
+          <h1 className="title">Tổng quan</h1>
+          <Markup
+            className="content-body"
+            content={detailHome?.apartment_detail?.description}
+          />
+        </div>
+      ) : null}
       <SectionFeatures />
       <SectionSimilarListing isRender={props.isRender} />
     </div>

@@ -38,6 +38,18 @@
   }
 }
 
+.item-compare-non {
+  display: flex;
+  border-right: 1px solid #e5e5e5;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  .title-add {
+    color: rgba($color: #01bbbc, $alpha: 0.7);
+    margin: 0;
+  }
+}
+
 .modal-search {
   height: 300px;
   .list {

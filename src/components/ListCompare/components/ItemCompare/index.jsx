@@ -51,14 +51,8 @@ function ItemCompare(props) {
           <p className="title">{props.item.title}</p>
         </div>
       ) : (
-        <div className="item-compare">
-          <i
-            className="icon-add far fa-plus-square"
-            onClick={() => {
-              setVisible(true);
-            }}
-          ></i>
-          <p className="title-add">Thêm sản phẩm</p>
+        <div className="item-compare-non">
+          <p className="title-add">Vui lòng chọn sản phẩm</p>
         </div>
       )}
       <Modal

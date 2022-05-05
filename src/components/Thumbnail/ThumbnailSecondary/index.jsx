@@ -43,6 +43,10 @@ function ThumbnailSecondary(props) {
     ) {
       temp.push(props.listLatestNew?.id);
       dispatch(changeCompare(temp));
+    } else {
+      dispatch(
+        changeCompare(temp.filter((item) => item !== props.listLatestNew?.id))
+      );
     }
   };
 
@@ -67,12 +71,7 @@ function ThumbnailSecondary(props) {
       </div>
       <div className="listing-body">
         <h6 className="listing-title">
-          <a
-            title="Iris Watson, Frederick Nebraska 20620"
-            onClick={() => toDetailHome()}
-          >
-            {props.listLatestNew?.address}
-          </a>
+          <a onClick={() => toDetailHome()}>{props.listLatestNew?.address}</a>
         </h6>
         <div className="flex-compare">
           <span className="listing-price">

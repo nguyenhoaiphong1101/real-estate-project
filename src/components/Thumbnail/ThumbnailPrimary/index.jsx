@@ -1,4 +1,4 @@
-import { Popover } from "antd";
+import { Popover, Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import "./styles.scss";
@@ -61,6 +61,10 @@ function ThumbnailPrimary(props) {
     ) {
       temp.push(props.listLatestNew?.id);
       dispatch(changeCompare(temp));
+    } else {
+      dispatch(
+        changeCompare(temp.filter((item) => item !== props.listLatestNew?.id))
+      );
     }
   };
 
@@ -73,22 +77,6 @@ function ThumbnailPrimary(props) {
   const handleCancel = () => {
     setIsVisible(false);
   };
-
-  const content = (
-    <div className="popup-content-wrapper">
-      <ul className="popup-content">
-        <li>
-          <i className="fas fa-phone"></i>Gọi chúng tôi
-        </li>
-        <li>
-          <i className="fas fa-th-list"></i>Nhắn tin
-        </li>
-        <li>
-          <i className="fas fa-star"></i>Đặt lịch
-        </li>
-      </ul>
-    </div>
-  );
 
   const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
   const getPhotosImgAvatar = (name) => `${API_URL}/public/image/avatar/${name}`;
@@ -236,19 +224,27 @@ function ThumbnailPrimary(props) {
                 <span>{toTimeString(props.listLatestNew?.created_at)}</span>
               </div>
               <div className="icon-wrapper">
-                <Popover trigger="click" onClick={addCompare}>
-                  <div className="icon" style={{ marginRight: "5px" }}>
-                    <i className="fas fa-plus"></i>
-                  </div>
-                </Popover>
-                <Popover trigger="click" onClick={setFavorite}>
-                  <div className="icon" style={{ marginRight: "5px" }}>
-                    <i
-                      style={{ color: isFavorite ? "#ff0f59" : "" }}
-                      className="far fa-heart"
-                    ></i>
-                  </div>
-                </Popover>
+                <Tooltip title="So sánh">
+                  <Popover trigger="click" onClick={addCompare}>
+                    <div className="icon" style={{ marginRight: "5px" }}>
+                      <i
+                        style={{ color: isCompare ? "#01bbbc" : "" }}
+                        className="fas fa-plus"
+                      ></i>
+                    </div>
+                  </Popover>
+                </Tooltip>
+                <Tooltip title="Yêu thích">
+                  <Popover trigger="click" onClick={setFavorite}>
+                    <div className="icon" style={{ marginRight: "5px" }}>
+                      <i
+                        style={{ color: isFavorite ? "#ff0f59" : "" }}
+                        className="far fa-heart"
+                      ></i>
+                    </div>
+                  </Popover>
+                </Tooltip>
+
                 {/* <Popover className="popup" content={content} trigger="click">
                 <div className="icon">
                   <i className="fas fa-ellipsis-h"></i>

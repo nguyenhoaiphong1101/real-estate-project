@@ -9,10 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 function ListAboutProduct(props) {
   const [isIndex, setIsIndex] = useState(0);
+  const [province_id, setProvince_id] = useState(1);
+  const listHighlight = useSelector((state) => state.highlight.listHighlight);
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     arrows: true,
     slidesToShow: 3,
@@ -22,11 +24,10 @@ function ListAboutProduct(props) {
     },
   };
 
-  const listHighlight = useSelector((state) => state.highlight.listHighlight);
   const listProvince = useSelector((state) => state.search.province);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadListHighlight());
+    dispatch(loadListHighlight({ province_id }));
   }, []);
 
   const slide = useRef(null);
@@ -49,7 +50,10 @@ function ListAboutProduct(props) {
                 className="select-province"
                 style={{ minWidth: "fit-content" }}
                 bordered={false}
-                defaultValue={1}
+                onChange={(e) => {
+                  setProvince_id(e);
+                }}
+                value={province_id}
                 options={listProvince.map((item) => {
                   return {
                     value: item.id,
@@ -63,13 +67,13 @@ function ListAboutProduct(props) {
           </div>
         </Col>
         <Col span={18} className="slick-slider-product">
-          <button
-            className={`button-prev ${isIndex === 0 ? "disable-btn" : ""}`}
-            disabled={isIndex === 0}
-            onClick={previous}
-          >
-            <LeftOutlined style={{ color: "black", fontSize: "16px" }} />
-          </button>
+          {listHighlight.length > 3 ? (
+            isIndex === 0 ? null : (
+              <button className={`button-prev`} onClick={previous}>
+                <LeftOutlined style={{ color: "black", fontSize: "16px" }} />
+              </button>
+            )
+          ) : null}
           <div>
             <Slider ref={slide} {...settings}>
               {listHighlight.map((item, index) => {
@@ -82,15 +86,13 @@ function ListAboutProduct(props) {
               })}
             </Slider>
           </div>
-          <button
-            className={`button-next ${
-              isIndex === listHighlight.length - 3 ? "disable-btn" : ""
-            }`}
-            disabled={isIndex === listHighlight.length - 3}
-            onClick={next}
-          >
-            <RightOutlined style={{ color: "black", fontSize: "16px" }} />
-          </button>
+          {listHighlight.length > 3 ? (
+            isIndex === listHighlight.length - 3 ? null : (
+              <button className={`button-next`} onClick={next}>
+                <RightOutlined style={{ color: "black", fontSize: "16px" }} />
+              </button>
+            )
+          ) : null}
         </Col>
       </Row>
     </div>
