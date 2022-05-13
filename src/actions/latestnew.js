@@ -1,12 +1,15 @@
-import { listLatestNew } from "../api/latestnewApi"
+import { listLatestNew } from "../api/latestnewApi";
 
 export const loadListLatestNew = (params) => {
-    return (dispatch) => {
-        listLatestNew.GET(params).then(res => {
-            dispatch({
-                type: 'LOAD_LATESTNEW',
-                payload: res
-            })
-        })
-    }
-}
+  return (dispatch) => {
+    dispatch({
+      type: "LOAD_LATEST_LOADING",
+    });
+    listLatestNew.GET(params).then((res) => {
+      dispatch({
+        type: "LOAD_LATESTNEW",
+        payload: res,
+      });
+    });
+  };
+};

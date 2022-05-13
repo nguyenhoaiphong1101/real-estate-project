@@ -30,7 +30,6 @@ function Chat() {
           ?.querySelector("#messageList")
           ?.querySelectorAll("df-card");
         if (cards === undefined && count < 10) {
-          console.log("plus");
           setCount(count + 1);
         }
         if (cards !== undefined) {
@@ -56,7 +55,6 @@ function Chat() {
 
   return (
     <div>
-      <div className="test">test</div>
       <df-messenger
         intent="WELCOME"
         chat-title="Auto Smart Bot"

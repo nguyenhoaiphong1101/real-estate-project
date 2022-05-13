@@ -62,6 +62,11 @@ function FilterListing(props) {
     paramsSearch.category_id = category_id;
     history.push(`?${objectToQueryString(clearObject(paramsSearch))}&page=1`);
   };
+  const _handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onFilter();
+    }
+  };
 
   const getListTag = () => {
     if (Object.keys(paramsQuery).length) {
@@ -247,6 +252,7 @@ function FilterListing(props) {
           <i className="fas fa-search"></i>
           <Input
             value={search}
+            onKeyDown={_handleKeyDown}
             onChange={(e) => {
               setSearch(e.target.value);
             }}

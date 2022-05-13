@@ -3,6 +3,12 @@
   margin-bottom: 20px;
   .card {
     padding: 50px 0;
+    min-height: 546px;
+    .card-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .card-province {
       background-color: #fff;
       display: flex;

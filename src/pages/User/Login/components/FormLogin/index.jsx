@@ -21,7 +21,7 @@ function FormLogin() {
     if (role === "ADMIN") {
       history.push("/admin");
     } else {
-      history.push("/");
+      history.push("/home");
       dispatch(getInfoUser());
     }
   };

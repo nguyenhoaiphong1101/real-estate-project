@@ -6,11 +6,10 @@ import {
   Modal,
   Select,
   Row,
-  Form,
   Input,
   Button,
-  Alert,
   message,
+  Spin,
 } from "antd";
 import ItemTarget from "./components/ItemTarget";
 import {
@@ -21,12 +20,14 @@ import {
 } from "../../../../../../../api/userApi";
 import { province, district } from "../../../../../../../api/searchApi";
 import { listCategoryApi } from "../../../../../../../api/category";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function ListingTarget(props) {
   const [listProvince, setListProvince] = useState([]);
   const [listDistrict, setListDistrict] = useState([]);
   const [listCategory, setListCategory] = useState([]);
   const [update, setUpdate] = useState();
+  const [loading, setLoading] = useState(false);
   const [listTarget, setListTarget] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isDetail, setIsDetail] = useState(false);
@@ -39,6 +40,7 @@ function ListingTarget(props) {
   const [bathroom, setBathroom] = useState();
   const [floor, setFloor] = useState();
   const [bedroom, setBedroom] = useState();
+  const antIcon = <LoadingOutlined style={{ fontSize: 36 }} spin />;
 
   useEffect(() => {
     province.GET().then((res) => {
@@ -47,8 +49,10 @@ function ListingTarget(props) {
     listCategoryApi.GET().then((res) => {
       setListCategory(res);
     });
+    setLoading(true);
     getTarget.GET().then((res) => {
       setListTarget(res);
+      setLoading(false);
     });
   }, []);
 
@@ -85,6 +89,7 @@ function ListingTarget(props) {
   };
 
   const handleOk = () => {
+    setLoading(true);
     if (update) {
       if (
         !city &&
@@ -114,6 +119,7 @@ function ListingTarget(props) {
             getTarget.GET().then((res) => {
               setListTarget(res);
             });
+            setLoading(false);
             setCity();
             setDistr();
             setArea();
@@ -153,6 +159,7 @@ function ListingTarget(props) {
             getTarget.GET().then((res) => {
               setListTarget(res);
             });
+            setLoading(false);
             setCity();
             setDistr();
             setArea();
@@ -168,9 +175,11 @@ function ListingTarget(props) {
   };
 
   const deleteItem = (id) => {
+    setLoading(true);
     deleteTarget.DELETE(id).then((res) => {
       getTarget.GET().then((res) => {
         setListTarget(res);
+        setLoading(false);
       });
     });
   };
@@ -194,6 +203,7 @@ function ListingTarget(props) {
         visible={isModalVisible}
         okText="Thêm"
         cancelText="Hủy"
+        width={800}
         onOk={handleOk}
         onCancel={handleCancel}
       >
@@ -309,6 +319,7 @@ function ListingTarget(props) {
       <Modal
         title="Chi tiết mục tiêu"
         visible={isDetail}
+        width={800}
         onCancel={() => {
           setIsDetail(false);
         }}
@@ -339,28 +350,46 @@ function ListingTarget(props) {
           </Col>
           <Col className="form-group-detail" offset={1} span={11}>
             <label>Diện tích</label>
-            <p>{Number(detail?.area).toLocaleString("vi-VN")}m2</p>
+            {detail?.area ? (
+              <p>{Number(detail?.area).toLocaleString("vi-VN")}m2</p>
+            ) : (
+              <p>Chưa cập nhật</p>
+            )}
           </Col>
           <Col className="form-group-detail" span={11}>
             <label>Giá tiền</label>
             <p>
-              {new Intl.NumberFormat("de-DE", {
-                style: "currency",
-                currency: "VND",
-              }).format(detail?.price)}
+              {detail.price
+                ? new Intl.NumberFormat("de-DE", {
+                    style: "currency",
+                    currency: "VND",
+                  }).format(detail.price)
+                : "Chưa cập nhật"}
             </p>
           </Col>
           <Col className="form-group-detail" offset={1} span={11}>
             <label>Số tầng</label>
-            <p>{detail?.floor_quantity}</p>
+            <p>
+              {detail?.floor_quantity
+                ? detail?.floor_quantity
+                : "Chưa cập nhật"}
+            </p>
           </Col>
           <Col className="form-group-detail" span={11}>
             <label>Số phòng tắm</label>
-            <p>{detail?.bathroom_quantity}</p>
+            <p>
+              {detail?.bathroom_quantity
+                ? detail?.bathroom_quantity
+                : "Chưa cập nhật"}
+            </p>
           </Col>
           <Col className="form-group-detail" offset={1} span={11}>
             <label>Số phòng ngủ</label>
-            <p>{detail?.bedroom_quantity}</p>
+            <p>
+              {detail?.bedroom_quantity
+                ? detail?.bedroom_quantity
+                : "Chưa cập nhật"}
+            </p>
           </Col>
         </Row>
       </Modal>
@@ -374,32 +403,38 @@ function ListingTarget(props) {
       >
         <i className="far fa-plus-square"></i> Thêm mục tiêu
       </p>
-      <List
-        className="listing-post-profile"
-        itemLayout="vertical"
-        size="small"
-        dataSource={listTarget}
-        pagination={{
-          pageSize: 10,
-        }}
-        renderItem={(item) => (
-          <List.Item
-            className="item"
-            style={{ borderBottom: "0" }}
-            key={item.id}
-          >
-            <ItemTarget
-              detail={(detail) => {
-                setDetail(detail);
-                setIsDetail(true);
-              }}
-              updateItem={updateItem}
-              deleteItem={deleteItem}
-              item={item}
-            />
-          </List.Item>
-        )}
-      ></List>
+      <Spin
+        indicator={antIcon}
+        spinning={loading}
+        style={{ maxHeight: "100%" }}
+      >
+        <List
+          className="listing-post-profile"
+          itemLayout="vertical"
+          size="small"
+          dataSource={listTarget}
+          pagination={{
+            pageSize: 10,
+          }}
+          renderItem={(item) => (
+            <List.Item
+              className="item"
+              style={{ borderBottom: "0" }}
+              key={item.id}
+            >
+              <ItemTarget
+                detail={(detail) => {
+                  setDetail(detail);
+                  setIsDetail(true);
+                }}
+                updateItem={updateItem}
+                deleteItem={deleteItem}
+                item={item}
+              />
+            </List.Item>
+          )}
+        ></List>
+      </Spin>
     </div>
   );
 }

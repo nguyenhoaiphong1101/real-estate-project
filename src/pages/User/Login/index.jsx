@@ -13,7 +13,7 @@ function Login() {
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token !== null) {
-      history.push("/");
+      history.push("/home");
     }
   }, []);
   return (

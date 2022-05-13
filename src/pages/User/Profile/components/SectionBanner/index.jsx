@@ -82,7 +82,6 @@ function SectionBanner() {
         data: bodyFormData,
       })
       .then((res) => {
-        console.log(res);
         res.data.data.forEach((file) => {
           result.push({
             originalName: file.originalName,

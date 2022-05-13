@@ -7,12 +7,17 @@ import Slider from "react-slick";
 import { loadListRecommend } from "../../../../../actions/recommend";
 import ThumbnailRecomend from "../../../../../components/Thumbnail/ThumbnailRecommend";
 import "./styles.scss";
+import qs from "query-string";
 
 function ListRecomend(props) {
   const slide = useRef(null);
   const [isIndex, setIsIndex] = useState(0);
   const listRecommend = useSelector((state) => state.recommend.listRecommend);
   const loading = useSelector((state) => state.recommend.loading);
+  const paramsQuery = qs.parse(window.location.search);
+  const type_apartment = paramsQuery.type_apartment
+    ? paramsQuery.type_apartment
+    : "BUY";
 
   const dispatch = useDispatch();
 
@@ -22,6 +27,7 @@ function ListRecomend(props) {
       dispatch(
         loadListRecommend({
           user_id: token ? jwtDecode(token).id : null,
+          type_apartment,
         })
       );
   }, []);

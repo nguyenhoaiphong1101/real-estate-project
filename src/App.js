@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ListCompare from "./components/ListCompare";
@@ -69,7 +69,7 @@ function App() {
         ) : null}
         <Switch>
           {returnRole() === "ADMIN" && <AdminWrapper />}
-          <Route path="/" exact>
+          <Route path="/home" exact>
             <Home />
             <Footer />
           </Route>
@@ -117,6 +117,11 @@ function App() {
             <Recommend />
             <Footer />
           </Route>
+          {location.pathname === "/" ? (
+            <Route path="/">
+              <Redirect to="/home" />
+            </Route>
+          ) : null}
           <Route>
             <Header />
             <NotFound />

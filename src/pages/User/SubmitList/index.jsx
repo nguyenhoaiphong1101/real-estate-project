@@ -205,7 +205,6 @@ function SubmitList(props) {
   }
 
   async function submitData(values) {
-    console.log(values);
     // await callApiImage().forEach((item) => {
     //   listphoto.push(item);
     // });
@@ -264,7 +263,6 @@ function SubmitList(props) {
   }, []);
 
   useEffect(() => {
-    console.log(detailHome);
     form.setFieldsValue({
       address: detailHome?.addressDetail?.address,
       balcony_direction: detailHome?.apartment_detail?.balcony_direction,

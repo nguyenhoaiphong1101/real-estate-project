@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { Col, Row, Tabs, Input, Button } from "antd";
 import FormFilter from "../FormFilter";
 import { clearObject, objectToQueryString } from "../../constants/Config";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+import qs from "query-string";
 
 const { TabPane } = Tabs;
 
@@ -11,8 +12,10 @@ function Filter(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [params, setParams] = useState({});
   const [search, setSearch] = useState();
+  const location = useLocation();
   const history = useHistory();
-
+  const paramsQuery = qs.parse(window.location.search);
+  const [type_apartment, set_type_apartment] = useState();
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -22,31 +25,31 @@ function Filter(props) {
     setParams(values);
   };
 
+  useEffect(() => {
+    set_type_apartment(
+      paramsQuery.type_apartment ? paramsQuery.type_apartment : "BUY"
+    );
+  }, [location.search]);
+
   const onFilter = () => {
     var paramsSearch = { ...params };
     paramsSearch.search = search;
     history.push(
-      `/${props.type}?${objectToQueryString(
-        clearObject(paramsSearch)
-      ).toString()}`
+      `/${
+        type_apartment === "BUY" ? "nha-dat-ban" : "nha-dat-thue"
+      }?${objectToQueryString(clearObject(paramsSearch))}`
     );
   };
   return (
     <div className="filter">
       <Tabs
-        defaultActiveKey={props.type}
+        activeKey={type_apartment}
         onChange={(e) => {
-          props.setType(e);
+          history.push(`?${objectToQueryString({ type_apartment: e })}`);
         }}
       >
-        <TabPane
-          tab={<p className="filter-tab">Mua</p>}
-          key="nha-dat-ban"
-        ></TabPane>
-        <TabPane
-          tab={<p className="filter-tab">Thuê</p>}
-          key="nha-dat-thue"
-        ></TabPane>
+        <TabPane tab={<p className="filter-tab">Mua</p>} key="BUY"></TabPane>
+        <TabPane tab={<p className="filter-tab">Thuê</p>} key="RENT"></TabPane>
       </Tabs>
 
       <Row style={{ marginTop: "10px" }}>

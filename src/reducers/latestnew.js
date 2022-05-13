@@ -1,5 +1,6 @@
 const initialState = {
   listLatestNew: [],
+  loadingList: false,
 };
 
 const latestNewReducer = (state = initialState, action) => {
@@ -8,6 +9,13 @@ const latestNewReducer = (state = initialState, action) => {
       return {
         ...state,
         listLatestNew: action.payload,
+        loadingList: false,
+      };
+    }
+    case "LOAD_LATEST_LOADING": {
+      return {
+        ...state,
+        loadingList: true,
       };
     }
     default:

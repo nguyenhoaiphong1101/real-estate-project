@@ -9,7 +9,11 @@ import { API_URL } from "../../../constants/Config";
 import "./styles.scss";
 import Img from "../../../assets/images/noavatar.png";
 import { deletePost } from "../../../api/userApi";
-import { changeCompare, getPostUser } from "../../../actions/user";
+import {
+  changeCompare,
+  getFavoriteUser,
+  getPostUser,
+} from "../../../actions/user";
 
 function ThumbnailExtra(props) {
   const [isVisible, setIsVisible] = useState(false);
@@ -81,9 +85,11 @@ function ThumbnailExtra(props) {
   const setFavorite = () => {
     if (token) {
       setIsFavorite(!isFavorite);
-      postFavorite.POST(props.listLatestNew?.id);
+      postFavorite.POST(props.listLatestNew?.id).then((res) => {
+        if (history.location.pathname === "/trang-ca-nhan")
+          dispatch(getFavoriteUser(null));
+      });
     } else {
-      console.log("=====");
       setIsVisible(true);
     }
   };
@@ -132,7 +138,7 @@ function ThumbnailExtra(props) {
       </Modal>
 
       <div className="listing__thumbnail">
-        <a onClick={() => toDetailHome()}>
+        <a onClick={toDetailHome}>
           {/* <img src={image !== {} ? image?.url : "http://androthemes.com/themes/html/acres/assets/img/listings-list/8.jpg"} alt="listing" /> */}
           <img
             className={`${props.classNameImg}`}
@@ -222,7 +228,9 @@ function ThumbnailExtra(props) {
       <div className="listing__body">
         <div className="card-content">
           <div>
-            <p className="listing-text">{props.listLatestNew?.title}</p>
+            <p className="listing-text" onClick={toDetailHome}>
+              {props.listLatestNew?.title}
+            </p>
             <span className="listing-price">
               {props.listLatestNew?.total_price}
             </span>

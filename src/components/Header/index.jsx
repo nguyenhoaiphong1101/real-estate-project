@@ -14,7 +14,12 @@ function Header(props) {
   const location = useLocation();
   const history = useHistory();
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (
+      (["/nha-dat-ban", "/nha-dat-thue", "/home"].includes(location.pathname) &&
+        !location.search) ||
+      location.pathname.search("chi-tiet") > 0
+    )
+      window.scrollTo(0, 0);
   }, [location]);
 
   const removeLocal = () => {
@@ -178,8 +183,8 @@ function Header(props) {
               />
               <ul className="nav-link">
                 <React.Fragment>
-                  <li className={location.pathname === "/" ? "active" : ""}>
-                    <Link to="/"> Trang chủ </Link>
+                  <li className={location.pathname === "/home" ? "active" : ""}>
+                    <Link to="/home"> Trang chủ </Link>
                   </li>
                 </React.Fragment>
                 <React.Fragment>

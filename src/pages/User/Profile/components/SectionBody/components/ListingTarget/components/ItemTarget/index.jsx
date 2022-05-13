@@ -6,7 +6,7 @@ import "./styles.scss";
 function ItemTarget(props) {
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key={1}>
         <p
           style={{
             padding: "0px 10px",
@@ -20,7 +20,7 @@ function ItemTarget(props) {
           Chi tiết
         </p>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key={2}>
         <p
           style={{
             padding: "0px 10px",
@@ -35,7 +35,7 @@ function ItemTarget(props) {
           Thay đổi
         </p>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key={3}>
         <p
           style={{ color: "#dc4a38", textAlign: "center", marginBottom: "0" }}
           onClick={() => {
@@ -50,7 +50,7 @@ function ItemTarget(props) {
   return (
     <div className="item-target">
       <Row>
-        <Dropdown overlay={menu} placement="bottomCenter" arrow>
+        <Dropdown overlay={menu} placement="bottom" arrow>
           <Col
             style={{
               display: "flex",

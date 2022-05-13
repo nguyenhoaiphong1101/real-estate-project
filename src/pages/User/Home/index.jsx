@@ -9,14 +9,13 @@ import SectionRecentList from "./components/SectionRecentList";
 import "./styles.scss";
 
 function Home(props) {
-  const [typeApartment, setTypeApartment] = useState("nha-dat-ban");
   return (
     <div style={{ paddingBottom: "20px" }}>
-      <Banner type={typeApartment} setType={setTypeApartment} />
+      <Banner />
       <ListRecomend />
       <SectionRecentList />
       <ListAboutProduct />
-      <Category type={typeApartment} />
+      <Category />
       <SectionFunction />
       <NeedMore />
     </div>

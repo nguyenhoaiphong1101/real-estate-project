@@ -31,4 +31,27 @@
       color: white;
     }
   }
+  .skeleton-container {
+    display: flex;
+    .wrapper-item {
+      width: 25%;
+      padding: 10px 15px 10px 10px;
+      .skeleton-item {
+        padding: 20px;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        height: 330px;
+        border: 0;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        .item-input {
+          margin-top: 5px;
+          span {
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
 }

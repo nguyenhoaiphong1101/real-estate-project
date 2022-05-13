@@ -178,7 +178,9 @@ function ThumbnailPrimary(props) {
       <div className="listing__body">
         <div className="card-content">
           <div>
-            <p className="listing-text">{props.listLatestNew?.title}</p>
+            <p className="listing-text" onClick={toDetailHome}>
+              {props.listLatestNew?.title}
+            </p>
             <span className="listing-price">
               {props.listLatestNew?.total_price}
             </span>

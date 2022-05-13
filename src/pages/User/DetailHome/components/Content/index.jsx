@@ -19,7 +19,7 @@ function Content(props) {
         </div>
       ) : null}
       <SectionFeatures />
-      <SectionSimilarListing isRender={props.isRender} />
+      {/* <SectionSimilarListing isRender={props.isRender} /> */}
     </div>
   );
 }

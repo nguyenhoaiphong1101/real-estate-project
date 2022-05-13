@@ -35,7 +35,7 @@ function Banner(props) {
         <div className="banner-filter">
           <div className="title-search">Tìm kiếm bất động sản</div>
           <div className="card-filter">
-            <Filter type={props.type} setType={props.setType} />
+            <Filter />
           </div>
         </div>
       </div>
