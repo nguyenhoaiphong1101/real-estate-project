@@ -21,8 +21,9 @@ function SectionRecentList() {
   const antIcon = <LoadingOutlined style={{ fontSize: 36 }} spin />;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadListLatestNew({ type_apartment }));
-  }, [location]);
+    if (!paramsQuery.highlight_province)
+      dispatch(loadListLatestNew({ type_apartment }));
+  }, [location.search]);
   return (
     <div className="section-recent-list">
       <div className="title">Bất động sản gần đây</div>

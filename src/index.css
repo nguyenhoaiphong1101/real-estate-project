@@ -44,3 +44,9 @@ body {
   height: auto !important;
   border-radius: 8px !important;
 }
+
+.flex-center {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}

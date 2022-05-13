@@ -1,4 +1,5 @@
 .main-statis {
+  padding-bottom: 40px;
   .sub-header {
     background-image: url("http://androthemes.com/themes/react/acres/assets/img/subheader.jpg");
     padding: 290px 0 30px;
@@ -66,6 +67,10 @@
         rgb(209, 213, 219) 0px 0px 0px 1px inset;
       border-radius: 8px;
       padding: 20px;
+      .warning-title {
+        color: #e5e5eb;
+        font-size: 32px;
+      }
       .group-search {
         text-align: right;
         padding: 20px 10px;
@@ -80,7 +85,7 @@
     }
 
     .rating {
-      margin-top: 60px;
+      margin-top: 30px;
       padding: 20px;
       .title-rating {
         margin-bottom: 40px;
