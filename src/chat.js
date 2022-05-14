@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 function Chat() {
   const user = localStorage.getItem("user");
   const [count, setCount] = useState(0);
+  const [countChips, setCountChips] = useState(0);
   const mesRef = useRef(null);
   let dfMessenger;
   const returnUser = () => {
@@ -15,12 +16,14 @@ function Chat() {
   };
   useEffect(() => {
     setCount(-1);
+    setCountChips(-1);
   });
 
   useEffect(() => {
     dfMessenger = mesRef.current;
     dfMessenger.addEventListener("df-response-received", function (event) {
       setCount(-1);
+      setCountChips(-1);
       setTimeout(() => {
         const cards = dfMessenger.shadowRoot
           ?.querySelector(".df-messenger-wrapper")
@@ -34,24 +37,65 @@ function Chat() {
         }
         if (cards !== undefined) {
           cards.forEach((card) => {
+            card.style.width = "85%"
             const tempImage =
-              card?.shadowRoot?.querySelectorAll("df-list-element");
+              card?.shadowRoot?.querySelectorAll("df-title");
             if (tempImage !== undefined) {
               tempImage.forEach((element) => {
-                const temp = element?.shadowRoot
-                  ?.querySelector(".title-card-elements")
-                  ?.querySelector(".image");
-                temp.style.maxHeight = "100%";
-                temp.style.maxWidth = "100%";
-                temp.style.paddingRight = "70px";
-                temp.style.marginRight = "10px";
+                const itemWrap = element?.shadowRoot
+                  ?.querySelector(".title-card-elements");
+                const img = itemWrap?.querySelector(".image");
+                const title = itemWrap?.querySelector(".title");
+                const subtitle = itemWrap?.querySelector(".subtitle");
+                itemWrap.style.padding = "10px";
+                img.style.maxHeight = "100%";
+                img.style.maxWidth = "100%";
+                img.style.paddingRight = "70px";
+                img.style.marginRight = "10px";
+                img.style.backgroundPosition = "center";
+                img.style.backgroundSize = "cover";
+                title.style.fontSize = "11px";
+                title.style.fontWeight = "600";
+                subtitle.style.paddingTop = "0px";
+                subtitle.style.marginBottom = "-6px";
+                subtitle.style.fontSize = "10px";
               });
             }
           });
         }
+        
       }, 100);
     });
   }, [count]);
+
+  useEffect(() => {
+    dfMessenger = mesRef.current;
+    dfMessenger.addEventListener("df-chip-clicked", function (event) {
+      setCountChips(-1);
+      setTimeout(() => {
+        const chips = dfMessenger.shadowRoot
+          ?.querySelector(".df-messenger-wrapper")
+          ?.querySelector("df-messenger-chat")
+          ?.shadowRoot?.querySelector("df-message-list")
+          ?.shadowRoot?.querySelector(".message-list-wrapper")
+          ?.querySelector("#messageList")
+          ?.querySelectorAll("df-chips");
+        if (chips === undefined && countChips < 10) {
+          setCountChips(countChips + 1);
+        }
+        if (chips !== undefined) {
+          chips.forEach((chip) => {
+            const chipsWrapper = chip?.shadowRoot?.querySelectorAll(".df-chips-wrapper");
+            if (chipsWrapper !== undefined) {
+              chipsWrapper.forEach((element) => {
+                element.style.color = "block";
+              });
+              }
+            });
+          }
+      }, 100);
+    });
+  }, [countChips]);
 
   return (
     <div>
