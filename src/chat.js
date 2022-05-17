@@ -1,29 +1,30 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // import "./chat.scss";
 
 function Chat() {
-  const user = localStorage.getItem("user");
+  const [user, setUser] = useState(localStorage.getItem("user"));
   const [count, setCount] = useState(0);
-  const [countChips, setCountChips] = useState(0);
   const mesRef = useRef(null);
   let dfMessenger;
-  const returnUser = () => {
-    if (user !== null) {
-      return user;
-    } else {
-      return -1;
-    }
-  };
   useEffect(() => {
     setCount(-1);
-    setCountChips(-1);
+  });
+  useEffect(() => {
+    dfMessenger = mesRef.current;
+    dfMessenger.addEventListener("df-user-input-entered", function (event) {
+      if (localStorage.getItem("user") !== null && localStorage.getItem("user") !== undefined){
+        setUser(localStorage.getItem("user"));
+      }else{
+        setUser(-1);
+      }
+    });
   });
 
   useEffect(() => {
     dfMessenger = mesRef.current;
     dfMessenger.addEventListener("df-response-received", function (event) {
       setCount(-1);
-      setCountChips(-1);
       setTimeout(() => {
         const cards = dfMessenger.shadowRoot
           ?.querySelector(".df-messenger-wrapper")
@@ -63,39 +64,9 @@ function Chat() {
             }
           });
         }
-        
       }, 100);
     });
   }, [count]);
-
-  useEffect(() => {
-    dfMessenger = mesRef.current;
-    dfMessenger.addEventListener("df-chip-clicked", function (event) {
-      setCountChips(-1);
-      setTimeout(() => {
-        const chips = dfMessenger.shadowRoot
-          ?.querySelector(".df-messenger-wrapper")
-          ?.querySelector("df-messenger-chat")
-          ?.shadowRoot?.querySelector("df-message-list")
-          ?.shadowRoot?.querySelector(".message-list-wrapper")
-          ?.querySelector("#messageList")
-          ?.querySelectorAll("df-chips");
-        if (chips === undefined && countChips < 10) {
-          setCountChips(countChips + 1);
-        }
-        if (chips !== undefined) {
-          chips.forEach((chip) => {
-            const chipsWrapper = chip?.shadowRoot?.querySelectorAll(".df-chips-wrapper");
-            if (chipsWrapper !== undefined) {
-              chipsWrapper.forEach((element) => {
-                element.style.color = "block";
-              });
-              }
-            });
-          }
-      }, 100);
-    });
-  }, [countChips]);
 
   return (
     <div>
@@ -104,7 +75,7 @@ function Chat() {
         chat-title="Auto Smart Bot"
         agent-id="2bf67365-63ed-41d5-baba-281029162464"
         language-code="vi"
-        user-id={returnUser()}
+        user-id={user}
         chat-icon="https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png"
         ref={mesRef}
       ></df-messenger>
