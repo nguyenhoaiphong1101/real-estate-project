@@ -10,6 +10,7 @@
     width: 100%;
     .img-large {
       max-height: 500px;
+      object-fit: contain;
     }
   }
   .slider {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import "./chat.scss";
+import "./constants/Images"
+import Images from "./constants/Images";
 
 function Chat() {
   const [user, setUser] = useState(localStorage.getItem("user"));
@@ -72,11 +72,11 @@ function Chat() {
     <div>
       <df-messenger
         intent="WELCOME"
-        chat-title="Auto Smart Bot"
+        chat-title="Messenger"
         agent-id="2bf67365-63ed-41d5-baba-281029162464"
         language-code="vi"
         user-id={user}
-        chat-icon="https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png"
+        chat-icon= {Images.LOGO_BOT}
         ref={mesRef}
       ></df-messenger>
     </div>

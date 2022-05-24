@@ -37,7 +37,7 @@ function SectionFunction() {
                 <h4>Thuê nhà</h4>
                 <p>
                   Bạn muốn thay đổi không gian sống? Nhiều sự lựa chọn hấp dẫn
-                  đang chờ đợi bạn. Hãy Thuê Ngay
+                  đang chờ đợi bạn.
                 </p>
                 <a
                   onClick={() => {

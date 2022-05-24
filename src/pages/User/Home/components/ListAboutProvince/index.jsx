@@ -148,8 +148,8 @@ function ListAboutProduct(props) {
                   })}
                 </Slider>
               </div>
-              {listHighlight.length > 3 ? (
-                isIndex === listHighlight.length - 3 ? null : (
+              {listHighlight.length > 4 ? (
+                isIndex === listHighlight.length - 4 ? null : (
                   <button className={`button-next`} onClick={next}>
                     <RightOutlined
                       style={{ color: "black", fontSize: "16px" }}

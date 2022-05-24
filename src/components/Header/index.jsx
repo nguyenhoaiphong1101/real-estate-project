@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "../Button";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import "./styles.scss";
-
+import jwt_decode from "jwt-decode";
 import useDocumentScroll from "./../../hooks/useDocumentScroll";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUser } from "../../actions/user";
@@ -21,6 +21,21 @@ function Header(props) {
     )
       window.scrollTo(0, 0);
   }, [location]);
+  const token = localStorage.getItem("access_token");
+
+  useEffect(() => {
+    if (token){
+      var expToken = jwt_decode(token).exp;
+      var dateNow = new Date();
+  
+      if(expToken < dateNow.getTime()){
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("role");
+        localStorage.removeItem("user");
+        dispatch(resetUser());
+      }
+    }
+  }, []);
 
   const removeLocal = () => {
     localStorage.removeItem("access_token");
@@ -28,7 +43,6 @@ function Header(props) {
     localStorage.removeItem("user");
     history.push("/");
   };
-  const token = localStorage.getItem("access_token");
 
   const dispatch = useDispatch();
 
@@ -69,7 +83,7 @@ function Header(props) {
               <Link className="mr-10" to="/trang-ca-nhan">
                 {" "}
                 {`Hi ${
-                  user?.full_name ? user?.full_name : user?.username
+                  user?.full_name ? user?.full_name : user?.username ? user?.username : jwt_decode(token).full_name
                 }`}{" "}
               </Link>
               <Link

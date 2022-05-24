@@ -50,3 +50,12 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+df-messenger {
+  --df-messenger-bot-message: #01bbbc;
+  --df-messenger-button-titlebar-color: #01bbbc;
+  --df-messenger-chat-background-color: #fafafa;
+  --df-messenger-font-color: white;
+  --df-messenger-send-icon: #519fff;
+  --df-messenger-user-message: #519fff;
+ }
