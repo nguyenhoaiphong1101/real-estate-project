@@ -2,8 +2,12 @@
   margin: auto;
   background-color: #1d2228;
   color: #cecece;
-  padding: 50px 0;
+  padding: 50px 150px;
   .footer-top {
+    height: 220px;
+    .footer-col-wrap{
+      height: 100%;
+    }
     .col-1 {
       padding-right: 200px;
     }
@@ -14,6 +18,7 @@
       margin-top: 50px;
     }
     .footer-col {
+      height: 100%;
       h2 {
         font-size: 18px;
         color: #cecece;
@@ -24,8 +29,8 @@
         &::before {
           content: "";
           position: absolute;
-          left: 0;
-          bottom: -5px;
+          right: 0;
+          bottom: -10px;
           height: 2px;
           background-color: #fff;
           box-sizing: border-box;
@@ -51,6 +56,12 @@
           }
         }
       }
+      img{
+        height: 100%;
+      }
+      .align-right{
+        text-align: right;
+      }
     }
   }
 
@@ -60,9 +71,8 @@
       list-style: none;
       display: flex;
       justify-content: flex-end;
-      margin-right: 32px;
       li {
-        margin: 0 12px;
+        margin-left: 20px;
         a {
           font-size: 14px;
           text-transform: capitalize;
@@ -77,6 +87,5 @@
         }
       }
     }
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 }

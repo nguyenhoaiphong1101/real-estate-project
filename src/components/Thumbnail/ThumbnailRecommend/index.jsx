@@ -59,6 +59,7 @@ function ThumbnailRecomend(props) {
         }}
         onClick={() => toDetailHome()}
       ></div>
+      <div className="bg"></div>
       <div className="recomend-item-body">
         <div style={{ zIndex: "1" }}>
           <h5 className="recommend-title" onClick={() => toDetailHome()}>

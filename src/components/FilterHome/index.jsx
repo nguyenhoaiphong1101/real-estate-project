@@ -62,7 +62,7 @@ function Filter(props) {
                 setSearch(e.target.value);
               }}
               className="text-input"
-              placeholder="Search name department"
+              placeholder="Tìm kiếm bất động sản"
             />
           </div>
         </Col>

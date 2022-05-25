@@ -13,7 +13,7 @@ function SectionSlideIntroduce() {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 5,
     slidesToScroll: 1,
     arrows: true,
   };

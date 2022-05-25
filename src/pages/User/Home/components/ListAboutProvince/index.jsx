@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import qs from "query-string";
 import { useHistory, useLocation } from "react-router-dom";
 import { objectToQueryString } from "../../../../../constants/Config";
+import Images from "../../../../../constants/Images";
 
 function ListAboutProduct(props) {
   const [isIndex, setIsIndex] = useState(0);
@@ -95,6 +96,10 @@ function ListAboutProduct(props) {
                 Tìm thấy {listHighlight.length} tin đăng
               </p>
             </div>
+            <img
+                  src={Images.MARKET}
+                  alt="#"
+                />
             <Button
               className="btn-more"
               onClick={() => {

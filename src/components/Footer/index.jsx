@@ -10,15 +10,14 @@ function Footer(props) {
         <div className="footer-container">
             <div className="container">
                 <div className="footer-top">
-                    <Row>
+                    <Row  className="footer-col-wrap">
                         <Col span={12} className="footer-col col-1">
                             <img className="nav-logo" src={Images.LOGO} alt="logo" />
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Odio ullam consequuntur tempora excepturi earum molestiae!
+                            <p>Tập trung vào chất lượng công trình, đảm bảo an toàn, dựng lên đẳng cấp và tạo ra lợi ích cho mọi người
                         </p>
                         </Col>
                         <Col span={12} className="footer-col col-2">
-                            <Row>
+                            <Row className="align-right">
                                 <Col span={8}>
                                     <h2>Danh mục</h2>
                                     <ul>
@@ -54,7 +53,7 @@ function Footer(props) {
                     <Row>
                         <Col span={12}>
                             <p>
-                                © Copyright 2021 - KTPM 2018
+                                © Copyright 2022 - KTPM 2018
                         </p>
                         </Col>
                         <Col span={12}>

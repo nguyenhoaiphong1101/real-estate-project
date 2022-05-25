@@ -9,6 +9,8 @@
   .banner-filter {
     position: relative;
     border-top: -130px;
+    max-width: 1140px;
+    margin: 0 auto;
     .title-search {
       color: #fff;
       text-align: center;
@@ -28,7 +30,6 @@
     padding-left: 12px;
   }
   .container {
-    max-width: 1140px;
     margin: auto;
     margin-top: 85px;
   }
@@ -36,7 +37,7 @@
     position: relative;
     .banner-text {
       max-width: 650px;
-      margin-bottom: 120px;
+      margin-top: 100px;
       color: #fff;
       .title {
         font-size: 72px;

@@ -7,6 +7,7 @@ import useDocumentScroll from "./../../hooks/useDocumentScroll";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUser } from "../../actions/user";
 import { resetDetail } from "../../actions/detailhome";
+import Images from "../../constants/Images";
 
 function Header(props) {
   const user = useSelector((state) => state.user.user);
@@ -192,7 +193,7 @@ function Header(props) {
             <nav className="nav">
               <img
                 className="nav-logo"
-                src="https://achaumedia.vn/wp-content/uploads/2020/03/Free_Vector_Logo_for_Real_Estate-300x138.jpg"
+                src={Images.LOGO}
                 alt="logo"
               />
               <ul className="nav-link">
