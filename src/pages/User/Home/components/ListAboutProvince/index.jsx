@@ -14,6 +14,7 @@ import qs from "query-string";
 import { useHistory, useLocation } from "react-router-dom";
 import { objectToQueryString } from "../../../../../constants/Config";
 import Images from "../../../../../constants/Images";
+import jwtDecode from "jwt-decode";
 
 function ListAboutProduct(props) {
   const [isIndex, setIsIndex] = useState(0);
@@ -38,6 +39,8 @@ function ListAboutProduct(props) {
       setIsIndex(next);
     },
   };
+  const token = localStorage.getItem("access_token");
+  const user_id =  token ? jwtDecode(token).id : null;
 
   const listProvince = useSelector((state) => state.search.province);
   const dispatch = useDispatch();
@@ -48,6 +51,7 @@ function ListAboutProduct(props) {
           ? parseInt(paramsQuery.highlight_province)
           : 1,
         type_apartment,
+        user_id,
       })
     );
   }, [location]);

@@ -7,6 +7,7 @@ import { loadListLatestNew } from "../../../../../actions/latestnew";
 import qs from "query-string";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useLocation } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 function SectionRecentList() {
   const [seeMore, setSeeMore] = useState(false);
@@ -18,11 +19,13 @@ function SectionRecentList() {
   const type_apartment = paramsQuery.type_apartment
     ? paramsQuery.type_apartment
     : "BUY";
+  const token = localStorage.getItem("access_token");
+  const user_id =  token ? jwtDecode(token).id : null;
   const antIcon = <LoadingOutlined style={{ fontSize: 36 }} spin />;
   const dispatch = useDispatch();
   useEffect(() => {
     if (!paramsQuery.highlight_province)
-      dispatch(loadListLatestNew({ type_apartment }));
+      dispatch(loadListLatestNew({ type_apartment , user_id}));
   }, [location.search]);
   return (
     <div className="section-recent-list">

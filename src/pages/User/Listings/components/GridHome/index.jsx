@@ -24,6 +24,9 @@ function GridHome(props) {
 
   const antIcon = <LoadingOutlined style={{ fontSize: 36 }} spin />;
 
+  const token = localStorage.getItem("access_token");
+  const user_id =  token ? jwtDecode(token).id : null;
+  
   const paramsQuery = qs.parse(window.location.search);
   const page = Object.keys(paramsQuery).length
     ? paramsQuery.page
@@ -39,6 +42,7 @@ function GridHome(props) {
           clearObject({
             ...paramsQuery,
             type_apartment,
+            user_id,
           })
         )
       );
@@ -47,6 +51,7 @@ function GridHome(props) {
         loadListSearch(
           clearObject({
             type_apartment,
+            user_id,
             page: 1,
           })
         )
