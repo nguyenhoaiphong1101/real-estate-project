@@ -26,7 +26,7 @@ function Header(props) {
 
   useEffect(() => {
     if (token){
-      var expToken = jwt_decode(token).exp;
+      var expToken = jwt_decode(token).exp *1000;
       var dateNow = new Date();
   
       if(expToken < dateNow.getTime()){
