@@ -59,6 +59,43 @@ function ThumbnailRecomend(props) {
         }}
         onClick={() => toDetailHome()}
       ></div>
+      <div className="listing-badges">
+        <span
+          style={{ cursor: "default" }}
+          className={`listing-badge ${
+            props.list?.status === "OPEN"
+              ? "sale"
+              : props.list?.status === "PENDING"
+              ? "sale-pending"
+              : "sale-close"
+          }`}
+        >
+          {props.list?.type_apartment}
+        </span>
+        {!props.list?.percent_suitable ? null : (
+          <span
+            className={`listing-badge ${
+              props.list?.percent_suitable >= 80
+                ? "sale"
+                : props.list?.percent_suitable >= 30 &&
+                  props.list?.percent_suitable < 80
+                ? "medium"
+                : "short"
+            }`}
+            style={{ cursor: "default" }}
+            title={`Mức độ phù hợp ${
+              props.list?.percent_suitable < 20
+                ? "< 20"
+                : props.list?.percent_suitable
+            }%`}
+          >
+            {props.list?.percent_suitable < 20
+              ? "< 20"
+              : props.list?.percent_suitable}
+            %
+          </span>
+        )}
+      </div>
       <div className="bg"></div>
       <div className="recomend-item-body">
         <div style={{ zIndex: "1" }}>

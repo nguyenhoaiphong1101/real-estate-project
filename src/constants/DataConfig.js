@@ -164,3 +164,41 @@ export const listProvinceDemo = [
     label: "Nha Trang",
   },
 ];
+
+export const listMapSort = [
+  {
+    value: "ID",
+    sort: {
+      sort_by: "",
+      sort_direction: "",
+    },
+  },
+  {
+    value: "AREA_ASC",
+    sort: {
+      sort_by: "AREA",
+      sort_direction: "ASC",
+    },
+  },
+  {
+    value: "AREA_DESC",
+    sort: {
+      sort_by: "AREA",
+      sort_direction: "DESC",
+    },
+  },
+  {
+    value: "TOTAL_PRICE_ASC",
+    sort: {
+      sort_by: "TOTAL_PRICE",
+      sort_direction: "ASC",
+    },
+  },
+  {
+    value: "TOTAL_PRICE_DESC",
+    sort: {
+      sort_by: "TOTAL_PRICE",
+      sort_direction: "DESC",
+    },
+  },
+];

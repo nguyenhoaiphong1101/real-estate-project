@@ -16,8 +16,7 @@ function Header(props) {
   const history = useHistory();
   useEffect(() => {
     if (
-      (["/nha-dat-ban", "/nha-dat-thue", "/home"].includes(location.pathname) &&
-        !location.search) ||
+      (["/home"].includes(location.pathname) && !location.search) ||
       location.pathname.search("chi-tiet") > 0
     )
       window.scrollTo(0, 0);
@@ -25,11 +24,11 @@ function Header(props) {
   const token = localStorage.getItem("access_token");
 
   useEffect(() => {
-    if (token){
-      var expToken = jwt_decode(token).exp *1000;
+    if (token) {
+      var expToken = jwt_decode(token).exp * 1000;
       var dateNow = new Date();
-  
-      if(expToken < dateNow.getTime()){
+
+      if (expToken < dateNow.getTime()) {
         localStorage.removeItem("access_token");
         localStorage.removeItem("role");
         localStorage.removeItem("user");
@@ -42,7 +41,7 @@ function Header(props) {
     localStorage.removeItem("access_token");
     localStorage.removeItem("role");
     localStorage.removeItem("user");
-    history.push("/");
+    history.push("/home");
   };
 
   const dispatch = useDispatch();
@@ -84,11 +83,15 @@ function Header(props) {
               <Link className="mr-10" to="/trang-ca-nhan">
                 {" "}
                 {`Hi ${
-                  user?.full_name ? user?.full_name : user?.username ? user?.username : jwt_decode(token).full_name
+                  user?.full_name
+                    ? user?.full_name
+                    : user?.username
+                    ? user?.username
+                    : jwt_decode(token).full_name
                 }`}{" "}
               </Link>
               <Link
-                to="/"
+                to="/home"
                 onClick={() => {
                   removeLocal();
                   dispatch(resetUser());
@@ -191,11 +194,7 @@ function Header(props) {
           </div>
           <div className="main-header">
             <nav className="nav">
-              <img
-                className="nav-logo"
-                src={Images.LOGO}
-                alt="logo"
-              />
+              <img className="nav-logo" src={Images.LOGO} alt="logo" />
               <ul className="nav-link">
                 <React.Fragment>
                   <li className={location.pathname === "/home" ? "active" : ""}>

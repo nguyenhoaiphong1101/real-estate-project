@@ -1,6 +1,6 @@
 import { Button, Input, Select, Space } from "antd";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
 import qs from "query-string";
 import FormFilter from "../FormFilter";
@@ -16,6 +16,7 @@ import {
   quantity,
 } from "../../constants/Config";
 import { useHistory, useLocation } from "react-router-dom";
+import { loadDistrict } from "../../actions/search";
 
 function FilterListing(props) {
   const listCategory = useSelector((state) => state.category.listCategory);
@@ -36,11 +37,18 @@ function FilterListing(props) {
       : undefined
   );
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setListTag([...getListTag()]);
+  }, [listCategory, listProvince, listDistrict, location.search]);
 
   useEffect(() => {
     if (Object.keys(paramsQuery).length) {
-      setListTag([...getListTag()]);
       setIsModalVisible(false);
+      if (paramsQuery.province_id) {
+        dispatch(loadDistrict(parseInt(paramsQuery.province_id)));
+      }
       setCategory_id(
         paramsQuery.category_id ? parseInt(paramsQuery.category_id) : undefined
       );

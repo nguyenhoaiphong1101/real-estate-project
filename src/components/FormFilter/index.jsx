@@ -67,9 +67,6 @@ function FormFilter(props) {
           ? parseInt(paramsQuery.bathroom_quantity)
           : undefined,
       });
-      if (paramsQuery.district_id) {
-        dispatch(loadDistrict(parseInt(paramsQuery.province_id)));
-      }
     }
   }, [location.search]);
 

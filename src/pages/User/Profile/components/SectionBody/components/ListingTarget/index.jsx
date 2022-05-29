@@ -359,7 +359,7 @@ function ListingTarget(props) {
           <Col className="form-group-detail" span={11}>
             <label>Giá tiền</label>
             <p>
-              {detail.price
+              {detail?.price
                 ? new Intl.NumberFormat("de-DE", {
                     style: "currency",
                     currency: "VND",

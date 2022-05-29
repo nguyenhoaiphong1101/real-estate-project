@@ -1,19 +1,46 @@
 import { Row, Tabs, Select } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import FilterListing from "../../../components/FilterListing";
+import { listMapSort } from "../../../constants/DataConfig";
 import GridHome from "./components/GridHome";
 import ListHome from "./components/ListHome";
+import qs from "query-string";
 import "./styles.scss";
+import { clearObject, objectToQueryString } from "../../../constants/Config";
 const { TabPane } = Tabs;
 
 const { Option } = Select;
 
 function Listings(props) {
-  const [sortBy, setSortBy] = useState();
-  const [sortDirection, setSortDirection] = useState("ASC");
+  const location = useLocation();
+  const history = useHistory();
+  const paramsQuery = qs.parse(location.search);
+  const [sort, setSort] = useState();
 
+  useEffect(() => {
+    if (paramsQuery.sort_by && paramsQuery.sort_direction) {
+      setSort(
+        listMapSort.find(
+          (item) =>
+            item.sort.sort_by === paramsQuery.sort_by &&
+            item.sort.sort_direction === paramsQuery.sort_direction
+        ).value
+      );
+    } else {
+      setSort("ID");
+    }
+  }, [location.search]);
   const handleChange = (value) => {
-    setSortBy(value);
+    let optionSort = listMapSort.find((item) => item.value === value).sort;
+    history.push(
+      `?${objectToQueryString(
+        clearObject({
+          ...paramsQuery,
+          ...optionSort,
+        })
+      )}`
+    );
   };
 
   return (
@@ -50,6 +77,7 @@ function Listings(props) {
                 <Select
                   className="select"
                   defaultValue="ID"
+                  value={sort}
                   onChange={handleChange}
                 >
                   <Option value="ID">Mặc định</Option>

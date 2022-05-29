@@ -36,11 +36,12 @@ function ListAboutProduct(props) {
     slidesToShow: 3,
     slidesToScroll: 1,
     beforeChange: (prev, next) => {
+      console.log(next);
       setIsIndex(next);
     },
   };
   const token = localStorage.getItem("access_token");
-  const user_id =  token ? jwtDecode(token).id : null;
+  const user_id = token ? jwtDecode(token).id : null;
 
   const listProvince = useSelector((state) => state.search.province);
   const dispatch = useDispatch();
@@ -68,7 +69,7 @@ function ListAboutProduct(props) {
   return (
     <div className="list-about-product">
       <Row className="container card">
-        <Col span={6} style={{ paddingRight: "5px" }}>
+        <Col span={6} style={{ paddingRight: "5px", paddingBottom: "6px" }}>
           <div className="card-province">
             <div>
               <p className="title">Bất động sản nổi bật theo khu vực</p>
@@ -100,10 +101,7 @@ function ListAboutProduct(props) {
                 Tìm thấy {listHighlight.length} tin đăng
               </p>
             </div>
-            <img
-                  src={Images.MARKET}
-                  alt="#"
-                />
+            <img src={Images.MARKET} alt="#" />
             <Button
               className="btn-more"
               onClick={() => {
@@ -111,7 +109,7 @@ function ListAboutProduct(props) {
                   `/${
                     type_apartment === "BUY" ? "nha-dat-ban" : "nha-dat-thue"
                   }?${objectToQueryString({
-                    province_id: paramsQuery.highlight_province,
+                    province_id: paramsQuery.highlight_province || 1,
                   })}`
                 );
               }}
@@ -142,23 +140,21 @@ function ListAboutProduct(props) {
                   </button>
                 )
               ) : null}
-              <div>
-                <Slider ref={slide} {...settings}>
-                  {listHighlight.map((item, index) => {
-                    if (index < 10)
-                      return (
-                        <div
-                          key={index}
-                          style={{ paddingRight: "5px !important" }}
-                        >
-                          <ThumbnailPrimary listLatestNew={item} />
-                        </div>
-                      );
-                  })}
-                </Slider>
-              </div>
+              <Slider ref={slide} {...settings}>
+                {listHighlight.map((item, index) => {
+                  if (index < 10)
+                    return (
+                      <div
+                        key={index}
+                        style={{ paddingRight: "5px !important" }}
+                      >
+                        <ThumbnailPrimary listLatestNew={item} />
+                      </div>
+                    );
+                })}
+              </Slider>
               {listHighlight.length > 4 ? (
-                isIndex === listHighlight.length - 4 ? null : (
+                parseInt(isIndex) === 7 ? null : (
                   <button className={`button-next`} onClick={next}>
                     <RightOutlined
                       style={{ color: "black", fontSize: "16px" }}

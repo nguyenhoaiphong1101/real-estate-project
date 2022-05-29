@@ -128,45 +128,27 @@ function ThumbnailPrimary(props) {
           >
             {props.listLatestNew?.type_apartment}
           </span>
-          {token ? (
-            props.listLatestNew?.percent_suitable === undefined ? (
-              <span
-                className={`listing-badge short `}
-                style={{ cursor: "default" }}
-                title="Vui lòng cập nhật mục tiêu để xem độ phù hợp"
-              >
-                0%
-              </span>
-            ) : (
-              <span
-                className={`listing-badge ${
-                  props.listLatestNew?.percent_suitable >= 80
-                    ? "sale"
-                    : props.listLatestNew?.percent_suitable >= 30 &&
-                      props.listLatestNew?.percent_suitable < 80
-                    ? "medium"
-                    : "short"
-                }`}
-                style={{ cursor: "default" }}
-                title={`Mức độ phù hợp ${
-                  props.listLatestNew?.percent_suitable < 20
-                    ? "< 20"
-                    : props.listLatestNew?.percent_suitable
-                }%`}
-              >
-                {props.listLatestNew?.percent_suitable < 20
-                  ? "< 20"
-                  : props.listLatestNew?.percent_suitable}
-                %
-              </span>
-            )
-          ) : (
+          {!props.listLatestNew?.percent_suitable ? null : (
             <span
-              className={`listing-badge short-grey`}
+              className={`listing-badge ${
+                props.listLatestNew?.percent_suitable >= 80
+                  ? "sale"
+                  : props.listLatestNew?.percent_suitable >= 30 &&
+                    props.listLatestNew?.percent_suitable < 80
+                  ? "medium"
+                  : "short"
+              }`}
               style={{ cursor: "default" }}
-              title="Vui lòng đăng nhập để xem mức độ phù hợp"
+              title={`Mức độ phù hợp ${
+                props.listLatestNew?.percent_suitable < 20
+                  ? "< 20"
+                  : props.listLatestNew?.percent_suitable
+              }%`}
             >
-              <i className="fas fa-question"></i>
+              {props.listLatestNew?.percent_suitable < 20
+                ? "< 20"
+                : props.listLatestNew?.percent_suitable}
+              %
             </span>
           )}
         </div>
@@ -187,24 +169,40 @@ function ThumbnailPrimary(props) {
           </div>
           <div>
             <div className="acr-listing-icons">
-              <div className="acr-listing-icon">
-                <i className="flaticon-pillow"></i>
-                <span className="acr-listing-icon-value">
-                  {props.listLatestNew?.bedroom_quantity}
-                </span>
-              </div>
-              <div className="acr-listing-icon">
-                <i className="flaticon-bathtub"></i>
-                <span className="acr-listing-icon-value">
-                  {props.listLatestNew?.bathroom_quantity}
-                </span>
-              </div>
-              <div className="acr-listing-icon">
-                <i className="flaticon-ruler"></i>
-                <span className="acr-listing-icon-value">
-                  {props.listLatestNew?.area} m2
-                </span>
-              </div>
+              <Tooltip
+                placement="top"
+                title={`Phòng ngủ: ${props.listLatestNew?.bedroom_quantity}`}
+              >
+                <div className="acr-listing-icon">
+                  <i className="flaticon-pillow"></i>
+                  <span className="acr-listing-icon-value">
+                    {props.listLatestNew?.bedroom_quantity}
+                  </span>
+                </div>
+              </Tooltip>
+              <Tooltip
+                placement="top"
+                title={`Phòng tắm: ${props.listLatestNew?.bathroom_quantity}`}
+              >
+                <div className="acr-listing-icon">
+                  <i className="flaticon-bathtub"></i>
+                  <span className="acr-listing-icon-value">
+                    {props.listLatestNew?.bathroom_quantity}
+                  </span>
+                </div>
+              </Tooltip>
+
+              <Tooltip
+                placement="top"
+                title={`Diện tích: ${props.listLatestNew?.area} m2`}
+              >
+                <div className="acr-listing-icon">
+                  <i className="flaticon-ruler"></i>
+                  <span className="acr-listing-icon-value">
+                    {props.listLatestNew?.area} m2
+                  </span>
+                </div>
+              </Tooltip>
             </div>
             <div className="author">
               <div onClick={() => toDetailHome()}>

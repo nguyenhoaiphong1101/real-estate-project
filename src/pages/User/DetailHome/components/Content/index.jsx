@@ -9,7 +9,7 @@ function Content(props) {
   const detailHome = useSelector((state) => state.detailhome.detailHome);
   return (
     <div>
-      {detailHome.description ? (
+      {detailHome?.apartment_detail?.description ? (
         <div className="section-overview">
           <h1 className="title">Tổng quan</h1>
           <Markup

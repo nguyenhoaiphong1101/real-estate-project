@@ -25,8 +25,8 @@ function GridHome(props) {
   const antIcon = <LoadingOutlined style={{ fontSize: 36 }} spin />;
 
   const token = localStorage.getItem("access_token");
-  const user_id =  token ? jwtDecode(token).id : null;
-  
+  const user_id = token ? jwtDecode(token).id : null;
+
   const paramsQuery = qs.parse(window.location.search);
   const page = Object.keys(paramsQuery).length
     ? paramsQuery.page
@@ -36,6 +36,7 @@ function GridHome(props) {
   const type_apartment = location.pathname === "/nha-dat-ban" ? "BUY" : "RENT";
 
   useEffect(() => {
+    console.log(location);
     if (Object.keys(paramsQuery).length) {
       dispatch(
         loadListSearch(
@@ -57,7 +58,7 @@ function GridHome(props) {
         )
       );
     }
-  }, [location.search]);
+  }, [location]);
 
   // useEffect(() => {
   //     dispatch(loadListSearch(1, 2));
@@ -74,6 +75,7 @@ function GridHome(props) {
         grid={{ column: 4 }}
         pagination={{
           onChange: (page) => {
+            window.scrollTo(0, 320);
             history.push(
               `?${objectToQueryString(
                 clearObject({

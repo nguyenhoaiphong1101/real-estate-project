@@ -14,9 +14,11 @@ function SectionBody(props) {
         <Row>
           <SectionSlideIntroduce />
         </Row>
+
         <Row>
           <SectionPriceRange />
         </Row>
+
         <Row>
           <Col span={16}>
             <Content isRender={props.isRender} />
