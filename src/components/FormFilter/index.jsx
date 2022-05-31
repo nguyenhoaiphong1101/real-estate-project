@@ -19,9 +19,9 @@ import qs from "query-string";
 import { ArrowRightOutlined } from "@ant-design/icons";
 
 function FormFilter(props) {
-  const [priceTo, setPriceTo] = useState(0);
+  const [priceTo, setPriceTo] = useState(NaN);
   const [priceFrom, setPriceFrom] = useState(0);
-  const [areaTo, setAreaTo] = useState(0);
+  const [areaTo, setAreaTo] = useState(NaN);
   const [areaFrom, setAreaFrom] = useState(0);
   const location = useLocation();
   const paramsQuery = qs.parse(location.search);
@@ -62,11 +62,17 @@ function FormFilter(props) {
           ? parseInt(paramsQuery.bathroom_quantity)
           : undefined,
       });
-      setAreaFrom(paramsQuery.area_from);
-      setAreaTo(paramsQuery.area_to === "-1" ? NaN : paramsQuery.area_to);
-      setPriceFrom(paramsQuery.price_from / minPrice);
+      setAreaFrom(parseInt(paramsQuery.area_from || 0));
+      setAreaTo(
+        paramsQuery.area_to === "-1"
+          ? NaN
+          : parseInt(paramsQuery.area_to || NaN)
+      );
+      setPriceFrom(parseInt(paramsQuery.price_from || 0) / minPrice);
       setPriceTo(
-        paramsQuery.price_to === "-1" ? NaN : paramsQuery.price_to / minPrice
+        paramsQuery.price_to === "-1"
+          ? NaN
+          : parseInt(paramsQuery.price_to || NaN) / minPrice
       );
     }
   }, [location.search]);
@@ -79,20 +85,52 @@ function FormFilter(props) {
 
   const onFilter = (values) => {
     var paramsSearch = { ...values };
-    paramsSearch.area_from = areaFrom.toString() === "NaN" ? 0 : areaFrom;
-    paramsSearch.area_to = areaTo.toString() === "NaN" ? -1 : areaTo;
-    paramsSearch.price_from =
-      priceFrom.toString() === "NaN" ? 0 : priceFrom * minPrice;
-    paramsSearch.price_to =
-      priceTo.toString() === "NaN" ? -1 : priceTo * minPrice;
+    if (areaFrom !== 0 && areaTo !== 0 && areaTo.toString() !== "NaN") {
+      paramsSearch.area_from = areaFrom;
+      paramsSearch.area_to = areaTo;
+    } else {
+      paramsSearch.area_from =
+        areaFrom === 0 && (areaTo === 0 || areaTo.toString() === "NaN")
+          ? ""
+          : areaFrom;
+      paramsSearch.area_to =
+        areaFrom === 0 && (areaTo === 0 || areaTo.toString() === "NaN")
+          ? ""
+          : areaTo.toString() !== "NaN"
+          ? areaTo
+          : -1;
+    }
+
+    if (priceFrom !== 0 && priceTo !== 0 && priceTo.toString() !== "NaN") {
+      paramsSearch.price_from = priceFrom * minPrice;
+      paramsSearch.price_to = priceTo * minPrice;
+    } else {
+      paramsSearch.price_from =
+        priceFrom === 0 && (priceTo === 0 || priceTo.toString() === "NaN")
+          ? ""
+          : priceFrom * minPrice;
+      paramsSearch.price_to =
+        priceFrom === 0 && (priceTo === 0 || priceTo.toString() === "NaN")
+          ? ""
+          : priceTo.toString() !== "NaN"
+          ? priceTo * minPrice
+          : -1;
+    }
+
     paramsSearch.search = props.search;
     if (props.listing) {
       paramsSearch.category_id = props.category_id;
     }
+    props.setIsModalVisible(false);
     history.push(
       `/${
         props.type_apartment === "BUY" ? "nha-dat-ban" : "nha-dat-thue"
-      }?${objectToQueryString(clearObject(paramsSearch))}`
+      }?${objectToQueryString(
+        clearObject({
+          ...paramsSearch,
+          page: 1,
+        })
+      )}`
     );
   };
 
@@ -132,48 +170,29 @@ function FormFilter(props) {
   };
 
   const valuePriceSlider = () => {
-    let priceFromSlide = priceFrom.toString()
-      ? priceFrom / numberPriceSlider
-      : undefined;
-    let priceToSlide = priceTo.toString()
-      ? priceTo / numberPriceSlider
-      : undefined;
-    if (
-      priceFromSlide.toString() !== "NaN" &&
-      priceToSlide.toString() !== "NaN"
-    ) {
-      if (priceToSlide >= 100 && priceFromSlide >= 100) {
-        return [100, 100];
-      } else if (priceToSlide >= 100 && priceFromSlide < 100) {
-        return [priceFromSlide, 100];
-      } else {
-        return [priceFromSlide, priceToSlide];
-      }
+    let priceFromSlide = priceFrom / numberPriceSlider;
+    let priceToSlide =
+      priceTo.toString() === "NaN" ? 100 : priceTo / numberPriceSlider;
+
+    if (priceToSlide >= 100 && priceFromSlide >= 100) {
+      return [100, 100];
+    } else if (priceToSlide >= 100 && priceFromSlide < 100) {
+      return [priceFromSlide, 100];
     } else {
-      if (
-        priceFromSlide.toString() !== "NaN" &&
-        priceToSlide.toString() === "NaN"
-      )
-        return [priceFromSlide, 100];
-      else return [0, 0];
+      return [priceFromSlide, priceToSlide];
     }
   };
 
   const valueAreaSlider = () => {
-    let areFromSlide = areaFrom.toString() ? areaFrom / 10 : undefined;
-    let areaToSlide = areaTo.toString() ? areaTo / 10 : undefined;
-    if (areFromSlide.toString() !== "NaN" && areaToSlide.toString() !== "NaN") {
-      if (areaToSlide >= 100 && areFromSlide >= 100) {
-        return [100, 100];
-      } else if (areaToSlide >= 100 && areFromSlide < 100) {
-        return [areFromSlide, 100];
-      } else {
-        return [areFromSlide, areaToSlide];
-      }
+    let areFromSlide = areaFrom / 10;
+    let areaToSlide = areaTo.toString() === "NaN" ? 100 : areaTo / 10;
+
+    if (areaToSlide >= 100 && areFromSlide >= 100) {
+      return [100, 100];
+    } else if (areaToSlide >= 100 && areFromSlide < 100) {
+      return [areFromSlide, 100];
     } else {
-      if (areFromSlide.toString() !== "NaN" && areaToSlide.toString() === "NaN")
-        return [areFromSlide, 100];
-      else return [0, 0];
+      return [areFromSlide, areaToSlide];
     }
   };
 
@@ -276,7 +295,11 @@ function FormFilter(props) {
                       }
                     }}
                     onChange={(e) => {
-                      setAreaFrom(e.target.valueAsNumber);
+                      setAreaFrom(
+                        e.target.valueAsNumber.toString() === "NaN"
+                          ? 0
+                          : e.target.valueAsNumber
+                      );
                     }}
                     placeholder="Từ"
                   />
@@ -286,7 +309,7 @@ function FormFilter(props) {
                 </Col>
                 <Col span={11}>
                   <Input
-                    value={areaTo}
+                    value={areaTo.toString() === "NaN" ? "" : areaTo}
                     type={"number"}
                     onBlur={() => {
                       if (areaFrom > areaTo) {
@@ -330,7 +353,11 @@ function FormFilter(props) {
                       }
                     }}
                     onChange={(e) => {
-                      setPriceFrom(e.target.valueAsNumber);
+                      setPriceFrom(
+                        e.target.valueAsNumber.toString() === "NaN"
+                          ? 0
+                          : e.target.valueAsNumber
+                      );
                     }}
                     placeholder="Từ"
                   />
@@ -340,7 +367,7 @@ function FormFilter(props) {
                 </Col>
                 <Col span={11}>
                   <Input
-                    value={priceTo}
+                    value={priceTo.toString() === "NaN" ? "" : priceTo}
                     type={"number"}
                     onBlur={() => {
                       if (priceFrom > priceTo) {
@@ -419,9 +446,9 @@ function FormFilter(props) {
             onClick={() => {
               form.resetFields();
               dispatch(loadDistrict());
-              setPriceTo(selectPriceTo);
-              setPriceFrom();
-              setAreaTo(0);
+              setPriceTo(NaN);
+              setPriceFrom(0);
+              setAreaTo(NaN);
               setAreaFrom(0);
             }}
           >

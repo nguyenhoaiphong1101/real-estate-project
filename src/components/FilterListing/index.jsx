@@ -45,7 +45,6 @@ function FilterListing(props) {
 
   useEffect(() => {
     if (Object.keys(paramsQuery).length) {
-      setIsModalVisible(false);
       if (paramsQuery.province_id) {
         dispatch(loadDistrict(parseInt(paramsQuery.province_id)));
       }
@@ -61,7 +60,6 @@ function FilterListing(props) {
 
   const parsePrice = (value) => {
     if (value >= 1000) {
-      console.log(value);
       if (value - parseInt(value / 1000) * 1000 > 0)
         return (
           parseInt(value / 1000).toString() +
@@ -327,6 +325,7 @@ function FilterListing(props) {
       <FormFilter
         listing={true}
         isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
         onFilter={onFilter}
         search={search}
         category_id={category_id}

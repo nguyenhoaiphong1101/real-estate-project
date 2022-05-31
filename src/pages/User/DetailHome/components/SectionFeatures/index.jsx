@@ -8,7 +8,6 @@ function SectionFeatures() {
   const detailHome = useSelector((state) => state.detailhome.detailHome);
   const [arr1, setArr1] = useState([]);
   const [arr2, setArr2] = useState([]);
-  console.log(detailHome);
   useEffect(() => {
     setArr1([
       {

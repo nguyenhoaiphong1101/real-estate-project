@@ -36,7 +36,6 @@ function ListAboutProduct(props) {
     slidesToShow: 3,
     slidesToScroll: 1,
     beforeChange: (prev, next) => {
-      console.log(next);
       setIsIndex(next);
     },
   };

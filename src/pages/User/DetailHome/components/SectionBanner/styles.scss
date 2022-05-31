@@ -1,6 +1,18 @@
 .detail-section-banner-wrapper {
   height: 80vh;
   margin: 0;
+  .sale {
+    color: #fff;
+    background-color: #01bbbc !important;
+  }
+  .medium {
+    color: #fff;
+    background-color: #a5d13f !important;
+  }
+  .short {
+    color: #fff;
+    background-color: #ff0f59 !important;
+  }
   .detail-section-banner {
     background-image: url("./../../../../../assets/images/Home/1.jpg");
     background-repeat: no-repeat;

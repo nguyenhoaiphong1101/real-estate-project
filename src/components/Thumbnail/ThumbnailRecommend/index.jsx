@@ -1,3 +1,4 @@
+import { Tooltip } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -60,41 +61,64 @@ function ThumbnailRecomend(props) {
         onClick={() => toDetailHome()}
       ></div>
       <div className="listing-badges">
-        <span
-          style={{ cursor: "default" }}
-          className={`listing-badge ${
-            props.list?.status === "OPEN"
-              ? "sale"
-              : props.list?.status === "PENDING"
-              ? "sale-pending"
-              : "sale-close"
-          }`}
+        <Tooltip
+          placement="top"
+          title={`Thể loại: ${props.list?.type_apartment}`}
         >
-          {props.list?.type_apartment}
-        </span>
-        {!props.list?.percent_suitable ? null : (
           <span
-            className={`listing-badge ${
-              props.list?.percent_suitable >= 80
-                ? "sale"
-                : props.list?.percent_suitable >= 30 &&
-                  props.list?.percent_suitable < 80
-                ? "medium"
-                : "short"
-            }`}
             style={{ cursor: "default" }}
-            title={`Mức độ phù hợp ${
-              props.list?.percent_suitable < 20
-                ? "< 20"
-                : props.list?.percent_suitable
-            }%`}
+            className={`listing-badge ${
+              props.list?.status === "OPEN"
+                ? "sale"
+                : props.list?.status === "PENDING"
+                ? "sale-pending"
+                : "sale-close"
+            }`}
           >
-            {props.list?.percent_suitable < 20
-              ? "< 20"
-              : props.list?.percent_suitable}
-            %
+            {props.list?.type_apartment}
           </span>
-        )}
+        </Tooltip>
+
+        <Tooltip
+          placement="top"
+          title={`Mức độ phù hợp: ${
+            props.list?.percent_suitable < 20
+              ? "< 20"
+              : props.list?.percent_suitable || "0%"
+          }%`}
+        >
+          {!props.list?.percent_suitable ? (
+            <span
+              className={`listing-badge short`}
+              style={{ cursor: "default" }}
+              title={`Mức độ phù hợp 0%`}
+            >
+              0%
+            </span>
+          ) : (
+            <span
+              className={`listing-badge ${
+                props.list?.percent_suitable >= 80
+                  ? "sale"
+                  : props.list?.percent_suitable >= 30 &&
+                    props.list?.percent_suitable < 80
+                  ? "medium"
+                  : "short"
+              }`}
+              style={{ cursor: "default" }}
+              title={`Mức độ phù hợp ${
+                props.list?.percent_suitable < 20
+                  ? "< 20"
+                  : props.list?.percent_suitable
+              }%`}
+            >
+              {props.list?.percent_suitable < 20
+                ? "< 20"
+                : props.list?.percent_suitable}
+              %
+            </span>
+          )}
+        </Tooltip>
       </div>
       <div className="bg"></div>
       <div className="recomend-item-body">

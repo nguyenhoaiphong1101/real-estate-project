@@ -51,11 +51,14 @@
 }
 
 .modal-search {
-  height: 300px;
+  height: 450px;
+  input {
+    height: 42px;
+  }
   .list {
     border: 1px solid #d9d9d9;
-    margin-top: 5px;
-    height: 290px;
+    margin-top: 10px;
+    height: 400px;
     overflow-y: scroll;
     .card-item {
       padding: 10px;

@@ -151,41 +151,64 @@ function ThumbnailExtra(props) {
           />
         </a>
         <div className="listing-badges">
-          <span
-            style={{ cursor: "default" }}
-            className={`listing-badge ${
-              props.listLatestNew?.status === "OPEN"
-                ? "sale"
-                : props.listLatestNew?.status === "PENDING"
-                ? "sale-pending"
-                : "sale-close"
-            }`}
+          <Tooltip
+            placement="top"
+            title={`Thể loại: ${props.listLatestNew?.type_apartment}`}
           >
-            {props.listLatestNew?.type_apartment}
-          </span>
-          {!props.listLatestNew?.percent_suitable ? null : (
             <span
-              className={`listing-badge ${
-                props.listLatestNew?.percent_suitable >= 80
-                  ? "sale"
-                  : props.listLatestNew?.percent_suitable >= 30 &&
-                    props.listLatestNew?.percent_suitable < 80
-                  ? "medium"
-                  : "short"
-              }`}
               style={{ cursor: "default" }}
-              title={`Mức độ phù hợp ${
-                props.listLatestNew?.percent_suitable < 20
-                  ? "< 20"
-                  : props.listLatestNew?.percent_suitable
-              }%`}
+              className={`listing-badge ${
+                props.listLatestNew?.status === "OPEN"
+                  ? "sale"
+                  : props.listLatestNew?.status === "PENDING"
+                  ? "sale-pending"
+                  : "sale-close"
+              }`}
             >
-              {props.listLatestNew?.percent_suitable < 20
-                ? "< 20"
-                : props.listLatestNew?.percent_suitable}
-              %
+              {props.listLatestNew?.type_apartment}
             </span>
-          )}
+          </Tooltip>
+
+          <Tooltip
+            placement="top"
+            title={`Mức độ phù hợp ${
+              props.listLatestNew?.percent_suitable < 20
+                ? "< 20"
+                : props.listLatestNew?.percent_suitable || "0%"
+            }%`}
+          >
+            {!props.listLatestNew?.percent_suitable ? (
+              <span
+                className={`listing-badge short`}
+                style={{ cursor: "default" }}
+                title={`Mức độ phù hợp 0%`}
+              >
+                0%
+              </span>
+            ) : (
+              <span
+                className={`listing-badge ${
+                  props.listLatestNew?.percent_suitable >= 80
+                    ? "sale"
+                    : props.listLatestNew?.percent_suitable >= 30 &&
+                      props.listLatestNew?.percent_suitable < 80
+                    ? "medium"
+                    : "short"
+                }`}
+                style={{ cursor: "default" }}
+                title={`Mức độ phù hợp: ${
+                  props.listLatestNew?.percent_suitable < 20
+                    ? "< 20"
+                    : props.listLatestNew?.percent_suitable || 0
+                }%`}
+              >
+                {props.listLatestNew?.percent_suitable < 20
+                  ? "< 20"
+                  : props.listLatestNew?.percent_suitable}
+                %
+              </span>
+            )}
+          </Tooltip>
         </div>
         <div className="address">
           <i className="fas fa-map-marker-alt"></i>{" "}

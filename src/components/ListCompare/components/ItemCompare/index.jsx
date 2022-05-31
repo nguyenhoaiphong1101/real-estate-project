@@ -1,9 +1,10 @@
 import { Button, Input, Modal, List, Row, Col } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCompare } from "../../../../actions/user";
 import { listSearchCompare } from "../../../../api/listsearchApi";
 import { API_URL } from "../../../../constants/Config";
+import debounce from "lodash.debounce";
 import "./styles.scss";
 
 function ItemCompare(props) {
@@ -12,30 +13,35 @@ function ItemCompare(props) {
   const detele = () => {
     props?.deleteItem(props.item.id);
   };
-  const [listDepartment, setListDepartment] = useState([]);
   const [listShow, setListShow] = useState([]);
 
   useEffect(() => {
     listSearchCompare.GET().then((res) => {
-      setListDepartment(res);
       setListShow(res);
     });
   }, []);
 
   const getPhotosImg = (name) => `${API_URL}/public/image/apartment/${name}`;
 
+  const debouncedSearch = useCallback(
+    debounce((nextValue) => {
+      listSearchCompare
+        .GET({
+          search: nextValue,
+        })
+        .then((res) => {
+          setListShow(res);
+        });
+    }, 300),
+    []
+  );
+
   const changeSearch = (e) => {
-    setListShow(
-      e.target.value === ""
-        ? listDepartment
-        : listDepartment.filter((item) =>
-            item.title?.toLowerCase().includes(e.target.value.toLowerCase())
-          )
-    );
+    debouncedSearch(e.target.value.trim());
   };
 
   return (
-    <>
+    <div>
       {props.item ? (
         <div className="item-compare">
           <i className="icon fas fa-times" onClick={detele}></i>
@@ -51,8 +57,14 @@ function ItemCompare(props) {
           <p className="title">{props.item.title}</p>
         </div>
       ) : (
-        <div className="item-compare-non">
-          <p className="title-add">Vui lòng chọn sản phẩm</p>
+        <div className="item-compare">
+          <i
+            className="icon-add far fa-plus-square"
+            onClick={() => {
+              setVisible(true);
+            }}
+          ></i>
+          <p className="title-add">Thêm sản phẩm</p>
         </div>
       )}
       <Modal
@@ -66,7 +78,14 @@ function ItemCompare(props) {
         }}
         footer={[
           <Button
-            style={{ backgroundColor: "#01bbbc", color: "#fff" }}
+            key={"btn"}
+            style={{
+              backgroundColor: "#01bbbc",
+              color: "#fff",
+              borderRadius: "16px",
+              padding: "8px 16px",
+              height: "auto",
+            }}
             onClick={() => {
               setVisible(false);
             }}
@@ -76,23 +95,24 @@ function ItemCompare(props) {
         ]}
       >
         <div className="modal-search">
-          <Input.Search
+          <Input
             placeholder="Nhập tên sản phẩm"
             onChange={changeSearch}
             style={{ width: "100%" }}
           />
           <List
             className="list"
+            rowKey="id"
             dataSource={listShow}
-            renderItem={(item) => <ItemModal item={item} />}
+            renderItem={(item, index) => <ItemModal item={item} />}
           />
         </div>
       </Modal>
-    </>
+    </div>
   );
 }
 
-function ItemModal({ item }) {
+function ItemModal({ item, index }) {
   const [isCompare, setIsCompare] = useState(false);
 
   const dispatch = useDispatch();
@@ -122,14 +142,7 @@ function ItemModal({ item }) {
       <Col span={18}>
         <p className="title">{item.title}</p>
         <p>{item.address}</p>
-        <p>
-          Giá:{" "}
-          {new Intl.NumberFormat("de-DE", {
-            style: "currency",
-            currency: "VND",
-          }).format(item.total_price)}{" "}
-          ({item.area}m2)
-        </p>
+        <p>Giá: {item.total_price}</p>
       </Col>
       <Col className="fl-center" span={6}>
         <span
