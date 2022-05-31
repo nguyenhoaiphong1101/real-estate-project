@@ -59,6 +59,22 @@ function FilterListing(props) {
     setIsModalVisible(true);
   };
 
+  const parsePrice = (value) => {
+    if (value >= 1000) {
+      console.log(value);
+      if (value - parseInt(value / 1000) * 1000 > 0)
+        return (
+          parseInt(value / 1000).toString() +
+          " tỷ " +
+          (value - parseInt(value / 1000) * 1000).toString() +
+          " triệu"
+        );
+      else return (value / 1000).toString() + " tỷ";
+    } else {
+      return value.toString() + " triệu";
+    }
+  };
+
   const handleCancel = (values) => {
     setIsModalVisible(false);
     setParams(values);
@@ -163,13 +179,9 @@ function FilterListing(props) {
               title:
                 "Diện tích: " +
                 `${
-                  selectAreaFrom.filter(
-                    (item) => item.value === parseInt(paramsQuery.area_from)
-                  )[0]?.label
-                } - ${
-                  selectAreaTo.filter(
-                    (item) => item.value === parseInt(paramsQuery.area_to)
-                  )[0]?.label
+                  paramsQuery.area_to === "-1"
+                    ? `>= ${paramsQuery.area_from + "m2"}`
+                    : `${paramsQuery.area_from}m2 - ${paramsQuery.area_to}m2`
                 }`,
             });
             break;
@@ -180,13 +192,15 @@ function FilterListing(props) {
               title:
                 "Giá tiền: " +
                 `${
-                  selectPriceFrom.filter(
-                    (item) => item.value === parseInt(paramsQuery.price_from)
-                  )[0].label
-                } - ${
-                  selectPriceTo.filter(
-                    (item) => item.value === parseInt(paramsQuery.price_to)
-                  )[0].label
+                  paramsQuery.price_to === "-1"
+                    ? `>= ${parsePrice(
+                        parseInt(paramsQuery.price_from / 1000000)
+                      )}`
+                    : `${parsePrice(
+                        parseInt(paramsQuery.price_from / 1000000)
+                      )} - ${parsePrice(
+                        parseInt(paramsQuery.price_to / 1000000)
+                      )}`
                 }`,
             });
             break;

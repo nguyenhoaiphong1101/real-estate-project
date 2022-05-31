@@ -8,7 +8,7 @@ const { Option } = Select;
 const DisplayContainer = ({ title, value }) => {
   return (
     <span className="select-container" dir="ltr" data-select2-id="2">
-      <label>{title} </label>
+      <label>Title </label>
       <span className="selection">
         <span className="select-value">{value}</span>
       </span>
@@ -30,13 +30,6 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
 
   const [items, setItems] = useState([]);
   const inputRef = useRef(null);
-  // const area_from = useSelector(state => state.listsearch.area.area_from)
-  // const area_to = useSelector(state => state.listsearch.area.area_to)
-  // const category_id = useSelector(state => state.listsearch.category_id)
-  // const district_id = useSelector(state => state.listsearch.district_id)
-  // const price_from = useSelector(state => state.listsearch.price.price_from)
-  // const price_to = useSelector(state => state.listsearch.price.price_to)
-  // const province_id = useSelector(state => state.listsearch.province_id)
 
   const handleChange = (value, id) => {
     setCurrentValue(value);
@@ -121,25 +114,6 @@ function SelectCustom({ title, options, onHandleChange, value, disabled }) {
           return (
             <Option value={item.name} key={item.id}>
               {item.name}
-              <DisplayItem
-                value={item.name}
-                lastchild={index === items.length - 1 ? "last-child" : ""}
-              />
-            </Option>
-          );
-        })}
-        <Option className="input-wrapper" key="">
-          <Input
-            placeholder="Search"
-            value={valueSearch}
-            ref={inputRef}
-            onChange={(e) => onTodoChange(e.target.value)}
-            onClick={preventEvent}
-          />
-        </Option>
-        {items.map((item, index) => {
-          return (
-            <Option value={item.name} key={item.id}>
               <DisplayItem
                 value={item.name}
                 lastchild={index === items.length - 1 ? "last-child" : ""}

@@ -36,7 +36,6 @@ function GridHome(props) {
   const type_apartment = location.pathname === "/nha-dat-ban" ? "BUY" : "RENT";
 
   useEffect(() => {
-    console.log(location);
     if (Object.keys(paramsQuery).length) {
       dispatch(
         loadListSearch(

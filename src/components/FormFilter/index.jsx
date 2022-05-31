@@ -6,25 +6,26 @@ import {
   quantity,
 } from "../../constants/Config";
 import { useDispatch, useSelector } from "react-redux";
-import { Col, Row, Button, Modal, Form, Select } from "antd";
+import { Col, Row, Button, Modal, Form, Select, Slider, Input } from "antd";
 import "./styles.scss";
 import {
+  listSelectArea,
   selectAreaFrom,
   selectAreaTo,
-  selectPriceFrom,
   selectPriceTo,
 } from "../../constants/DataConfig";
 import { useHistory, useLocation } from "react-router-dom";
 import qs from "query-string";
+import { ArrowRightOutlined } from "@ant-design/icons";
 
 function FormFilter(props) {
-  const [priceTo, setPriceTo] = useState(selectPriceTo);
-  const [priceFrom, setPriceFrom] = useState(selectPriceFrom);
-  const [areaTo, setAreaTo] = useState(selectAreaTo);
-  const [areaFrom, setAreaFrom] = useState(selectAreaFrom);
-  const paramsQuery = qs.parse(window.location.search);
-  const history = useHistory();
+  const [priceTo, setPriceTo] = useState(0);
+  const [priceFrom, setPriceFrom] = useState(0);
+  const [areaTo, setAreaTo] = useState(0);
+  const [areaFrom, setAreaFrom] = useState(0);
   const location = useLocation();
+  const paramsQuery = qs.parse(location.search);
+  const history = useHistory();
 
   const listDistrict = useSelector((state) => state.search.district);
   const listProvince = useSelector((state) => state.search.province);
@@ -41,12 +42,6 @@ function FormFilter(props) {
           : undefined,
         district_id: paramsQuery.district_id
           ? parseInt(paramsQuery.district_id)
-          : undefined,
-        area_from: paramsQuery.area_from
-          ? parseInt(paramsQuery.area_from)
-          : undefined,
-        area_to: paramsQuery.area_to
-          ? parseInt(paramsQuery.area_to)
           : undefined,
         price_to: paramsQuery.price_to
           ? parseInt(paramsQuery.price_to)
@@ -67,25 +62,118 @@ function FormFilter(props) {
           ? parseInt(paramsQuery.bathroom_quantity)
           : undefined,
       });
+      setAreaFrom(paramsQuery.area_from);
+      setAreaTo(paramsQuery.area_to === "-1" ? NaN : paramsQuery.area_to);
+      setPriceFrom(paramsQuery.price_from / minPrice);
+      setPriceTo(
+        paramsQuery.price_to === "-1" ? NaN : paramsQuery.price_to / minPrice
+      );
     }
   }, [location.search]);
 
   const dispatch = useDispatch();
 
+  //10 tỷ = 10 000 000 000
+  const minPrice = 1000000;
+  const numberPriceSlider = 100;
+
   const onFilter = (values) => {
+    var paramsSearch = { ...values };
+    paramsSearch.area_from = areaFrom.toString() === "NaN" ? 0 : areaFrom;
+    paramsSearch.area_to = areaTo.toString() === "NaN" ? -1 : areaTo;
+    paramsSearch.price_from =
+      priceFrom.toString() === "NaN" ? 0 : priceFrom * minPrice;
+    paramsSearch.price_to =
+      priceTo.toString() === "NaN" ? -1 : priceTo * minPrice;
+    paramsSearch.search = props.search;
     if (props.listing) {
-      var paramsSearch = { ...values };
-      paramsSearch.search = props.search;
       paramsSearch.category_id = props.category_id;
-      history.push(
-        `?${objectToQueryString(clearObject(paramsSearch)).toString()}`
-      );
+    }
+    history.push(
+      `/${
+        props.type_apartment === "BUY" ? "nha-dat-ban" : "nha-dat-thue"
+      }?${objectToQueryString(clearObject(paramsSearch))}`
+    );
+  };
+
+  const infoArea = () => {
+    return areaFrom && areaTo
+      ? `${areaFrom}m2 - ${areaTo}m2`
+      : areaFrom && !areaTo
+      ? `>= ${areaFrom}m2`
+      : !areaFrom && areaTo
+      ? `0m2 - ${areaTo}m2`
+      : "Tất cả diện tích";
+  };
+
+  const parsePrice = (value) => {
+    if (value >= 1000) {
+      if (value - parseInt(value / 1000) * 1000 > 0)
+        return (
+          parseInt(value / 1000).toString() +
+          " tỷ " +
+          (value - parseInt(value / 1000) * 1000).toString() +
+          " triệu"
+        );
+      else return (value / 1000).toString() + " tỷ";
     } else {
-      var paramsSearch = { ...values };
-      paramsSearch.search = props.search;
-      history.push(
-        `?${objectToQueryString(clearObject(paramsSearch)).toString()}`
-      );
+      return value.toString() + " triệu";
+    }
+  };
+
+  const infoPrice = () => {
+    return priceFrom && priceTo
+      ? `${parsePrice(priceFrom)} - ${parsePrice(priceTo)}`
+      : priceFrom && !priceTo
+      ? `>= ${parsePrice(priceFrom)}`
+      : !priceFrom && priceTo
+      ? `0 triệu - ${parsePrice(priceTo)}`
+      : "Tất cả giá tiền";
+  };
+
+  const valuePriceSlider = () => {
+    let priceFromSlide = priceFrom.toString()
+      ? priceFrom / numberPriceSlider
+      : undefined;
+    let priceToSlide = priceTo.toString()
+      ? priceTo / numberPriceSlider
+      : undefined;
+    if (
+      priceFromSlide.toString() !== "NaN" &&
+      priceToSlide.toString() !== "NaN"
+    ) {
+      if (priceToSlide >= 100 && priceFromSlide >= 100) {
+        return [100, 100];
+      } else if (priceToSlide >= 100 && priceFromSlide < 100) {
+        return [priceFromSlide, 100];
+      } else {
+        return [priceFromSlide, priceToSlide];
+      }
+    } else {
+      if (
+        priceFromSlide.toString() !== "NaN" &&
+        priceToSlide.toString() === "NaN"
+      )
+        return [priceFromSlide, 100];
+      else return [0, 0];
+    }
+  };
+
+  const valueAreaSlider = () => {
+    let areFromSlide = areaFrom.toString() ? areaFrom / 10 : undefined;
+    let areaToSlide = areaTo.toString() ? areaTo / 10 : undefined;
+    if (areFromSlide.toString() !== "NaN" && areaToSlide.toString() !== "NaN") {
+      if (areaToSlide >= 100 && areFromSlide >= 100) {
+        return [100, 100];
+      } else if (areaToSlide >= 100 && areFromSlide < 100) {
+        return [areFromSlide, 100];
+      } else {
+        return [areFromSlide, areaToSlide];
+      }
+    } else {
+      if (areFromSlide.toString() !== "NaN" && areaToSlide.toString() === "NaN")
+        return [areFromSlide, 100];
+      else return [0, 0];
     }
   };
 
@@ -173,76 +261,111 @@ function FormFilter(props) {
               </Row>
             </div>
             <div className="group-filter">
-              <div className="label">Diện tích</div>
+              <div className="label">Diện tích ( {infoArea()} )</div>
               <Row>
                 <Col span={11}>
-                  <Form.Item name="area_from">
-                    <Select
-                      className="select-custom"
-                      placeholder="Từ"
-                      options={areaFrom}
-                      onChange={(e) => {
-                        setAreaTo(
-                          selectAreaTo.filter(
-                            (item) => item.value > e || item.value === -1
-                          )
-                        );
-                      }}
-                    />
-                  </Form.Item>
+                  <Input
+                    type={"number"}
+                    className="input-filter"
+                    value={areaFrom}
+                    onBlur={() => {
+                      if (areaFrom > areaTo) {
+                        let temp = areaTo;
+                        setAreaTo(areaFrom);
+                        setAreaFrom(temp);
+                      }
+                    }}
+                    onChange={(e) => {
+                      setAreaFrom(e.target.valueAsNumber);
+                    }}
+                    placeholder="Từ"
+                  />
                 </Col>
-                <Col offset={2} span={11}>
-                  <Form.Item name="area_to">
-                    <Select
-                      className="select-custom"
-                      placeholder="Đến"
-                      options={areaTo}
-                      onChange={(e) => {
-                        setAreaFrom(
-                          e === -1
-                            ? selectAreaFrom
-                            : selectAreaFrom.filter((item) => item.value < e)
-                        );
-                      }}
-                    />
-                  </Form.Item>
+                <Col span={2} className="flex-center">
+                  <ArrowRightOutlined />
+                </Col>
+                <Col span={11}>
+                  <Input
+                    value={areaTo}
+                    type={"number"}
+                    onBlur={() => {
+                      if (areaFrom > areaTo) {
+                        let temp = areaTo;
+                        setAreaTo(areaFrom);
+                        setAreaFrom(temp);
+                      }
+                    }}
+                    onChange={(e) => {
+                      setAreaTo(e.target.valueAsNumber);
+                    }}
+                    className="input-filter"
+                    placeholder="Đến"
+                  />
+                </Col>
+                <Col span={24} style={{ marginTop: "15px" }}>
+                  <Slider
+                    range
+                    value={valueAreaSlider()}
+                    onChange={(e) => {
+                      setAreaFrom(e[0] * 10);
+                      setAreaTo(e[1] * 10);
+                    }}
+                  />
                 </Col>
               </Row>
             </div>
             <div className="group-filter">
-              <div className="label">Giá tiền</div>
+              <div className="label">Giá tiền ( {infoPrice()} )</div>
               <Row>
                 <Col span={11}>
-                  <Form.Item name="price_from">
-                    <Select
-                      className="select-custom"
-                      placeholder="Từ"
-                      options={priceFrom}
-                      onChange={(e) => {
-                        setPriceTo(
-                          selectPriceTo.filter(
-                            (item) => item.value > e || item.value === -1
-                          )
-                        );
-                      }}
-                    />
-                  </Form.Item>
+                  <Input
+                    type={"number"}
+                    className="input-filter"
+                    value={priceFrom}
+                    onBlur={() => {
+                      if (priceFrom > priceTo) {
+                        let temp = priceTo;
+                        setPriceTo(priceFrom);
+                        setPriceFrom(temp);
+                      }
+                    }}
+                    onChange={(e) => {
+                      setPriceFrom(e.target.valueAsNumber);
+                    }}
+                    placeholder="Từ"
+                  />
                 </Col>
-                <Col offset={2} span={11}>
-                  <Form.Item name="price_to">
-                    <Select
-                      className="select-custom"
-                      placeholder="Đến"
-                      options={priceTo}
-                      onChange={(e) => {
-                        setPriceFrom(
-                          e === -1
-                            ? selectPriceFrom
-                            : selectPriceFrom.filter((item) => item.value < e)
-                        );
-                      }}
-                    />
-                  </Form.Item>
+                <Col span={2} className="flex-center">
+                  <ArrowRightOutlined />
+                </Col>
+                <Col span={11}>
+                  <Input
+                    value={priceTo}
+                    type={"number"}
+                    onBlur={() => {
+                      if (priceFrom > priceTo) {
+                        let temp = priceTo;
+                        setPriceTo(priceFrom);
+                        setPriceFrom(temp);
+                      }
+                    }}
+                    onChange={(e) => {
+                      setPriceTo(e.target.valueAsNumber);
+                    }}
+                    className="input-filter"
+                    placeholder="Đến"
+                  />
+                </Col>
+                <Col span={24} style={{ marginTop: "15px" }}>
+                  <Slider
+                    range
+                    step={0.01}
+                    value={valuePriceSlider()}
+                    onChange={(e) => {
+                      setPriceFrom(parseInt(e[0] * 100));
+                      setPriceTo(parseInt(e[1] * 100));
+                    }}
+                  />
                 </Col>
               </Row>
             </div>
@@ -297,7 +420,9 @@ function FormFilter(props) {
               form.resetFields();
               dispatch(loadDistrict());
               setPriceTo(selectPriceTo);
-              setPriceFrom(selectPriceFrom);
+              setPriceFrom();
+              setAreaTo(0);
+              setAreaFrom(0);
             }}
           >
             Xoá lọc

@@ -78,7 +78,7 @@ function Filter(props) {
         </Col>
       </Row>
       <FormFilter
-        typeHome={props.type}
+        type_apartment={type_apartment}
         isModalVisible={isModalVisible}
         handleCancel={handleCancel}
         setParams={setParams}
