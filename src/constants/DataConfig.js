@@ -1,4 +1,31 @@
-export const selectPriceFrom = [
+export const selectPriceFromRent = [
+  {
+    id: 1,
+    label: "0",
+    value: 0,
+  },
+  {
+    id: 2,
+    label: "1 triệu",
+    value: 1000000,
+  },
+  {
+    id: 3,
+    label: "10 triệu",
+    value: 10000000,
+  },
+  {
+    id: 4,
+    label: "20 triệu",
+    value: 20000000,
+  },
+  {
+    id: 5,
+    label: "50 triệu",
+    value: 50000000,
+  },
+];
+export const selectPriceFromBuy = [
   {
     id: 1,
     label: "0",
@@ -30,73 +57,49 @@ export const selectPriceFrom = [
     value: 5000000000,
   },
 ];
-export const listSelectArea = [
-  {
-    id: 1,
-    label: "Tất cả diện tích",
-    value: "",
-  },
-  {
-    id: 2,
-    label: "30m2 - 50m2",
-    value: "area_from=30&area_to=50",
-  },
-  {
-    id: 3,
-    label: "50m2 - 100m2",
-    value: "area_from=50&area_to=100",
-  },
-  {
-    id: 4,
-    label: "100m2 - 150m2",
-    value: "area_from=100&area_to=150",
-  },
-  {
-    id: 5,
-    label: "150m2 - 200m2",
-    value: "area_from=150&area_to=200",
-  },
-  {
-    id: 6,
-    label: "200m2 - 250m2",
-    value: "area_from=200&area_to=250",
-  },
-  {
-    id: 7,
-    label: "250m2 - 500m2",
-    value: "area_from=250&area_to=500",
-  },
-  {
-    id: 8,
-    label: "500m2 - 750m2",
-    value: "area_from=500&area_to=750",
-  },
-  {
-    id: 9,
-    label: "750m2 - 1000m2",
-    value: "area_from=750&area_to=1000",
-  },
-  {
-    id: 10,
-    label: ">= 1000m2",
-    value: "area_from=1000",
-  },
-];
-export const selectPriceTo = [
-  {
-    id: 2,
-    label: "1 triệu",
-    value: 1000000,
-  },
+
+export const selectPriceToRent = [
   {
     id: 3,
     label: "10 triệu",
     value: 10000000,
   },
   {
+    id: 1,
+    label: "20 triệu",
+    value: 20000000,
+  },
+  {
+    id: 2,
+    label: "50 triệu",
+    value: 50000000,
+  },
+  {
     id: 4,
     label: "100 triệu",
     value: 100000000,
+  },
+  {
+    id: 8,
+    label: "> 100 triệu",
+    value: -1,
+  },
+];
+export const selectPriceToBuy = [
+  {
+    id: 4,
+    label: "100 triệu",
+    value: 100000000,
+  },
+  {
+    id: 3,
+    label: "200 triệu",
+    value: 200000000,
+  },
+  {
+    id: 2,
+    label: "500 triệu",
+    value: 500000000,
   },
   {
     id: 5,

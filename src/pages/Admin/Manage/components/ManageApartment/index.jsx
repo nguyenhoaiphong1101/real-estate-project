@@ -427,19 +427,13 @@ function ManageApartment(props) {
     await dispatch(loadDistrict(detailHome?.addressDetail?.province_id));
     formMain.setFieldsValue({
       address: detailHome?.addressDetail?.address,
-      balcony_direction: detailHome?.apartment_detail?.balcony_direction,
       bathroom_quantity: detailHome?.apartment_detail?.bathroom_quantity,
       bedroom_quantity: detailHome?.apartment_detail?.bedroom_quantity,
       description: detailHome?.apartment_detail?.description,
-      entrance_building: detailHome?.apartment_detail?.entrance_building,
       floor_quantity: detailHome?.apartment_detail?.floor_quantity,
-      front_building: detailHome?.apartment_detail?.front_building,
-      furniture: detailHome?.apartment_detail?.furniture,
-      house_direction: detailHome?.apartment_detail?.house_building,
       toilet_quantity: detailHome?.apartment_detail?.toilet_quantity,
       area: detailHome?.area,
       expired_date: moment(detailHome?.expired_date),
-      overview: detailHome?.overview,
       title: detailHome?.title,
       total_price: detailHome?.total_price,
       district: detailHome?.addressDetail?.district_id,
@@ -476,22 +470,16 @@ function ManageApartment(props) {
           province_id: dataForm.province,
         },
         apartment_detail: {
-          balcony_direction: dataForm.balcony_direction,
           bathroom_quantity: dataForm.bathroom_quantity,
           bedroom_quantity: dataForm.bedroom_quantity,
           description: descriptionEditor,
-          entrance_building: dataForm.entrance_building,
           floor_quantity: dataForm.floor_quantity,
-          front_building: dataForm.front_building,
-          furniture: dataForm.furniture,
-          house_direction: dataForm.house_direction,
           toilet_quantity: dataForm.toilet_quantity,
         },
         area: dataForm.area,
         category_id: dataForm.category,
         expired_date:
           moment(dataForm.expired_date).format("YYYY-MM-DDTHH:mm:ss") + "Z",
-        overview: dataForm.overview,
         title: dataForm.title,
         total_price: dataForm.total_price,
         type_apartment: dataForm.type_apartment,
@@ -521,22 +509,16 @@ function ManageApartment(props) {
           province_id: dataForm.province,
         },
         apartment_detail: {
-          balcony_direction: dataForm.balcony_direction,
           bathroom_quantity: dataForm.bathroom_quantity,
           bedroom_quantity: dataForm.bedroom_quantity,
           description: descriptionEditor,
-          entrance_building: dataForm.entrance_building,
           floor_quantity: dataForm.floor_quantity,
-          front_building: dataForm.front_building,
-          furniture: dataForm.furniture,
-          house_direction: dataForm.house_direction,
           toilet_quantity: dataForm.toilet_quantity,
         },
         area: dataForm.area,
         category_id: dataForm.category,
         expired_date:
           moment(dataForm.expired_date).format("YYYY-MM-DDTHH:mm:ss") + "Z",
-        overview: dataForm.overview,
         title: dataForm.title,
         total_price: dataForm.total_price,
         type_apartment: dataForm.type_apartment,
@@ -578,7 +560,7 @@ function ManageApartment(props) {
         province_id: dataForm.province, //
         price_to: dataPrice[0]?.to === -1 ? undefined : dataPrice[0]?.to,
         price_from: dataPrice[0]?.from === -1 ? undefined : dataPrice[0]?.from,
-        district_id: dataForm.category, //
+        district_id: dataForm.district_id, //
         category_id: dataForm.category, //
         area_to: dataArea[0]?.to === -1 ? undefined : dataArea[0]?.to,
         area_from: dataArea[0]?.from === -1 ? undefined : dataArea[0]?.from,
@@ -592,7 +574,7 @@ function ManageApartment(props) {
       province_id: dataForm.province, //
       price_to: dataPrice[0]?.to === -1 ? undefined : dataPrice[0]?.to,
       price_from: dataPrice[0]?.from === -1 ? undefined : dataPrice[0]?.from,
-      district_id: dataForm.category, //
+      district_id: dataForm.district_id, //
       category_id: dataForm.category, //
       area_to: dataArea[0]?.to === -1 ? undefined : dataArea[0]?.to,
       area_from: dataArea[0]?.from === -1 ? undefined : dataArea[0]?.from,
@@ -939,12 +921,12 @@ function ManageApartment(props) {
                 </Form.Item>
               </Col>
               <Col span={11}>
-                <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>Sân nhà</h1>
-                <Form.Item name="front_building">
+                <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>Số tầng</h1>
+                <Form.Item name="floor_quantity">
                   <Input
                     className="input"
                     type="text"
-                    placeholder="Sân nhà"
+                    placeholder="Số tầng căn hộ"
                   ></Input>
                 </Form.Item>
               </Col>
@@ -960,19 +942,8 @@ function ManageApartment(props) {
                   ></Input>
                 </Form.Item>
               </Col>
+
               <Col span={11}>
-                <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>
-                  Lối vào nhà
-                </h1>
-                <Form.Item name="entrance_building">
-                  <Input
-                    className="input"
-                    type="text"
-                    placeholder="Lối vào căn hộ"
-                  ></Input>
-                </Form.Item>
-              </Col>
-              <Col span={11} offset={2}>
                 <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>
                   Phòng tắm
                 </h1>
@@ -981,18 +952,6 @@ function ManageApartment(props) {
                     className="input"
                     type="text"
                     placeholder="Số phòng tắm"
-                  ></Input>
-                </Form.Item>
-              </Col>
-              <Col span={11}>
-                <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>
-                  Nội thất
-                </h1>
-                <Form.Item name="furniture">
-                  <Input
-                    className="input"
-                    type="text"
-                    placeholder="Nội thất trong căn hộ"
                   ></Input>
                 </Form.Item>
               </Col>
@@ -1008,19 +967,8 @@ function ManageApartment(props) {
                   ></Input>
                 </Form.Item>
               </Col>
+
               <Col span={11}>
-                <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>
-                  Hướng nhà
-                </h1>
-                <Form.Item name="house_direction">
-                  <Input
-                    className="input"
-                    type="text"
-                    placeholder="Hướng căn hộ"
-                  ></Input>
-                </Form.Item>
-              </Col>
-              <Col offset={2} span={11}>
                 <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>
                   Kích thước
                 </h1>
@@ -1032,18 +980,7 @@ function ManageApartment(props) {
                   ></Input>
                 </Form.Item>
               </Col>
-              <Col span={11}>
-                <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>
-                  Hướng ban công
-                </h1>
-                <Form.Item name="balcony_direction">
-                  <Input
-                    className="input"
-                    type="text"
-                    placeholder="Hướng ban công căn hộ"
-                  ></Input>
-                </Form.Item>
-              </Col>
+
               <Col offset={2} span={11}>
                 <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>
                   Tình trạng
@@ -1056,26 +993,6 @@ function ManageApartment(props) {
                     <Option value="BUY">Bán</Option>
                     <Option value="RENT">Cho thuê</Option>
                   </Select>
-                </Form.Item>
-              </Col>
-              <Col span={11}>
-                <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>Số tầng</h1>
-                <Form.Item name="floor_quantity">
-                  <Input
-                    className="input"
-                    type="text"
-                    placeholder="Số tầng căn hộ"
-                  ></Input>
-                </Form.Item>
-              </Col>
-              <Col offset={2} span={11}>
-                <h1 style={{ fontSize: "1rem", fontWeight: "800" }}>View</h1>
-                <Form.Item name="overview">
-                  <Input
-                    className="input"
-                    type="text"
-                    placeholder="View căn hộ"
-                  ></Input>
                 </Form.Item>
               </Col>
             </Row>
@@ -1225,6 +1142,7 @@ function ManageApartment(props) {
         onCancel={cancelModalStatus}
         footer={[
           <Button
+            key={"123"}
             style={{ marginRight: " 8px " }}
             className="ant-btn-return"
             onClick={cancelModalStatus}
@@ -1232,6 +1150,7 @@ function ManageApartment(props) {
             Quay lại
           </Button>,
           <Button
+            key={"321"}
             style={{ marginRight: " 8px " }}
             className="ant-btn"
             onClick={cancelStatus}
@@ -1239,6 +1158,7 @@ function ManageApartment(props) {
             Từ chối
           </Button>,
           <Button
+            key={"3211"}
             style={{ marginRight: " 8px " }}
             className="ant-btn-primary"
             onClick={acceptStatus}
@@ -1365,6 +1285,8 @@ function ManageApartment(props) {
                 page: page,
               });
             },
+            position: ["bottomCenter"],
+            showSizeChanger: false,
             pageSize: 10,
             total: totalItem,
           }}

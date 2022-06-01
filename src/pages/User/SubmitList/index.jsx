@@ -82,38 +82,6 @@ function SubmitList(props) {
 
   const [arr1, setArr1] = useState([
     {
-      icon: "flaticon-paint",
-      label: "Mặt tiền",
-      name: "front_building",
-    },
-    {
-      icon: "flaticon-garage",
-      label: "Lối vào nhà",
-      name: "entrance_building",
-    },
-    {
-      icon: "flaticon-chair",
-      label: "Nội thất",
-      name: "furniture",
-    },
-    {
-      icon: "flaticon-fan",
-      label: "Hướng nhà",
-      name: "house_direction",
-    },
-    {
-      icon: "flaticon-garage",
-      label: "Hướng ban công",
-      name: "balcony_direction",
-    },
-    {
-      icon: "flaticon-ruler",
-      label: "Số tầng",
-      name: "floor_quantity",
-    },
-  ]);
-  const [arr2, setArr2] = useState([
-    {
       icon: "flaticon-pillow",
       label: "Phòng ngủ",
       name: "bedroom_quantity",
@@ -123,6 +91,13 @@ function SubmitList(props) {
       label: "Phòng tắm",
       name: "bathroom_quantity",
     },
+    {
+      icon: "flaticon-ruler",
+      label: "Số tầng",
+      name: "floor_quantity",
+    },
+  ]);
+  const [arr2, setArr2] = useState([
     {
       icon: "flaticon-bathtub",
       label: "Nhà vệ sinh",
@@ -137,12 +112,6 @@ function SubmitList(props) {
       icon: "flaticon-new",
       label: "Tình trạng",
       name: "type_apartment",
-    },
-
-    {
-      icon: "flaticon-view",
-      label: "View",
-      name: "overview",
     },
   ]);
 
@@ -222,15 +191,10 @@ function SubmitList(props) {
           province_id: values.province,
         },
         apartment_detail: {
-          balcony_direction: values.balcony_direction,
           bathroom_quantity: values.bathroom_quantity,
           bedroom_quantity: values.bedroom_quantity,
           description: values.description,
-          entrance_building: values.entrance_building,
           floor_quantity: values.floor_quantity,
-          front_building: values.front_building,
-          furniture: values.furniture,
-          house_direction: values.house_direction,
           toilet_quantity: values.toilet_quantity,
         },
         area: values.area,
@@ -265,19 +229,13 @@ function SubmitList(props) {
   useEffect(() => {
     form.setFieldsValue({
       address: detailHome?.addressDetail?.address,
-      balcony_direction: detailHome?.apartment_detail?.balcony_direction,
       bathroom_quantity: detailHome?.apartment_detail?.bathroom_quantity,
       bedroom_quantity: detailHome?.apartment_detail?.bedroom_quantity,
       description: detailHome?.apartment_detail?.description,
-      entrance_building: detailHome?.apartment_detail?.entrance_building,
       floor_quantity: detailHome?.apartment_detail?.floor_quantity,
-      front_building: detailHome?.apartment_detail?.front_building,
-      furniture: detailHome?.apartment_detail?.furniture,
-      house_direction: detailHome?.apartment_detail?.house_building,
       toilet_quantity: detailHome?.apartment_detail?.toilet_quantity,
       area: detailHome?.area,
       expired_date: moment(detailHome?.expired_date),
-      overview: detailHome?.overview,
       title: detailHome?.title,
       total_price: detailHome?.total_price,
       district: detailHome?.addressDetail?.district_id,

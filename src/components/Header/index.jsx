@@ -68,15 +68,13 @@ function Header(props) {
           <React.Fragment>
             <li>
               {localStorage.getItem("role") === "ADMIN" ? (
-                <Link
+                <a
                   className="mr-10"
-                  onClick={() => {
-                    window.location.pathname = "/admin";
-                  }}
+                  onClick={() => window.location.replace("/admin/can-ho")}
                 >
                   {" "}
                   Tới trang quản trị{" "}
-                </Link>
+                </a>
               ) : (
                 ""
               )}

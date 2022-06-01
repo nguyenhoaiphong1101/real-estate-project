@@ -30,7 +30,7 @@ function DetailHome() {
   };
 
   return (
-    <div style={{ paddingBottom: "20px" }}>
+    <div style={{ paddingBottom: "100px" }}>
       <SectionBanner />
       <SectionBody isRender={isRender} />
     </div>

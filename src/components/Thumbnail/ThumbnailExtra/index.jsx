@@ -168,6 +168,24 @@ function ThumbnailExtra(props) {
               {props.listLatestNew?.type_apartment}
             </span>
           </Tooltip>
+          {history.location.pathname === "/trang-ca-nhan" ? (
+            <Tooltip
+              placement="top"
+              title={`Trạng thái: ${props.listLatestNew?.status}`}
+            >
+              <span
+                className={`listing-badge-status ${
+                  props.listLatestNew?.status === "OPEN"
+                    ? "open"
+                    : props.listLatestNew?.status === "PENDING"
+                    ? "pending"
+                    : "close"
+                }`}
+              >
+                {props.listLatestNew?.status}
+              </span>
+            </Tooltip>
+          ) : null}
 
           <Tooltip
             placement="top"

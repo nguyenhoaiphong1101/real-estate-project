@@ -51,6 +51,12 @@ body {
   justify-content: center;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 df-messenger {
   --df-messenger-bot-message: #01bbbc;
   --df-messenger-button-titlebar-color: #01bbbc;
@@ -58,4 +64,4 @@ df-messenger {
   --df-messenger-font-color: white;
   --df-messenger-send-icon: #519fff;
   --df-messenger-user-message: #519fff;
- }
+}

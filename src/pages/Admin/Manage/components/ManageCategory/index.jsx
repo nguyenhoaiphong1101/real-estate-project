@@ -331,6 +331,8 @@ function ManageCategory(props) {
               });
             },
             pageSize: 10,
+            position: ["bottomCenter"],
+            showSizeChanger: false,
             total: totalItem,
           }}
         />

@@ -51,7 +51,7 @@ function SectionBody() {
         >
           <ListingFavorite />
         </TabPane>
-        <TabPane
+        {/* <TabPane
           tab={
             <div className="tab-item-wrapper">
               <h1 className="tab-item">Mục tiêu người dùng</h1>
@@ -60,7 +60,7 @@ function SectionBody() {
           key="4"
         >
           <ListingTarget />
-        </TabPane>
+        </TabPane> */}
       </Tabs>
     </div>
   );

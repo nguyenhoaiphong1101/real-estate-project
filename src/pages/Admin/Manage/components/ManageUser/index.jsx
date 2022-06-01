@@ -395,6 +395,8 @@ function ManageUser(props) {
               });
             },
             pageSize: 10,
+            position: ["bottomCenter"],
+            showSizeChanger: false,
             total: totalItem,
           }}
         />

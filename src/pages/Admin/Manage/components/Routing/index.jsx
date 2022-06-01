@@ -15,6 +15,9 @@ import "./styles.scss";
 function AdminRouting(props) {
   return (
     <div className="admin-routing" style={{ width: "100%" }}>
+      <Route path="/admin">
+        <Redirect to={"/admin/can-ho"} />
+      </Route>
       <Route path="/admin/can-ho">
         <div>
           <ManageApartment />

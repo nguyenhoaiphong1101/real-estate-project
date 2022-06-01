@@ -261,8 +261,17 @@ function FilterListing(props) {
               };
             })}
             value={category_id}
+            allowClear
             onChange={(e) => {
-              setCategory_id(e);
+              history.push(
+                `?${objectToQueryString(
+                  clearObject({
+                    ...paramsQuery,
+                    category_id: e,
+                    page: 1,
+                  })
+                )}`
+              );
             }}
             className="select"
             placeholder="All"

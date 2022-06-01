@@ -97,10 +97,12 @@ function FormEdit() {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <label className="pl-auto">Quận/huyện</label>
-            <Form.Item className="form-item" name="district">
+            <label className="pl-auto">Quốc gia</label>
+            <Form.Item className="form-item" name="country">
               <Select
-                options={listDistrict.map((item) => {
+                style={{ height: "58px" }}
+                disabled
+                options={listCountry.map((item) => {
                   return {
                     value: item.id,
                     label: item.name,
@@ -127,12 +129,10 @@ function FormEdit() {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <label className="pl-auto">Quốc gia</label>
-            <Form.Item className="form-item" name="country">
+            <label className="pl-auto">Quận/huyện</label>
+            <Form.Item className="form-item" name="district">
               <Select
-                style={{ height: "58px" }}
-                disabled
-                options={listCountry.map((item) => {
+                options={listDistrict.map((item) => {
                   return {
                     value: item.id,
                     label: item.name,

@@ -9,8 +9,10 @@ import ThumbnailExtra from "../../../components/Thumbnail/ThumbnailExtra";
 import {
   selectAreaFrom,
   selectAreaTo,
-  selectPriceFrom,
-  selectPriceTo,
+  selectPriceFromBuy,
+  selectPriceFromRent,
+  selectPriceToBuy,
+  selectPriceToRent,
 } from "../../../constants/DataConfig";
 import { province } from "../../../api/searchApi";
 import { getStatistic, getStatisticRank } from "../../../api/userApi";
@@ -43,6 +45,7 @@ function Statistical(props) {
   const [listHot, setListHot] = useState([]);
   const [listInfo, setListInfo] = useState([]);
   const [listRank, setListRank] = useState([]);
+  const [type_apartment, set_type_apartment] = useState("BUY");
   const [categoryChart, setCategoryChart] = useState("1");
   const [target, setTarget] = useState("1");
   const [from, setFrom] = useState("100000000");
@@ -263,7 +266,7 @@ function Statistical(props) {
     if (token !== null) {
       params.user_id = jwt_decode(token).id;
     }
-    getStatistic.GET(params).then((res) => {
+    getStatistic.GET({ ...params, type_apartment }).then((res) => {
       setLoading(false);
       if (categoryChart === "1") {
         setDataChart({
@@ -328,9 +331,9 @@ function Statistical(props) {
         <h1 className="title">Biểu đồ thống kê</h1>
         <div className="list-search">
           <Row>
-            <Col span={18}>
+            <Col span={21}>
               <Row>
-                <Col span={8}>
+                <Col span={6}>
                   <div className="group-search">
                     <div className="label-item">
                       <label>Thống kê : </label>
@@ -360,7 +363,7 @@ function Statistical(props) {
                   </div>
                 </Col>
                 {categoryChart === "1" ? (
-                  <Col span={8}>
+                  <Col span={6}>
                     <div className="group-search">
                       <div className="label-item">
                         <label>Thành phố : </label>
@@ -387,7 +390,7 @@ function Statistical(props) {
                   </Col>
                 ) : null}
                 {categoryChart === "1" ? null : categoryChart === "2" ? (
-                  <Col span={8}>
+                  <Col span={6}>
                     <div className="group-search">
                       <div className="label-item">
                         <label>Bắt đầu :</label>
@@ -411,7 +414,7 @@ function Statistical(props) {
                     </div>
                   </Col>
                 ) : (
-                  <Col span={8}>
+                  <Col span={6}>
                     <div className="group-search">
                       <div className="label-item">
                         <label>Bắt đầu :</label>
@@ -424,7 +427,10 @@ function Statistical(props) {
                         }}
                         style={{ width: 160 }}
                       >
-                        {selectPriceFrom.map((item) => {
+                        {(type_apartment === "BUY"
+                          ? selectPriceFromBuy
+                          : selectPriceFromRent
+                        ).map((item) => {
                           return (
                             <Select.Option key={item.id} value={item.value}>
                               {item.label}
@@ -437,7 +443,7 @@ function Statistical(props) {
                 )}
 
                 {categoryChart === "1" ? null : categoryChart === "2" ? (
-                  <Col span={8}>
+                  <Col span={6}>
                     <div className="group-search">
                       <div className="label-item">
                         <label>Kết thúc:</label>
@@ -461,7 +467,7 @@ function Statistical(props) {
                     </div>
                   </Col>
                 ) : (
-                  <Col span={8}>
+                  <Col span={6}>
                     <div className="group-search">
                       <div className="label-item">
                         <label>Kết thúc:</label>
@@ -474,7 +480,10 @@ function Statistical(props) {
                         }}
                         style={{ width: 160 }}
                       >
-                        {selectPriceTo.map((item) => {
+                        {(type_apartment === "BUY"
+                          ? selectPriceToBuy
+                          : selectPriceToRent
+                        ).map((item) => {
                           return (
                             <Select.Option key={item.id} value={item.value}>
                               {item.label}
@@ -485,9 +494,39 @@ function Statistical(props) {
                     </div>
                   </Col>
                 )}
+                <Col span={6}>
+                  <div className="group-search">
+                    <div className="label-item">
+                      <label>Loại BĐS:</label>
+                    </div>
+                    <Select
+                      className="select"
+                      value={type_apartment}
+                      onChange={(e) => {
+                        set_type_apartment(e);
+                        setPriceFromCate("");
+                        setPriceFromTar("");
+                        setPriceToCate("");
+                        setPriceToTar("");
+                      }}
+                      style={{ width: 160 }}
+                    >
+                      {[
+                        { id: 1, label: "Mua", value: "BUY" },
+                        { id: 2, label: "Thuê", value: "RENT" },
+                      ].map((item) => {
+                        return (
+                          <Select.Option key={item.id} value={item.value}>
+                            {item.label}
+                          </Select.Option>
+                        );
+                      })}
+                    </Select>
+                  </div>
+                </Col>
               </Row>
               <Row>
-                <Col span={8}>
+                <Col span={6}>
                   <div className="group-search">
                     <div className="label-item">
                       <label>Tiêu chí :</label>
@@ -515,7 +554,7 @@ function Statistical(props) {
                   </div>
                 </Col>
                 {target === "3" || target === "" ? null : target === "2" ? (
-                  <Col span={8}>
+                  <Col span={6}>
                     <div className="group-search">
                       <div className="label-item">
                         <label>Bắt đầu :</label>
@@ -539,7 +578,7 @@ function Statistical(props) {
                     </div>
                   </Col>
                 ) : (
-                  <Col span={8}>
+                  <Col span={6}>
                     <div className="group-search">
                       <div className="label-item">
                         <label>Bắt đầu :</label>
@@ -552,7 +591,10 @@ function Statistical(props) {
                         }}
                         style={{ width: 160 }}
                       >
-                        {selectPriceFrom.map((item) => {
+                        {(type_apartment === "BUY"
+                          ? selectPriceFromBuy
+                          : selectPriceFromRent
+                        ).map((item) => {
                           return (
                             <Select.Option key={item.id} value={item.value}>
                               {item.label}
@@ -564,7 +606,7 @@ function Statistical(props) {
                   </Col>
                 )}
                 {target === "3" || target === "" ? null : target === "2" ? (
-                  <Col span={8}>
+                  <Col span={6}>
                     <div className="group-search">
                       <div className="label-item">
                         <label>Kết thúc:</label>
@@ -588,7 +630,7 @@ function Statistical(props) {
                     </div>
                   </Col>
                 ) : (
-                  <Col span={8}>
+                  <Col span={6}>
                     <div className="group-search">
                       <div className="label-item">
                         <label>Kết thúc:</label>
@@ -601,7 +643,10 @@ function Statistical(props) {
                         }}
                         style={{ width: 160 }}
                       >
-                        {selectPriceTo.map((item) => {
+                        {(type_apartment === "BUY"
+                          ? selectPriceToBuy
+                          : selectPriceToRent
+                        ).map((item) => {
                           return (
                             <Select.Option key={item.id} value={item.value}>
                               {item.label}
@@ -614,7 +659,7 @@ function Statistical(props) {
                 )}
               </Row>
             </Col>
-            <Col className="column-btn" span={6}>
+            <Col className="column-btn" span={3}>
               <button type="submit" className="btn-submit" onClick={onCompare}>
                 Thống kê
               </button>

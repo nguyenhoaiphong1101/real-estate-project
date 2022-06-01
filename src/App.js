@@ -1,6 +1,12 @@
 import jwt_decode from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ListCompare from "./components/ListCompare";
@@ -37,7 +43,7 @@ function App() {
     if (
       token !== null &&
       jwt_decode(token).role === "ADMIN" &&
-      location.pathname.includes("/admin")
+      location.pathname.includes("/admin/can-ho")
     ) {
       return "ADMIN";
     } else {
@@ -57,6 +63,7 @@ function App() {
   useEffect(() => {
     setToken(localToken);
   }, [localToken]);
+
   doAxiosRequestIntercept();
   return (
     <BrowserRouter>
@@ -68,7 +75,9 @@ function App() {
           </div>
         ) : null}
         <Switch>
-          {returnRole() === "ADMIN" && <AdminWrapper />}
+          {token !== null &&
+            jwt_decode(token).role === "ADMIN" &&
+            location.pathname.includes("/admin/can-ho") && <AdminWrapper />}
           <Route path="/home" exact>
             <Home />
             <Footer />
@@ -99,11 +108,9 @@ function App() {
           </Route>
           <Route path="/dang-nhap" exact>
             <Login />
-            <Footer />
           </Route>
           <Route path="/dang-ky" exact>
             <Signup />
-            <Footer />
           </Route>
           <Route path="/so-sanh/:id" exact>
             <Compare title="So sánh bất động sản" />
@@ -117,7 +124,8 @@ function App() {
             <Recommend />
             <Footer />
           </Route>
-          {location.pathname === "/" ? (
+          {location.pathname === "/" &&
+          location.pathname !== "/admin/can-ho" ? (
             <Route path="/">
               <Redirect to="/home" />
             </Route>

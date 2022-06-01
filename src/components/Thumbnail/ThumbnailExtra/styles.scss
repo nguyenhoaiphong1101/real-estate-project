@@ -78,13 +78,21 @@
         padding: 9px 6px;
         margin-right: 5px;
       }
-      .listing-status {
-        font-size: 12px;
-        font-weight: 600;
-        color: #fff;
-        border-radius: 8px;
+      .listing-badge-status {
+        background-color: #47bfff;
         padding: 9px 6px;
+        font-size: 13px;
+        border-radius: 5px;
         margin-right: 5px;
+      }
+      .open {
+        background-color: #29e671;
+      }
+      .close {
+        background-color: #f15353;
+      }
+      .pending {
+        background-color: #47bfff;
       }
       .sale {
         color: #fff;

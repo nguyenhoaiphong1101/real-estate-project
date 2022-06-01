@@ -19,7 +19,7 @@ function FormLogin() {
 
   const loginSuccess = (role) => {
     if (role === "ADMIN") {
-      history.push("/admin");
+      window.location.replace("/admin/can-ho");
     } else {
       history.push("/home");
       dispatch(getInfoUser());
@@ -35,58 +35,60 @@ function FormLogin() {
   // const [state, setstate] = useState(initialState)
   return (
     <Form form={form} className="form-login" onFinish={onFinish}>
-      <div className="form-login-text">
-        <h3>Đăng Nhập</h3>
-      </div>
-      <div className="form-login-group">
-        <label>Tài khoản</label>
-        <Form.Item
-          name="username"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input
-            type="text"
-            className="form-login-group-control"
-            placeholder="Tài khoản"
+      <div style={{ width: "100%", padding: "0 120px" }}>
+        <div className="form-login-text">
+          <h3>Đăng Nhập</h3>
+        </div>
+        <div className="form-login-group">
+          <label>Tài khoản</label>
+          <Form.Item
             name="username"
-          />
-        </Form.Item>
-      </div>
-      <div className="form-login-group">
-        <label>Mật khẩu</label>
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input
-            type="password"
-            className="form-login-group-control"
-            placeholder="Mật khẩu"
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input
+              type="text"
+              className="form-login-group-control"
+              placeholder="Tài khoản"
+              name="username"
+            />
+          </Form.Item>
+        </div>
+        <div className="form-login-group">
+          <label>Mật khẩu</label>
+          <Form.Item
             name="password"
-          />
-        </Form.Item>
-      </div>
-      {/* <div className="form-login-group">
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input
+              type="password"
+              className="form-login-group-control"
+              placeholder="Mật khẩu"
+              name="password"
+            />
+          </Form.Item>
+        </div>
+        {/* <div className="form-login-group">
                 <a className="form-login-group-forgot-password" href="#">Quên mật khẩu?</a>
             </div> */}
-      <button type="submit" className="form-login-btn-submit">
-        Đăng nhập
-      </button>
-      <div className="auth-seperator">
-        <span>OR</span>
+        <button type="submit" className="form-login-btn-submit">
+          Đăng nhập
+        </button>
+        <div className="auth-seperator">
+          <span>OR</span>
+        </div>
+        <p className="text-end">
+          Bạn chưa có tài khoản?
+          <a href="/dang-ky">Tạo ngay</a>
+        </p>
       </div>
-      <p className="text-end">
-        Bạn chưa có tài khoản?
-        <a href="/dang-ky">Tạo ngay</a>
-      </p>
     </Form>
   );
 }

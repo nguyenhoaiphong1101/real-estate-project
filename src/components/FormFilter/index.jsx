@@ -184,8 +184,8 @@ function FormFilter(props) {
   };
 
   const valueAreaSlider = () => {
-    let areFromSlide = areaFrom / 10;
-    let areaToSlide = areaTo.toString() === "NaN" ? 100 : areaTo / 10;
+    let areFromSlide = areaFrom / 5;
+    let areaToSlide = areaTo.toString() === "NaN" ? 100 : areaTo / 5;
 
     if (areaToSlide >= 100 && areFromSlide >= 100) {
       return [100, 100];
@@ -330,8 +330,8 @@ function FormFilter(props) {
                     range
                     value={valueAreaSlider()}
                     onChange={(e) => {
-                      setAreaFrom(e[0] * 10);
-                      setAreaTo(e[1] * 10);
+                      setAreaFrom(e[0] * 5);
+                      setAreaTo(e[1] * 5);
                     }}
                   />
                 </Col>

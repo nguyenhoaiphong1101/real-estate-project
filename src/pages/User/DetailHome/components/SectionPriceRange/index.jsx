@@ -43,6 +43,10 @@ function SectionPriceRange(props) {
       <div className="section-price">
         <div className="area-price">
           <div className="price-min">
+            <span>Thể loại</span>
+            <h5>{detailHome.category_name}</h5>
+          </div>
+          <div className="price-min">
             <span>Giá cả</span>
             <h5>{detailHome.total_price}</h5>
           </div>
