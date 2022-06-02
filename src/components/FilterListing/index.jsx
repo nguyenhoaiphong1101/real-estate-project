@@ -82,7 +82,14 @@ function FilterListing(props) {
     var paramsSearch = { ...params };
     paramsSearch.search = search;
     paramsSearch.category_id = category_id;
-    history.push(`?${objectToQueryString(clearObject(paramsSearch))}&page=1`);
+    history.push(
+      `?${objectToQueryString(
+        clearObject({
+          ...paramsSearch,
+          page: 1,
+        })
+      )}`
+    );
   };
   const _handleKeyDown = (e) => {
     if (e.key === "Enter") {

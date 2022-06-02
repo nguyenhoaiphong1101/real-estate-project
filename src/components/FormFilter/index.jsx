@@ -121,10 +121,14 @@ function FormFilter(props) {
     if (props.listing) {
       paramsSearch.category_id = props.category_id;
     }
-    props.setIsModalVisible(false);
+    if (props.setIsModalVisible) props.setIsModalVisible(false);
     history.push(
-      `/${
-        props.type_apartment === "BUY" ? "nha-dat-ban" : "nha-dat-thue"
+      `${
+        props.type_apartment
+          ? props.type_apartment === "BUY"
+            ? "/nha-dat-ban"
+            : "/nha-dat-thue"
+          : ""
       }?${objectToQueryString(
         clearObject({
           ...paramsSearch,
