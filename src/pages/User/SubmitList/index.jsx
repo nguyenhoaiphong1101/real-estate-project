@@ -335,14 +335,14 @@ function SubmitList(props) {
                   })}
                 />
               </Form.Item>
-              <Form.Item
+              {/* <Form.Item
                 className="pl-auto label"
                 label="Ngày Hết Hạn"
                 name="expired_date"
                 rules={[{ required: true, message: "Vui lòng nhập ngày !" }]}
               >
                 <DatePicker className="input" disabledDate={disabledDate} />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item
                 className="pl-auto label"
                 name="total_price"

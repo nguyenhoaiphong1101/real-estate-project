@@ -3,7 +3,7 @@ import './FooterAdmin.scss';
 function FooterAdmin() {
     return (
         <div className="footer">
-            2021 © Real Estate - Designed by Khánh - Phong
+            2022 © Real Estate - Designed by KTPM2018
         </div>
     )
 }
